@@ -1,0 +1,92 @@
+.bandeau {
+    background-color: #fff;
+    text-align: center;
+    font-size: 16px;
+    color: #000;
+    text-transform: uppercase;
+    padding: 0px;
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    z-index: 1000;
+  }
+  .bandeau .bannerbody {
+    position: relative;
+    animation-name: fadeUp;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .bandeau img {
+    position: relative;
+    margin-right: 10px;
+    width: 30px;
+    animation-duration: 10s;
+    animation-name: truck;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+  .bandeau p {
+    margin: 0;
+  }
+  .bandeau .bandeaunew {
+    position: relative;
+    margin: 0 10px;
+    color: #fe88de;
+    animation-duration: 10s;
+    animation-name: spanNew;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+  .bandeau .bandeautext {
+    position: relative;
+    margin: 0 10px;
+    animation-duration: 10s;
+    animation-name: spanText;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+  
+  @keyframes truck {
+    0% {
+      left: -40px;
+      opacity: 0;
+    }
+    6%, 100% {
+      left: 0;
+      opacity: 1;
+    }
+  }
+  @keyframes spanNew {
+    0%, 5% {
+      left: -30px;
+      opacity: 0;
+    }
+    15% {
+      left: 0;
+      opacity: 1;
+    }
+  }
+  @keyframes spanText {
+    0%, 10% {
+      top: -20px;
+      opacity: 0;
+    }
+    20% {
+      top: 0;
+      opacity: 1;
+    }
+  }
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+    }
+    10%, 90% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }

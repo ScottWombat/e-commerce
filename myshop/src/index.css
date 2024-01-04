@@ -1,0 +1,38 @@
+@font-face {
+  font-family: "monument_extendedregular";
+  src: url("https://www.yudiz.com/codepen/photography-banner/monumentextended-regular.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Extenda Trial 20 Micro";
+  src: url("https://www.yudiz.com/codepen/photography-banner/Extenda-20Micro.woff2")
+    format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Extenda Trial 30 Deca";
+  src: url("https://www.yudiz.com/codepen/photography-banner/Extenda-30Deca.woff2")
+    format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
