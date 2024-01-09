@@ -1,0 +1,51 @@
+.remember_root{
+	margin: 10px;
+}
+.remember1{
+    margin-left:50px;
+    padding:0px;
+	width:10%;
+	background-color: blue;
+	font-size: 12px;
+    height:24px;
+	float:left;
+   
+}
+
+.remember_me{
+	float: left;
+	color:#0073a4;
+	display: inline;
+	width:50%;
+	
+	background-color: red;
+}
+
+.myform{
+	background-color: red;
+	display: inline;
+    overflow: hidden;
+}
+
+
+.myform input[type=checkbox]  {
+	margin-left:-45px !important;
+	margin-top: -5px !important;
+    float: left;
+	transform: scale(0.5);
+	overflow: hidden;
+  } 
+
+input[type=checkbox] + label {
+	margin-left:-250px !important;
+} 
+
+.forget_password{
+	width:50%;
+	float: right;
+	margin-top:-30px;
+
+}
+
+
+
