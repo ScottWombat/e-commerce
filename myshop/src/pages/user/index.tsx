@@ -5,7 +5,6 @@ const UserPage = () => {
     return (
        <React.Fragment>
         <LogIn/>
-       <SignIn/>
        </React.Fragment>
     )
 }

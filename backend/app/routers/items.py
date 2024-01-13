@@ -7,7 +7,7 @@ from app.repository.item_repository import create_item,delete_item_by_id,delete_
 
 router = APIRouter(
     prefix="/items",
-    tags=["items"],
+    tags=["Items"],
     responses={404: {"description": "Not found"}},
 )
 @router.post("/count_items", response_model=ItemResponse,response_model_exclude_none=True)
