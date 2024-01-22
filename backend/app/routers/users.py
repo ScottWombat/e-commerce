@@ -1,4 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status, Body
+from fastapi.exception_handlers import (
+    http_exception_handler,
+    request_validation_exception_handler,
+)
+from fastapi.exceptions import RequestValidationError
+from starlette.exceptions import HTTPException as StarletteHTTPException
 from datetime import datetime, timedelta
 from typing import Annotated, Union
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
@@ -8,6 +14,7 @@ from passlib.context import CryptContext
 
 from app.model.user import User, UserInDB, Token, TokenData
 from app.auth.auth_handler import signJWT
+from app.exceptions.custom_exception import CustomException
 
 # to get a string like this run:
 # openssl rand -hex 32
@@ -99,14 +106,20 @@ router = APIRouter(
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()]
 ):
-    user = authenticate_user(fake_users_db, form_data.username, form_data.password)
     
+    user = authenticate_user(fake_users_db, form_data.username, form_data.password)
+   
     if not user:
+        print("dddd")
+        raise CustomException
+        """
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
+        """
+  
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
         data={"sub": user.username}, expires_delta=access_token_expires

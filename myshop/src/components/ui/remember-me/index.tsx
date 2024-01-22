@@ -1,11 +1,17 @@
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import styles from './remember-me.module.css'
 import authReducer,{fetchToken} from "src/store/authReducer";
 import axios from 'axios';
 import UserRepository , {IUser} from 'src/repositories/user-repository';
 import ApiResponse from 'src/repositories/api-response';
+import Toaster from 'src/components/ui/toast/toaster';
 const RememberMe = () => {
-    const handleCheck = (e:any) => {
+  const [state, setState] = useState({
+    toast: { message:'',type:''}
+  });
+
+  const handleCheck1 = (e:any) => {
       let data: IUser = {
         username: 'johndoe',
         password: 'secret'
@@ -17,8 +23,11 @@ const RememberMe = () => {
       });
       
     };
-    const handleCheck1 = (e:any) => {
-		console.log('d');
+    const handleCheck = (e:any) => {
+		
+    setState({
+      toast: { message: "Hold my beer", type: "danger" }
+    })
     let data = {
       password: 'secret',
       username: 'johndoe'
@@ -33,13 +42,19 @@ const RememberMe = () => {
       console.log("RESPONSE RECEIVED: ", res);
     })
     .catch((err) => {
-      console.log("AXIOS ERROR: ", err);
+      let status = err.response.status
+      let detail = err.response.data.detail
+      console.log(`AXIOS ERROR: status=${status} deatail=${detail}`);
     });
     
-    
-    console.log('dk');
+    setState({
+      toast: { message: "Hold my beer", type: "info" }
+    })
+   
 	}
     return(
+      <>
+      <Toaster toast={state.toast} position="top-right"  autoDelete={true}/>
       <div className={styles.remember_root}>
 			<form className={styles.myform}>	
         
@@ -51,6 +66,7 @@ const RememberMe = () => {
             <div className={styles.forget_password}>Forget password?</div>
             </Link>	
 		  </div>
+      </>
     )
 };
 

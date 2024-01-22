@@ -1,3 +1,4 @@
+/* tslint:disable */
 {
   "compilerOptions": {
     "outDir": "build/dist",
@@ -8,6 +9,7 @@
       "esnext"
     ],
     "allowJs": true,
+    "noImplicitAny": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

@@ -16,6 +16,7 @@ export interface IBaseRepository<T> {
 const transform = (response: AxiosResponse): Promise<ApiResponse<any>> => {
   return new Promise((resolve, reject) => {
     console.log("DDDD");
+    console.log(response);
     console.log(response.status);
     const result: ApiResponse<any> = {
       data: response,
@@ -46,7 +47,7 @@ export abstract class BaseRepository<T> extends ApiClient implements IBaseReposi
       const instance = this.createInstance({api_base_url: Constants.API_BASE_URL,content_type: Constants.X_WWW_FORM_CONTENT_TYPE});
      
       const data = new FormData();
-      data.append('username','johndoe');
+      data.append('username','johndoe1');
       data.append('password','secret');
       const result = await instance.post(`${this.collection}/token`, data).then(transform);
       //return result;

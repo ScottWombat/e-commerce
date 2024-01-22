@@ -6,8 +6,8 @@ from decouple import config
 JWT_SECRET = config("secret")
 JWT_ALGORITHM = config("algorithm")
 
-print("D")
-print(JWT_SECRET)
+#print("D")
+#print(JWT_SECRET)
 
 def token_response(token: str):
     return {
