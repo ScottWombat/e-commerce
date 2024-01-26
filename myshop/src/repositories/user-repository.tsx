@@ -2,7 +2,12 @@ import { BaseRepository } from './base-repository';
 
 export interface IUser {
   username: string;
-  password: string;
+  token: string;
+  token_type: string;
+}
+
+export interface IError{
+  message: string;
 }
 
 class UserRepository extends BaseRepository<IUser> {
@@ -16,8 +21,8 @@ class UserRepository extends BaseRepository<IUser> {
       return super.get(id);
     }
   
-    post(data: IUser) {
-      return super.post(data);
+    post(formData: FormData) {
+      return super.post(formData);
     }
   
     update(id: string, data: IUser) {

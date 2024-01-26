@@ -11,7 +11,6 @@ abstract class ApiClient {
   protected instance: AxiosInstance | undefined;
     
   protected createInstance(apiSettings: ApiSettings): AxiosInstance {
-    console.log(apiSettings.api_base_url)
     this.instance = axios.create({
       baseURL: apiSettings.api_base_url,
       headers: {

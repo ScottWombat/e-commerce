@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Link } from "react-router-dom";
 import styles from './remember-me.module.css'
 import authReducer,{fetchToken} from "src/store/authReducer";
@@ -6,24 +8,38 @@ import axios from 'axios';
 import UserRepository , {IUser} from 'src/repositories/user-repository';
 import ApiResponse from 'src/repositories/api-response';
 import Toaster from 'src/components/ui/toast/toaster';
+import { useAppDispatch } from 'src/store/hooks';
+
 const RememberMe = () => {
+  const dispatch = useAppDispatch();
+
   const [state, setState] = useState({
     toast: { message:'',type:''}
   });
 
-  const handleCheck1 = (e:any) => {
-      let data: IUser = {
-        username: 'johndoe',
-        password: 'secret'
-      };
+  useEffect(() => {
+    dispatch(fetchToken());
+}, []);
+
+  const handleCheck = (e:any) => {
+      //let data: IUser = {
+      //  username: 'johndoe',
+      //  password: 'secret'
+     // };
+     
       const repository: UserRepository = new UserRepository();
-      repository.post(data).then((response: ApiResponse<IUser>) => {
+      const form = new FormData();
+      form.append('username','johndoe');
+      form.append('password','secret');
+      /*
+      repository.post(form).then((response: ApiResponse<IUser>) => {
+        console.log("hee");
         console.log(response);
        
       });
-      
+      */
     };
-    const handleCheck = (e:any) => {
+    const handleCheck1 = (e:any) => {
 		
     setState({
       toast: { message: "Hold my beer", type: "danger" }
