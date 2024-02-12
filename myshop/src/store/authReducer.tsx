@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk  } from '@reduxjs/toolkit';
 import * as Constants from 'src/constants'
 import UserRepository , {IUser,IError} from 'src/repositories/user-repository';
 import ApiResponse from 'src/repositories/api-response';
+import { RootState } from 'src/store';
 import axios from 'axios';
 const TOKEN_URL = Constants.API_BASE_URL + '/users/token';
 
@@ -12,8 +13,6 @@ type AuthState = {
     status: string | null,
     error: any | null
 }
-
-
 
 
 export const fetchToken1 = createAsyncThunk(
@@ -32,15 +31,14 @@ export const fetchToken1 = createAsyncThunk(
 
 export const fetchToken = createAsyncThunk(
   'auth/fetchToken',
-  async () => {
+  async ({ username, password }: { username: string, password: string }) => {
     const repository: UserRepository = new UserRepository();
     const form = new FormData();
-    form.append('username','johndoe');
-    form.append('password','secret');
- 
+    form.append('username',username);
+    form.append('password',password);
     var response:ApiResponse<IUser> =await repository.post(form);
-   
-    return response;
+    
+    return response ;
     
   }
 );
@@ -52,7 +50,7 @@ const initialState:AuthState={
   error: null,
 };
 const authSlice = createSlice({
-    name: "auth",
+    name: "authreducer",
     initialState,
     reducers: {
     },
@@ -81,5 +79,7 @@ const authSlice = createSlice({
 
         },
 });
-const { actions, reducer } = authSlice
+const { actions, reducer } = authSlice;
 export default authSlice.reducer;
+
+export const selectIsLoggedIn = (state: RootState) => state.authreducer.isLoggedIn;

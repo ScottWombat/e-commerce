@@ -4,12 +4,12 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 from .mongodb import db
 
-MONGO_URL = "mongodb://root:example@172.18.0.3:27017?uuidRepresentation=standard"
-MONGO_DB_NAME = "mydatabase"
+##MONGO_URL = "mongodb://root:example@172.18.0.3:27017?uuidRepresentation=standard"
+#MONGO_DB_NAME = "mydb"
 
 async def connect_to_mongo():
     logging.info("Connecting to database...")
-    db.client = AsyncIOMotorClient("mongodb://root:example@172.18.0.2:27017?uuidRepresentation=standard",
+    db.client = AsyncIOMotorClient("mongodb://root:example@172.26.0.2:27017?uuidRepresentation=standard",
                                    maxPoolSize=2,
                                    minPoolSize=2)
     logging.info("Database connected！")

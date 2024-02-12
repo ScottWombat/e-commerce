@@ -7,8 +7,9 @@ async def pagination(client: AsyncIOMotorClient,page: int = 1, limit: int = 10) 
     pass
 
 async def count_items(client: AsyncIOMotorClient) -> ItemResponse:
+    print("DDDDDDDDDDDDDD")
     try:
-        cursor = client.mydatabase.items.find({})
+        cursor = client.mydb.products.find({})
         docs = await cursor.to_list(None)
         count=0
         for doc in  docs:
@@ -16,7 +17,9 @@ async def count_items(client: AsyncIOMotorClient) -> ItemResponse:
         print(f"Count:${count}")
         return ItemResponse(status="success",count=count,msg="Item counted")
     except Exception as e:
-        return ItemResponse(status="FAILUE",msg=str(e))
+        #return ItemResponse(status="FAILUE",msg=str(e))
+        return ItemResponse(status="FAILUE",msg='l')
+        
 
 async def delete_item_by_id(client: AsyncIOMotorClient,id: str) -> ItemResponse:
     try:

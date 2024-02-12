@@ -1,0 +1,23 @@
+
+
+.parent {
+	overflow-y: hidden;
+  }
+  
+  .slide {
+	background: gray;
+	z-index: 30;
+	position: relative;
+  }
+  
+  .slideMenu {
+	transform: translateY(-100%);
+	overflow: hidden;
+	z-index: -1;
+	transition: 1s transform ease-in;
+	position: relative;
+  }
+  
+  .slideMenu.open {
+	transform: translateY(0);
+  }

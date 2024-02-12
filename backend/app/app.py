@@ -16,6 +16,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from app.model.item import Item
 from app.routers.items import router as items_router
 from app.routers.users import router as users_router
+from app.routers.products import router as products_router
 
 from app.db.mongodb_utils import connect_to_mongo, close_mongo_connection
 
@@ -26,9 +27,9 @@ from app.db.mongodb import AsyncIOMotorClient, get_database
 from app.exceptions.custom_exception import CustomException
 import uvicorn
 
-MONGO_URL = "mongodb://root:example@172.18.0.2:27017?uuidRepresentation=standard"
-MONGO_DB_NAME = "mydatabase"
-MONGO_CLIENT: AsyncIOMotorClient = None
+#MONGO_URL = "mongodb://root:example@172.18.0.2:27017?uuidRepresentation=standard"
+#MONGO_DB_NAME = "mydatabase"
+#MONGO_CLIENT: AsyncIOMotorClient = None
 
 app = FastAPI()
 app.router.prefix = "/api"
@@ -45,6 +46,7 @@ app.add_event_handler("shutdown", close_mongo_connection)
 
 app.include_router(items_router)
 app.include_router(users_router)
+app.include_router(products_router)
 """
 MONGO_CLIENT = AsyncIOMotorClient(MONGO_URL)
 db = MONGO_CLIENT[MONGO_DB_NAME]

@@ -3,13 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from "react-router-dom";
 import styles from './remember-me.module.css'
-import authReducer,{fetchToken} from "src/store/authReducer";
+import authReducer,{fetchToken,selectIsLoggedIn} from "src/store/authReducer";
 import axios from 'axios';
 import UserRepository , {IUser} from 'src/repositories/user-repository';
 import ApiResponse from 'src/repositories/api-response';
 import Toaster from 'src/components/ui/toast/toaster';
-import { useAppDispatch } from 'src/store/hooks';
-
+import { useAppDispatch,useAppSelector } from 'src/store/hooks';
+import useLocalStorage from "src/utils/local_storage";
 const RememberMe = () => {
   const dispatch = useAppDispatch();
 
@@ -18,9 +18,11 @@ const RememberMe = () => {
   });
 
   useEffect(() => {
-    dispatch(fetchToken());
-}, []);
-
+    dispatch(fetchToken({'username':'johndoe','password':'secret'}));
+    
+  }, []);
+  
+  console.log("LDDD"+JSON.stringify(useAppSelector(selectIsLoggedIn)));
   const handleCheck = (e:any) => {
       //let data: IUser = {
       //  username: 'johndoe',

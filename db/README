@@ -1,0 +1,8 @@
+Mongo-express ui default account
+username: admin
+password: pass
+
+Access mongodb shell
+
+>docker exec -it <id> mongosh
+

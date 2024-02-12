@@ -10,8 +10,9 @@ router = APIRouter(
     tags=["Items"],
     responses={404: {"description": "Not found"}},
 )
-@router.post("/count_items", response_model=ItemResponse,response_model_exclude_none=True)
-async def count(item: Item,client: AsyncIOMotorClient = Depends(get_database)):
+@router.get("/count_items", response_model=ItemResponse,response_model_exclude_none=True)
+async def count(client: AsyncIOMotorClient = Depends(get_database)):
+    print("KKKKKK")
     itemResponse = await count_items(client)
     return itemResponse
 
