@@ -34,7 +34,7 @@ import './alert.module.css'
     },[]);
 
     useEffect(() => {
-      console.log("DDDDD")
+     
       let ctx = gsap.context(() => {
         // all your animations go in here...
         gsap.to(root.current, { 

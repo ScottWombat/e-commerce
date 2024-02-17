@@ -13,7 +13,9 @@ const ContentPage = (props) => {
     
       //const count = props.location.state?.count || 0;    
     return(
-        <>Content Page</>
+        <div className={styles.container}>
+            Content Page
+        </div>
     );
 };
 export default ContentPage;

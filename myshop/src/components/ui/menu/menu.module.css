@@ -1,88 +1,94 @@
 
 
-.container {
-	margin: auto;
-	width: 100%;
-	color:black;
-	z-index:100;
-}
 
-.menu_main{
+/*
+  Slide animation styles
+
+  You may need to add vendor prefixes for transform depending on your desired browser support.
+*/
+
+  /*
+	CSS for the submenu container, needed to adjust the behaviour to our needs.
+	Try commenting out this part to see how the animation looks without the container involved.
+  */
+  .submenu_container {
+	height: 150px;
+	min-width: 180px;
+	position: absolute;
+	overflow: hidden;
+	z-index: 1;
+  }
+  
+  /*
+	Layout styles.
+  
+	I like to work on stuff that's good looking so I remixed a cool simple menu by Mike Rojas (thanks!): https://codepen.io/mikerojas87/pen/rojKb 
+
+  html {
+	box-sizing: border-box;
+  }
+  
+  *, *:before, *:after {
+	box-sizing: border-box;
+  }
+  
+  body {
 	margin: 0;
-	padding: 0;
+	font-family: "Open Sans", sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+  }
+  */
+  .menu-container {
+	text-align: center;
+  }
+  
+  nav ul {
 	list-style: none;
-	position:relative;
-}
-.menu_main li{
+	padding-left: 0;
+	margin-top: 0;
+	margin-bottom: 0;
+  }
+  
+  .nav {
 	display: inline-block;
-	margin-right: 10px;
-	
-}
-.menu_main li a{
-	color:#818a55;
-	padding: 10px;
+	margin: 0px auto;
+	color: #0d2035;
+	justify-content: center;
+  }
+  .nav a {
 	display: block;
-	text-decoration: none;
-	text-transform: uppercase;
-}
-.menu_main li:hover{
-	background: gray;
+	padding: 0 16px;
+	line-height: inherit;
 	cursor: pointer;
-}
-
-.menu_main li:hover a{
- color: red;
-}
-.menu_sub{
- position: absolute;
- left: 0;
- background:orchid;
- width: 100%;
- padding: 2em;
- display:none;
- z-index:52;
-}
-
-
-.menu_main li:hover .menu_sub{
-  display:block;
-}
-
-.menu_sub ul{
- padding: 0;
-}
-.menu_sub li{
-  display:block;
-  margin-right: 0px;
-}
-
-.menu_sub li a{
-  color: #818a55;
-}
-.menu_main li:hover .menu_sub li a{
-  color: #818a55;
-}
-
-.menu_main > li:hover .menu_sub li:hover a{
-  color: orange;
- 
-}
-
-
-
-
-
-.menu_sub h3{
-  color:#edf5c3;
-  margin: 1em 0.5em 0.5em 0;
-}
-.menu_col_1{
-  float: left;
-  margin-right: 3em;
-  min-height: 262px;
-}
-
-.menu_col_1:last-of-type{
-  margin-right: 0;
-}
-
+  }
+  
+  .nav__menu {
+	line-height: 45px;
+	font-weight: 700;
+	text-transform: uppercase;
+  }
+  
+  .nav__menu_item {
+	display: inline-block;
+	position: relative;
+  }
+  .nav__menu_item:hover {
+	background-color: #00aeef;
+  }
+  .nav__menu_item:hover .nav__submenu {
+	display: block;
+  }
+  
+  .nav__submenu {
+	font-weight: 300;
+	text-transform: none;
+	display: none;
+	position: absolute;
+	width: 180px;
+	background-color: #00aeef;
+  }
+  
+  .nav__submenu-item:hover {
+	background: rgba(0, 0, 0, 0.1);
+  }
