@@ -8,13 +8,13 @@ interface BurgerStatus{
 
 const StyledBurger = styled.button<BurgerStatus>`
   position: absolute;
-  top: 5%;
-  left: 2rem;
+  top: 15px;
+  left: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 2rem;
-  height: 2rem;
+  width: 18px;
+  height: 18px;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -26,8 +26,8 @@ const StyledBurger = styled.button<BurgerStatus>`
   }
 
   div {
-    width: 2rem;
-    height: 0.25rem;
+    width: 18px;
+    height: 4px;
     background: ${(props) => props.open ? "#0D0C1D" : "#000"};
     border-radius: 10px;
     transition: all 0.3s linear;

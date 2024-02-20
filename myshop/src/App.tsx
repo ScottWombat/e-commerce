@@ -12,17 +12,29 @@ import Hamberger from './components/ui/hamberger';
 import { Layout, ScrollTextSection, LogoSection, MainMenuSection,UserMenuSection,HambergerSection,MainContent } from 'src/styled/layout';
 import ScrollText from 'src/components/ui/scroll-menu'
 import UserMenu from 'src/components/ui/user-menu'
+import { RightPanelSection } from 'src/styled/layout';
+import RightPanel from 'src/components/ui/right-panel';
+import useDetectResize from './utils/detect-resize';
+
 const App = () => {
+  const { windowDimensions, isMobile, isTablet, isLaptop, isDesktop } = useDetectResize();
   return (
     <BrowserRouter>
     <Layout>
-     
+    {isMobile && <>
       <HambergerSection>
-       <Hamberger/>
+         <Hamberger/>
       </HambergerSection>
+      <LogoSection>
+         <Logo/>
+      </LogoSection>
      
+      
+      </>
+      }
     </Layout>
     </BrowserRouter>
+    
   );
 }
 

@@ -1,16 +1,21 @@
+import React, { useState,useEffect, useRef } from 'react';
 import ShoppingBagIcon from 'src/components/svg/shopping-bag';
 import UserIcon from 'src/components/svg/user';
 import HeartIcon from 'src/components/svg/heart'
 import SearchBox from 'src/components/ui/search-box';
+import useDetectResize from 'src/utils/detect-resize';
 import {
     OptionsContainer,
     OptionLink
 } from './user-menu.styled';
+import SearchIcon from 'src/components/svg/search';
 const UserMenu = () => {
+    const { isMobile } = useDetectResize();
+    const [show, setShow]= useState(!isMobile);
     return(
         <OptionsContainer>
                 <OptionLink to='/'>
-                    <SearchBox/>
+                    {show ? <SearchBox/> : <SearchIcon/>}
                 </OptionLink>
                 <OptionLink to='/user'>
                    <UserIcon/>
@@ -21,7 +26,7 @@ const UserMenu = () => {
                 <OptionLink to='/signin'>
                 <ShoppingBagIcon />
                 </OptionLink>
-            </OptionsContainer>
+        </OptionsContainer>
     )
 }
 

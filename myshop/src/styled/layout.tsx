@@ -32,12 +32,11 @@ interface Size {
     grid-gap: 0px;
     @media (max-width: 480x) {
       grid-template-columns: repeat(2, 1fr);
-        grid-template-areas:
-            "hamberger usermenu"
+      grid-template-areas:
+          "hamberger logo";
     }
-    @media (min-width: 768px) {
+    @media (max-width: 768px) {
         grid-template-columns: repeat(3, 1fr);
-
         grid-template-areas:
             "hamberger . ."
             "scroll_menu scroll_menu scroll_menu"
@@ -65,16 +64,15 @@ export const MainMenuSection = styled.nav`
 
 export const LogoSection = styled.div`
   grid-area: logo;
-  padding: 0rem;
-  margin: 0;
-  text-align: left;
+  text-align: center;
+  background-color: red;
 `;
 
 export const UserMenuSection = styled.div`
   grid-area: user-menu;
   padding: 0rem;
   margin: 0;
-  text-align: right;
+  text-align: left;
 `;
 
 export const MainContent = styled.div`
@@ -84,5 +82,13 @@ export const MainContent = styled.div`
   margin: 0;
   text-align: right;
 `;
+
+export const RightPanelSection = styled.div`
+  grid-area: right-panel;
+  padding: 0rem;
+  margin: 0;
+  text-align: right;
+`;
+
 
 //export default Layout;

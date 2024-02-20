@@ -1,20 +1,22 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-export const OptionsContainer = styled.div`
+export const OptionsContainer2 = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  margin-right: 5px;
+  margin-right: 2px;
+  background-color: red;
+  text-align: right;
 `;
 
-export const OptionsContainer1 = styled.div`
+export const OptionsContainer = styled.div`
   display: flex;
   text-align: right;
 `;
 
 export const OptionLink = styled(Link)`
   text-transform: uppercase;
-  padding: 10px 15px;
+  margin: 10px 5px 5px 5px;
   cursor: pointer;
 `;
