@@ -15,24 +15,29 @@ import UserMenu from 'src/components/ui/user-menu'
 import { RightPanelSection } from 'src/styled/layout';
 import RightPanel from 'src/components/ui/right-panel';
 import useDetectResize from './utils/detect-resize';
-
+const Mobile = () =>{
+  return (
+    <>
+    <HambergerSection>
+      <Hamberger/>
+    </HambergerSection>
+    <LogoSection>
+      <Logo/>
+    </LogoSection>
+    <UserMenuSection>
+      <UserMenu/>
+    </UserMenuSection>
+    </>
+  )
+}
 const App = () => {
   const { windowDimensions, isMobile, isTablet, isLaptop, isDesktop } = useDetectResize();
   return (
     <BrowserRouter>
-    <Layout>
-    {isMobile && <>
-      <HambergerSection>
-         <Hamberger/>
-      </HambergerSection>
-      <LogoSection>
-         <Logo/>
-      </LogoSection>
-     
-      
-      </>
-      }
-    </Layout>
+        <Layout>
+          {isMobile && <Mobile/>}
+          {isTablet && <Mobile/>}
+        </Layout>
     </BrowserRouter>
     
   );

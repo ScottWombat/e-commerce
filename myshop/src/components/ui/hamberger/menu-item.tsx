@@ -1,24 +1,30 @@
 import React from "react";
 import { bool } from 'prop-types';
 import styled from "styled-components";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import TreeView from "../tree-view";
+
+
 interface props{
     open: boolean
 }
 const StyledMenu = styled.nav<props>`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  
   background: #effffa;
   transform: ${props => props.open ? 'translateX(0)' : 'translateX(-100%)'};
   height: 100vh;
+  width: 50vh;
   text-align: left;
   padding: 2rem;
   position: absolute;
   top: 0;
   left: 0;
   transition: transform 0.3s ease-in-out;
-
-  @media (max-width: 576px) {
+  padding: 2rem;
+  background-color:red;
+  @media (max-width: 480px) {
     width: 100%;
   }
 
@@ -43,18 +49,13 @@ const StyledMenu = styled.nav<props>`
   }
 `;
 
+/*
+ <a onClick={() => props.setOpen(!props.open)}>Click</a>
+*/
 const MenuItem = (props) => {
   return (
-    <StyledMenu open={props.open}>
-      <a href="/">
-        About us
-      </a>
-      <a href="/">
-        Pricing
-      </a>
-      <a href="/">
-        Contact
-      </a>
+    <StyledMenu open={props.open} >
+      <TreeView open={props.open} setOpen={props.setOpen}/>
     </StyledMenu>
   );
 };

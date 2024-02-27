@@ -11,11 +11,12 @@ import {
 import SearchIcon from 'src/components/svg/search';
 const UserMenu = () => {
     const { isMobile } = useDetectResize();
-    const [show, setShow]= useState(!isMobile);
+    const [show, setShow]= useState(isMobile);
+    //const [show, setShow]= useState(false);
     return(
         <OptionsContainer>
                 <OptionLink to='/'>
-                    {show ? <SearchBox/> : <SearchIcon/>}
+                    {show ? <SearchIcon/> : <SearchIcon/>}
                 </OptionLink>
                 <OptionLink to='/user'>
                    <UserIcon/>

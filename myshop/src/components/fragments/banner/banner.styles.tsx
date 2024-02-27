@@ -39,7 +39,6 @@ export const Text = styled.div`
         line-height: 1.05em;
         font-weight: 700;
         text-align: center;
-        color: red;
     }
 
 `;

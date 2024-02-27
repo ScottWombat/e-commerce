@@ -12,7 +12,7 @@ const useOnClickOutside = (ref, handler) => {
       handler(event);
     };
     document.addEventListener("mousedown", listener);
-    console.log('dd')
+    
     return () => {
       document.removeEventListener("mousedown", listener);
     };
@@ -24,9 +24,9 @@ const Hamberger = () => {
   const node = useRef();
   useOnClickOutside(node, () => setOpen(false));
   return(
-  <div ref={node}>
+    <div ref={node}>
     <Burger open={open} setOpen={setOpen}/>
-    <MenuItem open={open} setOpen={setOpen} />
+    <MenuItem open={open} setOpen={setOpen}/>
   </div>
   );
 }

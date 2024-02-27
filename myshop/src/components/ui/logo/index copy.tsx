@@ -8,8 +8,8 @@ import {
 const Logo = () => {
     return(
         <LogoContainer to='/'>
-            <LogoIcon />
-            <LogoText>love me sexy </LogoText>
+                 <LogoIcon />
+                <LogoText>love me sexy </LogoText>
         </LogoContainer>
     )
 }

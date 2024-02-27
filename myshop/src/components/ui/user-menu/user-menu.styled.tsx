@@ -6,13 +6,13 @@ export const OptionsContainer2 = styled.div`
   align-items: center;
   justify-content: flex-end;
   margin-right: 2px;
-  background-color: red;
   text-align: right;
 `;
 
 export const OptionsContainer = styled.div`
   display: flex;
-  text-align: right;
+  justify-content: flex-end;
+  margin-right: 5px;
 `;
 
 export const OptionLink = styled(Link)`

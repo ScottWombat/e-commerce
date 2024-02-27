@@ -30,24 +30,27 @@ interface Size {
   export const Layout = styled.div`
     display: grid;
     grid-gap: 0px;
-    
-    @media all and (max-width: 480px) {
-      grid-template-columns: repeat(3,1fr);
-      grid-template-areas: "hamberger logo user_menu";
+    background-color:yellow;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas: "hamberger logo logo";
+    @media (max-width: 480x) {
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-areas: "hamberger logo logo";
     }
-    @media all and (min-width: 481px) and (max-width: 768px){
-      grid-template-columns: repeat(3,1fr);
-      grid-template-areas: "hamberger logo user_menu";
+    @media (max-width: 768px) {
+        grid-template-columns: repeat(3,1fr);
+        grid-template-areas:
+            "hamberger . ."
+            "scroll_menu scroll_menu scroll_menu"
+            "logo main-menu user-menu"
+            "main-content main-content main-content"
     }
-    @media all and(min-width: 992px) {
-      grid-template-columns: repeat(3,1fr);
-      grid-template-areas: "hamberger logo user_menu";
-    }
+    align-items: start;
 `;
 export const HambergerSection = styled.div`
      grid-area: hamberger;
      text-aligh: left;
-     width: 50%;
+     background-color:#ccc;
 `;
 
 
@@ -67,7 +70,10 @@ export const LogoSection = styled.div`
 `;
 
 export const UserMenuSection = styled.div`
-  grid-area: user_menu;
+  grid-area: user-menu;
+  padding: 0rem;
+  margin: 0;
+  text-align: left;
 `;
 
 export const MainContent = styled.div`
