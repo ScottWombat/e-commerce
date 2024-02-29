@@ -12,7 +12,7 @@
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #0087ca;
+  background-color: #fff;
   transform-origin: bottom right;
   transition: transform 0.30s ease-out;
 }
@@ -31,6 +31,7 @@
   
   .treeViewContainer .label {
     margin-bottom: 5px;
+    text-transform: uppercase;
   }
   
   .treeViewContainer .label .treeviewIcon {

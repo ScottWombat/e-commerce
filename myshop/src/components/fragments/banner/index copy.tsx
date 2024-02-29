@@ -6,7 +6,8 @@ import { gsap } from "gsap";
 import BannerDiv, {Wrapper,Text,Span} from './banner.styles';
 import styles from './particles.module.css';
 import LoremSvg from 'src/components/svg/lorem';
-
+import { Container,TextNow ,AnnimateP} from './annimated-text.styles';
+import styles1 from './index.module.css';
 
  const Banner1 = () => {
  
@@ -20,15 +21,18 @@ import LoremSvg from 'src/components/svg/lorem';
           setImageId(randomIndex);
     },[]);
 
-    const imagePath = `./wallpapers/wallpaper${imageId}.jpg`
+    const imagePath = `./wallpapers/wallpaper0.jpg`
     return (
         <>
         <BannerDiv bgcolor={'#fff'} bgimage={imagePath}>
-           <Wrapper>
-             <Text><LoremSvg/></Text>
-            </Wrapper>
-           
+          
+             
+             <TextNow>Escape</TextNow>
+             <TextNow><p className={styles1.ptag}>&nbsp;into amazing experiences</p></TextNow>
+          
+            
         </BannerDiv>
+        {/*
         <div className={styles.animation_wrapper}>
             <div className={styles.particle}>
               <div className={styles.particle_1}></div>
@@ -37,6 +41,7 @@ import LoremSvg from 'src/components/svg/lorem';
               <div className={styles.particle_4}></div>
             </div>
         </div>
+        */}
       </>
     );
 }

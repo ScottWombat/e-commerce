@@ -23,9 +23,11 @@ export const BannerDiv = styled.div<ImageProps>`
 //export default BannerDiv;
 
 export const Wrapper =  styled.div`
-    height: 50%;
-    width: 50%;
+    height:100%;
+    width: 100%;
     color: #008000;
+    text-align:center;
+ 
 `;
 
 export const Text = styled.div`

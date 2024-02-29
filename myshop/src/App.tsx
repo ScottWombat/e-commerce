@@ -9,24 +9,21 @@ import ContentPage from 'src/pages/content';
 import Menu from 'src/components/ui/menu';
 import Logo from 'src/components/ui/logo';
 import Hamberger from './components/ui/hamberger';
-import { Layout, ScrollTextSection, LogoSection, MainMenuSection,UserMenuSection,HambergerSection,MainContent } from 'src/styled/layout';
+import { Layout, ScrollTextSection, LogoSection, MainMenuSection,UserMenuSection,HambergerSection,MainContentSection } from 'src/styled/layout';
 import ScrollText from 'src/components/ui/scroll-menu'
 import UserMenu from 'src/components/ui/user-menu'
 import { RightPanelSection } from 'src/styled/layout';
 import RightPanel from 'src/components/ui/right-panel';
+import Banner from './components/fragments/banner';
 import useDetectResize from './utils/detect-resize';
 const Mobile = () =>{
   return (
     <>
-    <HambergerSection>
-      <Hamberger/>
-    </HambergerSection>
-    <LogoSection>
-      <Logo/>
-    </LogoSection>
-    <UserMenuSection>
-      <UserMenu/>
-    </UserMenuSection>
+    <HambergerSection><Hamberger/></HambergerSection>
+    <LogoSection><Logo/></LogoSection>
+    <UserMenuSection><UserMenu/></UserMenuSection>
+    <ScrollTextSection><ScrollText/></ScrollTextSection>
+    <MainContentSection><Banner/></MainContentSection>
     </>
   )
 }

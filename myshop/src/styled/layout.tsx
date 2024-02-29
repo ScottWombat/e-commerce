@@ -33,11 +33,16 @@ interface Size {
     
     @media all and (max-width: 480px) {
       grid-template-columns: repeat(3,1fr);
-      grid-template-areas: "hamberger logo user_menu";
+      grid-template-areas: "hamberger logo user_menu"
+                           "scroll_menu scroll_menu scroll_menu"
+                           "main-content main-content main-content";
+                           
     }
-    @media all and (min-width: 481px) and (max-width: 768px){
+    @media all and (max-width: 768px){
       grid-template-columns: repeat(3,1fr);
-      grid-template-areas: "hamberger logo user_menu";
+      grid-template-areas: "hamberger logo user_menu"
+                           "scroll_menu scroll_menu scroll_menu"
+                           "main-content main-content main-content";
     }
     @media all and(min-width: 992px) {
       grid-template-columns: repeat(3,1fr);
@@ -70,7 +75,7 @@ export const UserMenuSection = styled.div`
   grid-area: user_menu;
 `;
 
-export const MainContent = styled.div`
+export const MainContentSection = styled.div`
   background: #3a3a55;
   grid-area: main-content;
   padding: 0rem;

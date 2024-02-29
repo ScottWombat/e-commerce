@@ -23,7 +23,7 @@ const StyledMenu = styled.nav<props>`
   left: 0;
   transition: transform 0.3s ease-in-out;
   padding: 2rem;
-  background-color:red;
+  background-color:#6F7084;
   @media (max-width: 480px) {
     width: 100%;
   }

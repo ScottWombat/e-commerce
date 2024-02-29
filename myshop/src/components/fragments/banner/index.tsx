@@ -1,117 +1,99 @@
 
-import React, { useState, useEffect,useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 //import { TweenMax, TimelineMax,Elastic, Back } from "gsap/all";
 import { gsap } from "gsap";
-import BannerDiv, {Wrapper,Text,Span} from './banner.styles';
+import { TimelineLite, CSSPlugin } from "gsap/all";
+import BannerDiv, { Wrapper, Text, Span } from './banner.styles';
 import styles from './particles.module.css';
-import { CSSTransition } from "react-transition-group";
-import { Container, Button, Alert } from 'react-bootstrap';
 import LoremSvg from 'src/components/svg/lorem';
-import Title from './title';
-import styles1 from './title.module.css'
-import './my_node.module.css'
-import './alert.module.css'
+import { Container, TextNow, AnnimateP } from './annimated-text.styles';
+import ShopNow from './button.styles';
+import styles2 from './index.module.css';
+import HeartIcon from 'src/components/svg/heart';
+import Heart from 'src/components/svg/letter_heart';
+const Banner1 = () => {
+  const hello = useRef();
+  const row1 = useRef();
+  const shop_now = useRef();
+  const container = useRef(null);
+  const timeline = useRef(gsap.timeline({ paused: false, repeat: 0 }));
+  const tl = timeline.current;
 
- const Banner = () => {
-    const [inProp, setInProp] = useState(false);
-    const nodeRef1 = useRef(null);
- 
-    const [imageId, setImageId] = useState(0);
-    const root = useRef();
-    const app = useRef<HTMLDivElement>(null);
-    const tl = useRef<GSAPTimeline>();
+  const [imageId, setImageId] = useState(0);
 
-    const [showButton, setShowButton] = useState(true);
-    const [showMessage, setShowMessage] = useState(false);
-    const nodeRef = useRef(null);
+  const appRef = useRef();
 
-    const [width, setWidth]   = useState(window.innerWidth);
-
-    useEffect(() => {
-          let randomIndex = Math.floor(Math.random() * 4);  
-          setImageId(randomIndex);
-    },[]);
-
-    useEffect(() => {
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      tl.from(hello.current, {
+        opacity: 0,
+        x: 100,
+        duration: 3
+      }).
+      to(row1.current,{
+        opacity: 1,
+        x: -400,
+        duration:3
+      })
+      .to(shop_now.current,{
+        opacity: 1,
+        x: -340,
+        duration:3
+      });
      
-      let ctx = gsap.context(() => {
-        // all your animations go in here...
-        gsap.to(root.current, { 
-          delay: 1.0,
-          opacity: 1,
-          x: width/2,
-          ease: "power3",
-          duration: 2
-        });
-      }, root); // <- scopes all selector text to the root element
-      console.log(ctx)
-      return () => ctx.revert();
-    }, []);
-  
+    }, container.current);
+    //  tl.to(root.current, {
+    //     rotation: 360,
+    //     duration: 5,
+    //  });
+    return () => ctx.revert(); //clean up
+  }, []);
 
-    const imagePath = `./wallpapers/wallpaper${imageId}.jpg`
-    return (
-        <>
-         <BannerDiv bgcolor={'#fff'} bgimage={imagePath}>
-          <Wrapper>
-           <div ref={root} className={styles1.app}>
-            <div className={styles1.hide}>love me sexy</div>
-           </div>
-           <CSSTransition nodeRef={nodeRef1} in={inProp} timeout={200} className="my_node">
-              <div ref={nodeRef1}>
-                {"I'll receive my-node-* classes"}
+  const imagePath = `./wallpapers/wallpaper0.jpg`
+  return (
+    <>
+      <BannerDiv bgcolor={'#fff'} bgimage={imagePath}>
+
+        <div className={styles2.container} ref={container}>
+             <div ref={hello} className={styles2.escape}>
+                Escape into amazing experiences
+              </div>
+              <div ref={row1} className={styles2.brand_name}>
+                <span>L</span>
+                <span><Heart/></span>
+                <span>V</span>
+                <span>E</span>
+                <span>&nbsp;</span>
+                <span>M</span>
+                <span>E</span>
+                <span>&nbsp;</span>
+                <span>S</span>
+                <span>E</span>
+                <span>X</span>
+                <span>Y</span>
+              </div>
+              <div ref={shop_now}>
+                <ShopNow>Show Now</ShopNow>
+              </div>
+
+        </div>
+
+
+
+      </BannerDiv>
+      {/*
+        <div className={styles.animation_wrapper}>
+            <div className={styles.particle}>
+              <div className={styles.particle_1}></div>
+              <div className={styles.particle_2}></div>
+              <div className={styles.particle_3}></div>
+              <div className={styles.particle_4}></div>
             </div>
-            </CSSTransition>
-            <button type="button" onClick={() => setInProp(true)}>
-            Click to Enter
-            </button>
-            <Container style={{ paddingTop: '2rem' }}>
-      {showButton && (
-        <Button
-          onClick={() => setShowMessage(true)}
-          size="lg"
-        >
-          Show Message
-        </Button>
-      )}
-      <CSSTransition
-        in={showMessage}
-        nodeRef={nodeRef}
-        timeout={300}
-        classNames="alert"
-        unmountOnExit
-        onEnter={() => setShowButton(false)}
-        onExited={() => setShowButton(true)}
-      >
-        <Alert
-          ref={nodeRef}
-          variant="primary"
-          dismissible
-          onClose={() => setShowMessage(false)}
-        >
-          <Alert.Heading>
-            Animated alert message
-          </Alert.Heading>
-          <p>
-            This alert message is being transitioned in and
-            out of the DOM.
-          </p>
-          <Button
-            variant="primary"
-            onClick={() => setShowMessage(false)}
-          >
-            Close
-          </Button>
-        </Alert>
-      </CSSTransition>
-    </Container>
-          </Wrapper>
-           
-        </BannerDiv>
-        
-      </>
-    );
+        </div>
+        */}
+    </>
+  );
 }
 
-export default Banner;
+export default Banner1;

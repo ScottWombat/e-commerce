@@ -1,8 +1,8 @@
 .app1 {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: left;
     min-height: 100vh;
+    margin-left:-100px;
   }
 
   .box {
@@ -19,7 +19,7 @@
   }
 
 .hide{
-    text-indent: -100px;
+    text-indent: 0px;
     font-size: 4em;
 }
 
