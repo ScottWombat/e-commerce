@@ -12,7 +12,19 @@ import ShopNow from './button.styles';
 import styles2 from './index.module.css';
 import HeartIcon from 'src/components/svg/heart';
 import Heart from 'src/components/svg/letter_heart';
+import useDetectResize from 'src/utils/detect-resize';
+
+//-300
+
+
 const Banner1 = () => {
+  const { windowDimensions, isMobile, isTablet, isLaptop, isDesktop,isLarge } = useDetectResize();
+  const findXShowNow=()=>{
+    //if(isLarge){
+      return -300;
+    //}
+    //return 0;
+  }
   const hello = useRef();
   const row1 = useRef();
   const shop_now = useRef();
@@ -21,26 +33,34 @@ const Banner1 = () => {
   const tl = timeline.current;
 
   const [imageId, setImageId] = useState(0);
+  const [x,setX] = useState(0);
+  const [y,setY] = useState(0);
 
   const appRef = useRef();
 
   useEffect(() => {
+    setX(findXShowNow)
+
     const ctx = gsap.context(() => {
       tl.from(hello.current, {
-        opacity: 0,
-        x: 100,
-        duration: 3
-      }).
-      to(row1.current,{
         opacity: 1,
-        x: -400,
+        x: 0,
+        duration: 3,
+        yPercent: 100,
+        ease: "power4",
+        stagger: 0.1  
+      })
+      .from(shop_now.current,{
+        opacity: 1,
+        x: x,
         duration:3
       })
-      .to(shop_now.current,{
+      .to(row1.current,{
         opacity: 1,
-        x: -340,
-        duration:3
+        x: -100,
+        duration:1
       });
+      
      
     }, container.current);
     //  tl.to(root.current, {
@@ -48,7 +68,7 @@ const Banner1 = () => {
     //     duration: 5,
     //  });
     return () => ctx.revert(); //clean up
-  }, []);
+  }, [x,y]);
 
   const imagePath = `./wallpapers/wallpaper0.jpg`
   return (

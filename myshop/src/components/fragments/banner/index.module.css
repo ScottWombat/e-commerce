@@ -1,15 +1,14 @@
 .container {
   width: 100vw;
   color:#fff;
-  font-size:48px;
   z-index:1000;
 }
 .escape{
-  font-size: 3.5rem;
+  font-size: 2.0rem;
   font-weight: 100;
-  letter-spacing: -3px;
-  line-height: 45px;
-  font-family: 'Poppins', sans-serif;
+  letter-spacing: 2px;
+  line-height: 20px;
+  font-family:'Poppins',  sans-serif;
 }
 
 .brand_name{

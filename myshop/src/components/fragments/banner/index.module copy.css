@@ -1,0 +1,34 @@
+.container {
+  width: 100vw;
+  color:#fff;
+  font-size:48px;
+  z-index:1000;
+}
+@media only screen and (max-width: 480px) {
+  .escape{
+    font-size: 3.5rem;
+    font-weight: 100;
+    letter-spacing: -3px;
+    line-height: 45px;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .escape{
+    font-size: 3.5rem;
+    font-weight: 100;
+    letter-spacing: -3px;
+    line-height: 45px;
+    font-family: 'Poppins', sans-serif;
+  }
+}
+
+
+.brand_name{
+  font-family: 'Montserrat';
+  color: #f1f2f6;
+  font-size: 40px;
+  font-weight: bold;
+}
+

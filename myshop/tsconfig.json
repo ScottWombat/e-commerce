@@ -1,5 +1,5 @@
-/* tslint:disable */
-/* tslint-disable no-restricted-globals */
+/* tslint:disable 
+ tslint-disable no-restricted-globals */
 {
   "compilerOptions": {
     "outDir": "build/dist",

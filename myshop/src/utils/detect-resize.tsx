@@ -6,6 +6,7 @@ interface MediaObj {
   isTablet: boolean;
   isLaptop: boolean;
   isDesktop: boolean;
+  isLarge: boolean;
 };
 
 //upper limit (BP) for each device. based off Bootstrap breakpoints
@@ -21,7 +22,7 @@ const defaultValues= {
   isTablet: (window.innerWidth > mobileBP && window.innerWidth <= tabletBP) ? true : false,
   isLaptop: (window.innerWidth > tabletBP && window.innerWidth <= laptopBP) ? true : false,
   isDesktop: (window.innerWidth > laptopBP && window.innerWidth <= desktopBP) ? true : false,
-  isLarge: (window.innerWidth > desktopBP) ? true : false,
+  isLarge: (window.innerWidth > largeBP) ? true : false,
 }
 
 const useDetectResize = () => {
@@ -48,7 +49,7 @@ const useDetectResize = () => {
         isTablet: (window.innerWidth > mobileBP && window.innerWidth <= tabletBP) ? true : false,
         isLaptop: (window.innerWidth > tabletBP && window.innerWidth <= laptopBP) ? true : false,
         isDesktop: (window.innerWidth > laptopBP && window.innerWidth <= desktopBP) ? true : false,
-        isLarge: (window.innerWidth > desktopBP) ? true : false,
+        isLarge: (window.innerWidth > largeBP) ? true : false,
       }
 
       setMediaType(currState => currState = mediaTypes);
@@ -68,6 +69,7 @@ const useDetectResize = () => {
     isTablet: mediaType.isTablet,
     isLaptop: mediaType.isLaptop,
     isDesktop: mediaType.isDesktop,
+    isLarge: mediaType.isLarge,
     windowDimensions
   }
 }
