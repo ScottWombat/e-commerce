@@ -16,7 +16,7 @@ const ButtonMenu = () => {
 
       <div className={styles.img1}>
         <div className={styles.con1}>
-          <Link1 to='/content'>
+          <Link1 to='/product-list/men'>
           <img src="black_anal.png" className={styles.img2} alt="" />
           <div className={styles.text_block}>
             <p className={styles.underline}>Cock Rings</p>

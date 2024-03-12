@@ -9,7 +9,7 @@ from .mongodb import db
 
 async def connect_to_mongo():
     logging.info("Connecting to database...")
-    db.client = AsyncIOMotorClient("mongodb://root:example@172.26.0.2:27017?uuidRepresentation=standard",
+    db.client = AsyncIOMotorClient("mongodb://root:example@172.26.0.3:27017?uuidRepresentation=standard",
                                    maxPoolSize=2,
                                    minPoolSize=2)
     logging.info("Database connected！")
