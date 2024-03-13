@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+.filter-content-simple:has([data-type]:checked) [data-type-target], .filter-content-advanced:has([data-type*=actor]:checked) [data-type-target]:not([data-type-target*=actor]), .filter-content-advanced:has([data-type*=fruit]:checked) [data-type-target]:not([data-type-target*=fruit]), .filter-content-advanced:has([data-type*=car]:checked) [data-type-target]:not([data-type-target*=car]), .filter-content-advanced:has([data-type*=vegetable]:checked) [data-type-target]:not([data-type-target*=vegetable]), .filter-content-advanced:has([data-category*=dull]:checked) [data-category-target]:not([data-category-target*=dull]), .filter-content-advanced:has([data-category*=fun]:checked) [data-category-target]:not([data-category-target*=fun]), .filter-content-advanced:has([data-category*=cool]:checked) [data-category-target]:not([data-category-target*=cool]) {
+  max-height: 0;
+  margin-bottom: 0;
+  transform: scale(0.9);
+  opacity: 0;
+}
+
+.filter-content-simple:not(:has([data-type]:checked)) [data-type-target], .filter-content-simple:has([data-type*=actor]:checked) [data-type-target*=actor], .filter-content-simple:has([data-type*=fruit]:checked) [data-type-target*=fruit], .filter-content-simple:has([data-type*=car]:checked) [data-type-target*=car], .filter-content-advanced li {
+  overflow: hidden;
+  gap: 1rem;
+  transition: 0.75s ease;
+  max-height: 40px;
+  height: 100vh;
+  transition: 0.7s ease;
+  padding-block: 0;
+  margin-bottom: 0.5rem;
+  opacity: 1;
+  transform: scale(1);
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+:root {
+  --light: #e2ecfc;
+  --light2: #cddaef;
+  --dark: #252a35;
+  --white: white;
+  --white2: #f5fbff;
+  --black: black;
+  --black2: #171717;
+}
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+}
+
+section {
+  padding: 4rem 2rem;
+  display: grid;
+  gap: 2rem;
+}
+section article {
+  display: grid;
+  gap: 1rem;
+}
+section header {
+  display: grid;
+  gap: 1rem;
+}
+section ul {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: 80vh;
+  overflow: auto;
+  gap: 0;
+  display: block;
+  padding: 1rem;
+  background-color: var(--light2);
+  border-radius: 1rem;
+}
+section ul > li {
+  margin: 0;
+  padding: 0 1rem;
+  background-color: var(--dark);
+  color: var(--light);
+  border-radius: 0.5rem;
+  font-size: 80%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+  gap: 1rem;
+  max-height: 40px;
+  height: 100vh;
+  transition: 0.5s ease;
+  padding-block: 0;
+  margin-bottom: 0.5rem;
+  transform: scale(1);
+}
+section ul > li:hover {
+  background-color: var(--black2);
+}
+section ul > li[data-category-target]:after, section ul > li[data-type-target]:before {
+  content: attr(data-type-target);
+  order: 2;
+  padding: 0.2rem 0.6rem;
+  font-size: 80%;
+  border-radius: 100px;
+  background-color: var(--light);
+  color: var(--black);
+  font-weight: 800;
+}
+section ul > li[data-category-target]:after {
+  content: attr(data-category-target);
+  background-color: #2972a8;
+  color: white;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+.bg-1 {
+  background-color: var(--light);
+}
+
+.bg-2 {
+  background-color: var(--dark);
+  color: white;
+}
+.bg-2 > * {
+  --light: #252a35;
+  --light2: #1b202a;
+  --dark: #e2ecfc;
+  --white: black;
+  --white2: #171717;
+  --black: white;
+  --black2: #f5fbff;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+.filters > input {
+  position: absolute;
+  left: -9999px;
+}
+.filters > input + label {
+  padding: 0.2rem 0.8rem;
+  font-size: 70%;
+  color: var(--dark);
+  border-radius: 100px;
+  border: 2px solid var(--dark);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.filters > input:hover + label, .filters > input:checked + label {
+  background-color: var(--dark);
+  color: var(--white);
+}

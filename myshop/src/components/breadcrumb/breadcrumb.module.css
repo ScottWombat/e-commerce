@@ -1,0 +1,10 @@
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-left:5px;
+}
+
+.separator {
+    margin: 0 5px;
+}
