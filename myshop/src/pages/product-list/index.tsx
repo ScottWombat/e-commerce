@@ -27,6 +27,13 @@ const ProductList = (props) => {
     const redStyle = gridWidth + ' ' + styles.red;
     const greenStyle = gridWidth + ' ' + styles.green;
 
+    const changeListStyle = () => {
+        setGridListStyle(false)
+    }
+    const changeGridStyle = () => {
+        setGridListStyle(true)
+    }
+
     return (
         <div className={styles.p_container}>
             <div className={styles.breadcrumb_view}>
@@ -40,18 +47,18 @@ const ProductList = (props) => {
             <div className={styles.left_view}>
                 <ul className={styles.label_ul}>
 
-                    <li><label htmlFor="blue" className={styles.blue_label} >BLUE</label></li>
-                    <li><label htmlFor="red">RED</label></li>
-                    <li><label htmlFor="green">GREEN</label></li>
-                    <li><label htmlFor="reset">RESET</label> </li>
+                    <li><label htmlFor="blue" className={styles.list_view_button} >BLUE</label></li>
+                    <li><label htmlFor="red" className={styles.list_view_button}>RED</label></li>
+                    <li><label htmlFor="green" className={styles.list_view_button}>GREEN</label></li>
+                    <li><label htmlFor="reset" className={styles.list_view_button}>RESET</label> </li>
 
                 </ul>
             </div>{/*-- end left view */}
             <div className={styles.right_view}>
 
                 <div className={styles.filter_buttons}>
-                    <div className={styles.list_view_button}><i className="fa fa-bars" aria-hidden="true"></i> List view</div>
-                    <div className={styles.grid_view_button}><i className="fa fa-th-large" aria-hidden="true"></i> Grid view</div>
+                    <div className={styles.list_view_button} onClick = {changeListStyle}><i className="fa fa-bars" aria-hidden="true"></i> List view</div>
+                    <div className={styles.grid_view_button} onClick = {changeGridStyle}><i className="fa fa-th-large" aria-hidden="true"></i> Grid view</div>
                 </div>
 
             </div>
