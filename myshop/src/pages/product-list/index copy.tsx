@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import styles from './product-list.module.css'
 import { useParams } from "react-router";
 import Breadcrumbs from 'src/components/breadcrumb';
-import { ULWrapper,ListItem} from './product-list.styled';
-
+import { ULWrapper} from './product-list.styled';
 const breadcrumbs = [
     { label: 'Home', link: '/' },
     { label: 'Products', link: '/products' },
     { label: 'Category', link: '/products/category' },
     { label: 'Product Detail' },
     ];
+
+    
 
 const ProductList = (props) => {
     const [gridListStyle, setGridListStyle] = useState(false);
@@ -20,12 +21,12 @@ const ProductList = (props) => {
         setGridListStyle(true);
        
     }, [])
-  
-    const gridWidth = gridListStyle?styles.tile:styles.title_width;
-
-    const blueStyle = gridWidth + ' ' + styles.blue;
-    const redStyle = gridWidth + ' ' + styles.red;
-    const greenStyle = gridWidth + ' ' + styles.green;
+    const gridBlueStyle = gridListStyle?styles.blue:styles.blue_row;
+    const gridRedStyle = gridListStyle?styles.red:styles.red_row;
+    const gridGreenStyle = gridListStyle?styles.green:styles.green_row;
+    const blueStyle = styles.tile + ' ' + gridBlueStyle;
+    const redStyle = styles.tile + ' ' + gridRedStyle;
+    const greenStyle = styles.tile + ' ' + gridGreenStyle;
 
     return (
         <div className={styles.p_container}>
@@ -63,7 +64,7 @@ const ProductList = (props) => {
                 <input type="radio" id="reset" name="color" />
                 
                 <ULWrapper>
-                <li className={blueStyle}>1</li>
+                    <li className={blueStyle}>1dddd</li>
                     <li className={redStyle}>2</li>
                     <li className={blueStyle}>3</li>
                     <li className={greenStyle}>4</li>
