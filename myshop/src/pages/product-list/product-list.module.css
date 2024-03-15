@@ -214,3 +214,8 @@ ul.label_ul>li {
     background-color: red;
   }
 }
+
+.ul_test {
+  display:inline;
+
+};

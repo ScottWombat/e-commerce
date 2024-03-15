@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './product-list.module.css'
 import { useParams } from "react-router";
 import Breadcrumbs from 'src/components/breadcrumb';
-import { ULWrapper,ListItem} from './product-list.styled';
+import { ULWrapper,ListItem,StyledDiv} from './product-list.styled';
 
 const breadcrumbs = [
     { label: 'Home', link: '/' },
@@ -27,12 +27,15 @@ const ProductList = (props) => {
     const redStyle = gridWidth + ' ' + styles.red;
     const greenStyle = gridWidth + ' ' + styles.green;
 
+    const displayStyle = gridListStyle?'inline':'flex';
+
     const changeListStyle = () => {
         setGridListStyle(false)
     }
     const changeGridStyle = () => {
         setGridListStyle(true)
     }
+    
 
     return (
         <div className={styles.p_container}>
@@ -70,7 +73,12 @@ const ProductList = (props) => {
                 <input type="radio" id="reset" name="color" />
                 
                 <ULWrapper>
-                <li className={blueStyle}>1</li>
+                <li className={blueStyle}>
+                    <StyledDiv displayStyle={displayStyle}>
+                        <div><img src="http://farm8.staticflickr.com/7254/7740405218_deedfa35cb_t.jpg" /></div>
+                        <div>Parrot</div>
+                    </StyledDiv>
+                </li>
                     <li className={redStyle}>2</li>
                     <li className={blueStyle}>3</li>
                     <li className={greenStyle}>4</li>

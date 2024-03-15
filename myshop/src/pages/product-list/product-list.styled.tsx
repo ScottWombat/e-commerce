@@ -19,6 +19,8 @@ box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
 margin: 2px 15px;
 padding: 0 20px 15px;
 text-align: left;
-
 `;
 
+export const StyledDiv = styled.div<{displayStyle?:string;}>`
+    display: ${props => props.displayStyle};
+`;
