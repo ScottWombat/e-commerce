@@ -1,7 +1,9 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './product-details.module.css'
+import styles1 from './image-view.module.css'
 import Breadcrumbs from 'src/components/breadcrumb';
+import Item from 'src/pages/product/item';
 const breadcrumbs = [
     { label: 'Home', link: '/' },
     { label: 'Products', link: '/products' },
@@ -25,9 +27,10 @@ const ProductDetails = (props) => {
             </div>
             <div className={styles.product_view}>
                 <div className={styles.product_view_left}>
-                    ProductDetails  {catalog} {category}
+                    <Item/>
                 </div>
                 <div className={styles.product_view_right}>
+                    <div>Deatial</div>
                     <div className={styles.product_details}>
                         <input type="checkbox" className={styles.acc_check} id="detail1" name="detail1" /> 
                         <div className={styles.features}>

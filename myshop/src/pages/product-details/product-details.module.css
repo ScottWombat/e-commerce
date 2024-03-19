@@ -14,14 +14,17 @@
 }
 .product_view{
     display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    /*--
     grid-template-areas: "product_view_left  product_view_right";
+    */
 }
 .product_view_left{
-    grid-area:product_view_left;
+    /*grid-area:product_view_left;*/
     float:left;
 }
 .product_view_right{
-    grid-area:product_view_right;
+    /*grid-area:product_view_right;*/
     float: left;
 }
 /*--  product details --*/
