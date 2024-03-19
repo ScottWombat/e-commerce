@@ -24,7 +24,7 @@
     grid-area:product_view_right;
     float: left;
 }
-/*--  product description --*/
+/*--  product details --*/
 .product_details{
     width:100%;
     display: block;
@@ -33,7 +33,7 @@
    display:grid;
    grid-template-columns: 50% 50%;
    grid-template-areas: 'features_left features_right';
-   border-top:1px solid black;
+   border-top:1px solid #ccc;
    margin-right:15px;
 }
 .features_left{
@@ -45,22 +45,6 @@
     margin-right: 0px;
     text-align:right;
 }
-
-.float_left{
-    float:left;
-}
-.float_right{
-    float:right;
-}
-.specifications{
-    width:100%;
-    display: inline;
-}
-.shipping{
-    width:100%;
-    display: inline;
-}
-/* -- plus minus */
 
 .acc_check {
   position: absolute;
@@ -104,11 +88,8 @@
   transition: transform 1s ease;
   transform: scaleY(1);
 }
-.acc_check:checked + .features  .button_div  .acc_button:after {
+.acc_check:checked  ~ .features .button_dev .acc_button:after {
   transform: scaleY(0);
-}
-.acc-check:focus > .features > .button_div ~ .acc_button {
-  border-color: #ccc;
 }
 
 .acc_content {
@@ -137,8 +118,193 @@
   display: none;
 }
 
-.acc_outer {
-  display: inline-block;
+
+/*-- product specification --*/
+.product_specifications{
+  width:100%;
+  display: block;
+}
+.specfications{
+ display:grid;
+ grid-template-columns: 50% 50%;
+ grid-template-areas: 'spec_left spec_right';
+ border-top:1px solid #ccc;
+ margin-right:15px;
+}
+
+.spec_left{
+  grid-template-areas: spec_left;
+  
+}
+.spec_right{
+  grid-template-areas: spec_right;
+  margin-right: 0px;
+  text-align:right;
+}
+
+.spec_check {
+  position: absolute;
+  opacity: 0;
+}
+.button1_div{
+  overflow: auto;
+
+}
+
+.spec_button {
   position: relative;
-  vertical-align: top;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  float:right;
+}
+.spec_button:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #000;
+  height: 4px;
+  width: 16px;
+  margin-top: -2px;
+  margin-left: -8px;
+  border-radius: 2px;
+}
+.spec_button:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #000;
+  width: 4px;
+  height: 16px;
+  margin-left: -2px;
+  margin-top: -8px;
+  border-radius: 2px;
+  transition: transform 1s ease;
+  transform: scaleY(1);
+}
+
+.spec_check:checked ~ .specfications .button1_dev .spec_button:after {
+  transform: scaleY(0);
+}
+
+.spec_content {
+  height: 0px;
+  overflow: hidden;
+  width: 300px;
+  transition: height 1s ease;
+  position: relative;
+  text-align: left;
+}
+.spec_content:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  height: 0px;
+  display: block;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+}
+
+.spec_check:checked ~ .spec_content {
+  height: 600px;
+}
+.spec_check:checked ~ .spec_content:after {
+  display: none;
+}
+
+
+/*-- product shipping --*/
+.product_shipping{
+  width:100%;
+  display: block;
+}
+
+.shipping{
+ display:grid;
+ grid-template-columns: 50% 50%;
+ grid-template-areas: 'ship_left ship_right';
+ border-top:1px solid #ccc;
+ margin-right:15px;
+}
+
+.ship_left{
+  grid-template-areas: ship_left;
+  
+}
+
+.shipping_check {
+  position: absolute;
+  opacity: 0;
+}
+
+.button2_div{
+  overflow: auto;
+}
+.ship_button {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  float:right;
+}
+.ship_button:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #000;
+  height: 4px;
+  width: 16px;
+  margin-top: -2px;
+  margin-left: -8px;
+  border-radius: 2px;
+}
+.ship_button:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #000;
+  width: 4px;
+  height: 16px;
+  margin-left: -2px;
+  margin-top: -8px;
+  border-radius: 2px;
+  transition: transform 1s ease;
+  transform: scaleY(1);
+}
+
+.shipping_check:checked ~ .shipping .button2_dev .ship_button:after {
+  transform: scaleY(0);
+}
+
+.shipping_content {
+  height: 0px;
+  overflow: hidden;
+  width: 300px;
+  transition: height 1s ease;
+  position: relative;
+  text-align: left;
+}
+.shipping_content:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  height: 0px;
+  display: block;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+}
+
+.shipping_check:checked ~ .shipping_content {
+  height: 600px;
+}
+.shipping_check:checked ~ .shipping_content:after {
+  display: none;
 }

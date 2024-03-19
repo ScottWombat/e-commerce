@@ -29,10 +29,10 @@ const ProductDetails = (props) => {
                 </div>
                 <div className={styles.product_view_right}>
                     <div className={styles.product_details}>
-                        <input type="checkbox" className={styles.acc_check} id="detail1" name="detail1" />
+                        <input type="checkbox" className={styles.acc_check} id="detail1" name="detail1" /> 
                         <div className={styles.features}>
                             <div className={styles.features_left}>Details and Features</div>
-                            <div className={styles.button_div}>
+                            <div className={styles.button_dev}>
                             <label htmlFor="detail1" className={styles.acc_button}></label>
                             </div>
                         </div>
@@ -42,7 +42,36 @@ const ProductDetails = (props) => {
                                 <p>sorry, nothing to read.</p>
                         </div>
                     </div>
+                    <div className={styles.product_specifications}>
+                        <input type="checkbox" className={styles.spec_check} id="spec1" name="spec1" />
+                        <div className={styles.specfications}>
+                            <div className={styles.spec_left}>Product Specifications</div>
+                            <div className={styles.button1_dev}>
+                               <label htmlFor="spec1" className={styles.spec_button}></label>
+                            </div>
+                        </div>
+                        <div className={styles.spec_content}>
+                                <h2>Specication</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
+                                <p>sorry, nothing to read.</p>
+                        </div>
+                    </div>
+                    <div className={styles.product_shipping}>
+                        <input type="checkbox" className={styles.shipping_check} id="ship1" name="ship1" />
+                        <div className={styles.shipping}>
+                            <div className={styles.ship_left}>Shipping and Returns</div>
+                            <div className={styles.button2_dev}>
+                               <label htmlFor="ship1" className={styles.ship_button}></label>
+                            </div>
+                        </div>
+                        <div className={styles.shipping_content}>
+                                <h2>Shippping</h2>
+                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
+                                <p>sorry, nothing to read.</p>
+                        </div>
+                    </div>
                 </div>
+                
             </div>
         </div>
     );
