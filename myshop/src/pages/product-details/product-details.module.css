@@ -1,0 +1,144 @@
+.main_view {
+    display: inline;
+}
+
+.breadcrumb_view {
+    /*grid-area: breadcrumb_view;*/
+    text-align: left;
+    margin-left: 0px
+}
+
+.breadcrumb_row {
+    display: flex;
+    margin: 0px;
+}
+.product_view{
+    display:grid;
+    grid-template-areas: "product_view_left  product_view_right";
+}
+.product_view_left{
+    grid-area:product_view_left;
+    float:left;
+}
+.product_view_right{
+    grid-area:product_view_right;
+    float: left;
+}
+/*--  product description --*/
+.product_details{
+    width:100%;
+    display: block;
+}
+.features{
+   display:grid;
+   grid-template-columns: 50% 50%;
+   grid-template-areas: 'features_left features_right';
+   border-top:1px solid black;
+   margin-right:15px;
+}
+.features_left{
+    grid-template-areas: features_left;
+    
+}
+ .features_right{
+    grid-template-areas: features_right;
+    margin-right: 0px;
+    text-align:right;
+}
+
+.float_left{
+    float:left;
+}
+.float_right{
+    float:right;
+}
+.specifications{
+    width:100%;
+    display: inline;
+}
+.shipping{
+    width:100%;
+    display: inline;
+}
+/* -- plus minus */
+
+.acc_check {
+  position: absolute;
+  opacity: 0;
+}
+.button_div{
+  overflow: auto;
+
+}
+.acc_button {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  cursor: pointer;
+  float:right;
+}
+.acc_button:before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #000;
+  height: 4px;
+  width: 16px;
+  margin-top: -2px;
+  margin-left: -8px;
+  border-radius: 2px;
+}
+.acc_button:after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #000;
+  width: 4px;
+  height: 16px;
+  margin-left: -2px;
+  margin-top: -8px;
+  border-radius: 2px;
+  transition: transform 1s ease;
+  transform: scaleY(1);
+}
+.acc_check:checked + .features  .button_div  .acc_button:after {
+  transform: scaleY(0);
+}
+.acc-check:focus > .features > .button_div ~ .acc_button {
+  border-color: #ccc;
+}
+
+.acc_content {
+  height: 0px;
+  overflow: hidden;
+  width: 300px;
+  transition: height 1s ease;
+  position: relative;
+  text-align: left;
+}
+.acc_content:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  height: 0px;
+  display: block;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, white 100%);
+}
+
+.acc_check:checked ~ .acc_content {
+  height: 600px;
+}
+.acc_check:checked ~ .acc_content:after {
+  display: none;
+}
+
+.acc_outer {
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+}

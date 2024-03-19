@@ -2,87 +2,76 @@ import React, { useEffect, useState } from 'react';
 import styles from './product-list.module.css'
 import { useParams } from "react-router";
 import Breadcrumbs from 'src/components/breadcrumb';
-import { ULWrapper} from './product-list.styled';
+import { ULWrapper, ListItem, StyledDiv } from './product-list.styled';
+
 const breadcrumbs = [
     { label: 'Home', link: '/' },
     { label: 'Products', link: '/products' },
     { label: 'Category', link: '/products/category' },
     { label: 'Product Detail' },
-    ];
-
-    
+];
 
 const ProductList = (props) => {
     const [gridListStyle, setGridListStyle] = useState(false);
     const { catalog } = useParams();
-    useEffect(() => {{}
+    useEffect(() => {
+        { }
         //const params = new URLSearchParams(search);
         //const queryValue = params.get('catalog');
         setGridListStyle(true);
-       
-    }, [])
-    const gridBlueStyle = gridListStyle?styles.blue:styles.blue_row;
-    const gridRedStyle = gridListStyle?styles.red:styles.red_row;
-    const gridGreenStyle = gridListStyle?styles.green:styles.green_row;
-    const blueStyle = styles.tile + ' ' + gridBlueStyle;
-    const redStyle = styles.tile + ' ' + gridRedStyle;
-    const greenStyle = styles.tile + ' ' + gridGreenStyle;
 
+    }, [])
+
+    const gridWidth = gridListStyle ? styles.tile : styles.title_width;
+
+    const blueStyle = gridWidth + ' ' + styles.blue;
+    const redStyle = gridWidth + ' ' + styles.red;
+    const greenStyle = gridWidth + ' ' + styles.green;
+
+    const displayStyle = gridListStyle ? 'inline' : 'flex';
+
+    const changeListStyle = () => {
+        setGridListStyle(false)
+    }
+    const changeGridStyle = () => {
+        setGridListStyle(true)
+    }
+
+    const foo = 7;
     return (
         <div className={styles.p_container}>
             <div className={styles.breadcrumb_view}>
                 <div className={styles.breadcrumb_row}>
                     <a href="#">  <i className="fa fa-home fa-lg"></i></a>
                     <Breadcrumbs breadcrumbs={breadcrumbs} />
-                   
                 </div>
-          
             </div>
-            <div className={styles.left_view}>
-                <ul className={styles.label_ul}>
-
-                    <li><label htmlFor="blue" className={styles.blue_label} >BLUE</label></li>
-                    <li><label htmlFor="red">RED</label></li>
-                    <li><label htmlFor="green">GREEN</label></li>
-                    <li><label htmlFor="reset">RESET</label> </li>
-
-                </ul>
-            </div>{/*-- end left view */}
-            <div className={styles.right_view}>
-
-                <div className={styles.filter_buttons}>
-                    <div className={styles.list_view_button}><i className="fa fa-bars" aria-hidden="true"></i> List view</div>
-                    <div className={styles.grid_view_button}><i className="fa fa-th-large" aria-hidden="true"></i> Grid view</div>
+            {/* Product card */}
+            <div className={styles.product_view_root}>
+                {[...Array(9)].map((e, i) => 
+                <div className={styles.product_card + ' ' + styles.spacing}>
+                    <div className={styles.dis_ribbon}><span>35 % Off</span></div>
+                    <div className={styles.product_thumb}>
+                    <img src="https://cdn-icons-png.flaticon.com/512/2806/2806251.png" />
+                    </div>
+                    <div className={styles.product_details}>
+                        <span className={styles.product_category}>T-Shirt{i}</span>
+                        <div className={styles.product_header}><a href="#">New T-Shirt For Man</a></div>
+                        <div className={styles.product_desc}>New Import T-Shirt For Man Very Rare Collection, If You Want Order Right Now</div>
+                        <div className={styles.product_bottom_details}>
+                            <div className={styles.product_price}><small>$15.10</small>$7.99</div>
+                            <div className={styles.product_links}>
+                            <a href="#"><i className="fa fa-heart"></i></a>
+                            <a href="#"><i className="fa fa-shopping-cart"></i></a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
+                )}
             </div>
-            <div className={styles.product_content}>
-
-                <input type="radio" id="blue" name="color" />
-                <input type="radio" id="red" name="color" />
-                <input type="radio" id="green" name="color" />
-                <input type="radio" id="reset" name="color" />
-                
-                <ULWrapper>
-                    <li className={blueStyle}>1dddd</li>
-                    <li className={redStyle}>2</li>
-                    <li className={blueStyle}>3</li>
-                    <li className={greenStyle}>4</li>
-                    <li className={blueStyle}>5</li>
-                    <li className={redStyle}>6</li>
-                    <li className={redStyle}>7</li>
-                    <li className={greenStyle}>4</li>
-                    <li className={blueStyle}>9</li>
-                    <li className={greenStyle}>4</li>
-                    <li className={redStyle}>11</li>
-                    <li className={greenStyle}>4</li>
-                    <li className={blueStyle}>13</li>
-                    <li className={blueStyle}>14</li>
-                    <li className={greenStyle}>4</li>
-                    <li className={redStyle}>16</li>
-                </ULWrapper>
-              
-            </div>
+            
+            {/* end Product card */}
+            
         </div>
     );
 }

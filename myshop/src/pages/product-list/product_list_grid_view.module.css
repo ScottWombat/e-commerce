@@ -1,0 +1,221 @@
+/* RESET RULES
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+
+.l_container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.p_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "breadcrumb_view  breadcrumb_view "
+    "left_view right_view"
+    "product_content product_content";
+}
+
+.breadcrumb_view {
+  grid-area: breadcrumb_view;
+  text-align: left;
+  margin-left: 15px
+}
+
+.breadcrumb_row {
+  display: flex;
+  margin: 15px;
+}
+
+.right_view {
+  grid-area: right_view;
+  text-align: right;
+  padding: 5px;
+}
+
+.right_view i {
+  cursor: pointer;
+}
+
+.right_view i.selected {
+  color: #ef0000;
+}
+
+.left_view {
+  grid-area: left_view;
+  text-align: left;
+  color: black;
+  margin: 10px auto 20px auto;
+}
+
+.product_content {
+  grid-area: product_content;
+  font-size: 20px;
+}
+
+/* LIST VIEW GRID VIEW
+__________________________________________________*/
+.filter_buttons {
+  display: flex;
+  margin-right: 10px;
+  float: right;
+}
+
+.list_view_button,
+.grid_view_button {
+  color: black;
+  border: 1px solid black;
+  padding: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.list_view_button:hover,
+.grid_view_button:hover {
+  background: white;
+  color: #0e2439;
+}
+
+.list_view_button {
+  margin-right: 10px;
+}
+
+
+/* FILTERS
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+input[type="radio"] {
+  display: none;
+
+}
+
+label {
+  width: 150px;
+  float: left;
+  text-align: center;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  color: #222222;
+  margin: 5px;
+  cursor: pointer;
+
+}
+
+label:hover {
+  background-color: red;
+}
+
+label:active {
+  background-color: red;
+}
+
+input[type="radio"][id="blue"]:checked+label {
+  background-color: red;
+}
+
+input[type="radio"][id="blue"]:checked~ul>.red,
+input[type="radio"][id="blue"]:checked~ul>.green {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+}
+
+input[type="radio"][id="red"]:checked+label {
+  background-color: #ff4466;
+}
+
+input[type="radio"][id="red"]:checked~ul>.blue,
+input[type="radio"][id="red"]:checked~ul>.green {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+}
+
+input[type="radio"][id="green"]:checked+label {
+  background-color: #66dd99;
+}
+
+input[type="radio"][id="green"]:checked~ul>.blue,
+input[type="radio"][id="green"]:checked~ul>.red {
+  width: 0;
+  height: 0;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
+}
+
+.tile {
+  height: 100px;
+  float: left;
+  transition: all 1s;
+  margin: 5px;
+  padding: 5px;
+}
+
+.tile_width {
+  width:100%;
+}
+
+.green {
+  background: #66dd99;
+}
+
+.blue {
+  background: #6666ff;
+}
+
+.red {
+  background: #ff4466;
+}
+.green_row {
+  background: #66dd99;
+  width:100%;
+}
+
+.blue_row {
+  background-color: #6666ff;
+  width:100%;
+  margin:20px;
+}
+.red_row {
+  background: #ff4466;
+  width:100%;
+}
+
+.test {
+  background-color: #66dd99;
+}
+
+ul.label_ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  color: red;
+}
+
+ul.label_ul>li {
+  float: left;
+}
+
+.blue_rebel {
+  color: blue;
+}
+
+
+.content:has(input[type="radio"][id="green"]:checked)+.rigth_view {
+  color: red;
+}
+
+@supports selector(:has(+ *)) {
+  .right_view {
+    background-color: red;
+  }
+}
+
+.ul_test {
+  display:inline;
+
+};

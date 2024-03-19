@@ -7,6 +7,7 @@ import UserPage from 'src/pages/user';
 import ForgetPasswordPage from 'src/pages/forget-password';
 import ContentPage from 'src/pages/content';
 import ProductList from 'src/pages/product-list';
+import ProductDetails from './pages/product-details';
 import Menu from 'src/components/ui/menu';
 import Logo from 'src/components/ui/logo';
 import Hamberger from './components/ui/hamberger';
@@ -45,6 +46,7 @@ const App = () => {
             <Route path="/forget-password" element={<ForgetPasswordPage />} />
             <Route path="/content" element={<ContentPage />} />
             <Route path="/product-list/:men" element={<ProductList />} />
+            <Route path="/product-details/:catalog?/:category?" element={<ProductDetails />} />
         </Routes>
         <Footer/>
     </BrowserRouter>
