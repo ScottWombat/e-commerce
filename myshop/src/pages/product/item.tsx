@@ -40,8 +40,11 @@ const Button = styled.button`
   float:left;
   margin:10px 5px 10px 10px;
   padding:5px;
+  &:hover {
+    background-color: #ccc;
+  }
   &.selected {
-    border: 1px solid #ccc;
+    background-color: #91AEC4;
 
   }
 `;

@@ -16,7 +16,7 @@ const ProductDetails = (props) => {
     //const [searchParams] = useSearchParams();
     //const type = searchParams.get('category');
     let { catalog, category } = useParams();
-
+    const stars=2;
     return (
         <div className={styles.main_view}>
             <div className={styles.breadcrumb_view}>
@@ -30,7 +30,35 @@ const ProductDetails = (props) => {
                     <Item/>
                 </div>
                 <div className={styles.product_view_right}>
-                    <div>Deatial</div>
+                    <div className={styles.item_tag}>Sustainable Materials</div>
+                    <div className={styles.item_name_row}>
+                        <div className={styles.item_name}>Nike Air Max Dn</div>
+                        <div className={styles.product_header_star}>
+                        {[...Array(5)].map((e, index) => 
+                            (stars <= index)?
+                            <i className="fa fa-star" aria-hidden="true" style={{color:'#ccc'}}></i>
+                            :
+                            <i className="fa fa-star" aria-hidden="true" style={{color:'#FF5F1F'}}></i>
+                           
+                        )}
+                         <span>&#40;4 reviews&#41;</span>
+                        </div>
+                    </div>
+                    <div className={styles.item_desc}>Men's Shoes</div>
+                    <div className={styles.item_price}>
+                        <span className={styles.price_discount}>$149.99</span>
+                        <span className={styles.price_original}>$169.99</span>
+                    </div>
+                    <div className={styles.cart_checkout}>
+                    <button className={styles.cta_btn}>
+                    <img className={styles.cta_icon} src="https://kellychi22.github.io/frontend-mentor-solutions/01-product-preview-card-component/images/icon-cart.svg" alt="cart icon"/>
+                    <span>Add to Cart</span>
+                    </button>
+                    <button className={styles.cta_btn}>
+                    <img className={styles.cta_icon} src="https://kellychi22.github.io/frontend-mentor-solutions/01-product-preview-card-component/images/icon-cart.svg" alt="cart icon"/>
+                    <span>Checkout</span>
+                    </button>
+                    </div>
                     <div className={styles.product_details}>
                         <input type="checkbox" className={styles.acc_check} id="detail1" name="detail1" /> 
                         <div className={styles.features}>
