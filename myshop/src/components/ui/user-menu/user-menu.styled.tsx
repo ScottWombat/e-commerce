@@ -17,6 +17,10 @@ export const OptionsContainer = styled.div`
 
 export const OptionLink = styled(Link)`
   text-transform: uppercase;
-  margin: 10px 5px 5px 5px;
+  margin: 5px 7px 7px 7px;
+  cursor: pointer;
+`;
+export const BagOptionLink = styled(Link)`
+  margin: -5px 0px 0px 0px;
   cursor: pointer;
 `;

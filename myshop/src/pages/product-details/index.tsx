@@ -27,7 +27,7 @@ const ProductDetails = (props) => {
             </div>
             <div className={styles.product_view}>
                 <div className={styles.product_view_left}>
-                    <Item/>
+                    <Item key='1'/>
                 </div>
                 <div className={styles.product_view_right}>
                     <div className={styles.item_tag}>Sustainable Materials</div>

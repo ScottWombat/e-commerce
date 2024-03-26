@@ -1,12 +1,13 @@
-import React, { useState,useEffect, useRef } from 'react';
-import ShoppingBagIcon from 'src/components/svg/shopping-bag';
+import React, { useState,useEffect, useRef } from 'react'
 import UserIcon from 'src/components/svg/user';
 import HeartIcon from 'src/components/svg/heart'
+import CartIcon from '../cart-icon';
 import SearchBox from 'src/components/ui/search-box';
 import useDetectResize from 'src/utils/detect-resize';
 import {
     OptionsContainer,
-    OptionLink
+    OptionLink,
+    BagOptionLink
 } from './user-menu.styled';
 import SearchIcon from 'src/components/svg/search';
 const UserMenu = () => {
@@ -24,9 +25,9 @@ const UserMenu = () => {
                 <OptionLink to='/signin'>
                    <HeartIcon/>
                 </OptionLink>
-                <OptionLink to='/signin'>
-                <ShoppingBagIcon />
-                </OptionLink>
+                <BagOptionLink to='/cart'>
+                   <CartIcon />
+                </BagOptionLink>
         </OptionsContainer>
     )
 }

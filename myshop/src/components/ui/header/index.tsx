@@ -1,6 +1,6 @@
 //import { ReactComponent as Logo } from 'src/assets/logo.svg';
 import LogoIcon from 'src/components/svg/logo';
-import ShoppingBagIcon from 'src/components/svg/shopping-bag';
+import ShoppingBagIcon from 'src/components/ui/cart-icon/shopping-bag';
 import UserIcon from 'src/components/svg/user';
 import HeartIcon from 'src/components/svg/heart'
 import SearchBox from 'src/components/ui/search-box';
