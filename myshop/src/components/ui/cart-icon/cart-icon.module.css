@@ -202,7 +202,7 @@ span.product_qty_price {
     transition: all 0.3s linear;
   }
 span.product_price{
-    margin-left:60px;
+    margin-left:30px;
     font-size:12px;
     color: #75757a;
     margin-top:8px;
@@ -289,7 +289,7 @@ div.action_buttons a.view_cart_button {
   border-color: #4dc0e3;
   margin-right: 5px;
   color: #4dc0e3;
-  width: 80px;
+  width: 100px;
 }
 div.action_buttons a.view_cart_button:active, div.action_buttons a.view_cart_button:hover {
   background: rgba(77, 192, 227, 0.2);
@@ -335,7 +335,7 @@ div.action_buttons a.checkout_button:active, div.action_buttons a.checkout_butto
 .wrapper{
     position:relative;
     transform:translateX(-50%) translateY(-50%);
-    left:70px;
+    left:35px;
     top:20px;
     font-size:12px;
     color:red;

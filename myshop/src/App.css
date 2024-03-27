@@ -31,3 +31,8 @@
   padding: 0;
 }
 
+.fa-heart,.fa-trash {
+  text-shadow: 0px 0px 1px red;
+  color: white;  
+}
+

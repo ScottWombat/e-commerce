@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CartContainer, ShoppingIcon ,ItemCountContainer,CartSlider} from "./cart-icon.styles";
 import { useSelector } from 'react-redux';
 import { getAmountInCart,} from "src/store/cart/cartReducer";
@@ -71,8 +71,7 @@ const CartIcon = () => {
 			   </div>
 		   </div>
          <div className={styles.action_buttons}>
-			   <a className={styles.view_cart_button} href="#">Buy Now</a>
-            <Link to='/checkout' className={styles.checkout_button} onClick={checkOut}>Checkout</Link>
+			   <a className={styles.view_cart_button} href="#">Cart</a><a className={styles.checkout_button} href="#" onClick={checkOut}>Checkout</a>
 		   </div>
        </div>
        
