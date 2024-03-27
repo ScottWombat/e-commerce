@@ -46,7 +46,10 @@ const CartIcon = () => {
                      <input value={counter} className={styles.product_qty_input} readOnly={true}/>
                      <button className={styles.plus_button} onClick={() => setCounter(counter + 1)}>+</button>
                   </span>
-                  <span className={styles.product_price}>$16.00</span>
+                  <div className={styles.price_section}>
+                     <span className={styles.wrapper}><span className={styles.slashed}>$20.00</span></span>
+                     <span className={styles.product_price}>$16.00</span>
+                  </div>
 						</span>
 					</span>
 				</a>

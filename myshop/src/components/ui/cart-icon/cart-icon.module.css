@@ -330,3 +330,28 @@ div.action_buttons a.checkout_button:active, div.action_buttons a.checkout_butto
     z-index: 1;
   }
 
+.price_section{
+    display:flex;
+}
+.wrapper{
+    position:relative;
+    transform:translateX(-50%) translateY(-50%);
+    left:70px;
+    top:20px;
+    font-size:12px;
+    color:red;
+  }
+  
+  .slashed::before{
+     position:absolute;
+    transform:rotate(-25deg) translateY(-50%);
+    top:40%;
+    left:-5%;
+    display:block;
+    content:'';
+    background:red;
+    width:110%;
+    height:8%;
+    opacity:0.6;
+  }
+
