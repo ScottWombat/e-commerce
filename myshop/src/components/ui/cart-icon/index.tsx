@@ -35,9 +35,11 @@ const CartIcon = () => {
          <ul className={styles.products}>
             <li className={styles.product}>
             <a href="#" className={styles.product_link}>
+               <div>
 					<span className={styles.product_image}>
 						<img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_1.jpg" alt="Product Photo"/>
 					</span>
+               </div>
                <span className={styles.product_details}>
 						<div className={styles.product_details_header}>Very Cool Product One</div>
 						<span className={styles.product_qty_price}>
@@ -65,7 +67,7 @@ const CartIcon = () => {
 			   <a className={styles.view_cart_button} href="#">Cart</a><a className={styles.checkout_button} href="#">Checkout</a>
 		   </div>
        </div>
-       <div className={styles.sidebar_cart_curtain}></div>
+       
    </CartSlider>
    </>
    );
