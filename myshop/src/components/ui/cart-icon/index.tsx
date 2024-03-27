@@ -1,15 +1,70 @@
-import { CartContainer, ShoppingIcon ,ItemCountContainer} from "./cart-icon.styles";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { CartContainer, ShoppingIcon ,ItemCountContainer,CartSlider} from "./cart-icon.styles";
 import { useSelector } from 'react-redux';
 import { getAmountInCart,} from "src/store/cart/cartReducer";
+import styles from './cart-icon.module.css';
+
 const CartIcon = () => {
    const amount = useSelector(state => getAmountInCart(state))
+   const [sidebar, setSidebar] = useState(false);
 
-
+   const showSidebar = () => setSidebar(!sidebar);
+   const [counter, setCounter] = useState(1);
+   
+   const handleClick = () =>{
+      if(counter===1){
+         setCounter(1)
+      }else{
+         setCounter(counter-1)
+      }
+   }
    return (
-   <CartContainer>
-      <ShoppingIcon/>
+   <>
+   <CartContainer onClick={()=>showSidebar()}>
+      <ShoppingIcon />
       <ItemCountContainer>{amount === 0?'':amount}</ItemCountContainer>
    </CartContainer> 
+   
+   <CartSlider sidebar={sidebar}>
+       <div className={styles.cart_header_section}>
+       <h2 className={styles.bag_header}>Shopping Bag <span className={styles.count}>3</span></h2>
+       <a className={styles.close_button} onClick={()=>showSidebar()}><span className={styles.close_icon}>X</span></a>
+       </div>
+       <div className={styles.product_section}>
+         <ul className={styles.products}>
+            <li className={styles.product}>
+            <a href="#" className={styles.product_link}>
+					<span className={styles.product_image}>
+						<img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_1.jpg" alt="Product Photo"/>
+					</span>
+               <span className={styles.product_details}>
+						<div className={styles.product_details_header}>Very Cool Product One</div>
+						<span className={styles.product_qty_price}>
+                  <span className={styles.product_qty}>
+                     <button className={styles.minus_button} onClick={() => handleClick()}>-</button>
+                     <input value={counter} className={styles.product_qty_input} readOnly={true}/>
+                     <button className={styles.plus_button} onClick={() => setCounter(counter + 1)}>+</button>
+                  </span>
+                  <span className={styles.product_price}>$16.00</span>
+						</span>
+					</span>
+				</a>
+				<a href="#remove" className={styles.remove_button}><span className={styles.remove_icon}>X</span></a>
+            </li>
+         </ul>
+         <div className={styles.cart_totals}>
+			   <div className={styles.cart_subtotal}>
+				   <span className={styles.label}>Subtotal:</span> <span className={styles.amount}>$54.00</span>
+			   </div>
+		   </div>
+         <div className={styles.action_buttons}>
+			   <a className={styles.view_cart_button} href="#">Cart</a><a className={styles.checkout_button} href="#">Checkout</a>
+		   </div>
+       </div>
+       <div className={styles.sidebar_cart_curtain}></div>
+   </CartSlider>
+   </>
    );
 }
 

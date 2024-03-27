@@ -26,3 +26,22 @@ export const ItemCountContainer = styled.span`
   bottom: 10px;
   color:red;
 `;
+
+interface CartSliderProps{
+  sidebar: boolean;
+  
+}
+export const CartSlider = styled.aside<CartSliderProps>`
+  background: #354165;
+  color: #75757a;
+  width: 250px;
+  height: 100vh;
+  display: inline;
+  font-family: "Montserrat", sans-serif;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  right: ${ props => props.sidebar ? '0px' : '-340px'};
+  z-index: 10;
+  transition: right 0.5s ease-in-out;
+`;
