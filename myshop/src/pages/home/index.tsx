@@ -11,7 +11,7 @@ const HomePage = () => {
       <React.Fragment>
          <BannerSection><Banner/></BannerSection>
         <ButtonMenu/>
-        <i className="fa fa-shopping-bag"></i>
+       
       </React.Fragment>
     );
   }

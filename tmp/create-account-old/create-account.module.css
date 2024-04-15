@@ -1,0 +1,157 @@
+.create_account_wrapper {
+    display: grid;
+    place-content: center;
+    width: 80%;
+    margin: auto;
+}
+
+.element1 {
+    grid-row: 1;
+    grid-column: 1;
+    width: 100%;
+}
+
+.element2 {
+    grid-row: 2;
+    grid-column: 1;
+    width: 100%;
+}
+
+.element3 {
+    grid-row: 3;
+    grid-column: 1;
+    width: 100%;
+}
+
+.element4 {
+    grid-row: 4;
+    grid-column: 1;
+    width: 100%;
+}
+
+.element5 {
+    grid-row: 5;
+    grid-column: 1;
+    width: fit-content;
+    position: relative;
+    margin-top: 0px;
+}
+
+.element6 {
+    grid-row: 6;
+    grid-column: 1;
+    width: fit-content;
+    position: relative;
+    margin-top: 0px;
+    display: flex
+}
+
+.element7 {
+    grid-row: 7;
+    grid-column: 1;
+    width: fit-content;
+    position: relative;
+    margin-top: 0px;
+}
+
+.element8 {
+    grid-row: 8;
+    grid-column: 1;
+    width: fit-content;
+    position: relative;
+    margin-top: 0px;
+    display: inline;
+}
+
+.input_field {
+    padding: 8px 12px;
+    border: 1px solid gray;
+    position: relative;
+    background: transparent;
+    padding: 12px 24px;
+    border-radius: 8px;
+
+}
+
+.input_field.short {
+    width: 120px;
+}
+
+.input-field.medium {
+    width: 250px;
+}
+
+.input-field.long {
+    width: 400px;
+}
+
+.icon {
+    position: absolute;
+    right: 8px;
+    top: 10px;
+}
+
+.left {
+    float: left;
+    margin-right: 5px;
+}
+
+.right {
+    float: left;
+}
+
+/** input **/
+
+.did_floating_label_content {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.did_floating_label {
+    color: #1e4c82;
+    font-size: 13px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 10px;
+    margin-top: -25px;
+    padding: 0 5px;
+    background: #fff;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+.did_floating_select {
+    font-size: 12px;
+    display: block;
+    width: 200px;
+    height: 36px;
+    padding: 0 20px;
+    background: #fff;
+    color: #323840;
+    border: 1px solid #3D85D8;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.did_floating_select:focus {
+    outline: none;
+}
+/*
+left: 10px;
+    margin-top: -25px;
+*/
+.did_floating_select:focus ~ .did_floating_label {
+    margin-top:-50px;
+    font-size: 13px;
+    
+}
+ 
+
+
+
+
+
+
+

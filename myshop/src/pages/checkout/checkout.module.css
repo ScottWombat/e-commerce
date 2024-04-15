@@ -4,6 +4,7 @@
     grid-template-rows: auto;
     grid-template-areas: "c_left c_right";
     width:100%;
+    font-family: 'Montserrat';
 }
 .left_container{
     grid-area: c_left;
@@ -20,9 +21,21 @@
 }
 .right_container{
     grid-area: c_right;
-    background: beige;
     padding:5px;
     margin: 5px;
+    display: grid;
+    grid-template-columns: 200fr 100fr; 
+    grid-auto-rows: 25px;
+    grid-template-areas: 
+      "product_summary ."
+      "product_subtotal product_price"
+      "product_delivery product_delivery_charge"
+      "line1 line1"
+      "product_total product_total_price"
+      "line2 line2"
+      "guest_checkout guest_checkout"
+      "member_checkout member_checkout"
+      "paypal paypal"; 
 }
 .product_header{
     grid-area: product_header;
@@ -53,9 +66,91 @@
     width:auto;
 }
 
-.fa-tag {
-    text-shadow: 0px 0px 1px red;
-    color: white;  
-  }
+.product_summary{
+    grid-area: product_summary;
+    color:#36454F;
+    font-weight:400;
+    font-size:18px;
+}
+.product_subtotal{
+    grid-area: product_subtotal;
+}
+.product_price{
+    grid-area: product_price;
+    text-align:right;
+    
+}
+.product_delivery{
+    grid-area: product_delivery;
 
+}
+.product_delivery_charge{
+    grid-area: product_delivery_charge;
+    text-align:right;
+    
+}
 
+.line1{
+    grid-area:line1;
+    border-top: 1px solid #848484;
+    margin-top:10px;;
+}
+.line2{
+    grid-area:line2;
+    border: 1px solid #848484;
+    margin-bottom:10px;
+
+}
+.product_total{
+    grid-area: product_total;
+    font-weight:500;
+}
+.product_total_price{
+    grid-area: product_total_price;
+    text-align:right;
+    font-weight:500;
+}
+.guest_checkout{
+    grid-area: guest_checkout;
+    text-align:center;
+}
+.member_checkout{
+    grid-area: member_checkout;
+    text-align:center;
+    margin-top:20px;
+}
+.paypal{
+    grid-area: paypal;
+    text-align:center;
+    color:red;
+    margin-top:50px;
+}
+
+.button_box {
+  
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+
+}
+
+.button_box:focus {
+    outline: none;
+}
+
+.round {
+    background: #272829;
+    color: #fff;
+    border-radius: 50px;
+    width: 400px;
+    height:40px;
+}
+.round1 {
+    background: #fff;
+    border-radius: 50px;
+    width: 400px;
+    height:40px;
+    border: 5px solid #ccc;
+    margin-top:-15px;
+}

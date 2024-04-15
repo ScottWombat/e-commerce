@@ -5,7 +5,7 @@ import App from './App';
 import 'font-awesome/css/font-awesome.min.css';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
-import store   from 'src/store';
+import { store }   from 'src/store';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

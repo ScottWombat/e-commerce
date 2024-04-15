@@ -28,7 +28,7 @@
   },
   "include": [
     "src"
-  ],
+, "../tmp/create-account-old"  ],
   "exclude": [
     "node_modules",
     "babel.config.js",
