@@ -17,7 +17,7 @@ input.checkbox {
 input.checkbox[type="checkbox"]:checked {
   box-shadow: 0 0 0 2px #002B4E;
   accent-color: #fff !important;
-  color:black;
+  color:#000;
 }
 
 

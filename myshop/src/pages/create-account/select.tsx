@@ -9,7 +9,7 @@ const SelectWrapper = (props) => {
 
   return (
     <div style={mystyle}>
-      <StyledSelect onChange={(e) => props.callback(e)} id={props.itemId} width={'50px'}>
+      <StyledSelect  onChange={(e) => props.shopPrefOnChange(e)} id={props.itemId} name={props.name} width={'50px'}>
         {props.options.map(({ label, value }) => (
           <StyledOption key={value} value={value} >
          
@@ -18,7 +18,7 @@ const SelectWrapper = (props) => {
           </StyledOption>
         ))}
       </StyledSelect>
-      <StyledLabel move={props.move} onClick={props.onShopPrefClick}>{props.label}</StyledLabel>
+      <StyledLabel move={props.move} onClick={props.shopPrefLabelOnClick}>{props.label}</StyledLabel>
     </div>
   );
 };
@@ -34,7 +34,7 @@ const Select = (props) => {
       }),
     [props.options]
   );
-  return <SelectWrapper callback={props.callback} label={props.label} itemId={props.itemId} options={options} move={props.move}/>;
+  return <SelectWrapper name={props.name} shopPrefOnChange={props.shopPrefOnChange} label={props.label} itemId={props.itemId} options={options} move={props.move} shopPrefLabelOnClick={props.shopPrefLabelOnClick} onblur={props.onblur}/>;
 };
 
 export default Select;

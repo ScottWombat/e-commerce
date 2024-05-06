@@ -46,7 +46,7 @@ export const StyledLabel = styled.label<LabelProps>`
 export const StyledSelect = styled.select<SelectProps>`
 grid-area: 1 / 1;
 width: 100%;
-height: 60px;
+height: 55px;
 background-color: #fff;
 color: #000;
 font-size: 16px;
@@ -60,7 +60,7 @@ background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/200
 padding: 10px 50px 10px 15px;
 background-position: 97% 50%;
 border-style: solid;
-border-width: 2px;
+border-width: 1px;
 &:focus {
   outline: none;
 `;

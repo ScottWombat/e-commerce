@@ -10,9 +10,14 @@
 }
 .left{
     float:left;
+    width:50%;
 }
 .right{
     float:right;
+    
+}
+.error_right{
+  float:left;
 }
 
 .submit{
@@ -31,14 +36,15 @@
   right: 15px;
   top: 17px;
 }
+
 label {
 	background-color:#fff;
 	position:absolute;
 	top:0;
 	left:0;
 	font-weight:500;
-	margin:12px;
-	padding:10px;
+	margin:10px;
+	padding:5px;
 	color:#000;
 	font-size:15px;
 	text-transform:uppercase;
@@ -47,13 +53,29 @@ label {
   transition: all .2s ease-in-out;
 }
 
+label.active {
+  top: -25px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+}
 
-input[type=text] {
+input.test[type=text] {
 	width:100%;
 	background-color:transparent;
 	box-shadow:none;
 	padding:20px 0;
 	border: 2px solid #000;
+	color:blue;
+	text-indent: 20px;
+}
+input[type=password] {
+	width:100%;
+	background-color:transparent;
+	box-shadow:none;
+	padding:20px 0;
+	border: 1px solid #000;
 	color:#000;
 	text-indent: 20px;
 }
@@ -81,29 +103,28 @@ input[type=text]:focus {
   outline: none;
 }
 
-label.active {
-  top: -30px;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: 6px;
-  text-transform: uppercase;
-}
 
 @media only screen and (max-width: 600px) {
 	label.active {font-size:12px;top:-25px;}
 }
 
 /* --- */
+
 .floating_input  {
     font-size:14px;
-    padding:4px 4px;
+    padding:10px 10px 10px 10px;
     display:block;
     width:100%;
     height:50px;
     color:#000;
     background-color: transparent;
     border:1px solid #000;
+    cursor:default;
 }
+.floating_input.error{
+  border:1px solid red;
+}
+
 .highlight {
     position:absolute;
     height:50%; 
@@ -115,7 +136,7 @@ label.active {
 }
 .floating_input:focus   {
     outline:none;
-    border-bottom:2px solid #5264AE; 
+    border:1px solid #000; 
 }
 
 .floating_input:focus ~ .lab1  {
@@ -156,3 +177,26 @@ label.lab1 {
     transition: all .1s ease-in-out;
   }
   */
+
+  input_field {
+    padding: 8px 12px;
+    border: 1px solid gray;
+    position: relative;
+    background: transparent;
+    padding: 12px 24px;
+    border-radius: 8px;
+    width:100%;
+}
+
+.input_field.short {
+    width: 120px;
+}
+
+.input-field.medium {
+    width: 250px;
+}
+
+.input-field.long {
+    width: 400px;
+}
+

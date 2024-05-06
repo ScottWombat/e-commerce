@@ -1,5 +1,12 @@
 .icon {
     position: absolute;
     right: 15px;
-    top: 17px;
+    top: 10px;
+}
+
+.red{
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color:'red';
 }
