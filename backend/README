@@ -1,3 +1,8 @@
+Activate environment
+
+> source /venv/bin/activate
+
+
 resource
 https://medium.com/@JeffyJeff/a-step-by-step-guide-to-abstraction-with-a-generic-repository-pattern-typescript-and-react-990b579c10b
 
@@ -12,4 +17,14 @@ run app
 
 or 
 
->python -m app.app
+>python main.python
+
+or 
+
+for production 
+
+>./app_script.sh
+
+or
+
+>./gunicorn-run.sh

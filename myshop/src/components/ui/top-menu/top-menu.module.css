@@ -1,0 +1,23 @@
+.wrapper {
+	width: 100%;
+    font-size: 12px;
+}
+
+.menu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	display: flex;
+    width: 100%;
+}
+
+
+.menu li {
+	text-align: center;
+	flex-grow: 1;
+	position: relative;
+	border-right: 1px #000 solid;
+}
+.menu li:last-child {
+	border-right: none;
+}

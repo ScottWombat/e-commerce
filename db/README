@@ -4,5 +4,11 @@ password: pass
 
 Access mongodb shell
 
->docker exec -it <id> mongosh
+>docker exec -it <id> bash
+
+>mongosh -u myuser -p mypassword mydb
+
+> show collections
+
+>db.addresses.find({})
 

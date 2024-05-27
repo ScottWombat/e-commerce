@@ -1,10 +1,11 @@
 import time
 from typing import Dict
 import jwt
-from decouple import config
+#from decouple import config
+from app.conf.config import Config
 
-JWT_SECRET = config("secret")
-JWT_ALGORITHM = config("algorithm")
+JWT_SECRET = Config.secret
+JWT_ALGORITHM = Config.algorithm
 
 #print("D")
 #print(JWT_SECRET)

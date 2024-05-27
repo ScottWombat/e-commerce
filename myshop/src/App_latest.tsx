@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import {useSelector} from "react-redux";
 import{ Marquee, Header, Footer} from 'src/components/ui'
 import HomePage from 'src/pages/home';
@@ -21,6 +22,10 @@ import RightPanel from 'src/components/ui/right-panel';
 import Banner from './components/fragments/banner';
 import useDetectResize from './utils/detect-resize';
 import { isMember } from './store/member/memberReducer';
+import MemberLogin from './pages/member-login';
+import GuestLogin from './pages/guest-login';
+import CreateAccount from './pages/create-account';
+import Dummy from './pages/dummy';
 const Mobile = () =>{
   return (
     <>
@@ -32,6 +37,14 @@ const Mobile = () =>{
     </>
   )
 }
+const PrivateRoutes = () => {
+  let auth = {'token': false}
+  return(
+      auth.token ? <Outlet/> : <Navigate to="/content"/>
+  )
+}
+
+
 const App = () => {
   const { windowDimensions, isMobile, isTablet, isLaptop, isDesktop,isLarge } = useDetectResize();
   const is_Member = useSelector(isMember)
@@ -39,15 +52,15 @@ const App = () => {
   console.log(is_Member)
   return (
     <BrowserRouter>
-        {is_Member} && <Layout>
-          {isMobile && <Mobile/>}
-          {isTablet && <Mobile/>}
-          {isLaptop && <Mobile/>}
-          {isDesktop && <Mobile/>}
-          {isLarge && <Mobile/>}
-        </Layout>
+        <Layout>{isMobile && <Mobile/>}</Layout>
         <Routes>
+            <Route element={<PrivateRoutes />}>
+                <Route element={<Dummy/>} path="/dummy"/>
+            </Route>
             <Route path="/" element={<HomePage />} />
+            <Route path="/create_account" element={<CreateAccount />} />
+            <Route path="/member_login" element={<MemberLogin />} />
+            <Route path="/guest_login" element={<GuestLogin />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/user" element={<UserPage />} />
             <Route path="/forget-password" element={<ForgetPasswordPage />} />

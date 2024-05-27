@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect'
 
 const initialState = {
-  isMember: true,
+  isMember: false,
   email:''
 }
 

@@ -1,4 +1,8 @@
+import logging
+from bson import ObjectId
 from fastapi import APIRouter, Depends, HTTPException, status, Body
+from fastapi import Request
+from fastapi.encoders import jsonable_encoder
 from fastapi.exception_handlers import (
     http_exception_handler,
     request_validation_exception_handler,
@@ -11,10 +15,22 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from fastapi.responses import JSONResponse
 from jose import JWTError, jwt
 from passlib.context import CryptContext
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 from app.model.user import User, UserInDB, Token, TokenData
 from app.auth.auth_handler import signJWT
 from app.exceptions.custom_exception import CustomException
+from app.utils.random_code import getRandomCode
+from app.db.mongodb import AsyncIOMotorClient, get_database
+from app.db.db import get_db
+from app.model.user import User
+from app.model.response import Response
+from app.repository.users_repository import user_signin, add_user, verify_email
+from app.repository.address_repository import find_address_by_email
+
+
 
 # to get a string like this run:
 # openssl rand -hex 32
@@ -102,6 +118,32 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
+@router.get("/find_addresses/{email}")
+async def findAddresses(email:str,client: AsyncIOMotorClient = Depends(get_db),response_model_exclude_none=True): # type: ignore
+    response = await verify_email(email,client)
+    res = await find_address_by_email(ObjectId(response['object_id']),client)
+    #print(f"userObje {response['object_id']}")
+    #print(response)
+    return res
+
+@router.post("/verify_account")
+async def verify_account(email:str= Body(..., embed=True),client: AsyncIOMotorClient = Depends(get_db),response_model_exclude_none=True): # type: ignore
+    response = await verify_email(email,client)
+    if response is None:
+        raise HTTPException(status_code=418, detail="Nope! I don't like 3.")
+    return response
+
+
+@router.post("/signin")
+async def signin(email:str= Body(..., embed=True),password:str= Body(..., embed=True),client: AsyncIOMotorClient = Depends(get_db),response_model_exclude_none=True): # type: ignore
+    response = await user_signin(email,password,client)
+    return response
+
+@router.post("/create_user",response_model=Response,response_model_exclude_none=True, status_code=status.HTTP_201_CREATED)
+async def create_user(user:User,client: AsyncIOMotorClient = Depends(get_db)): # type: ignore
+    response = await add_user(user,client)
+    return response
+
 @router.post("/token",response_model=Token)
 async def login_for_access_token(
     form_data: Annotated[OAuth2PasswordRequestForm, Depends()]
@@ -129,9 +171,41 @@ async def login_for_access_token(
     return JSONResponse(content=item,status_code=200)
 
 
-@router.get("/users/me/", response_model=User)
+@router.get("/me", response_model=User)
 async def read_users_me(
     current_user: Annotated[User, Depends(get_current_active_user)]
 ):
     return current_user
 
+
+
+@router.get("/security_code")
+async def security_code():
+    message = MIMEMultipart()
+    message["To"] = 'To line here.'
+    message["From"] = 'From line here.'
+    message["Subject"] = 'Subject line here.'
+
+    title = '<b> Title line here. </b>'
+    
+    security_code = getRandomCode(5)
+    bodyText = "Your security code is " + str(security_code)
+    #messageText = MIMEText('''Message body goes here.''','html')
+    messageText = MIMEText(bodyText,'html')
+    message.attach(messageText)
+
+    email = 'hrevit@gmail.com'
+    password = 'yxtd nofl hotg xonz' #this app password from google
+    try:
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.ehlo('Gmail')
+        server.starttls()
+        server.login(email,password)
+        fromaddr = 'hrevit@gmail.com'
+        toaddrs  = 'hrevit@gmail.com'
+        server.sendmail(fromaddr,toaddrs,message.as_string())
+        server.quit()
+    except SMTPResponseException as e:
+        error_code = e.smtp_code
+        error_message = e.smtp_error
+    return str(security_code)

@@ -1,4 +1,5 @@
 import React, { useMemo, useRef, useState, useEffect } from "react";
+import { useAppDispatch,useAppSelector } from 'src/store/hooks';
 import styled from "styled-components";
 import { type_options } from 'src/data';
 import Select from './select';
@@ -14,7 +15,8 @@ import Input from 'src/components/form/input';
 import Label1 from 'src/components/form/label';
 import validate_field from "src/utils/field-validation";
 import css_checkbox from './checkbox.module.css';
-
+import { userRegister } from "src/store/signup/signupReducer";
+import UserData from "src/types/user_data";
 const options = [
   { value: '', label: 'Select' },
   { value: 'chocolate', label: 'Chocolate' },
@@ -23,7 +25,7 @@ const options = [
 ];
 
 const CreateAccount = (props: any) => {
-  const today = new Date().toISOString().substr(0, 10);
+  const dispatch = useAppDispatch();
   const codeInputRef = useRef(null);
   const codeLabelRef = useRef(null);
   const firstnameInputRef = useRef(null);
@@ -34,6 +36,7 @@ const CreateAccount = (props: any) => {
   const passwordLabelRef = useRef(null)
   const dobLabelRef = useRef(null);
   const dobInputRef = useRef(null)
+  const shopPrefRef = useRef(null)
 
 
   const [value, setValue] = useState('')
@@ -60,6 +63,7 @@ const CreateAccount = (props: any) => {
     DOB: []
   });
   const [formData1, setFormData1] = useState({});
+  /*
   const [formData, setFormData] = useState({
     code: '',
     firstname: '',
@@ -70,102 +74,49 @@ const CreateAccount = (props: any) => {
     register: false,
     aggrement: false
   });
-  
-
-  /*
-  useEffect(() => {
-    setShopErr(shopErr)
-    console.log('shopError change')
-  }, [shopErr]);
   */
- /*
-  useEffect(()=>{
-    console.log('cod')
-    console.log(errors)
-    console.log('errors happened now--->')
-    if(errors.code.length ==1){
-      codeInputRef.current.focus();
-      codeInputRef.current.style.border= '1px solid red';
-      codeLabelRef.current.style.color='red';
-    }else{
-      codeInputRef.current.style.border= '1px solid black';
-      codeLabelRef.current.style.color='black';
-    }
-  },[setErrors]);
+
   
-  useEffect(() => {
-    
-    if(errors.firstname.length ==1){
-      firstnameInputRef.current.focus();
-      firstnameInputRef.current.style.border= '1px solid red';
-      firstnameLabelRef.current.style.color='red';
-    }else{
-      firstnameInputRef.current.style.border= '1px solid black';
-      firstnameLabelRef.current.style.color='black';
-    }
-   },[errors.firstname])
-
-  useEffect(() => {
-    if(errors.surname.length ==1){
-      surnameInputRef.current.focus();
-      surnameInputRef.current.style.border= '1px solid red';
-      surnameLabelRef.current.style.color='red';
-    }else{
-      surnameInputRef.current.style.border= '1px solid black';
-      surnameLabelRef.current.style.color='black';
-    }
-  },[errors.surname]);
-
-  useEffect(() => {
-    if(errors.password.length ==1){
-      passwordInputRef.current.focus();
-      passwordInputRef.current.style.border= '1px solid red';
-      passwordLabelRef.current.style.color='red';
-    }else{
-      passwordInputRef.current.style.border= '1px solid black';
-      passwordLabelRef.current.style.color='black';
-    }
-  },[errors.password]);
-
-  useEffect(() => {
-    if(errors.dob.length ==1){
-      dobInputRef.current.focus();
-      dobInputRef.current.style.border= '1px solid red';
-      dobLabelRef.current.style.color='red';
-    }else{
-      dobInputRef.current.style.border= '1px solid black';
-      dobLabelRef.current.style.color='black';
-    }
-  },[errors.dob]);
-  */
-  
-
-
   const onSubmit = (e) => {
     e.preventDefault();
+
+  
+    formData1['email'] = 'revit@gmail.com';
+    formData1['firstname'] = e.target.firstname.value;
+    formData1['surname'] = e.target.surname.value;
+    formData1['password'] = e.target.password.value;
+    formData1['dob'] =e.target.dob.value;
+    formData1['subscribed'] = e.target.signup.checked?true:false;
+  
+    if(e.target.shopPref.value===''){
+      setErrors({...errors,SHOP:['*SHOP PREFERENCE => required']})
+      return;
+    }else{
+      formData1['preference'] = e.target.shopPref.value;
+    }
     
-    formData.code =e.target.code.value;
-    formData.firstname = e.target.firstname.value;
-    formData.surname = e.target.surname.value;
-    formData.password = e.target.password.value
-    //formData.shopPref = e.target.shopPref.value
-    //formData.dob = e.target.dob.value
-    
-    formData1['signup'] = e.target.signup.checked?true:false;
-    formData1['policy'] = e.target.policy.checked?true:false;
-    console.log(formData1)
-    errors.CODE =['dd']
-    setErrors(errors)
-    console.log('errors')
+    //errors.CODE =['dd']
+    //setErrors(errors)
+    console.log('errors1')
     console.log(errors)
+    console.log(formData1)
+    let data ={
+      email: "revit@gmail.com",
+      password: "dddd"
+    }
+    let userData:UserData ={
+      email: 'Revitfffff',
+      password: 're',
+      firstname: 'd',
+      surname: 'd',
+      dob: '02/02/2000',
+      preference: 'd',
+      enabled: true,
+      subscribed: true
+    }
+    //const test =userRegister(userData)
+    dispatch(userRegister(userData))
   }
-
-  const validateForm = () => {
-    const errors = { code: '', preference: '' };
-
-    setFormData((prevState) => ({ ...prevState, errors }));
-    return Object.keys(errors).length === 0;
-  };
  
 
   /*  event */
@@ -196,18 +147,12 @@ const CreateAccount = (props: any) => {
   const shopPrefOnChange = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
-    formData[name]=value;
+
     setMove(true)
     let errs = validate_field(name, value)
     errors.SHOP = errs;
     setErrors(errors)
-    if (errors.SHOP.length === 0) {
-      setShopErr(false)
-    } else {
-      setShopErr(true)
-    }
-
-
+  
   }
   const labelOnClick = (e) => {
     e.preventDefault();
@@ -233,42 +178,23 @@ const CreateAccount = (props: any) => {
         setAnimatedLabel({...animatedLabel,dob:true});
         dobInputRef.current.focus();
         break;
+      case 'SHOP_PREF':
+        shopPrefRef.current.focus();
+        break;
       default:
         break;
     }
   }
 
-  const customize_name = (name) =>{
-    switch(name){
-      case 'FIRSTNAME' : return 'FIRST NAME' + ' -> required';
-      case 'SHOP' : return "SHOPPING PREFERENCE" + ' -> required';
-      case 'DOB' : return "DATE OF BIRTH" + ' -> required';
-      default: return name + ' -> required';
-    }
-  }
   const inputOnBlur1 = (e) => {
     e.preventDefault();
     const { name, value } = e.target;
     let errs = validate_field(name, value)
-    console.log("dd")
-    console.log(errs)
+    errs.length===0?setIsError(false):setIsError(true);
     setErrors({ ...errors,[name]: errs})
-  }
-  const inputOnBlur = (e) => {
-    e.preventDefault();
-    const { name, value } = e.target;
-    formData[name] = value;
    
-    if (!value || value === '' || value === undefined) {
-      setErrors({ ...errors,[name]: [customize_name(name)] })
-      setIsError(true);
-    } else {
-        setErrors({...errors,[name]:[]});
-        setIsError(false);
-    }
-    console.log('data')
-    console.log(formData)
   }
+  
   const dateOnChange = (e) =>{
     e.preventDefault();
     var val = e.target.value;
@@ -310,7 +236,7 @@ const CreateAccount = (props: any) => {
         {errors.CODE && (<div className={styles.row}>
           <ul style={{ color: 'red', fontSize: '12px' ,padding:'0', margin:'0'}}>
             {errors.CODE.map((x) => (
-              <li key={x}>{'CODE => '}{x}</li>
+              <li key={x}>{x}</li>
             ))}
           </ul>
         </div>)}
@@ -318,13 +244,13 @@ const CreateAccount = (props: any) => {
           <div className={styles.left}>
             <div className={styles.text_box}>
               <label ref={firstnameLabelRef} htmlFor="firstname" id="label_firstname" onClick={labelOnClick} className={animatedLabel.firstname ? styles.active : styles.label}>First Name</label>
-              <input ref={firstnameInputRef} className={styles.floating_input} id="firstname" name="FIRSTNAME" type="text"  onBlur={inputOnBlur} />
+              <input ref={firstnameInputRef} className={styles.floating_input} id="firstname" name="FIRSTNAME" type="text"  onBlur={inputOnBlur1} />
             </div>
           </div>
           <div className={styles.right}>
             <div className={styles.text_box}>
               <label ref={surnameLabelRef} htmlFor="surname" id="label_surname" onClick={labelOnClick} className={animatedLabel.surname ? styles.active : styles.label}>Surname</label>
-              <input ref={surnameInputRef} className={styles.floating_input} id="surname" name="SURNAME" type="text" onBlur={inputOnBlur} />
+              <input ref={surnameInputRef} className={styles.floating_input} id="surname" name="SURNAME" type="text" onBlur={inputOnBlur1} />
             </div>
           </div>
         </div>
@@ -332,7 +258,7 @@ const CreateAccount = (props: any) => {
           <div className={styles.left}>
           <ul style={{ padding: '0', color: 'red', fontSize: '14px' }}>
             {errors.FIRSTNAME.map((x) => (
-              <li>{x}</li>
+              <li key={x}>{x}</li>
             ))}
           </ul>
           </div>
@@ -363,7 +289,7 @@ const CreateAccount = (props: any) => {
         </div>)}
         <div className={styles.row}>
           <div className={styles.text_box}>
-          <Select name='shopPref' id='shopPref' options={options} shopPrefOnChange={shopPrefOnChange} label={'Shopping Preference'} move={move} shopPrefLabelOnClick={shopPrefLabelOnClick} />
+          <Select ref={shopPrefRef} name='SHOP_PREF' id='shopPref' options={options} shopPrefOnChange={shopPrefOnChange} label={'Shopping Preference'} move={move} shopPrefLabelOnClick={shopPrefLabelOnClick} />
           </div>
         </div>
 
@@ -377,12 +303,12 @@ const CreateAccount = (props: any) => {
         <div className={styles.row}>
           <div className={styles.text_box}>
           <label ref={dobLabelRef} id="label_dob" htmlFor="dob" onClick={labelOnClick} className={animatedLabel.dob ? styles.active : styles.label}>Date of Birth</label>
-            <input placeholder={"dd/mm/yyyy"}
+            <input placeholder={"DD/MM/YYYY"}
             type="text"
             onChange = {dateOnChange} 
             onKeyDown={dateOnKeydown}
             onBlur={inputOnBlur1}
-            ref={dobInputRef} className={styles.floating_input} id='dob' name="dob" value={value}/>
+            ref={dobInputRef} className={styles.floating_input} id='dob' name="DOB" value={value}/>
           </div>
         </div>
 

@@ -1,5 +1,9 @@
-from pydantic import BaseModel
-from typing import Union
+from datetime import datetime
+from pydantic import BaseModel, Field
+from typing import Optional,List
+
+
+
 fake_users_db = {
     "johndoe": {
         "username": "johndoe",
@@ -17,15 +21,25 @@ class Token(BaseModel):
 
 
 class TokenData(BaseModel):
-    username: Union[str, None] = None
-
-class User(BaseModel):
     username: str
-    email: Union[str, None] = None
-    full_name: Union[str, None] = None
-    disabled: Union[bool, None] = None
 
-
+#class User(BaseModelEncoder):
+class User(BaseModel):
+    id: str 
+    email: str
+    password: str
+    firstname: str
+    surname: str
+    dob: str
+    preference: str
+    enabled: bool
+    subscribed: bool
+    created_at: datetime = Field(default_factory=datetime.now)
+    updated_at: datetime = Field(default_factory=datetime.now)
+    class Config:
+        arbitrary_types_allowed = True
+        populate_by_name = True
+        
 
 class UserInDB(User):
     hashed_password: str

@@ -33,24 +33,33 @@ interface Size {
     
     @media all and (max-width: 480px) {
       grid-template-columns: repeat(3,1fr);
-      grid-template-areas: "hamberger logo user_menu"
+      grid-template-areas: ". . top_menu"
+                           "hamberger logo user_menu"
                            "scroll_menu scroll_menu scroll_menu"
                            "banner banner banner";
                            
     }
     @media all and (max-width: 768px){
       grid-template-columns: repeat(3,1fr);
-      grid-template-areas: "hamberger logo user_menu"
+      grid-template-areas: ". . top_menu"
+                           "hamberger logo user_menu"
                            "scroll_menu scroll_menu scroll_menu"
                            "banner banner banner";
     }
     @media all and(min-width: 992px) {
       grid-template-columns: repeat(3,1fr);
-      grid-template-areas: "hamberger logo user_menu"
+      grid-template-areas: ". . top_menu"
+                           "hamberger logo user_menu"
                            "scroll_menu scroll_menu scroll_menu"
                            "banner banner banner";
     }
 `;
+export const TopMenuSection = styled.div`
+     grid-area: top_menu;
+     text-aligh: right;
+     width: 100%;
+`;
+
 export const HambergerSection = styled.div`
      grid-area: hamberger;
      text-aligh: left;

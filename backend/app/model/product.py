@@ -1,20 +1,19 @@
 from uuid import UUID
 from datetime import datetime
 from typing import Optional, Dict, Any,List
-from pydantic import BaseModel,Field
+from pydantic import RootModel,BaseModel,Field
 from bson import ObjectId
 
-
 class Product(BaseModel):
-    id: int
-    name: str
-    catalog: str
-    category: str
-    price: float
-    discount: int
-    rating: int
-    viewers: int
-    description: str = None
+    id: str
+    name: Optional[str] = None
+    catalog: Optional[str] = None
+    category: Optional[str] = None
+    price: Optional[float] = None
+    discount: Optional[int] = None
+    rating: Optional[int] = None
+    viewers: Optional[int] = None
+    description: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
     class Config:

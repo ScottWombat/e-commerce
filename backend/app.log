@@ -1,0 +1,9 @@
+[2024-05-26 10:46:28,912] [INFO] db - Connected to mongo.
+[2024-05-26 10:46:40,749] [INFO] app - in root
+[2024-05-26 10:48:37,352] [INFO] db - Mongo connection closed.
+[2024-05-27 18:44:06,346] [ERROR] app - Request invalid. [{'type': 'missing', 'loc': ('body', 'address', 'id'), 'msg': 'Field required', 'input': {'addr': 'ddd', 'state': 'qld', 'zipcode': '2000', 'country': 'aus'}, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
+[2024-05-27 18:48:42,450] [ERROR] app - Request invalid. [{'type': 'missing', 'loc': ('body', 'address', 'id'), 'msg': 'Field required', 'input': {'addr': 'ddd', 'state': 'qld', 'zipcode': '2000', 'country': 'aus'}, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
+[2024-05-27 18:48:48,094] [ERROR] app - Request invalid. [{'type': 'missing', 'loc': ('body', 'address', 'id'), 'msg': 'Field required', 'input': {'addr': 'ddd', 'state': 'qld', 'zipcode': '2000', 'country': 'aus'}, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
+[2024-05-27 18:54:04,821] [ERROR] app - Request invalid. [{'type': 'missing', 'loc': ('body', 'address', 'id'), 'msg': 'Field required', 'input': {'addr': 'ddd', 'state': 'qld', 'zipcode': '2000', 'country': 'aus'}, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
+[2024-05-27 18:57:19,657] [ERROR] app - Request invalid. [{'type': 'missing', 'loc': ('body', 'address', 'id'), 'msg': 'Field required', 'input': {'addr': 'ddd', 'state': 'qld', 'zipcode': '2000', 'country': 'aus'}, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
+[2024-05-27 19:58:20,424] [ERROR] app - Request invalid. [{'type': 'value_error', 'loc': ('body', 'address', 'user_object_id'), 'msg': 'Value error, Invalid ObjectId', 'input': 'string', 'ctx': {'error': ValueError('Invalid ObjectId')}, 'url': 'https://errors.pydantic.dev/2.5/v/value_error'}]

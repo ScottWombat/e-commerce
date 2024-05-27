@@ -2,14 +2,19 @@
 import { useNavigate } from "react-router-dom";
 import styled from 'styled-components';
 import React, { useState} from "react";
+import { unwrapResult } from '@reduxjs/toolkit'
 import styles from './member-login.module.css';
 import Logo from 'src/components/ui/logo';
 import { setMember } from 'src/store/member/memberReducer';
-import { useAppDispatch } from 'src/store/hooks';
+import { useAppDispatch,useAppSelector } from 'src/store/hooks';
+import {getUserCode,selectUserCode} from 'src/store/user-code/userCodeReducer';
+import { useResetProjection } from "framer-motion";
+import {validateCode} from "src/utils/regx"
+
 interface ErrorMessageProps{
     isError: boolean;
     
-  }
+}
 const ErrorMessage = styled.div<ErrorMessageProps>`
 grid-area: label;
 color: red;
@@ -20,16 +25,30 @@ const MemberLogin = () =>{
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
     const [showError,setShowError] = useState(false);
-    const [user,setUser] = useState({isMember:false,email:''})
+    const [user,setUser] = useState({isMember:true,email:''})
+    const onDispatch = async() =>{
+        try{
+            const resultAction = await dispatch(getUserCode());
+            const originalPromiseResult = unwrapResult(resultAction)
+            //let path = `/create_account`; 
+            //navigate(path);
+        }catch(rejectedValueOrSerializedError){
+            const errorResponse = rejectedValueOrSerializedError
+            console.log("Errors: %s", errorResponse )
+            //return false;
+        }
+    }
     const handleSubmit = (e) =>{
         e.preventDefault();
-        //setShowError(false);
-        //alert(e.target.value)
-        dispatch(setMember(user))
+        const test = validateCode("a-12345")
+        console.log("Boolean %s",test?"true":"false")
+        dispatch(setMember({isMember:true}))
+        onDispatch();
         let path = `/create_account`; 
         navigate(path);
     } 
     const handleChange = (e) =>{
+        
         let email = e.target.value;
         let validEmail = validateEmail(email)
         if(validEmail){
@@ -56,7 +75,7 @@ const MemberLogin = () =>{
             Enter your email to join us or sign in.
             </div>
             <div className={styles.input_field}>
-            <input type="email" required onBlur={handleChange}/>
+            <input type="email" id="email" required onBlur={handleChange}/>
             <label>Enter email</label>
             </div>
             <ErrorMessage isError={showError}>

@@ -41,17 +41,17 @@
 
 .input_field label {
     position: absolute;
-    top: 50%;
+    top: 25%;
     left: 15px;
     transform: translateY(-50%);
     color: #000;
-    font-size: 19px;
+    font-size: 15px;
     pointer-events: none;
     transition: 0.3s;
 }
 
 input:focus {
-    border: 2px solid #ffcc00;
+    border: 2px solid #000;
 }
 
 input:focus~label,
