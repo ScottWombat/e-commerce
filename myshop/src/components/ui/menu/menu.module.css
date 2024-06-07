@@ -1,94 +1,120 @@
-
-
-
-/*
-  Slide animation styles
-
-  You may need to add vendor prefixes for transform depending on your desired browser support.
-*/
-
-  /*
-	CSS for the submenu container, needed to adjust the behaviour to our needs.
-	Try commenting out this part to see how the animation looks without the container involved.
-  */
-  .submenu_container {
-	height: 150px;
-	min-width: 180px;
-	position: absolute;
-	overflow: hidden;
-	z-index: 1;
-  }
-  
-  /*
-	Layout styles.
-  
-	I like to work on stuff that's good looking so I remixed a cool simple menu by Mike Rojas (thanks!): https://codepen.io/mikerojas87/pen/rojKb 
-
-  html {
-	box-sizing: border-box;
-  }
-  
-  *, *:before, *:after {
-	box-sizing: border-box;
-  }
-  
-  body {
-	margin: 0;
-	font-family: "Open Sans", sans-serif;
-	font-size: 16px;
-	line-height: 1.5;
-  }
-  */
-  .menu-container {
-	text-align: center;
-  }
-  
-  nav ul {
-	list-style: none;
-	padding-left: 0;
-	margin-top: 0;
-	margin-bottom: 0;
-  }
-  
-  .nav {
-	display: inline-block;
-	margin: 0px auto;
-	color: #0d2035;
+a {text-decoration: none;}
+h1 {
+	font-size: 40px;
+  	font-weight: 700;
+	margin-bottom: 20px;
+  	margin-top: 20px;
+}
+h2 {
+	font-size: 15px;
+  	font-weight: 600;
+	margin-bottom: 30px;
+  	margin-top: 10px;
+}
+.container {
+	width: 100%;
+}
+.container1{
+	width:100%;
+	display:flex;
 	justify-content: center;
-  }
-  .nav a {
-	display: block;
-	padding: 0 16px;
-	line-height: inherit;
-	cursor: pointer;
-  }
-  
-  .nav__menu {
-	line-height: 45px;
-	font-weight: 700;
-	text-transform: uppercase;
-  }
-  
-  .nav__menu_item {
-	display: inline-block;
+}
+.ul_reset {
+	padding-left: 0;
+   margin-top: 0;
+   margin-bottom: 0;
+   list-style: none;
+}
+
+
+
+/* #Navigation Styles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+nav {
+	background: #fff;
+	font-size: 0;
 	position: relative;
-  }
-  .nav__menu_item:hover {
-	background-color: #00aeef;
-  }
-  .nav__menu_item:hover .nav__submenu {
-	display: block;
-  }
+	margin-top:-7px;
+	
+}
+nav > ul > li {
+	display: inline-block;
+  	font-size: 14px;
+  	padding: 0 15px;
+  	position: relative;
+	
+}
+nav > ul > li:first-child {padding-left: 0;}
+nav > ul > li:last-child {padding-right: 0;}
+nav > ul > li > a {
+	color: #000;
+  	display: block;
+  	position: relative;
+  	padding: 10px 0;
+  	border-bottom: 3px solid transparent;
+}
+nav > ul > li:hover > a {
+	color: #69aae0; 
+  	border-bottom: 3px solid #69aae0;
+}
+
+
+
+/* #Mega Menu Styles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.mega_menu {
+	background: #f0f0f0;
+  	display: none;
+  	left: 0;
+  	position: absolute;
   
-  .nav__submenu {
-	font-weight: 300;
-	text-transform: none;
-	display: none;
-	position: absolute;
-	width: 180px;
-	background-color: #00aeef;
-  }
-  
-  .nav__submenu-item:hover {
-	background: rgba(0, 0, 0, 0.1);
-  }
+  	width: 100%;
+}
+.mega_menu h3 {color: #444;}
+.mega_menu ul {
+	float: left;
+  	margin-bottom: 20px;
+  	margin-right: 40px;
+  	width: 205px;
+}
+.mega_menu ul:last-child {margin-right: 0;}
+.mega_menu a {
+	
+  	color: #4ea3d8;
+  	display: block;
+  	padding: 10px 0;
+}
+.mega_menu a:hover {color: #2d6a91;}
+
+
+
+/* #Droppable Class Styles
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.droppable {position: static; }
+.droppable > a:after {
+	content: "\f107";
+  	font-family: FontAwesome;
+  	font-size: 12px;
+  	padding-left: 6px;
+  	position: relative;
+  	top: -1px;
+}
+.droppable:hover .mega_menu {display: block;}
+
+
+
+/* #Browser Clearfix
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.cf:before,
+.cf:after {
+	content: " "; /* 1 */
+   display: table; /* 2 */
+}
+.cf:after {clear: both;}
+
+.header{
+	height:50px;
+	line-height: 50px;
+	font-size:16px;
+	font-weight:bold;
+}
