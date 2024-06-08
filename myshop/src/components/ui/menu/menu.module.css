@@ -13,15 +13,17 @@ h2 {
 }
 .container {
 	width: 100%;
+	font-family: 'Montserrat';
 }
 .container1{
 	width:100%;
 	display:flex;
 	justify-content: center;
+	font-family: 'Montserrat';
 }
 .ul_reset {
 	padding-left: 0;
-   margin-top: 0;
+   margin-top: 5px;
    margin-bottom: 0;
    list-style: none;
 }
@@ -35,6 +37,7 @@ nav {
 	font-size: 0;
 	position: relative;
 	margin-top:-7px;
+	font-family: 'Montserrat';
 	
 }
 nav > ul > li {
@@ -116,5 +119,9 @@ nav > ul > li:hover > a {
 	height:50px;
 	line-height: 50px;
 	font-size:16px;
-	font-weight:bold;
+	letter-spacing: 0.1em;
+	float:left;
+}
+.align_li{
+	float:left;
 }

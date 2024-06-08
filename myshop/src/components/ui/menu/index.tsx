@@ -1,30 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
 import styles from './menu.module.css';
-import './slide.module.css';
+
 import { useNavigate } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
+
 /*
 https://codepen.io/Winterfox/pen/wGmEbY
 */
-const Submenu = (props) => {
 
-  return (
-    
-    <ul className={styles.nav__submenu}>
-      <li className={styles.nav__submenu_item}>
-        <a onClick={(e) => props.clickHandler(e, props.catalog, props.category)}>Our Company</a>
-      </li>
-      <li className={styles.nav__submenu_item}>
-        <a>Our Team</a>
-      </li>
-      <li className={styles.nav__submenu_item}>
-        <a>Our Portfolio</a>
-      </li>
-    </ul>
-
-  );
-}
 
 const Menu = (props) => {
   const componentRef = useRef(null);
@@ -46,21 +29,82 @@ const Menu = (props) => {
     setShowMenu(false);
 
   };
-  /*
-<ul className={styles.menu}>
-          <li><a href="#home">FOR HIM</a></li>
-          <li><a href="#news">FOR HER</a></li>
-          <li><a href="#contact">SALE</a></li>
-          <li><a href="#about">NEW ARRIVALS</a></li>
-          </ul>
-  */
+
 
   return (
     <nav>
-  <ul className={styles.container + ' ' + styles.ul_reset}>
+    <ul className={styles.container + ' ' + styles.ul_reset}>
 
     <li className={styles.droppable}>
       <a href='#'>FOR HIM</a>
+      <div className={styles.mega_menu}>
+      	<div className={styles.container1 + ' ' + styles.ul_reset}>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>MEN SEX TOYS</div>
+            <li className={styles.align_li}><a href='#'>Cock Rings</a></li>
+            <li className={styles.align_li}><a href='#'>Masturbators</a></li>
+            <li className={styles.align_li}><a href='#'>Penis Extenders</a></li>
+            <li className={styles.align_li}><a href='#'>Penis Pumps</a></li>
+            <li className={styles.align_li}><a href='#'>Flashlights</a></li>
+          </ul>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>Toys for your penis</div>
+            <li className={styles.align_li}><a href='#'>Cock Rings</a></li>
+            <li className={styles.align_li}><a href='#'>Masturbators</a></li>
+            <li className={styles.align_li}><a href='#'>Penis Extenders</a></li>
+            <li className={styles.align_li}><a href='#'>Penis Pumps</a></li>
+            <li className={styles.align_li}><a href='#'>Flashlights</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li className={styles.droppable}>
+      <a href='#'>FOR HER</a>
+      <div className={styles.mega_menu}>
+      	<div className={styles.container1 + ' ' + styles.ul_reset}>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>VIBRATORS</div>
+            <li><a href='#'>Clitoral vibrators</a></li>
+            <li><a href='#'>Rabbit Vibrators</a></li>
+            <li><a href='#'>G-spot vibrators</a></li>
+            <li><a href='#'>Dual Vibrators</a></li>
+            <li><a href='#'>Mini & Bullet Vibrators</a></li>
+            <li><a href='#'>Air Pulse Stimulators</a></li>
+            <li><a href='#'>Thrusting Vibrators</a></li>
+            <li><a href='#'>Massage & Body Wand Vibrators</a></li>
+          </ul>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>DILDOS</div>
+            <li><a href='#'>Classic Dildos</a></li>
+            <li><a href='#'>Vibrating dildos</a></li>
+            <li><a href='#'>Suction Cup Dildos</a></li>
+          </ul>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>ESSENTIALS</div>
+            <li><a href='#'>Arousal Oils & Creams</a></li>
+            <li><a href='#'>Lubricants</a></li>
+            <li><a href='#'>Sex Toy Cleaners</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li className={styles.droppable}>
+      <a href='#'>FOR GAY</a>
+      <div className={styles.mega_menu}>
+      	<div className={styles.container1 + ' ' + styles.ul_reset}>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>Toys for your penis</div>
+            <li className={styles.align_li}><a href='#'>Cock Rings</a></li>
+            <li className={styles.align_li}><a href='#'>Masturbators</a></li>
+            <li className={styles.align_li}><a href='#'>Penis Extenders</a></li>
+            <li className={styles.align_li}><a href='#'>Penis Pumps</a></li>
+            <li className={styles.align_li}><a href='#'>Flashlights</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li className={styles.droppable}>
+      <a href='#'>ANAL TOYS</a>
       <div className={styles.mega_menu}>
       	<div className={styles.container1 + ' ' + styles.ul_reset}>
           <ul className={styles.ul_reset}>
@@ -82,12 +126,90 @@ const Menu = (props) => {
         </div>
       </div>
     </li>
-   
-    <li><a href='#'>HER TOYS</a></li>
-    <li><a href='#'>HIS TOYS</a></li>
-    <li><a href='#'>COUPLE TOYS</a></li>
-    <li><a href='#'>BEST SELLERS</a></li>
-    <li><a href='#'>SALE</a></li>
+    <li className={styles.droppable}>
+      <a href='#'>DILDOS</a>
+      <div className={styles.mega_menu}>
+      	<div className={styles.container1 + ' ' + styles.ul_reset}>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>ANAL TOYS</div>
+            <li><a href='#'>Douches & Enemas</a></li>
+            <li><a href='#'>Butt Plugs</a></li>
+            <li><a href='#'>Beads</a></li>
+            <li><a href='#'>Prostate Messagers</a></li>
+          </ul>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>Toys for your penis</div>
+            <li><a href='#'>Cock Rings</a></li>
+            <li><a href='#'>Masturbators</a></li>
+            <li><a href='#'>Penis Extenders</a></li>
+            <li><a href='#'>Penis Pumps</a></li>
+            <li><a href='#'>Flashlights</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li className={styles.droppable}>
+      <a href='#'>VIBRATORS</a>
+      <div className={styles.mega_menu}>
+      	<div className={styles.container1 + ' ' + styles.ul_reset}>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>Toys for your penis</div>
+            <li className={styles.align_li}><a href='#'>Cock Rings</a></li>
+            <li className={styles.align_li}><a href='#'>Masturbators</a></li>
+            <li className={styles.align_li}><a href='#'>Penis Extenders</a></li>
+            <li className={styles.align_li}><a href='#'>Penis Pumps</a></li>
+            <li className={styles.align_li}><a href='#'>Flashlights</a></li>
+          </ul>
+        </div>
+
+      </div>
+    </li>
+    <li className={styles.droppable}>
+      <a href='#'>BONDAGE</a>
+      <div className={styles.mega_menu}>
+      	<div className={styles.container1 + ' ' + styles.ul_reset}>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>Toys for your penis</div>
+            <li><a href='#'>Cock Rings</a></li>
+            <li><a href='#'>Masturbators</a></li>
+            <li><a href='#'>Penis Extenders</a></li>
+            <li><a href='#'>Penis Pumps</a></li>
+            <li><a href='#'>Flashlights</a></li>
+          </ul>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>Toys for your penis</div>
+            <li><a href='#'>Cock Rings</a></li>
+            <li><a href='#'>Masturbators</a></li>
+            <li><a href='#'>Penis Extenders</a></li>
+            <li><a href='#'>Penis Pumps</a></li>
+            <li><a href='#'>Flashlights</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li className={styles.droppable}>
+      <a href='#'>LUBE & ESSENTIALS</a>
+      <div className={styles.mega_menu}>
+      	<div className={styles.container1 + ' ' + styles.ul_reset}>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>Toys for your penis</div>
+            <li><a href='#'>Cock Rings</a></li>
+            <li><a href='#'>Masturbators</a></li>
+            <li><a href='#'>Penis Extenders</a></li>
+            <li><a href='#'>Penis Pumps</a></li>
+            <li><a href='#'>Flashlights</a></li>
+          </ul>
+          <ul className={styles.ul_reset}>
+            <div className={styles.header}>Toys for your penis</div>
+            <li><a href='#'>Cock Rings</a></li>
+            <li><a href='#'>Masturbators</a></li>
+            <li><a href='#'>Penis Extenders</a></li>
+            <li><a href='#'>Penis Pumps</a></li>
+            <li><a href='#'>Flashlights</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
   </ul>
 </nav>
   );
