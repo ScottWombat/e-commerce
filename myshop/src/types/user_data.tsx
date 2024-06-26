@@ -8,4 +8,11 @@ type UserData = {
     enabled: boolean;
     subscribed: boolean
 }
+
+export type CartData ={
+    items:[];
+    totalPrice: number;
+    inCart: number;
+}
+
 export default UserData;

@@ -24,3 +24,19 @@ text-align: left;
 export const StyledDiv = styled.div<{displayStyle?:string;}>`
     display: ${props => props.displayStyle};
 `;
+interface ShowFilters{
+  filterShow:boolean;
+}
+
+export const StyledFiltersDiv = styled.div<ShowFilters>`
+    width: ${(props) => props.filterShow? '25%': '0%'};
+    margin-left: ${(props) => props.filterShow? '0px': '0px'};
+    overflow: hidden;
+    transition: all 0.5s ease;
+`;
+export const StyledProductViewDiv = styled.div<ShowFilters>`
+    width: ${(props) => props.filterShow? '75%': '100%'};
+    float:left;
+    
+`;
+

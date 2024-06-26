@@ -6,9 +6,10 @@ export interface ImageProps{
     bgcolor: string;
 }
 export const BannerDiv = styled.div<ImageProps>`
-    width: auto;
+    max-width: 100%;
+    margin-top:10px;
     height: 300px;
-    background-size: 100% 100%;
+    background-size: contain;
     background: ${ p => p.bgcolor};
     background-image: url(${p =>p.bgimage});  /*url("wallpapers/wallpaper.jpg");*/
     background-position: center; /* Center the image */
@@ -17,6 +18,8 @@ export const BannerDiv = styled.div<ImageProps>`
     display: flex;
     justify-content: center;
     align-items: center;
+    resize: both;
+    overflow: hidden;
     z-index: -1;
 `;
 

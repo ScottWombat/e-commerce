@@ -1,0 +1,6 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    max-height: 34px;
+}

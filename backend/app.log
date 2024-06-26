@@ -7,3 +7,269 @@
 [2024-05-27 18:54:04,821] [ERROR] app - Request invalid. [{'type': 'missing', 'loc': ('body', 'address', 'id'), 'msg': 'Field required', 'input': {'addr': 'ddd', 'state': 'qld', 'zipcode': '2000', 'country': 'aus'}, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
 [2024-05-27 18:57:19,657] [ERROR] app - Request invalid. [{'type': 'missing', 'loc': ('body', 'address', 'id'), 'msg': 'Field required', 'input': {'addr': 'ddd', 'state': 'qld', 'zipcode': '2000', 'country': 'aus'}, 'url': 'https://errors.pydantic.dev/2.5/v/missing'}]
 [2024-05-27 19:58:20,424] [ERROR] app - Request invalid. [{'type': 'value_error', 'loc': ('body', 'address', 'user_object_id'), 'msg': 'Value error, Invalid ObjectId', 'input': 'string', 'ctx': {'error': ValueError('Invalid ObjectId')}, 'url': 'https://errors.pydantic.dev/2.5/v/value_error'}]
+[2024-06-26 09:12:04,880] [ERROR] base_events - Future exception was never retrieved
+future: <Future finished exception=InvalidDocument("cannot encode object: {'name'}, of type: <class 'set'>")>
+Traceback (most recent call last):
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1683, in _to_list
+    result = get_more_result.result()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1908, in _on_started
+    pymongo_cursor = future.result()
+  File "/usr/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2720, in aggregate
+    return self._aggregate(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2627, in _aggregate
+    return self.__database.client._retryable_read(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1492, in _retryable_read
+    return self._retry_internal(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1453, in _retry_internal
+    return _ClientConnectionRetryable(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2315, in run
+    return self._read() if self._is_read else self._write()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2445, in _read
+    return self._func(self._session, self._server, conn, read_pref)  # type: ignore
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/aggregation.py", line 164, in get_cursor
+    result = conn.command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/helpers.py", line 322, in inner
+    return func(*args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 996, in command
+    self._raise_connection_failure(error)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 968, in command
+    return command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/network.py", line 151, in command
+    request_id, msg, size, max_doc_size = message._op_msg(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/message.py", line 762, in _op_msg
+    return _op_msg_uncompressed(flags, command, identifier, docs, opts)
+bson.errors.InvalidDocument: cannot encode object: {'name'}, of type: <class 'set'>
+[2024-06-26 09:15:11,840] [ERROR] base_events - Future exception was never retrieved
+future: <Future finished exception=InvalidDocument("cannot encode object: {'name'}, of type: <class 'set'>")>
+Traceback (most recent call last):
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1683, in _to_list
+    result = get_more_result.result()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1908, in _on_started
+    pymongo_cursor = future.result()
+  File "/usr/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2720, in aggregate
+    return self._aggregate(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2627, in _aggregate
+    return self.__database.client._retryable_read(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1492, in _retryable_read
+    return self._retry_internal(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1453, in _retry_internal
+    return _ClientConnectionRetryable(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2315, in run
+    return self._read() if self._is_read else self._write()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2445, in _read
+    return self._func(self._session, self._server, conn, read_pref)  # type: ignore
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/aggregation.py", line 164, in get_cursor
+    result = conn.command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/helpers.py", line 322, in inner
+    return func(*args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 996, in command
+    self._raise_connection_failure(error)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 968, in command
+    return command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/network.py", line 151, in command
+    request_id, msg, size, max_doc_size = message._op_msg(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/message.py", line 762, in _op_msg
+    return _op_msg_uncompressed(flags, command, identifier, docs, opts)
+bson.errors.InvalidDocument: cannot encode object: {'name'}, of type: <class 'set'>
+[2024-06-26 09:16:44,378] [ERROR] base_events - Future exception was never retrieved
+future: <Future finished exception=InvalidDocument("cannot encode object: {'name'}, of type: <class 'set'>")>
+Traceback (most recent call last):
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1683, in _to_list
+    result = get_more_result.result()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1908, in _on_started
+    pymongo_cursor = future.result()
+  File "/usr/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2720, in aggregate
+    return self._aggregate(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2627, in _aggregate
+    return self.__database.client._retryable_read(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1492, in _retryable_read
+    return self._retry_internal(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1453, in _retry_internal
+    return _ClientConnectionRetryable(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2315, in run
+    return self._read() if self._is_read else self._write()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2445, in _read
+    return self._func(self._session, self._server, conn, read_pref)  # type: ignore
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/aggregation.py", line 164, in get_cursor
+    result = conn.command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/helpers.py", line 322, in inner
+    return func(*args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 996, in command
+    self._raise_connection_failure(error)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 968, in command
+    return command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/network.py", line 151, in command
+    request_id, msg, size, max_doc_size = message._op_msg(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/message.py", line 762, in _op_msg
+    return _op_msg_uncompressed(flags, command, identifier, docs, opts)
+bson.errors.InvalidDocument: cannot encode object: {'name'}, of type: <class 'set'>
+[2024-06-26 09:16:44,418] [ERROR] base_events - Future exception was never retrieved
+future: <Future finished exception=InvalidDocument("cannot encode object: {'name'}, of type: <class 'set'>")>
+Traceback (most recent call last):
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1683, in _to_list
+    result = get_more_result.result()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1908, in _on_started
+    pymongo_cursor = future.result()
+  File "/usr/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2720, in aggregate
+    return self._aggregate(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2627, in _aggregate
+    return self.__database.client._retryable_read(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1492, in _retryable_read
+    return self._retry_internal(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1453, in _retry_internal
+    return _ClientConnectionRetryable(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2315, in run
+    return self._read() if self._is_read else self._write()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2445, in _read
+    return self._func(self._session, self._server, conn, read_pref)  # type: ignore
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/aggregation.py", line 164, in get_cursor
+    result = conn.command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/helpers.py", line 322, in inner
+    return func(*args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 996, in command
+    self._raise_connection_failure(error)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 968, in command
+    return command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/network.py", line 151, in command
+    request_id, msg, size, max_doc_size = message._op_msg(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/message.py", line 762, in _op_msg
+    return _op_msg_uncompressed(flags, command, identifier, docs, opts)
+bson.errors.InvalidDocument: cannot encode object: {'name'}, of type: <class 'set'>
+[2024-06-26 09:19:04,594] [ERROR] base_events - Future exception was never retrieved
+future: <Future finished exception=InvalidDocument("cannot encode object: {'name'}, of type: <class 'set'>")>
+Traceback (most recent call last):
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1683, in _to_list
+    result = get_more_result.result()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1908, in _on_started
+    pymongo_cursor = future.result()
+  File "/usr/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2720, in aggregate
+    return self._aggregate(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2627, in _aggregate
+    return self.__database.client._retryable_read(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1492, in _retryable_read
+    return self._retry_internal(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1453, in _retry_internal
+    return _ClientConnectionRetryable(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2315, in run
+    return self._read() if self._is_read else self._write()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2445, in _read
+    return self._func(self._session, self._server, conn, read_pref)  # type: ignore
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/aggregation.py", line 164, in get_cursor
+    result = conn.command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/helpers.py", line 322, in inner
+    return func(*args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 996, in command
+    self._raise_connection_failure(error)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 968, in command
+    return command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/network.py", line 151, in command
+    request_id, msg, size, max_doc_size = message._op_msg(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/message.py", line 762, in _op_msg
+    return _op_msg_uncompressed(flags, command, identifier, docs, opts)
+bson.errors.InvalidDocument: cannot encode object: {'name'}, of type: <class 'set'>
+[2024-06-26 09:24:09,990] [ERROR] base_events - Future exception was never retrieved
+future: <Future finished exception=InvalidDocument("cannot encode object: {'name'}, of type: <class 'set'>")>
+Traceback (most recent call last):
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1683, in _to_list
+    result = get_more_result.result()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1908, in _on_started
+    pymongo_cursor = future.result()
+  File "/usr/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2720, in aggregate
+    return self._aggregate(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2627, in _aggregate
+    return self.__database.client._retryable_read(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1492, in _retryable_read
+    return self._retry_internal(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1453, in _retry_internal
+    return _ClientConnectionRetryable(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2315, in run
+    return self._read() if self._is_read else self._write()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2445, in _read
+    return self._func(self._session, self._server, conn, read_pref)  # type: ignore
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/aggregation.py", line 164, in get_cursor
+    result = conn.command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/helpers.py", line 322, in inner
+    return func(*args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 996, in command
+    self._raise_connection_failure(error)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 968, in command
+    return command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/network.py", line 151, in command
+    request_id, msg, size, max_doc_size = message._op_msg(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/message.py", line 762, in _op_msg
+    return _op_msg_uncompressed(flags, command, identifier, docs, opts)
+bson.errors.InvalidDocument: cannot encode object: {'name'}, of type: <class 'set'>
+[2024-06-26 09:25:28,169] [ERROR] base_events - Future exception was never retrieved
+future: <Future finished exception=InvalidDocument("cannot encode object: {'name'}, of type: <class 'set'>")>
+Traceback (most recent call last):
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1683, in _to_list
+    result = get_more_result.result()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 1908, in _on_started
+    pymongo_cursor = future.result()
+  File "/usr/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2720, in aggregate
+    return self._aggregate(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/collection.py", line 2627, in _aggregate
+    return self.__database.client._retryable_read(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1492, in _retryable_read
+    return self._retry_internal(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1453, in _retry_internal
+    return _ClientConnectionRetryable(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2315, in run
+    return self._read() if self._is_read else self._write()
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 2445, in _read
+    return self._func(self._session, self._server, conn, read_pref)  # type: ignore
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/aggregation.py", line 164, in get_cursor
+    result = conn.command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/helpers.py", line 322, in inner
+    return func(*args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 996, in command
+    self._raise_connection_failure(error)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/pool.py", line 968, in command
+    return command(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/network.py", line 151, in command
+    request_id, msg, size, max_doc_size = message._op_msg(
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/message.py", line 762, in _op_msg
+    return _op_msg_uncompressed(flags, command, identifier, docs, opts)
+bson.errors.InvalidDocument: cannot encode object: {'name'}, of type: <class 'set'>

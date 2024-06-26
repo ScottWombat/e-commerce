@@ -34,6 +34,7 @@ class User(BaseModel):
     preference: str
     enabled: bool
     subscribed: bool
+    last_login: Optional[datetime] = None
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
     class Config:

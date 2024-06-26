@@ -2,7 +2,7 @@ import os
 from dotenv import load_dotenv
 from motor.motor_asyncio import AsyncIOMotorClient
 import logging
-
+import asyncio
 from app.conf.config import Config
 
 db_client: AsyncIOMotorClient = None # type: ignore
@@ -23,6 +23,7 @@ async def connect_and_init_db():
             minPoolSize=Config.db_settings.get('min_db_conn_count'),
             uuidRepresentation="standard",
         )
+        db_client.get_io_loop = asyncio.get_event_loop
         logging.info('Connected to mongo.')
     except Exception as e:
         logging.exception(f'Could not connect to mongo: {e}')

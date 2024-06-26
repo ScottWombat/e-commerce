@@ -14,7 +14,7 @@ import MemberLogin from './pages/member-login';
 import Menu from 'src/components/ui/menu';
 import Logo from 'src/components/ui/logo';
 import Hamberger from './components/ui/hamberger';
-import { Layout, ScrollTextSection, LogoSection, MainMenuSection,UserMenuSection,HambergerSection,BannerSection } from 'src/styled/layout';
+import { Layout, LaptopSection2,EmptySection,EmptySection2,MobileSection,TabletSection,LaptopSection,ScrollTextSection, LogoSection, MainMenuSection,UserMenuSection,HambergerSection,BannerSection } from 'src/styled/layout';
 import ScrollText from 'src/components/ui/scroll-menu'
 import UserMenu from 'src/components/ui/user-menu'
 import { RightPanelSection } from 'src/styled/layout';
@@ -28,29 +28,74 @@ import CreateAccount from './pages/create-account';
 
 const Mobile = () =>{
   return (
-    <>
-    <TopMenuSection><TopMenu/></TopMenuSection>
+    
+    <MobileSection>
     <HambergerSection><Hamberger/></HambergerSection>
     <LogoSection><Logo/></LogoSection>
     <UserMenuSection><UserMenu/></UserMenuSection>
-    <ScrollTextSection><ScrollText/></ScrollTextSection>
-   
+    </MobileSection>
+    
+  )
+}
+const Tablet = () =>{
+  return (
+    <TabletSection>
+    <HambergerSection><Hamberger/></HambergerSection>
+    <LogoSection><Logo/></LogoSection>
+    <UserMenuSection><UserMenu/></UserMenuSection>
+    </TabletSection>
+  )
+}
+
+const Laptop = () =>{
+  return (
+    <>
+    <LaptopSection>
+      <EmptySection>&nbsp;</EmptySection>
+      <EmptySection2>&nbsp;</EmptySection2>
+      <TopMenuSection><TopMenu/></TopMenuSection>
+      <LogoSection><Logo/></LogoSection>
+      <ScrollTextSection><ScrollText/></ScrollTextSection>
+      <UserMenuSection><UserMenu/></UserMenuSection>
+    </LaptopSection>
+    <LaptopSection2>
+      <MainMenuSection><Menu/></MainMenuSection>
+    </LaptopSection2>
     </>
+  )
+}
+
+const Laptop1 = () =>{
+  return (
+    <>
+    <LaptopSection>
+    <EmptySection>&nbsp;</EmptySection>
+      <EmptySection2>&nbsp;</EmptySection2>
+      <TopMenuSection><TopMenu/></TopMenuSection>
+      <LogoSection><Logo/></LogoSection>
+      <ScrollTextSection>Free Delivery to Australia on orders over $99</ScrollTextSection>
+      <UserMenuSection><UserMenu/></UserMenuSection>
+  </LaptopSection>
+  <LaptopSection2>
+    <LogoSection><Logo/></LogoSection>
+    <MainMenuSection><Menu/></MainMenuSection>
+    <UserMenuSection>ffff<UserMenu/></UserMenuSection>
+  </LaptopSection2>
+  </>
   )
 }
 const App = () => {
   const { windowDimensions, isMobile, isTablet, isLaptop, isDesktop,isLarge } = useDetectResize();
   const is_Member = useSelector(isMember)
   console.log("me")
-  console.log(is_Member)
+  console.log(isMobile)
+  console.log(windowDimensions)
   return (
     <BrowserRouter>
           <Layout>
           {isMobile && <Mobile/>}
-          {isTablet && <Mobile/>}
-          {isLaptop && <Mobile/>}
-          {isDesktop && <Mobile/>}
-          {isLarge && <Mobile/>}
+          {isTablet && <Tablet/>}
+          {isLaptop && <Laptop/>}
         </Layout>
         <Routes>
             <Route path="/" element={<HomePage />} />

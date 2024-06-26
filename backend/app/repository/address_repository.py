@@ -17,9 +17,12 @@ async def find_address_by_email(userObjectId: ObjectId,client: AsyncIOMotorClien
         docs = await cursor.to_list(None)
         #print(type(docs))
         #de =[doc async for doc in client.addresses.find({'user_object_id': str(userObjectId)})]
-        addr = []
-        for doc in docs:
-            addr.append(Address(**doc))
+        #addr = []
+        #for doc in docs:
+        #    addr.append(Address(**doc))
+        addr = [
+            Address(**doc) for doc in docs
+        ]
         return addr
         #return {"addresses":addr}
         #return docs

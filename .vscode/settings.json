@@ -2,5 +2,8 @@
     "python.autoComplete.extraPaths": [
        
 
-    ]
+    ],
+    "files.watcherExclude": {
+        "**/target": true
+    }
 }

@@ -48,3 +48,6 @@ async def add_user(user:User,client: AsyncIOMotorClient) -> Response: # type: ig
     except Exception as e:
         raise HTTPException(status_code=424, detail='Unable to create new an user')
     
+    
+async def get_user(user:User,client: AsyncIOMotorClient) -> Response: # type: ignore
+     return None

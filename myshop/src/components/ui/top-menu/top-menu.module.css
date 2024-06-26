@@ -1,23 +1,24 @@
 .wrapper {
-	width: 100%;
-    font-size: 12px;
+    font-size: 14px;
+	width:100%;
+	padding-right:10px;
+	font-family: 'Montserrat';
 }
 
-.menu {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	display: flex;
-    width: 100%;
-}
+.menu  {
+	list-style-type: none;
+	overflow: hidden;
 
-
-.menu li {
+  }
+  
+  .menu li {
+	 float: right;
+	
+  }
+  .menu li a {
+	display: block;
+	color: black;
 	text-align: center;
-	flex-grow: 1;
-	position: relative;
-	border-right: 1px #000 solid;
-}
-.menu li:last-child {
-	border-right: none;
-}
+	padding: 5px;
+	text-decoration: none;
+  }

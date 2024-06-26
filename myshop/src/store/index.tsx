@@ -2,15 +2,17 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './authReducer';
 import cartReducer from './cart/cartReducer';
 import memberReducer from './member/memberReducer';
-import userCodeReducer from './user-code/userCodeReducer'
+import userCodeReducer from './user-code/userCodeReducer';
 import signupReducer from './signup/signupReducer';
+import paginationReducer from './paginationReducer';
 export const store = configureStore({
     reducer:{ 
         authreducer:authReducer,
         cart:cartReducer,
         member:memberReducer,
         userCode:userCodeReducer,
-        signup:signupReducer
+        signup:signupReducer,
+        pagination:paginationReducer
     }
 })
 

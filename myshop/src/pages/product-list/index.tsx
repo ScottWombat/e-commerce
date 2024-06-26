@@ -2,8 +2,10 @@ import React, { useEffect, useState } from 'react';
 import styles from './product-list.module.css'
 import { useParams } from "react-router";
 import Breadcrumbs from 'src/components/breadcrumb';
-import { ULWrapper, ListItem, StyledDiv } from './product-list.styled';
+import { ULWrapper, ListItem, StyledDiv,  StyledFiltersDiv,StyledProductViewDiv } from './product-list.styled';
 import ProductCard from './product-card';
+import ProductViewOptions from 'src/components/ui/product-view-options';
+import ProductRightFilters from 'src/components/ui/product-view-options/product-right-filters';
 const breadcrumbs = [
     { label: 'Home', link: '/' },
     { label: 'Products', link: '/products' },
@@ -13,9 +15,11 @@ const breadcrumbs = [
 
 const ProductList = (props) => {
     const [gridListStyle, setGridListStyle] = useState(false);
+    const [showFilters ,setShowFilters] = useState(true)
     const { catalog } = useParams();
     useEffect(() => {
-        { }
+        console.log("poooooo")
+        //{ }
         //const params = new URLSearchParams(search);
         //const queryValue = params.get('catalog');
         setGridListStyle(true);
@@ -39,20 +43,38 @@ const ProductList = (props) => {
 
     return (
         <div className={styles.p_container}>
-            <div className={styles.breadcrumb_view}>
-                <div className={styles.breadcrumb_row}>
+            <div className={styles.breadcrumb}>
+                <div className={styles.breadcrumb_view}>
+                    
+                    <div className={styles.breadcrumb_row}>
                     <a href="#">  <i className="fa fa-home fa-lg"></i></a>
                     <Breadcrumbs breadcrumbs={breadcrumbs} />
+                    </div>
+                    
+                </div>
+                <div className={styles.product_filter_menu}>
+                    <div style={{float: "right"}}>
+                     <ProductViewOptions showFilters={showFilters} setShowFilters={setShowFilters}/>
+                    </div>
                 </div>
             </div>
-            {/* Product card */}
-            <div className={styles.product_view_root}>
-                {[...Array(31)].map((e, i) => 
-                    <ProductCard/>
-                )}
-            </div>
             
-            {/* end Product card */}
+            {/* Product card */}
+            <div className={styles.product_view_section}>
+                <StyledFiltersDiv filterShow={showFilters}>
+                    <ProductRightFilters/>
+                </StyledFiltersDiv>
+                <StyledProductViewDiv filterShow={showFilters}>
+                   <div className={styles.product_view_root}>
+                    {[...Array(31)].map((e, i) => 
+                    <ProductCard/>
+                    )}
+                </div>
+                </StyledProductViewDiv>
+               
+                {/* end Product card */}
+               
+            </div>
             
         </div>
     );

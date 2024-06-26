@@ -42,7 +42,7 @@ interface Size {
         grid-template-areas:
             "hamberger . ."
             "scroll_menu scroll_menu scroll_menu"
-            "logo main-menu user-menu"
+            "logo main_menu user-menu"
             "main-content main-content main-content"
     }
     align-items: start;
@@ -60,8 +60,8 @@ export const ScrollTextSection = styled.div`
 `;
 
 export const MainMenuSection = styled.nav`
-  grid-area: main-menu;
-  text-align: center;
+  grid-area: main_menu;
+  text-align: left;
   margin-top: 10px;
 `;
 

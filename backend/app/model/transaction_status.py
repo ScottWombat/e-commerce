@@ -1,0 +1,8 @@
+from enum import Enum
+class TransactionStatus(str, Enum):
+    CREATED='CREATE'
+    PROCESSING='PROCESSING'
+    CANCELLED="CANCELLED"
+    CANCELLED_REQUEST="CANCELLED_REQUEST"
+    COMPLETE="COMPLETE"
+    

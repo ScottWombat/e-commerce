@@ -35,7 +35,7 @@ const CartIcon = () => {
    
    <CartSlider sidebar={sidebar}>
        <div className={styles.cart_header_section}>
-       <h2 className={styles.bag_header}>Shopping Bag <span className={styles.count}>3</span></h2>
+       <h2 className={styles.bag_header}>Shopping Bag1 <span className={styles.count}>31</span></h2>
        <a className={styles.close_button} onClick={()=>showSidebar()}><span className={styles.close_icon}>X</span></a>
        </div>
        <div className={styles.product_section}>

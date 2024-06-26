@@ -18,12 +18,12 @@ import useDetectResize from 'src/utils/detect-resize';
 
 
 const Banner1 = () => {
-  const { windowDimensions, isMobile, isTablet, isLaptop, isDesktop } = useDetectResize();
+  const { windowDimensions, isMobile, isTablet, isLaptop, isDesktop,isLarge } = useDetectResize();
   const findXShowNow=()=>{
-    if(isMobile){
+    //if(isLarge){
       return -300;
-    }
-    return 0;
+    //}
+    //return 0;
   }
   const hello = useRef();
   const row1 = useRef();
@@ -45,7 +45,10 @@ const Banner1 = () => {
       tl.from(hello.current, {
         opacity: 1,
         x: 0,
-        duration: 3
+        duration: 3,
+        yPercent: 100,
+        ease: "power4",
+        stagger: 0.1  
       })
       .from(shop_now.current,{
         opacity: 1,
@@ -54,7 +57,7 @@ const Banner1 = () => {
       })
       .to(row1.current,{
         opacity: 1,
-        x: -100,
+        x: 100,
         duration:1
       });
       
@@ -71,8 +74,7 @@ const Banner1 = () => {
   return (
     <>
       <BannerDiv bgcolor={'#fff'} bgimage={imagePath}>
-
-        <div className={styles2.container} ref={container}>
+      <div className={styles2.container} ref={container}>
              <div ref={hello} className={styles2.escape}>
                 Escape into amazing experiences
               </div>
@@ -93,11 +95,8 @@ const Banner1 = () => {
               <div ref={shop_now}>
                 <ShopNow>Show Now</ShopNow>
               </div>
-
         </div>
-
-
-
+        
       </BannerDiv>
       {/*
         <div className={styles.animation_wrapper}>

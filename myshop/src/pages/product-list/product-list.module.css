@@ -15,11 +15,22 @@
     "product_content product_content";
   */
 }
+.breadcrumb{
+  display: flex;
+  width:100%;
+}
 
-.breadcrumb_view {
-  /*grid-area: breadcrumb_view;*/
-  text-align: left;
-  margin-left: 0px
+ .breadcrumb_view {
+  /*grid-area: breadcrumb_view;
+  text-align: left;*/
+  float:left;
+  width:50%;
+
+}
+
+.product_filter_menu{
+  float:right;
+  width:50%;
 }
 
 .breadcrumb_row {
@@ -250,6 +261,11 @@ __________________________________________________*/
   border-bottom: 3px solid transparent;
   border-top: 3px solid #79A70A;
 }
+.product_view_section{
+  display: flex;
+ 
+}
+
 
 
 

@@ -12,3 +12,12 @@ Access mongodb shell
 
 >db.addresses.find({})
 
+
+Import json to Mongo
+--------------------
+> docker cp catalogues.json f64:/catalogues.json
+
+> docker exec -it <id> bash
+
+> mongoimport --username=myuser --password=mypassword --db=mydb --collection=catalogue --uri=mongodb://localhost:27017/ --jsonArray --file=/catalogues.json --type=json
+

@@ -1,4 +1,4 @@
-from .items import router as items_router
+from .item import router as items_router
 from .users import router as users_router
 from .addresses import router as addresses_router
 from .mongo import router as healthcheck_router

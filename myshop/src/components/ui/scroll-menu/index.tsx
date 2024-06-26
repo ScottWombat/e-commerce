@@ -1,7 +1,14 @@
 import styles from './scroll-menu.module.css'
 import Marquee from 'src/components/ui/marquee'
-
 const ScrollText = () => {
+	return (
+		<div className={styles.text_align}>
+		 Free Delivery to Australia on orders over $99
+		</div>
+	)
+}
+
+const ScrollText1 = () => {
     return(
      <div className={styles.animate_contain}>
 		<div className={styles.animated_text}>

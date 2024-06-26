@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,700');
-
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700');
 @font-face {
   font-family: "monument_extendedregular";
   src: url("https://www.yudiz.com/codepen/photography-banner/monumentextended-regular.woff2")
@@ -34,5 +34,8 @@
 .fa-heart,.fa-trash {
   text-shadow: 0px 0px 1px red;
   color: white;  
+}
+* {
+  box-sizing: border-box;
 }
 

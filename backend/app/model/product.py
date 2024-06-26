@@ -14,6 +14,8 @@ class Product(BaseModel):
     rating: Optional[int] = None
     viewers: Optional[int] = None
     description: Optional[str] = None
+    category: Optional[str] = None
+    catalogue: Optional[str] = None
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
     class Config:
@@ -36,5 +38,14 @@ class ProductResponse(BaseModel):
             kwargs["exclude_none"] = True
             return BaseModel.dict(self, *args, **kwargs)
     
-
+class ProductDTO(BaseModel):
+    id: str
+    name: str
+    price: float
+    discount: int
+    rating: int
+    viewers: int
+    description: str
+    category: str
+    catalogue: str
    

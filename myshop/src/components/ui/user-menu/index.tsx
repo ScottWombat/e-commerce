@@ -25,7 +25,7 @@ const UserMenu = () => {
                 <OptionLink to='/signin'>
                    <HeartIcon/>
                 </OptionLink>
-                <BagOptionLink to='/cart'>
+                <BagOptionLink to='/cart9'>
                    <CartIcon />
                 </BagOptionLink>
         </OptionsContainer>

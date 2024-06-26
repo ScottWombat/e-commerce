@@ -4,6 +4,9 @@ import styles from './product-details.module.css'
 import styles1 from './image-view.module.css'
 import Breadcrumbs from 'src/components/breadcrumb';
 import Item from 'src/pages/product/item';
+import { useAppDispatch,useAppSelector } from 'src/store/hooks';
+import { addItem } from 'src/store/cart/cartReducer';
+import { CartData } from 'src/types/user_data';
 const breadcrumbs = [
     { label: 'Home', link: '/' },
     { label: 'Products', link: '/products' },
@@ -15,8 +18,14 @@ const breadcrumbs = [
 const ProductDetails = (props) => {
     //const [searchParams] = useSearchParams();
     //const type = searchParams.get('category');
+    const dispatch = useAppDispatch();
     let { catalog, category } = useParams();
     const stars=2;
+    const onAddToBagClick = (e) =>{
+        let item = {id:'22',price:20.20,key:'123',qty:2}
+        dispatch(addItem(item))
+    }
+
     return (
         <div className={styles.main_view}>
             <div className={styles.breadcrumb_view}>
@@ -25,6 +34,7 @@ const ProductDetails = (props) => {
                     <Breadcrumbs breadcrumbs={breadcrumbs} />
                 </div>
             </div>
+            
             <div className={styles.product_view}>
                 <div className={styles.product_view_left}>
                     <Item key='1'/>
@@ -50,9 +60,9 @@ const ProductDetails = (props) => {
                         <span className={styles.price_original}>$169.99</span>
                     </div>
                     <div className={styles.cart_checkout}>
-                    <button className={styles.cta_btn}>
+                    <button className={styles.cta_btn} onClick={onAddToBagClick}>
                     <img className={styles.cta_icon} src="https://kellychi22.github.io/frontend-mentor-solutions/01-product-preview-card-component/images/icon-cart.svg" alt="cart icon"/>
-                    <span>Add to Cart</span>
+                    <span>Add to Bag</span>
                     </button>
                     <button className={styles.cta_btn}>
                     <img className={styles.cta_icon} src="https://kellychi22.github.io/frontend-mentor-solutions/01-product-preview-card-component/images/icon-cart.svg" alt="cart icon"/>

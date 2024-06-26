@@ -9,7 +9,7 @@ const HomePage = () => {
     }, []);
     return (
       <React.Fragment>
-         <BannerSection><Banner/></BannerSection>
+        <Banner/>
         <ButtonMenu/>
        
       </React.Fragment>

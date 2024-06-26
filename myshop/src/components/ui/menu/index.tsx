@@ -40,7 +40,7 @@ const Menu = (props) => {
       <div className={styles.mega_menu}>
       	<div className={styles.container1 + ' ' + styles.ul_reset}>
           <ul className={styles.ul_reset}>
-            <div className={styles.header}>MEN SEX TOYS</div>
+            <div className={styles.header}>MALE SEX TOYS</div>
             <li className={styles.align_li}><a href='#'>Cock Rings</a></li>
             <li className={styles.align_li}><a href='#'>Masturbators</a></li>
             <li className={styles.align_li}><a href='#'>Penis Extenders</a></li>
@@ -64,14 +64,13 @@ const Menu = (props) => {
       	<div className={styles.container1 + ' ' + styles.ul_reset}>
           <ul className={styles.ul_reset}>
             <div className={styles.header}>VIBRATORS</div>
-            <li><a href='#'>Clitoral vibrators</a></li>
-            <li><a href='#'>Rabbit Vibrators</a></li>
-            <li><a href='#'>G-spot vibrators</a></li>
-            <li><a href='#'>Dual Vibrators</a></li>
-            <li><a href='#'>Mini & Bullet Vibrators</a></li>
-            <li><a href='#'>Air Pulse Stimulators</a></li>
-            <li><a href='#'>Thrusting Vibrators</a></li>
-            <li><a href='#'>Massage & Body Wand Vibrators</a></li>
+            <li className={styles.align_li}><a href='#'>Clitoral vibrators</a></li>
+            <li className={styles.align_li}><a href='#'>Rabbit Vibrators</a></li>
+            <li className={styles.align_li}><a href='#'>G-spot vibrators</a></li>
+            <li className={styles.align_li}><a href='#'>Dual Vibrators</a></li>
+            <li className={styles.align_li}><a href='#'>Mini & Bullet Vibrators</a></li>
+            <li className={styles.align_li}><a href='#'>Air Pulse Stimulators</a></li>
+            <li className={styles.align_li}><a href='#'>Thrusting Vibrators</a></li>
           </ul>
           <ul className={styles.ul_reset}>
             <div className={styles.header}>DILDOS</div>
