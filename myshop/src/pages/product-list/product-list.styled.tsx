@@ -36,7 +36,18 @@ export const StyledFiltersDiv = styled.div<ShowFilters>`
 `;
 export const StyledProductViewDiv = styled.div<ShowFilters>`
     width: ${(props) => props.filterShow? '75%': '100%'};
+    display:inline-block;
     float:left;
-    
+`;
+
+interface ProgressBar{
+  width:number;
+}
+export const StyledProgressBarDiv = styled.div<{width:number}>`
+    width: ${(props) => props.width}%;
+    height: 4px;
+    background-color: red;
+    margin:1px;
+    transition: width 0.4s, background-color 0.2s;
 `;
 

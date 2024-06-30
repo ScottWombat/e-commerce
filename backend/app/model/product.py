@@ -41,6 +41,7 @@ class ProductResponse(BaseModel):
 class ProductDTO(BaseModel):
     id: str
     name: str
+    image: str
     price: float
     discount: int
     rating: int

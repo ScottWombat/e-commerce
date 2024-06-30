@@ -105,7 +105,7 @@ const App = () => {
             <Route path="/user" element={<UserPage />} />
             <Route path="/forget-password" element={<ForgetPasswordPage />} />
             <Route path="/content" element={<ContentPage />} />
-            <Route path="/product-list/:men" element={<ProductList />} />
+            <Route path="/product-list/:category" element={<ProductList />} />
             <Route path="/product-details/:catalog?/:category?" element={<ProductDetails />} />
         </Routes>
         <Footer/>
