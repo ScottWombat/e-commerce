@@ -23,7 +23,8 @@ const RememberMe = () => {
   }, []);
   
   console.log("LDDD"+JSON.stringify(useAppSelector(selectIsLoggedIn)));
-  const handleCheck = (e:any) => {
+  const handleCheck1 = (e:any) => {
+    alert("dd")
       //let data: IUser = {
       //  username: 'johndoe',
       //  password: 'secret'
@@ -33,6 +34,9 @@ const RememberMe = () => {
       const form = new FormData();
       form.append('username','johndoe');
       form.append('password','secret');
+      setState({
+        toast: { message: "Hold my beer", type: "info" }
+      })
       /*
       repository.post(form).then((response: ApiResponse<IUser>) => {
         console.log("hee");
@@ -41,7 +45,7 @@ const RememberMe = () => {
       });
       */
     };
-    const handleCheck1 = (e:any) => {
+    const handleCheck = (e:any) => {
 		
     setState({
       toast: { message: "Hold my beer", type: "danger" }
@@ -55,6 +59,7 @@ const RememberMe = () => {
         "Content-Type": "application/x-www-form-urlencoded",
       }
     }
+  
     axios.post('http://localhost:5000/api/users/token', data, axiosConfig)
     .then((res) => {
       console.log("RESPONSE RECEIVED: ", res);
@@ -76,7 +81,7 @@ const RememberMe = () => {
       <div className={styles.remember_root}>
 			<form className={styles.myform}>	
         
-			<input type="checkbox" id="ossm" name="ossm" onChange={handleCheck}/> 
+			<input type="checkbox" id="ossm" name="ossm" onChange={handleCheck1}/> 
             <label>Remember me</label> 
             
             </form>	

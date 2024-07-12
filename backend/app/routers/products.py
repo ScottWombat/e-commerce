@@ -23,9 +23,10 @@ async def count(client: AsyncIOMotorClient = Depends(get_db)): # type: ignore
     return itemResponse
 
 @router.get("/products_by_category", include_in_schema=True, response_class=JSONResponse)
-async def query_by_category(category: str,per_page: int=20,page_no: int=20,client: AsyncIOMotorClient = Depends(get_db)): # type: ignore
+async def query_by_category(category: str,per_page: int=20,page_no: int=0,client: AsyncIOMotorClient = Depends(get_db)): # type: ignore
     total_records =  await query_category_size(category,client)
     skip = page_no * per_page if page_no > 0 else 0 
+    
     print("category:" + category)
     data = {
         'category': category,
@@ -34,11 +35,20 @@ async def query_by_category(category: str,per_page: int=20,page_no: int=20,clien
         'page_no': page_no,
         'skip': skip
     }
-    data1 = {"category" : category}
+    #data1 = {"category" : category}
     productResponse = await query_by_category_name(data,client)
-    total_pages = math.ceil(total_records/per_page)-1
-    progress_bar = math.floor((per_page * (page_no+1) * 100)/total_records) if page_no < total_pages else 100
-    return {"progress_bar": progress_bar,"page_no":page_no,"page_size":per_page,"total":total_records,"total_pages":total_pages,"data": productResponse}
+    
+    total_pages = math.ceil(total_records/per_page)
+    #view_items = (page_no+1) * per_page if page_no > 0 else per_page
+    if page_no == total_pages-1:
+        view_items = total_records;
+        progress_bar= 99;
+    else:
+        view_items = (page_no+1) * per_page if page_no > 0 else per_page
+        progress_bar =  math.floor((per_page * (page_no+1) * 100)/total_records)
+
+    #progress_bar = math.floor((per_page * (page_no+1) * 100)/total_records) if page_no < total_pages else 99
+    return {"view_items": view_items,"progress_bar": progress_bar,"total_items": total_records,"page_no":page_no,"page_size":per_page,"total_records":total_records,"total_pages":total_pages,"data": productResponse}
     #return []
 
 @router.get("/get_products_by_category/{category_name}", response_model=List,response_model_exclude_none=True)

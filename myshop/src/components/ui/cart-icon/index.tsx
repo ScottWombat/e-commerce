@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from "react-router-dom";
 import { CartContainer, ShoppingIcon ,ItemCountContainer,CartSlider} from "./cart-icon.styles";
-import { useSelector } from 'react-redux';
-import { getAmountInCart,} from "src/store/cart/cartReducer";
+//import { useSelector } from 'react-redux';
+import { useAppDispatch,useAppSelector } from 'src/store/hooks';
+import { getAmountInCart,getTotalPrice,selectAllItems} from "src/store/cart/cartReducer";
 import styles from './cart-icon.module.css';
 
 const CartIcon = () => {
-   const amount = useSelector(state => getAmountInCart(state))
+ 
+   const amount = useAppSelector(state => getAmountInCart(state))
+   const totalPrice = useAppSelector(state => getTotalPrice(state))
+   const allItems = useAppSelector(state => selectAllItems(state))
    const [sidebar, setSidebar] = useState(false);
-
+   console.log("all")
+   console.log(allItems)
+   {allItems.map((x, i) => {
+      console.log(x)
+   })}
    const showSidebar = () => setSidebar(!sidebar);
    const [counter, setCounter] = useState(1);
    const navigate = useNavigate()
@@ -67,7 +75,7 @@ const CartIcon = () => {
          </ul>
          <div className={styles.cart_totals}>
 			   <div className={styles.cart_subtotal}>
-				   <span className={styles.label}>Subtotal:</span> <span className={styles.amount}>$54.00</span>
+				   <span className={styles.label}>Subtotal:</span> <span className={styles.amount}>${totalPrice}</span>
 			   </div>
 		   </div>
          <div className={styles.action_buttons}>

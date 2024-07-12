@@ -43,7 +43,7 @@ export const StyledProductViewDiv = styled.div<ShowFilters>`
 interface ProgressBar{
   width:number;
 }
-export const StyledProgressBarDiv = styled.div<{width:number}>`
+export const StyledProgressBarDiv = styled.div<ProgressBar>`
     width: ${(props) => props.width}%;
     height: 4px;
     background-color: red;

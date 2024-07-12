@@ -22,7 +22,7 @@ const ProductDetails = (props) => {
     let { catalog, category } = useParams();
     const stars=2;
     const onAddToBagClick = (e) =>{
-        let item = {id:'22',price:20.20,key:'123',qty:2}
+        let item = {id:3,price:20.20,key:'123',qty:1}
         dispatch(addItem(item))
     }
 

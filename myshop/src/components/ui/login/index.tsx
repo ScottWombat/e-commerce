@@ -4,7 +4,7 @@ import RememberMe from 'src/components/ui/remember-me';
 import OrSeperator from 'src/components/ui/or-seperator';
 import SocialMedia from 'src/components/ui/social-media';
 const LogIn = () => {
-	const [active, setActive] = useState(false);
+	const [active, setActive] = useState(true);
 	
 	const handleToggle = (e:any) => {   
 		setActive(!active);	

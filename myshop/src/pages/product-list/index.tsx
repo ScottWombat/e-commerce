@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import { useParams,useSearchParams } from "react-router-dom";
 import { useAppDispatch,useAppSelector } from 'src/store/hooks';
-import { retrieveProducts } from "src/store/products";
+import { retrieveProducts, } from "src/store/products";
 import styles from './product-list.module.css'
 
 import Breadcrumbs from 'src/components/breadcrumb';
@@ -20,9 +20,13 @@ const breadcrumbs = [
 
 const ProductList = (props) => {
     /* lll */
+    //const state = useAppSelector((state) => state)
     const perPage = 20;
     const [totalPages, setTotalPages] = useState(1);
-    const [pageNo, setPageNo] = useState(1);
+    const [pageNo, setPageNo] = useState(0);
+    const [totalItems,setTotalItems] = useState(0);
+    const [progressWidth,setProgressWidth] = useState(0);
+    const [viewItems,setViewItems] = useState(0)
   
     const [userList, setUserList] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -41,13 +45,16 @@ const ProductList = (props) => {
     dispatch(updatePagination(payload))
    
     useEffect(() => {
-        let params ={'category':category}
+        let params ={'category':category,'page_no':pageNo}
         dispatch(retrieveProducts(params))
         //{ }
         //const params = new URLSearchParams(search);
         //const queryValue = params.get('catalog');
         setGridListStyle(true);
-
+        
+        //const p = selectProductById(state,'667a8da10d35869504d6bf78')
+        //console.log("producg")
+        //console.log(p)
     }, [])
 
     useEffect(() => {
@@ -59,6 +66,9 @@ const ProductList = (props) => {
               setTotalPages(res.total_pages);
               setUserList([...userList, ...res.data]);
               setLoading(false);
+              setProgressWidth(res.progress_bar);
+              setTotalItems(res.total_items);
+              setViewItems(res.view_items);
             });
         }
         getUserList();
@@ -106,6 +116,7 @@ const ProductList = (props) => {
                         let img1 = `/${x.image_name}.png`
                         let dis_price = x.price - (x.price * x.percent_discount)/100
                         let product ={
+                            id: x.id,
                             category: x.category,
                             name: x.name,
                             discount: x.percent_discount,
@@ -119,13 +130,12 @@ const ProductList = (props) => {
                       
                     </div>
                     <div className={styles.clearfix}>
-                        <div className={styles.show_items}>Showing 36 of 292 Items</div>
+                        <div className={styles.show_items}>You have viewed {viewItems} of {totalItems} Items</div>
                         <div id="progress_container" className={styles.progress_container}>
-                                <div id="progress_bar" className={styles.progress_bar}>
-                                </div>
+                                <StyledProgressBarDiv width={progressWidth}/>
                         </div>
                         <div className={styles.show_items}>
-                        {totalPages !== pageNo && <button className="btn-load-more" onClick={() => setPageNo(pageNo + 1)}>{loading ? 'Loading...' : 'Load More'}</button>}
+                        {totalItems !== viewItems && <button className={styles.btn_load_more} onClick={() => setPageNo(pageNo + 1)}>{loading ? 'Loading...' : 'Load more products'}</button>}
                         </div>
                     </div>
                 </StyledProductViewDiv>

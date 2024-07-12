@@ -42,6 +42,6 @@ export const CartSlider = styled.aside<CartSliderProps>`
   position: fixed;
   top: 0;
   right: ${ props => props.sidebar ? '0px' : '-340px'};
-  z-index: 10;
+  z-index: 1003;
   transition: right 0.5s ease-in-out;
 `;
