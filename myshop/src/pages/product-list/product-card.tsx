@@ -50,7 +50,7 @@ const ProductCard = (props) => {
     useEffect(() =>{
       let item = {id:productId,price:props.productDetails.price,key:'123',qty:1}
       dispatch(addItem(item))
-      createNotification();
+      //createNotification();
     },[productId])
 
     

@@ -22,11 +22,11 @@ async def count(client: AsyncIOMotorClient = Depends(get_db)): # type: ignore
     itemResponse = await count_products(client)
     return itemResponse
 
-@router.get("/products_by_category", include_in_schema=True, response_class=JSONResponse)
-async def query_by_category(category: str,per_page: int=20,page_no: int=0,client: AsyncIOMotorClient = Depends(get_db)): # type: ignore
+@router.get("/products_by_catalogue_category", include_in_schema=True, response_class=JSONResponse)
+async def query_by_category(catalogue:str,category: str,per_page: int=20,page_no: int=0,client: AsyncIOMotorClient = Depends(get_db)): # type: ignore
     total_records =  await query_category_size(category,client)
     skip = page_no * per_page if page_no > 0 else 0 
-    
+    print('category:' + catalogue)
     print("category:" + category)
     data = {
         'category': category,

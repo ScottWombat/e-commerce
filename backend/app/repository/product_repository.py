@@ -35,6 +35,8 @@ async def count_products(client: AsyncIOMotorClient) -> ProductResponse: # type:
         return ProductResponse(status="FAILUE",msg=str(e))
 
 async def query_category_size(category:str, client: AsyncIOMotorClient) -> int: # type: ignore
+  print("DDDDDDDDDDDDDDD")
+  print(category)
   response =   client.product.aggregate([
     { "$match": { "category": category } },
     {
@@ -42,7 +44,7 @@ async def query_category_size(category:str, client: AsyncIOMotorClient) -> int: 
     }
   ])
   docs = await response.to_list(None)
- 
+  print(docs)
   return docs[0]['total_documents']
 
 async def query_by_category_name(query_data: Dict, client: AsyncIOMotorClient) -> dict: # type: ignore

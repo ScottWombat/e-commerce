@@ -10,7 +10,7 @@ import ProductCard from './product-card';
 import ProductViewOptions from 'src/components/ui/product-view-options';
 import ProductRightFilters from 'src/components/ui/product-view-options/product-right-filters';
 import { loadMore,updatePagination } from 'src/store/pagination';
-import {total} from 'src/store/products'
+import {total,selectAllItems} from 'src/store/products'
 const breadcrumbs = [
     { label: 'Home', link: '/' },
     { label: 'Products', link: '/products' },
@@ -35,17 +35,18 @@ const ProductList = (props) => {
     
     const [gridListStyle, setGridListStyle] = useState(false);
     const [showFilters ,setShowFilters] = useState(true)
-    const { category } = useParams();
-  
+    const { catalogue,category } = useParams();
+
     const dispatch = useAppDispatch();
     const loadMore1 = useAppSelector(loadMore);
     const products_total1 = useAppSelector(total);
+    const product_items = useAppSelector(selectAllItems);
    
     let payload = {products_total: products_total1 }
     dispatch(updatePagination(payload))
    
     useEffect(() => {
-        let params ={'category':category,'page_no':pageNo}
+        let params ={'catalogue':catalogue,'category':category,'page_no':pageNo}
         dispatch(retrieveProducts(params))
         //{ }
         //const params = new URLSearchParams(search);
@@ -60,7 +61,7 @@ const ProductList = (props) => {
     useEffect(() => {
         const getUserList = () => {
           setLoading(true);
-          fetch(`http://localhost:5000/api/products/products_by_category?category=Cock%20Rings&page_no=${pageNo}&per_page=${perPage}`)
+          fetch(`http://localhost:5000/api/products/products_by_catalogue_category?catalogue=${catalogue}&category=${category}&page_no=${pageNo}&per_page=${perPage}`)
             .then(res => res.json())
             .then(res => {
               setTotalPages(res.total_pages);
@@ -73,7 +74,10 @@ const ProductList = (props) => {
         }
         getUserList();
       }, [pageNo]);
-
+    console.log("all_items")
+    console.log(userList)
+    console.log(product_items)
+    
     const gridWidth = gridListStyle ? styles.tile : styles.title_width;
 
     const blueStyle = gridWidth + ' ' + styles.blue;

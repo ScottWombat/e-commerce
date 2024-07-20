@@ -7,7 +7,7 @@ import properties from 'src/utils/properties'
 export const retrieveProducts = createAsyncThunk(
   'products/retrieveProducts', async (arg: any,thunkAPI: any) => {
  
-    let url  = `${properties.api_url}/products/products_by_category/?category=${arg.category}&page_no=0&page_size=${arg.page_no}`
+    let url  = `${properties.api_url}/products/products_by_catalogue_category/?catalogue=${arg.catalogue}&category=${arg.category}&page_no=0&page_size=${arg.page_no}`
     try{
       const response = await fetch(url);
       console.log("Trunck")
