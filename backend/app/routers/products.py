@@ -26,8 +26,7 @@ async def count(client: AsyncIOMotorClient = Depends(get_db)): # type: ignore
 async def query_by_category(catalogue:str,category: str,per_page: int=20,page_no: int=0,client: AsyncIOMotorClient = Depends(get_db)): # type: ignore
     total_records =  await query_category_size(category,client)
     skip = page_no * per_page if page_no > 0 else 0 
-    print('category:' + catalogue)
-    print("category:" + category)
+   
     data = {
         'category': category,
         'sort_type': 1,
@@ -48,7 +47,7 @@ async def query_by_category(catalogue:str,category: str,per_page: int=20,page_no
         progress_bar =  math.floor((per_page * (page_no+1) * 100)/total_records)
 
     #progress_bar = math.floor((per_page * (page_no+1) * 100)/total_records) if page_no < total_pages else 99
-    return {"view_items": view_items,"progress_bar": progress_bar,"total_items": total_records,"page_no":page_no,"page_size":per_page,"total_records":total_records,"total_pages":total_pages,"data": productResponse}
+    return {"view_items": view_items,"progress_bar": progress_bar,"total_items": total_records,"page_no":page_no,"page_size":per_page,"total_records":total_records,"total_pages":total_pages,"category": category,"catalogue": catalogue,"data": productResponse}
     #return []
 
 @router.get("/get_products_by_category/{category_name}", response_model=List,response_model_exclude_none=True)

@@ -106,7 +106,7 @@ const App = () => {
             <Route path="/forget-password" element={<ForgetPasswordPage />} />
             <Route path="/content" element={<ContentPage />} />
             <Route path="/product-list/:catalogue/:category" element={<ProductList />} />
-            <Route path="/product-details/:catalog?/:category?" element={<ProductDetails />} />
+            <Route path="/product-details/:catalog?/:category?/:id?" element={<ProductDetails />} />
         </Routes>
         <Footer/>
     </BrowserRouter>

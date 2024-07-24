@@ -42,7 +42,7 @@ const useDetectResize = () => {
       let width = window.innerWidth;
       let height = window.innerHeight;
       setWindowDimensions(currState => currState = {w:width, h: height});
-      console.log('Width Saved!: ', width);
+      //console.log('Width Saved!: ', width);
 
       let mediaTypes = {
         isMobile: window.innerWidth <= mobileBP ? true : false,

@@ -10,7 +10,7 @@ import ProductCard from './product-card';
 import ProductViewOptions from 'src/components/ui/product-view-options';
 import ProductRightFilters from 'src/components/ui/product-view-options/product-right-filters';
 import { loadMore,updatePagination } from 'src/store/pagination';
-import {total,selectAllItems} from 'src/store/products'
+import {selectRetriveProductStatus,selectAllItems,selectProductsInfo,addProducts} from 'src/store/products'
 const breadcrumbs = [
     { label: 'Home', link: '/' },
     { label: 'Products', link: '/products' },
@@ -19,15 +19,14 @@ const breadcrumbs = [
 ];
 
 const ProductList = (props) => {
-    /* lll */
-    //const state = useAppSelector((state) => state)
-    const perPage = 20;
     const [totalPages, setTotalPages] = useState(1);
     const [pageNo, setPageNo] = useState(0);
+    const [perPage,setPerPage] = useState(20);
     const [totalItems,setTotalItems] = useState(0);
     const [progressWidth,setProgressWidth] = useState(0);
     const [viewItems,setViewItems] = useState(0)
-  
+    const [productList,setProductList] = useState([])
+    const [productInfo,setProductInfo] = useState([])
     const [userList, setUserList] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -35,49 +34,96 @@ const ProductList = (props) => {
     
     const [gridListStyle, setGridListStyle] = useState(false);
     const [showFilters ,setShowFilters] = useState(true)
-    const { catalogue,category } = useParams();
+    const { catalogue,category,page_no } = useParams();
 
     const dispatch = useAppDispatch();
     const loadMore1 = useAppSelector(loadMore);
-    const products_total1 = useAppSelector(total);
+    //const products_total1 = useAppSelector(total);
     const product_items = useAppSelector(selectAllItems);
+    const product_info = useAppSelector(selectProductsInfo);
+    const product_retrieve_status = useAppSelector(selectRetriveProductStatus);
    
-    let payload = {products_total: products_total1 }
-    dispatch(updatePagination(payload))
-   
+    //let payload = {products_total: products_total1 }
+    //dispatch(updatePagination(payload))
+   /*
     useEffect(() => {
-        let params ={'catalogue':catalogue,'category':category,'page_no':pageNo}
+        let params ={'catalogue':catalogue,'category':category,'per_page':perPage,'page_no':pageNo}
         dispatch(retrieveProducts(params))
-        //{ }
-        //const params = new URLSearchParams(search);
-        //const queryValue = params.get('catalog');
+        console.log("retrieve status");
+        console.log(product_retrieve_status);
+        console.log("Loading page")
         setGridListStyle(true);
-        
+        //setPageNo(0)
+
+        //setProductList([...productList,...product_items]);
+        //setProductInfo(product_info)
         //const p = selectProductById(state,'667a8da10d35869504d6bf78')
         //console.log("producg")
-        //console.log(p)
-    }, [])
-
+        //console.log(productInfo)
+    },[props])
+    */
+    /*
+    useEffect(() =>{
+        console.log("IIIIIII");
+        console.log(product_retrieve_status);
+        setProductList([...productList,...product_items]);
+        setProductInfo(product_info)
+    },[])
+    */
+   /*
+    useEffect (() =>{
+        setPageNo(0)
+        let params ={'catalogue':catalogue,'category':category,'per_page': perPage,'page_no':pageNo}
+        dispatch(retrieveProducts(params))
+    })
+    */
+   /*
     useEffect(() => {
-        const getUserList = () => {
+        console.log("DDDD")
+        console.log(pageNo)
+        console.log(product_retrieve_status)
+       
+       
+        setProductInfo(product_info)
+        console.log(product_info)
+
+        const getProductList = async() => {
+             setProductList([...productList,...product_items]);
+            
+             setTotalPages(product_info.totalPages);
+             //setLoading(false)
+             setProgressWidth(product_info.progressBar);
+             setTotalItems(product_info.totalItems);
+             setViewItems(product_info.viewItems);
+            
+        }
+        getProductList();
+        console.log(product_info.total_items)
+    },[pageNo])
+    */
+    
+    useEffect(() => {
+        const getProductList = async() => {
           setLoading(true);
           fetch(`http://localhost:5000/api/products/products_by_catalogue_category?catalogue=${catalogue}&category=${category}&page_no=${pageNo}&per_page=${perPage}`)
             .then(res => res.json())
             .then(res => {
               setTotalPages(res.total_pages);
-              setUserList([...userList, ...res.data]);
+              setProductList([...productList, ...res.data]);
               setLoading(false);
               setProgressWidth(res.progress_bar);
               setTotalItems(res.total_items);
               setViewItems(res.view_items);
+              dispatch(addProducts([...productList, ...res.data]));
+              
             });
         }
-        getUserList();
+        
+        getProductList();
+        
       }, [pageNo]);
-    console.log("all_items")
-    console.log(userList)
-    console.log(product_items)
     
+   
     const gridWidth = gridListStyle ? styles.tile : styles.title_width;
 
     const blueStyle = gridWidth + ' ' + styles.blue;
@@ -116,19 +162,22 @@ const ProductList = (props) => {
                 </StyledFiltersDiv>
                 <StyledProductViewDiv filterShow={showFilters}>
                    <div className={styles.product_view_root}>
-                        {userList.map((x, i) => {
-                        let img1 = `/${x.image_name}.png`
-                        let dis_price = x.price - (x.price * x.percent_discount)/100
-                        let product ={
-                            id: x.id,
-                            category: x.category,
-                            name: x.name,
-                            discount: x.percent_discount,
-                            rating: x.rating,
-                            full_price: x.price,
-                            discount_price: dis_price.toFixed(2)
-                        }
-                        return <ProductCard productDetails={product} />
+                        {productList.map( x => {
+                                                   
+                           let dis_price = x.price - (x.price * x.percent_discount)/100
+                           let product ={
+                              id: x.id,
+                              category: x.category,
+                              catalogue: catalogue,
+                              name: x.name,
+                              discount: x.percent_discount,
+                              rating: x.rating,
+                              full_price: x.price,
+                              image: `/${x.image_name}.png`,
+                              discount_price: dis_price.toFixed(2)
+                           }
+                           
+                           return <ProductCard productDetails={product} />
                             
                         })}
                       

@@ -35,8 +35,7 @@ async def count_products(client: AsyncIOMotorClient) -> ProductResponse: # type:
         return ProductResponse(status="FAILUE",msg=str(e))
 
 async def query_category_size(category:str, client: AsyncIOMotorClient) -> int: # type: ignore
-  print("DDDDDDDDDDDDDDD")
-  print(category)
+ 
   response =   client.product.aggregate([
     { "$match": { "category": category } },
     {
@@ -44,12 +43,11 @@ async def query_category_size(category:str, client: AsyncIOMotorClient) -> int: 
     }
   ])
   docs = await response.to_list(None)
-  print(docs)
+  
   return docs[0]['total_documents']
 
 async def query_by_category_name(query_data: Dict, client: AsyncIOMotorClient) -> dict: # type: ignore
-    print("D1")
-    print(query_data)
+    
     category = query_data['category']
     lists =client.product.find({"category": category},
     {"id": {"$toString": "$_id"},
@@ -59,6 +57,9 @@ async def query_by_category_name(query_data: Dict, client: AsyncIOMotorClient) -
     product_list=[]
     
     async for doc in lists:
+      print("DDDDOC")
+      discount_price = doc['price'] - ((doc['percent_discount']/100)*doc['price'])
+      doc['discount_price'] = round(discount_price, 2)
       data_json = MongoJSONEncoder().encode(doc)
       json_string = dumps(doc,default=str)
       product_list.append(json.loads(json_string))

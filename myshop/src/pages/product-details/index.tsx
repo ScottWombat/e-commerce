@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState} from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './product-details.module.css'
 import styles1 from './image-view.module.css'
@@ -7,6 +7,7 @@ import Item from 'src/pages/product/item';
 import { useAppDispatch,useAppSelector } from 'src/store/hooks';
 import { addItem } from 'src/store/cart/cartReducer';
 import { CartData } from 'src/types/user_data';
+import {selectProductById} from 'src/store/products'
 const breadcrumbs = [
     { label: 'Home', link: '/' },
     { label: 'Products', link: '/products' },
@@ -18,14 +19,18 @@ const breadcrumbs = [
 const ProductDetails = (props) => {
     //const [searchParams] = useSearchParams();
     //const type = searchParams.get('category');
+    const [selectedProduct ,setSelectedProduct]= useState()
+    const state = useAppSelector((state) => state)
     const dispatch = useAppDispatch();
-    let { catalog, category } = useParams();
+    let { catalog, category,id } = useParams();
+    let product = selectProductById(state,id);
+    console.log(product)
     const stars=2;
     const onAddToBagClick = (e) =>{
         let item = {id:3,price:20.20,key:'123',qty:1}
         dispatch(addItem(item))
     }
-
+    
     return (
         <div className={styles.main_view}>
             <div className={styles.breadcrumb_view}>
@@ -42,22 +47,22 @@ const ProductDetails = (props) => {
                 <div className={styles.product_view_right}>
                     <div className={styles.item_tag}>Sustainable Materials</div>
                     <div className={styles.item_name_row}>
-                        <div className={styles.item_name}>Nike Air Max Dn</div>
+                        <div className={styles.item_name}>{product.name}</div>
                         <div className={styles.product_header_star}>
                         {[...Array(5)].map((e, index) => 
-                            (stars <= index)?
+                            (product.rating <= index)?
                             <i className="fa fa-star" aria-hidden="true" style={{color:'#ccc'}}></i>
                             :
                             <i className="fa fa-star" aria-hidden="true" style={{color:'#FF5F1F'}}></i>
                            
                         )}
-                         <span>&#40;4 reviews&#41;</span>
+                         <span>&#40;{product.viewers} reviews&#41;</span>
                         </div>
                     </div>
-                    <div className={styles.item_desc}>Men's Shoes</div>
+                    <div className={styles.item_desc}>{product.category}</div>
                     <div className={styles.item_price}>
-                        <span className={styles.price_discount}>$149.99</span>
-                        <span className={styles.price_original}>$169.99</span>
+                        <span className={styles.price_discount}>${product.price}</span>
+                        <span className={styles.price_original}>${product.discount_price}</span>
                     </div>
                     <div className={styles.cart_checkout}>
                     <button className={styles.cta_btn} onClick={onAddToBagClick}>

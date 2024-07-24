@@ -57,13 +57,14 @@ const ProductCard = (props) => {
     const handleCartClick = (e) => {
         setProductId(e.id)
     }
+    let url= `/product-details/${props.productDetails.catalogue}/${props.productDetails.category}/${props.productDetails.id}`;
     return(
         <>
         <div id="toast_view_area"></div>
         <div className={styles.product_card + ' ' + styles.spacing}>
         <div className={styles.dis_ribbon}><span>{props.productDetails.discount} % Off</span></div>
         <div className={styles.product_thumb}>
-        <ProductLink to="/product-details/men/cock_rings">
+        <ProductLink to={url}>
         <img src="/image1.png" />
         </ProductLink>
         </div>
