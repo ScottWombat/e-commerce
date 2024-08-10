@@ -87,9 +87,9 @@ const Laptop1 = () =>{
 const App = () => {
   const { windowDimensions, isMobile, isTablet, isLaptop, isDesktop,isLarge } = useDetectResize();
   const is_Member = useSelector(isMember)
-  console.log("me")
-  console.log(isMobile)
-  console.log(windowDimensions)
+  //console.log("me")
+  //console.log(isMobile)
+  //console.log(windowDimensions)
   return (
     <BrowserRouter>
           <Layout>

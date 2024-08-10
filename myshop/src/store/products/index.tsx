@@ -26,8 +26,8 @@ export const retrieveProducts = createAsyncThunk(
 
 const initialState = {
     items: [],
-    info: {},
-    status: ''
+    catalogue: '',
+    category: ''
     //totalRecords:0,
     //totalItems: 0,
     //viewItems:0,
@@ -44,27 +44,30 @@ export const productsSlice = createSlice({
     reducers: {
       addProducts(state,action){
         //state.items = [...state.items, action.payload]
-        state.items = action.payload
+        state.items = action.payload.items
+        state.catalogue = action.payload.catalogue
+        state.category= action.payload.category
+        
       },
     },
     extraReducers: (builder) =>{
       builder
           .addCase(retrieveProducts.pending, (state) => {
-              state.status = 'loading';
+              //state.status = 'loading';
           })
           .addCase(retrieveProducts.fulfilled, (state,action) => {
               state.items = action.payload.data;
-              state.status = 'success';
-              state.info ={'totalRecords': action.payload.total_records,
-                           'totalItems': action.payload.total_items,
-                           'viewItems': action.payload.view_items,
-                           'pageSize': action.payload.page_size,
-                           'totalPages': action.payload.total_pages,
-                           'progressBar': action.payload.progress_bar,
-                           'pageNo': action.meta.arg.page_no,
-                           'category': action.meta.arg.category,
-                           'catalogue': action.meta.arg.catalogue
-                          }
+              //state.status = 'success';
+              //state.info ={'totalRecords': action.payload.total_records,
+              //             'totalItems': action.payload.total_items,
+              //             'viewItems': action.payload.view_items,
+              //             'pageSize': action.payload.page_size,
+              //             'totalPages': action.payload.total_pages,
+              //             'progressBar': action.payload.progress_bar,
+              //             'pageNo': action.meta.arg.page_no,
+              //             'category': action.meta.arg.category,
+              //             'catalogue': action.meta.arg.catalogue
+              //            }
 
               //state.totalRecords = action.payload.total_records;
               //state.totalItems = action.payload.total_items;
@@ -77,9 +80,9 @@ export const productsSlice = createSlice({
               //state.category = action.meta.arg.category;
           })
           .addCase(retrieveProducts.rejected, (state, action) => {
-              state.status = 'failed';
+              //state.status = 'failed';
               state.items = [];
-              state.info={};
+              //state.info={};
           })
     }
 })
@@ -88,8 +91,8 @@ const { actions, reducer } = productsSlice;
 export const { addProducts } = productsSlice.actions;
 //store selector
 export const selectAllItems = (state) => state.products.items;
-export const selectProductsInfo = (state) => state.products.info;
-export const selectRetriveProductStatus = (state) => state.products.status;
+export const selectProductsCatalogue = (state) => state.products.catalogue;
+export const selectProductsCategory = (state) => state.products.category;
 //export const total = (state) => state.products.total;
 
 export const selectProductById = createSelector(

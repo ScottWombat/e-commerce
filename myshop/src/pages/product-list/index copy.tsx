@@ -40,9 +40,9 @@ const ProductList = (props) => {
     const dispatch = useAppDispatch();
     const loadMore1 = useAppSelector(loadMore);
 
-    const product_items = useAppSelector(selectAllItems);
-    const product_catalogue = useAppSelector(selectProductsCatalogue);
-    const product_category = useAppSelector(selectProductsCategory);
+    //const product_items = useAppSelector(selectAllItems);
+    //const product_catalogue = useAppSelector(selectProductsCatalogue);
+    //const product_category = useAppSelector(selectProductsCategory);
    
     
     useEffect(() => {

@@ -34,9 +34,11 @@ const ProductLink = styled(Link)`
   }
 `;
 
-const ProductCard = (props) => {
+const ProductCard = ({productDetails}) => {
     //const stars=3;
     //const state = useSelector((state) => state);
+    //console.log("product")
+    //console.log(productDetails)
     const [productId,setProductId] = useState(null);
     const dispatch = useAppDispatch();
    // const product = useSelector((state) => selectProductById(state,'667a8da10d35869504d6bf78'))
@@ -44,35 +46,43 @@ const ProductCard = (props) => {
    
     const [stars, setStars] = useState(0);
     useEffect(() => {
-        setStars(props.productDetails.rating);
+        setStars(productDetails.rating);
     },[])
 
-    useEffect(() =>{
-      let item = {id:productId,price:props.productDetails.price,key:'123',qty:1}
-      dispatch(addItem(item))
+    //useEffect(() =>{
+    //  console.log("EEEEE")
+      //let item = {id:'productId',price:props.productDetails.price,key:'1234',qty:1}
+      //dispatch(addItem(item))
       //createNotification();
-    },[productId])
+    //},[productId])
 
     
     const handleCartClick = (e) => {
         setProductId(e.id)
+        let item = {id:productDetails.id,
+                    name: productDetails.name,
+                    full_price:productDetails.full_price,
+                    discount_price:+productDetails.discount_price,
+                    qty:1
+                }
+        dispatch(addItem(item))
     }
-    let url= `/product-details/${props.productDetails.catalogue}/${props.productDetails.category}/${props.productDetails.id}`;
+    let url= `/product-details/${productDetails.catalogue}/${productDetails.category}/${productDetails.id}`;
     return(
         <>
         <div id="toast_view_area"></div>
         <div className={styles.product_card + ' ' + styles.spacing}>
-        <div className={styles.dis_ribbon}><span>{props.productDetails.discount} % Off</span></div>
+        <div className={styles.dis_ribbon}><span>{productDetails.discount} % Off</span></div>
         <div className={styles.product_thumb}>
         <ProductLink to={url}>
         <img src="/image1.png" />
         </ProductLink>
         </div>
         <div className={styles.product_details}>
-            <span className={styles.product_category}>{props.productDetails.category}</span>
+            <span className={styles.product_category}>{productDetails.category}</span>
             <div className={styles.product_header}>
                 <div>
-                <a href="#">{props.productDetails.name}</a>
+                <a href="#">{productDetails.name}</a>
                 </div>
                 <div className={styles.product_header_star}>
                 
@@ -90,14 +100,14 @@ const ProductCard = (props) => {
                 <div className={styles.product_price}>
                     <div className={styles.price_wrapper}>
                         <div className={styles.price_slash}></div>
-                        <div className={styles.full_price}>${props.productDetails.full_price}</div>
+                        <div className={styles.full_price}>${productDetails.full_price}</div>
                         
                     </div>
-                    <div>${props.productDetails.discount_price}</div>
+                    <div>${productDetails.discount_price}</div>
                 </div>
                 <div className={styles.product_links}>
                 <a href="#"><i className="fa fa-heart"></i></a>
-                <a href="#" onClick={(e) => handleCartClick(props.productDetails)}><i className="fa fa-shopping-cart"></i></a>
+                <a href="#" onClick={(e) => handleCartClick(productDetails)}><i className="fa fa-shopping-cart"></i></a>
                 </div>
             </div>
         </div>

@@ -24,7 +24,7 @@ const ProductDetails = (props) => {
     const dispatch = useAppDispatch();
     let { catalog, category,id } = useParams();
     let product = selectProductById(state,id);
-    console.log(product)
+    //console.log(product)
     const stars=2;
     const onAddToBagClick = (e) =>{
         let item = {id:3,price:20.20,key:'123',qty:1}
@@ -59,7 +59,7 @@ const ProductDetails = (props) => {
                          <span>&#40;{product.viewers} reviews&#41;</span>
                         </div>
                     </div>
-                    <div className={styles.item_desc}>{product.category}</div>
+                    <div className={styles.item_desc}>{product.category}&nbsp;&nbsp;{product.percent_discount} % discount</div>
                     <div className={styles.item_price}>
                         <span className={styles.price_discount}>${product.price}</span>
                         <span className={styles.price_original}>${product.discount_price}</span>

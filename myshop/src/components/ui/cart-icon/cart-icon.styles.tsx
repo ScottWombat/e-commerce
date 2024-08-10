@@ -34,7 +34,7 @@ interface CartSliderProps{
 export const CartSlider = styled.aside<CartSliderProps>`
   background: #354165;
   color: #75757a;
-  width: 270px;
+  width: 300px;
   height: 100vh;
   display: inline;
   font-family: "Montserrat", sans-serif;

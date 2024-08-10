@@ -6,13 +6,13 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
     if (existingCartItem) {
       return cartItems.map(cartItem =>
         cartItem.id === cartItemToAdd.id
-          ? { ...cartItem, qty: cartItem.qty + 1 }
+          ? { ...cartItem, qty: cartItem.qty + 1 ,total: cartItem.discount_price*(cartItem.qty+1)}
           : cartItem
       );
     }
   
   
-    return [...cartItems, { ...cartItemToAdd, qty: 1 }];
+    return [...cartItems, { ...cartItemToAdd, qty: 1 ,total: cartItemToAdd.discount_price}];
   };
   
   export const removeItemFromCart = (cartItems, cartItemToRemove) => {
