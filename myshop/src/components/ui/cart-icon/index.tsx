@@ -4,8 +4,8 @@ import { CartContainer, ShoppingIcon ,ItemCountContainer,CartSlider} from "./car
 import { useAppDispatch,useAppSelector } from 'src/store/hooks';
 import { getAmountInCart,getTotalPrice,selectAllItems} from "src/store/cart/cartReducer";
 import styles from './cart-icon.module.css';
-import { increaseQty,decreaseQty } from 'src/store/cart/cartReducer';
-import { all } from 'axios';
+import { removeItem,increaseQty,decreaseQty } from 'src/store/cart/cartReducer';
+//import { all } from 'axios';
 
 const CartIcon = () => {
    const dispatch = useAppDispatch();
@@ -18,12 +18,21 @@ const CartIcon = () => {
    useEffect(() => {
       formatGrandTotal()
    },[total])
+
+   useEffect(() => {
+     if (sidebar && amount===0){
+        setTimeout(() =>{
+         setSidebar(!sidebar)
+        },200)
+        
+     }
+   },[amount])
  
    const formatGrandTotal = () =>{
       let totalStr = ""+total;
       const re = /^[1-9]\d{0,3}\.\d{2}$/;
-      console.log("total")
-      console.log(total)
+      //console.log("total")
+      //console.log(total)
       if (!re.test(totalStr)){
            let format = totalStr+"0"
            setGrandTotal(format);
@@ -48,16 +57,20 @@ const CartIcon = () => {
       navigate(path);
    }
    const minusClick = (id,qty,price) =>{
-      //alert(id)
+     
       if (qty ==1){
          return;
       }
       dispatch(decreaseQty({'id':id,'price':price}))
    }
 
-   const plusClick = (id,qty,price) =>{
+   const plusClick = (id,price) =>{
       dispatch(increaseQty({'id':id,'price':price}))
       //formatGrandTotal();
+   }
+   const removeCartItem = (id) =>{
+      dispatch(removeItem(id))
+      
    }
 
    return (
@@ -94,28 +107,25 @@ const CartIcon = () => {
                   <span className={styles.product_qty}>
                      <button className={styles.minus_button} onClick={() => minusClick(item.id,item.qty,item.discount_price)}>-</button>
                      <input value={item.qty} className={styles.product_qty_input} readOnly={true}/>
-                     <button className={styles.plus_button} onClick={() => plusClick(item.id,item.qty,item.discount_price)}>+</button>
+                     <button className={styles.plus_button} onClick={() => plusClick(item.id,item.discount_price)}>+</button>
                   </span>
                  
 						</span>
                   <span className={styles.product_total}>Total:&nbsp;&nbsp;{item.total}</span>
 					</span>
 				</a>
-				<a href="#remove" className={styles.remove_button}><span className={styles.remove_icon}>X</span></a>
+				<a href="javascript:void(0)" onClick={() => removeCartItem(item.id)} className={styles.remove_button}><span className={styles.remove_icon}>X</span></a>
             </li>
            )}
          </ul>
          
-       
-         
-
          <div className={styles.cart_totals}>
 			   <div className={styles.cart_subtotal}>
 				   <span className={styles.label}>Grand Total:</span> <span className={styles.amount}>${grandTotal}</span>
 			   </div>
 		   </div>
          <div className={styles.action_buttons}>
-			   <a className={styles.view_cart_button} href="#">Buy Now</a>
+			   <a className={styles.view_cart_button} href="#">Continue Shopping</a>
             <Link to='/checkout' className={styles.checkout_button} onClick={checkOut}>Checkout</Link>
 		   </div>
        </div>

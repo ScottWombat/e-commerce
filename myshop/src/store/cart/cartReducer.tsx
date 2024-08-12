@@ -14,55 +14,71 @@ export const cartSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       state.items = addItemToCart(state.items, action.payload);
-     
-      let totalPrice = state.totalPrice + (action.payload.discount_price * action.payload.qty)
-   
-      state.totalPrice = Number.parseFloat(totalPrice.toFixed(2));
       state.inCart = state.inCart + action.payload.qty;
+      state.totalPrice = 0;
+      state.items.map((item) =>{
+          state.totalPrice += Number.parseFloat(item.total.toFixed(2));
+      })
+     
     },
     removeItem: (state, action) => {
       state.items = removeItemFromCart(state.items, action.payload)
       //state.totalPrice = state.totalPrice - (action.payload.price * action.payload.quantity);
       state.inCart = state.inCart - 1;
+      state.totalPrice = 0;
+      state.items.map((item) =>{
+          state.totalPrice += Number.parseFloat(item.total.toFixed(2));
+      })
     },
     increaseQty: (state,action) => {
+      state.totalPrice = 0;
       state.inCart = state.inCart + 1;
-      let tmp = []
-      let tot = 0
+      //let tmp = []
+      //let tot = 0
       state.items.map((item) =>{
         if(item.id === action.payload.id){
           item.qty = item.qty + 1;
-         
           item.total = item.total + action.payload.price
-          
-          tmp.push(item)
-        }else{
-          
-          tmp.push(item)
+          item.total =Number.parseFloat(item.total.toFixed(2));
+          /*
+          item.total = item.total + action.payload.price
+          const re = /^[1-9]\d{0,5}\.[0-9][0-9]$/;
+          if(!re.test(String(item.total))){
+            console.log("faction incorrect" + item.total)
+            item.total =Number.parseFloat(item.total.toFixed(2));
+            console.log('formated:' + item.total.toFixed(2))
+          }
+          */
+          //tmp.push(item)
         }
-        
+        //else{
+          
+        //  tmp.push(item)
+        //}
+        state.totalPrice = state.totalPrice + item.total;
        
       })
-      state.items = tmp;
-      state.totalPrice = 0
-      state.items.map((itm) =>{
-        state.totalPrice = state.totalPrice + itm.total;
-      })
-      
+      //state.items = tmp;
+      //state.totalPrice = 0
+      //state.items.map((itm) =>{
+      //  state.totalPrice = state.totalPrice + itm.total;
+      //})
+      //console.log("TT" + state.totalPrice)
       //state.totalPrice = 
     },
     decreaseQty: (state,action) => {
+      state.totalPrice = 0;
       state.inCart = state.inCart - 1;
-      let tmp = []
+     
       state.items.map((item) =>{
-        if(item.id === action.payload){
+        if(item.id === action.payload.id){
           item.qty = item.qty - 1;
-          tmp.push(item)
-        }else{
-          tmp.push(item)
+          item.total = item.total - action.payload.price;
+          console.log("total" + item.total)
         }
+        state.totalPrice = item.total - state.totalPrice;
       })
-      state.items = tmp;
+     
     },
     clearCart: (state) => initialState
   },
