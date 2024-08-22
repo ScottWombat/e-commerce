@@ -1,0 +1,14 @@
+.svg_icon.search_icon {
+	display: inline-block;
+	width: 32px;
+	height: 32px;
+	/* On hover: blue strokes */
+	/* On click: thicker black strokes  */
+  }
+  .svg_icon.search_icon:focus .search_path, .svg-icon.search_icon:hover .search_path {
+	stroke: #299ecc;
+  }
+  .svg-icon.search_icon:active .search_path {
+	stroke: #111516;
+	stroke-width: 2px;
+  }
