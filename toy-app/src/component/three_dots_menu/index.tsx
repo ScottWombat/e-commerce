@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
     width:100%;
     height:20px;
     float:right;
+    cursor: pointer;
    
 `;
 export const ThreeDotsMenu = () =>{

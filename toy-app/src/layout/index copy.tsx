@@ -40,19 +40,17 @@ export const SearchSection = styled.div<SearchSectionProps>`
   transition: ease-in .7s ;
   background-color:#fff;
   border-bottom:1px solid #d3d3d3;
+  
   z-index:1;
 `;
 
 
 export const NavSection = styled.div<NavProps>`
-  width:100%;
+  width:90%;
   display: grid;
-  padding:0px;
-  grid-template-columns: 30% 58% auto;
-  top:0;
-  z-index:0;
-  background-color:red;
-  position::absolute;
+  margin:${ props => props.margin};
+  
+  grid-template-columns: 30% 50% auto;
 `;
 export const MainSection = styled.div`
   width:100%;
@@ -66,11 +64,9 @@ export const FooterSection = styled.div`
 `;
 
 export const LogoSection = styled.div`
-    
-    font-size:20px;
-    display: flex;
-    margin:40px;
-    
+    width:50%;
+    font-size:28px;
+    margin-bottom:3px;
 `;
 export const MenuSection = styled.div`
     width:100%;
@@ -78,13 +74,6 @@ export const MenuSection = styled.div`
     grid-template-columns: 80% 1fr;
 `;
 
-export const ThreeDotSection = styled.div`
-  width:50px;
-  height:50px;
-  display: flex;
-  margin-top:25px;
-  font-size:30px;
-`;
 
 
 export const AppLayout = () => {
@@ -101,7 +90,6 @@ export const AppLayout = () => {
         <SearchSection isVisible={searchVisible}>
           <SearchBox onClose={searchOnClick}/>
         </SearchSection>
-        { isTablet && <Mobile onClose={searchOnClick} margin='15px' svgWidth='2em' svgHeight='2em'/>}
         { isMobile && <Mobile onClose={searchOnClick} margin='15px' svgWidth='2em' svgHeight='2em'/>}
         { isDesktop && <Desktop onClose={searchOnClick} margin='50px' svgWidth='2.5em' svgHeight='2.5em'/>}
         <MainSection>

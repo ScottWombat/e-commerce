@@ -10,24 +10,38 @@ interface SearchProps {
 
 const Wrapper = styled.div`
     width:100%;
-    height:25px;
-    margin-top:-5px;
-    margin-right:120px;
+    height:50px;
+    margin-top:0px;
+    margin-right:0px;
 `;
 const Container = styled.div`
     display:flex;
     float:left;
+    padding:0px;
 `;
 const Search = styled.div<SearchProps>`
-    width: 25px;
-    margin-top:-5px;
-    margin-left:0px;
-   
+    width: 50px;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    margin-top:35px;
+`;
+const Search1 = styled.div<SearchProps>`
+    width: 50px;
+    height:50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 const ShoppingBag = styled.div`
+    width: 50px;
+    height:50px;
     flex-grow: 1;
-    margin-top:-8px;
-    margin-left:30px;
+    margin-top:0px;
+    margin-left:0px;
+    display: flex;
+    justify-content: center;
+    margin-top:33px;
 `;
 export const UserMenu = (props:any) => {
     const id = "updown_up"

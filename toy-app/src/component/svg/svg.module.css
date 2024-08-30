@@ -1,7 +1,7 @@
 .svg_icon.search_icon {
 	display: inline-block;
-	width: 32px;
-	height: 32px;
+	/*width: 32px;
+	height: 32px;*/
 	/* On hover: blue strokes */
 	/* On click: thicker black strokes  */
   }
