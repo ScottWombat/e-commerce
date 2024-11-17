@@ -1,0 +1,25 @@
+
+.container {
+    display:flex;
+    float:left;
+}
+.fixed {
+    width: 50px;
+    margin-top:-5px;
+    margin-left:20px;
+}
+.flex_item {
+    flex-grow: 1;
+    margin-top:-8px;
+    margin-left:30px;
+}
+
+.search{
+  width:100%;
+  background-color: #d3d3d3;
+  margin-top:5px;
+}
+
+
+
+  
