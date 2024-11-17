@@ -1,0 +1,3 @@
+{"level":"info","message":"DD","timestamp":"2024-11-10T01:10:49.314Z"}
+{"level":"error","message":"Failed to create the Redis client with error:","timestamp":"2024-11-11T09:20:11.192Z"}
+{"level":"error","timestamp":"2024-11-11T09:20:11.245Z"}
