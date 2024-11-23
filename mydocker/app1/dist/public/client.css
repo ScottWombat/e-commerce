@@ -109,6 +109,107 @@
   
 
 
+/*!*********************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/cart-slider/cart-slider.module.css ***!
+  \*********************************************************************************************************/
+.e3020Ai0EsUlgW6CFPFS{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.siHm1MrvXYBBJ73mCEG8{
+    width: 80%;
+   height: 100vh;
+   margin: 25px;
+   display: block;
+   
+}
+.f5JMJs5Ertj9BlrlWMKA {
+    width:100%;
+    float: left;
+    margin-bottom: 10px;
+}
+.t2B8YapFD_axRVJ65sSg{
+    width:100%;
+    height:50px;
+    line-height: 50px;
+    float:left;
+    top: 50%;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.M4lJfigPoe_jyV7LVloa{
+    width:100%;
+    float: left;
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.aPyIEXyxJdQmOoiQaE_g{
+  margin-bottom:10px;
+}
+.eCoDgq5iN_GWNbUqJJ_C{
+  margin-top:10px;
+}
+
+.otZkQXC_yDBkf8oaIK3t{
+    float:left;
+}
+.GlVM_6m3JI2Pi6n4c1pj{
+  font-weight: bold;
+}
+.BIBqCk83SbbsZ5gPV3Ut{
+    float:right;
+    margin-right:10px;
+}
+
+.B_5Nxe96WGxBnMm3gz91 {
+    position: relative;
+   
+    width: 16px;
+    height: 16px;
+    opacity: 0.3;
+}
+  .B_5Nxe96WGxBnMm3gz91:hover {
+    opacity: 1;
+  }
+  .B_5Nxe96WGxBnMm3gz91:before, .B_5Nxe96WGxBnMm3gz91:after {
+    position: absolute;
+    margin-top:3px;
+    content: ' ';
+    height: 16px;
+    width: 2px;
+    background-color: #333;
+  }
+  .B_5Nxe96WGxBnMm3gz91:before {
+    transform: rotate(45deg);
+  }
+  .B_5Nxe96WGxBnMm3gz91:after {
+    transform: rotate(-45deg);
+  }
+
+  .CjjccAQQk5k2JbFsorSA {
+    background-color: #000;
+    border: none;
+    color: white;
+    padding: 10px 22px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 4px 2px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  .CjjccAQQk5k2JbFsorSA:hover{
+    color:#000;
+    background-color: #fff;
+    border-width:1px solid #000;
+  }
+
+
 /*!******************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/layout/usermenu/bag.module.css ***!
   \******************************************************************************************/

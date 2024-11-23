@@ -30,7 +30,7 @@ export const SelectWrapper = styled.div<WrapperProps>`
 
 export const AddressWrapper=styled.div<WrapperProps>`
     display:inline-block;
-    height: ${ p => p.open?'150px':'0px'};
+    height: ${ p => p.open?'150px':'150px'};
     transition: height 2s ease-out;
 `;
 

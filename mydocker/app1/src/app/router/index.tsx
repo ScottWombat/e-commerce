@@ -5,7 +5,8 @@ import { ErrorPage, HomePage} from '../views'
 
 const LazyCartPage = React.lazy(()=> import("../views/cart"))
 const LazyProductsPage = React.lazy(()=> import("../views/products"))
-//import Products from "../views/products"
+import Products from "../views/products"
+import CheckoutPage from 'app/views/checkout';
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
             {
                 path: '/products/:catalog/:category',
                 element: <LazyProductsPage/>
+            },
+            {
+                path: '/checkout',
+                element: <CheckoutPage/>
             },
 
         ]

@@ -13,11 +13,10 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addItem: (state, action) => {
-      console.log('addddd item')
-     
+      
       state.items = addItemToCart(state.items, action.payload);
       console.log(state.items)
-      console.log("EE")
+      
       state.inCart = state.inCart + 1;//action.payload.qty;
       state.totalPrice = 0;
       state.items.map((item) =>{

@@ -12,7 +12,7 @@ box-sizing: border-box;
 `;
 
 export const Cart = styled.div`
-    width: 90%;
+    width: 100%;
 `;
 export const CouponWrapper = styled.div`
     width: 90%;

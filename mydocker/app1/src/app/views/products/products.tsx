@@ -8,8 +8,8 @@ const Products = ({ productList}) => {
     //setName(name)
   })
   const addToCart = product =>{
-    console.log(product)
-    let item = {id:product.id,price:product.price,key:product.id,qty:1,total:product.price * product *1}
+    //console.log(product)
+    //let item = {id:product.id,price:product.price,key:product.id,qty:1,total:product.price * product *1}
     //dispatch(addItem(item))
     dispatch(addItem(product))
   }

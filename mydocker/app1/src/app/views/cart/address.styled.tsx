@@ -16,7 +16,7 @@ export const AddressContainer = styled.div`
 export const StyledCheckbox = styled.input.attrs(() => ({ type: 'checkbox' }))`
     
     &:checked + ${AddressContainer}{
-        height: 450px;
+        height: 390px;
         transition: height 1s ease-in-out;
      }
 `;

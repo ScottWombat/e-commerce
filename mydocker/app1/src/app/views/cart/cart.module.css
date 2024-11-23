@@ -120,7 +120,7 @@
 
 .name {
   float: left;
-  width: 10%;
+  width: 20%;
   font-weight: bold;
   font-size: 20px;
 }
@@ -131,10 +131,16 @@
 }
 
 .value1 {
-
   display: inline-block;
   width: 400px;
   margin:0;
+}
+.value2 {
+  display: inline-block;
+  width: 400px;
+  margin:0;
+  font-weight: bold;
+  font-size: 24px;;
 }
 
 .shipping_section {
@@ -291,5 +297,28 @@ i {
   margin-left: 0px;
   font-size: 20px;
   width: 400px;
-  letter-spacing: 2px;
+  z-index:100;
+}
+.input1{
+margin-left:20px;
+padding: 20px 40px 20px 40px; 
+border: none;
+color:#fff;
+background-color:black;
+font-weight:bold;
+font-size:14px;
+letter-spacing: 2px;
+}
+.button {
+  background-color: #000; /* Green */
+  border: none;
+  color: white;
+  padding: 14px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.fullAddress{
+  font-weight: bold;
 }

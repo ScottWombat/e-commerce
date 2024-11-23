@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: grid;
   grid-template-rows: 100%;
   grid-template-columns: 100%;
+  width:100%;
   height: 100vh;
   font-family: 'Montserrat';
 `;
@@ -52,10 +53,12 @@ export const NavSection = styled.div<NavProps>`
   justify-content: center;
   align-items: center;  
   font-family: 'Open Sans;
+  background-color:red;
 `;
 export const MainSection = styled.div`
   width:100%;
   height:100%;
+  background-color:yellow;
 `;
 
 export const FooterSection = styled.div`

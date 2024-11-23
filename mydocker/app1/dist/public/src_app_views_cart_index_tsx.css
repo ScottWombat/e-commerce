@@ -123,7 +123,7 @@
 
 .eCoM4ntGfB3zQPMeDQqy {
   float: left;
-  width: 10%;
+  width: 20%;
   font-weight: bold;
   font-size: 20px;
 }
@@ -134,10 +134,16 @@
 }
 
 .aqzI2umMf9m0oFdWcVpo {
-
   display: inline-block;
   width: 400px;
   margin:0;
+}
+.ri3cfXaDP0ou23j5mpjl {
+  display: inline-block;
+  width: 400px;
+  margin:0;
+  font-weight: bold;
+  font-size: 24px;;
 }
 
 .ZoriRBxyEygYHuNNZlQz {
@@ -294,5 +300,89 @@ i {
   margin-left: 0px;
   font-size: 20px;
   width: 400px;
-  letter-spacing: 2px;
+  z-index:100;
 }
+.Q81a68ebmxmzlWwE618A{
+margin-left:20px;
+padding: 20px 40px 20px 40px; 
+border: none;
+color:#fff;
+background-color:black;
+font-weight:bold;
+font-size:14px;
+letter-spacing: 2px;
+}
+.RdNWDjBAwChQEJcBDLm8 {
+  background-color: #000; /* Green */
+  border: none;
+  color: white;
+  padding: 14px 40px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.akdwC_CBEfjKF7nde_5x{
+  font-weight: bold;
+}
+
+/*!**********************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/views/cart/input_number.module.css ***!
+  \**********************************************************************************************/
+.Itg3nhwltXo_LQiXKMk1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px; 
+    height: 40px;
+    margin: 0 auto;    
+  }
+  
+  .Itg3nhwltXo_LQiXKMk1 .vYXzIcG7_pfbUSlNJ2CK{ 
+    border: 1px solid #ddd;
+    margin: 0px;
+    width: 40px;
+    height: 100%;   
+    padding: 0;
+    background: #eee; 
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .Itg3nhwltXo_LQiXKMk1 .vYXzIcG7_pfbUSlNJ2CK:hover {
+    background: rgb(230, 230, 230);
+  }
+  
+  .Itg3nhwltXo_LQiXKMk1 .vYXzIcG7_pfbUSlNJ2CK:active{
+    background: rgb(210, 210, 210);
+  }
+  
+  .Itg3nhwltXo_LQiXKMk1 .T684rIo1vV3OzhYl078T {
+    margin-right: -4px;
+    border-radius: 8px 0 0 8px;
+  }
+  
+  .Itg3nhwltXo_LQiXKMk1 .NRGDCHYYmamOpQ4W5ZOP {
+    margin-left: -4px;
+    border-radius: 0 8px 8px 0;
+  }
+   
+  .Itg3nhwltXo_LQiXKMk1 .Kz68lsUlyoOziJ6uqYxO{
+    display: inline-block;
+    text-align: center;
+    border: none;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 0px;
+    width: 40px;
+    height: 100%;
+    line-height: 40px;
+    font-size: 11pt;
+    box-sizing: border-box; 
+    background: white;
+    font-family: calibri;
+  }
+  
+  .Itg3nhwltXo_LQiXKMk1 .Kz68lsUlyoOziJ6uqYxO::selection{
+    background: none;
+  }
