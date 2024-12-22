@@ -1,0 +1,141 @@
+
+.container{
+    display: flex;
+    justify-content: center;
+    width:100%;
+    gap: 50px;
+}
+.left_container{
+    width:400px;
+    display:grid;
+    grid-template-rows: 1fr;
+}
+.left_total{
+    padding-top:8px;
+}
+.right_container{
+    width:400px;
+    display: grid;
+    grid-template-rows: 1fr;
+    
+}
+.right_container_wrapper{
+    margin:0;
+}
+.header{
+    padding-bottom: 5px;
+    font-size: 20px;
+    font-weight: 700;
+}
+.description{
+    padding-top: 5px;
+    font-size: 12px;
+}
+.items_wrapper{
+    position:fixed;
+    top:0;
+    background-color: #ccc;
+}
+.items{
+    position:relative;
+    top:0;
+    padding-top: 5px;
+    display:grid;
+    grid-template-columns: 100px 300px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ccc;
+    
+}
+.item_details{
+    display:grid;
+    grid-template-rows: 1fr;
+}
+.item_title{
+    background-color: #fff;
+    display:inline-flex;
+    padding-bottom: 2px;
+}
+
+.img{
+    width: 100px;
+    margin:0;
+    padding:0;
+}
+.item_image{
+    text-align: center;
+}
+.trash_right{
+    text-align:left;
+}
+.price_wrapper{
+    width:100%;
+}
+.item_counter{
+   width:80%;
+   padding-left: 0;
+
+}
+.item_price{
+   padding-right: 0;
+   text-align:right;
+}
+.subtotal{
+    display: flex;    
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.c_subtotal_1{
+ text-align: left;
+}
+.c_subtotal_2{
+    text-align: right;
+}
+
+.total{
+    display: flex;    
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.checkout_button{
+    background-color: #000;
+    border: none;
+    color: white;
+    padding: 12px 121px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 2px;
+    white-space:nowrap;
+}
+.checkout_button1{
+    background-color: #000;
+    border: none;
+    color: white;
+    padding: 12px 126px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 2px;
+    white-space:nowrap;
+}
+.bag_message{
+    top:0;
+    min-height: 100px;
+    max-height: 100px;
+    background-color: red;
+}
+.clear_both{
+    clear: both;
+}

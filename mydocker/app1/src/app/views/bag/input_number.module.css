@@ -1,0 +1,59 @@
+.quantity_field {
+    display: flex;
+    width: 120px; 
+    height: 30px;
+     
+    
+  }
+  
+  .quantity_field .value_button{ 
+    border: 1px solid #ddd;
+    margin: 0px;
+    width: 40px;
+    height: 100%;   
+    padding: 0;
+    background: #eee; 
+    outline: none;
+    cursor: pointer;
+  }
+  
+  .quantity_field .value_button:hover {
+    background: rgb(230, 230, 230);
+  }
+  
+  .quantity_field .value_button:active{
+    background: rgb(210, 210, 210);
+  }
+  
+  .quantity_field .decrease_button {
+    margin-right: -4px;
+    border-radius: 8px 0 0 8px;
+  }
+  
+  .quantity_field .increase_button {
+    margin-left: -4px;
+    border-radius: 0 8px 8px 0;
+  }
+   
+  .quantity_field .number{
+   
+    text-align: center;
+    align-items: center;
+    
+    border: none;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    padding-top: 5px;
+    padding-right: 5px;
+    width: 40px;
+    height: 100%;
+    font-size: 12pt;
+    box-sizing: border-box; 
+    background: white;
+ 
+  }
+  
+  .quantity_field .number::selection{
+    background: none;
+  }

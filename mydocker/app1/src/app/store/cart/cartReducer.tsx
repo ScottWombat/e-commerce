@@ -6,68 +6,53 @@ const initialState = {
   //items: [{ 'id': 1, 'price': 200, 'key': 1 }, { 'id': 2, 'price': 300, 'key': 2 }],
   items: [],
   totalPrice: 0,
-  inCart: 0
+  inCart: 0,
+  addresses: [],
+  grandTotal:0,
+  deliveryFee: 0
 }
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     addItem: (state, action) => {
-      
-      state.items = addItemToCart(state.items, action.payload);
+      console.info('items')
       console.log(state.items)
-      
+      state.items = addItemToCart(state.items, action.payload);
       state.inCart = state.inCart + 1;//action.payload.qty;
-      state.totalPrice = 0;
+      
       state.items.map((item) =>{
           state.totalPrice += Number.parseFloat(item.total.toFixed(2));
       })
-     
     },
     removeItem: (state, action) => {
       state.items = removeItemFromCart(state.items, action.payload)
-      //state.totalPrice = state.totalPrice - (action.payload.price * action.payload.quantity);
       state.inCart = state.inCart - 1;
       state.totalPrice = 0;
       state.items.map((item) =>{
           state.totalPrice += Number.parseFloat(item.total.toFixed(2));
       })
     },
+    updateCart:(state,action) => {
+      console.log("Upda")
+      console.log(action.payload.items)
+      state.items = action.payload.items
+      state.totalPrice = action.payload.totalPrice
+    },
     increaseQty: (state,action) => {
       state.totalPrice = 0;
       state.inCart = state.inCart + 1;
-      //let tmp = []
-      //let tot = 0
+      
       state.items.map((item) =>{
         if(item.id === action.payload.id){
           item.qty = item.qty + 1;
           item.total = item.total + action.payload.price
           item.total =Number.parseFloat(item.total.toFixed(2));
-          /*
-          item.total = item.total + action.payload.price
-          const re = /^[1-9]\d{0,5}\.[0-9][0-9]$/;
-          if(!re.test(String(item.total))){
-            console.log("faction incorrect" + item.total)
-            item.total =Number.parseFloat(item.total.toFixed(2));
-            console.log('formated:' + item.total.toFixed(2))
-          }
-          */
-          //tmp.push(item)
-        }
-        //else{
           
-        //  tmp.push(item)
-        //}
+        }
         state.totalPrice = state.totalPrice + item.total;
        
       })
-      //state.items = tmp;
-      //state.totalPrice = 0
-      //state.items.map((itm) =>{
-      //  state.totalPrice = state.totalPrice + itm.total;
-      //})
-      //console.log("TT" + state.totalPrice)
-      //state.totalPrice = 
     },
     decreaseQty: (state,action) => {
       state.totalPrice = 0;
@@ -82,6 +67,9 @@ export const cartSlice = createSlice({
         state.totalPrice = item.total - state.totalPrice;
       })
      
+    },
+    addAddress: (state,action) => {
+        state.addresses.push(action.payload)
     },
     clearCart: (state) => initialState
   },
@@ -100,7 +88,7 @@ export const selectItemById = createSelector(
   (items,id) => items.map(item => item.id === id)
 );
 
-export const { addItem, removeItem, increaseQty,decreaseQty,clearCart } = cartSlice.actions;
+export const { addItem, removeItem,updateCart, increaseQty,decreaseQty,clearCart,addAddress } = cartSlice.actions;
 
 export const getCurrentCart = (state) => state.shopping_cart.cartItems;
 

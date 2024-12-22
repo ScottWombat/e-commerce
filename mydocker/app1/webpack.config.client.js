@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -53,18 +54,17 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: "static/images/[name].[hash:8].[ext]",
-            },
-          },
-        ],
+        type: 'asset/resource'
       },
+      
     ]
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development'),
+      'process.env.PUBLIC_URL': JSON.stringify('http://localhost:9000/'),
+      'process.env.PUBLIC_IMAGE_URL': JSON.stringify('http://localhost:9000/assets/images/')
+    }),
     new CopyWebpackPlugin({
       patterns: [
         { from: path.resolve(__dirname,'./public/images'), to: 'assets/images' },

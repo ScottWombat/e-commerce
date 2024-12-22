@@ -53,7 +53,7 @@ const ProductsPage = (props) => {
         setProducts(products['data'])
         setTotalProducts(products['totalProducts'])
       })
-    },[])
+    },[products])
    
   
     //useEffect(getTodosFromDatabase, []);

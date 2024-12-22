@@ -7,6 +7,7 @@ const LazyCartPage = React.lazy(()=> import("../views/cart"))
 const LazyProductsPage = React.lazy(()=> import("../views/products"))
 import Products from "../views/products"
 import CheckoutPage from 'app/views/checkout';
+import ViewBag from 'app/views/bag';
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -30,10 +31,18 @@ export const router = createBrowserRouter([
                 element: <LazyProductsPage/>
             },
             {
-                path: '/checkout',
+                path: '/checkout1',
                 element: <CheckoutPage/>
+            },
+            {
+                path: '/viewbag',
+                element: <ViewBag/>
             },
 
         ]
+    },{
+        path: "/checkout",
+        element:<CheckoutPage/>,
+        errorElement: <ErrorPage/>,
     }
 ])

@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const AddressContainer = styled.div`
-   
     width: 500px;
     overflow: hidden;
     height: 0px;

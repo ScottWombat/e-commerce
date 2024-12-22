@@ -1,0 +1,161 @@
+.title{
+    margin-left:15px;
+    padding-top:8px;
+}
+.close {
+    position: absolute;
+    right: 35px;
+    top: 32px;
+    width: 20px;
+    height: 20px;
+    opacity: 0.3;
+  }
+  .close:hover {
+    opacity: 1;
+  }
+  .close:before, .close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 21px;
+    width: 2px;
+    background-color: #333;
+  }
+  .close:before {
+    transform: rotate(45deg);
+  }
+  .close:after {
+    transform: rotate(-45deg);
+  }
+
+.wrapper{
+    display: inline-flex; flex-direction: row;
+    margin-top: 25px;
+    margin-left: 25px;
+}
+.wrapper2{
+ 
+  margin-top: 20px;
+  margin-left: 25px;
+  position:relative;
+}
+.wrapper3{
+ 
+  margin-top: 20px;
+  margin-left: 25px;
+  position:relative;
+}
+.wrapper4{
+ 
+  margin-top: 15px;
+  margin-left: 25px;
+  position:relative;
+}
+.checkmark_loader {
+    animation: 600ms ease forwards loader-spin, 500ms linear 500ms forwards border-fill;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-left-color: #81c038;
+    border-radius: 50%;
+    display: inline-block;
+    height: 32px;
+    position: relative;
+    width: 32px;
+  }
+  
+  .checkmark {
+    animation: 800ms ease 1s forwards checkmark;
+    border-right: 2px solid #81c038;
+    border-top: 2px solid #81c038;
+    height: 16px;
+    left: 6px;
+    opacity: 0;
+    position: absolute;
+    top: 15px;
+    transform: scaleX(-1) rotate(135deg);
+    transform-origin: left top;
+    width: 8px;
+  }
+  
+  @keyframes loader-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes border-fill {
+    0% {
+      border-color-top: none;
+      border-color-right: none;
+      border-color-bottom: none;
+    }
+    90% {
+      border-color-top: rgba(247, 148, 30, 0.1);
+      border-color-right: rgba(247, 148, 30, 0.1);
+      border-color-bottom: rgba(247, 148, 30, 0.1);
+    }
+    100% {
+      border-color: #81c038;
+    }
+  }
+  @keyframes checkmark {
+    0% {
+      height: 0;
+      width: 0;
+      opacity: 0;
+    }
+    20% {
+      height: 0;
+      width: 8px;
+      opacity: 1;
+    }
+    40% {
+      height: 16px;
+      width: 8px;
+      opacity: 1;
+    }
+    100% {
+      height: 16px;
+      width: 8px;
+      opacity: 1;
+    }
+  }
+  .left{
+    float:left;
+  }
+  .right{
+    margin-left: 50px;
+    padding-top: 20px;
+    align-items: center;
+  }
+  .item_image{
+    width: 100px;
+    margin:0;
+    padding:0;
+  }
+
+.button {
+    width: 350px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    border: 1px solid #000;
+    background-color: #fff;
+}
+.button2 {
+  width: 350px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  background-color: #000;
+  color:#fff;
+}
+.button2:hover{
+  border: 1px solid #000;
+  background-color: #fff;
+  color:#000;
+}
+

@@ -10,7 +10,6 @@ export const addItemToCart = (cartItems, cartItemToAdd) => {
             ...cartItem, 
             qty: cartItem.qty + 1 ,
             total: Number.parseFloat((cartItem.price*(cartItem.qty+1)).toFixed(2))
-            //total: cartItem.price
           }
           : cartItem
       );

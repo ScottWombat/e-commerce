@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Trash } from '../../svg/trash';
 import {
     Wrapper, Cart, CouponWrapper, Coupon, Title, InputCoupon, ApplyCoupon, UpdateCart, Container,
@@ -10,10 +11,10 @@ import * as styles1 from './input_number.module.css'
 import { ContentWrapper, InputText, AddressButton, Label, Content, CountryUl, CountryLi, CountryWrapper, CountryInput, SelectWrapper, AddressWrapper, Span, Span1 } from "./input.styled"
 import { StyledCheckbox, AddressContainer } from './address.styled';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-
-import { selectAllItems, getAmountInCart } from '../../store/cart/cartReducer'
+import { selectAllItems, getAmountInCart,addAddress } from '../../store/cart/cartReducer'
 const CartPage = () => {
-
+    const navigate = useNavigate(); 
+    const dispatch = useAppDispatch();
     const [data, setData] = useState([]);
     const [subTotal, setSubTotal] = useState(0)
     const [grandTotal,setGrandTotal] = useState(0)
@@ -117,6 +118,12 @@ const CartPage = () => {
         setFullAddress(streetValue + " " + townValue + " " + stateValue + " " + countryValue);
         setChecked(!checked);
         setShowAddress(false)
+        let address = {'addr': streetValue,'suburb': townValue,'state': stateValue,'country':countryValue};
+        dispatch(addAddress(address))
+    }
+    const onProcessCheckout = () =>{
+        let path = `/checkout`; 
+        navigate(path);
     }
     return (
         <Wrapper>
@@ -200,6 +207,7 @@ const CartPage = () => {
 
                                 <label htmlFor="state">
                                     <div className={styles.address_button}>{showAddress?'Add address':'Update address'}</div>
+                                    <div>&nbsp;</div>
                                 </label>
                                 <StyledCheckbox id="state" hidden checked={checked} onChange={handleChange} />
                                 <AddressContainer>
@@ -227,7 +235,7 @@ const CartPage = () => {
                         </div>
                     </div>
                 </CartTotals>
-                <div> <input type='button' value='PROCESS TO CHECKOUT' className={styles.button}/></div>
+                <div> <input type='button' value='PROCESS TO CHECKOUT' className={styles.button} onClick={onProcessCheckout}/></div>
             </CartTotalsWrapper>
         </Wrapper>
     )

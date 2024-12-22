@@ -167,18 +167,19 @@
 }
 
 .address_button {
-
   cursor: pointer;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
-  width: 500px;
-  padding: 0;
+  width: 150px;
+  padding: 5px;;
+  border: 1px solid #000;
+  background-color: #000;
+  color:#fff;
+  text-align: center;
 }
 
 .address_button:hover {
-  opacity: 0.7;
-  margin: 0px;
-  padding: 0px;
+  color:greenyellow;
 }
 
 .content {

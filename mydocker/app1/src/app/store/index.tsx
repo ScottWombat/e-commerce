@@ -1,9 +1,11 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import counterReducer from './counter'
+import counterReducer from './counter';
 import cartReducer from './cart/cartReducer';
+import checkoutReducer from './checkout/checkoutReducer';
 const rootReducer = combineReducers({
     counter: counterReducer,
     cart:cartReducer,
+    checkout:checkoutReducer
 })
 export const store = configureStore({
     reducer: rootReducer
