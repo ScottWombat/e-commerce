@@ -6,8 +6,6 @@ interface DivProps {
     color?:string;
 }
 
-
-
 export const Container = styled.div`
   display:flex;
   width:100%;
@@ -126,6 +124,7 @@ export const Payment = styled.div<DivProps>`
     -webkit-transition: height 1s ease;
     height:${p => p.height};
     overflow: hidden;
+    border-bottom:1px solid #ccc;
     
 `;
 export const PaymentIcons = styled.div<DivProps>`
@@ -155,7 +154,7 @@ export const PaymentDetailsHeader = styled.div<DivProps>`
 
 export const Credit = styled.div<DivProps>`
 margin-top:0px;
-background-color:blue;
+background-color:#fff;
 font-weight:bold;
 transition: height 1s ease;
 -webkit-transition: height 1s ease;
@@ -164,20 +163,29 @@ overflow: hidden;
 `;
 
 export const PayPal = styled.div<DivProps>`
- 
+height: ${p => p.height};
 `;
 export const AfterPay = styled.div<DivProps>`
- 
+height: ${p => p.height};
 `;
 
 export const Button = styled.div<DivProps>`
-    margin-top:0px;
-    background-color:blue;
+    margin-top:20px;
     font-weight:bold;
     transition: height 1s ease;
     -webkit-transition: height 1s ease;
     height: ${p => p.height};
     overflow: hidden;
+`;
+
+export const CreditCardSection = styled.div<DivProps>`
+    margin-top:20px;
+    font-weight:bold;
+    transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    height: ${p => p.height};
+    overflow: hidden;
+    border: 1px solid red;
 `;
 
 

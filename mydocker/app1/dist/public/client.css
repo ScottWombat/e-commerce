@@ -423,25 +423,49 @@
     padding-top:50px;
   }
 
-  
+  .l_Iy6bTz3YmV3K9PAH8v{
+    float:right;
+    top:0;
+    display:flex;
+    line-height: 48px;;
+  }
+  .pf5vWYI2xr4JZ5pUXMK6{
+    float:left;
+    margin-top:15px;
+    display:flex;
+    line-height: 48px;;
+  }
   ._MbouBtTgsuNJGQ2WjK2 {
    float:right;
    top:0;
   }
   .xNGR9SZkbfhnwp59R13U{
-    margin:10px;
+    padding-top:5px;
+    padding-left:5px;
    
   }
   .vaWstpSVG031on1rmL5w{
     color: white;
-    width: 250px;
+    width: 100%;
     font-size: 16px;
     background-color: #000; 
     display:inline-block;
     text-align:left;
     height:40px;
-    padding-top:9px;
+    padding-top:6px;
     padding-right:12px;
+  }
+  .otA82AVV2NMceDtBjIbq{
+    color: #000;
+    width: 100%;
+    font-size: 16px;
+    background-color: #fff; 
+    display:inline-block;
+    text-align:left;
+    height:40px;
+    padding-top:10px;
+    padding-right:12px;
+    border:1px solid #fff;
   }
   .KXIe_SX9jp9nymR4thJF{
     display:flex;
@@ -486,10 +510,460 @@
 .cHb3t_r0umG7kH8yJtB3{
   margin-left:10px;
 }
+.RacSNgxJYU9a8p9EkVVY{
+  padding:10px;
+  font-weight:none;
+  font-size:12px;
+}
+.uAdaJ_Us79a0UpvRsAhS{
+  width:64px;
 
+  text-align: center;
+
+ line-height: 10px;  
+  border:1px solid #ccc;
+  
+}
+.uAoEX7uZyEar4f5wgKpg{
+  top:0;
+}
+/* payment input */
+.XwUbPbEsRxuQGGBYHcsw{
+  width:100%;
+  height:100vh;
+  position:relative;
+
+}
+.RwYtAQv21SgnFnCUgPR3{
+  position:relative;
+  top:0%;
+  left:0%;
+  width:100%;
+ 
+  padding:20px 10px;
+
+}
+.o4i3pGwPjBp4074RYUXr{
+  display:flex;
+  width:100%;
+  border-width:0px 0px 2px 0px;
+  border-style: solid;
+
+}
+
+.o4i3pGwPjBp4074RYUXr input{
+  width:50%;
+  font-size:14px;
+  padding: 6px 0px;
+}
+.ab7z5YOEizTrb4dTf4fw{
+  float:left;
+}
+.bbM0DjF_v0GEGnfKmK72{
+  display:relative;
+  padding:5px;
+  border:1px solid red;
+  width:100%;
+  height:100%;
+}
+
+.caZiFV2Z8zSfquyux1XP{
+  position: relative;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  color:#000;
+  border:1px solid red;
+}
   
 
   
+/*!*******************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/credit_card_cvc/index.module.css ***!
+  \*******************************************************************************************************/
+* {
+    box-sizing: border-box;
+  }
+  
+  .HqgcouREH9IHCttYAIwH {
+    background: #cec5bc;
+    border-radius: 3.50px;
+    display: inline-block;
+    height: 40.485px;
+    position: relative;
+    width: 64.2px;
+  }
+  .HqgcouREH9IHCttYAIwH.fBPd4WPKvldXAOhr7lMb .AyxhKJH1WEQryvlQwL0Z {
+    background: #000;
+    height: 8.097px;
+    position: absolute;
+    top: 8.097px;
+    width: 100%;
+  }
+  .HqgcouREH9IHCttYAIwH.fBPd4WPKvldXAOhr7lMb:before {
+    background: #fff;
+    bottom: 8.097px;
+    content: "";
+    display: block;
+    height: 8.097px;
+    left: 8.025px;
+    position: absolute;
+    width: 47.5555555556px;
+  }
+  .HqgcouREH9IHCttYAIwH.fBPd4WPKvldXAOhr7lMb:after {
+    background: #fff;
+    border: 1px solid #f00;
+    bottom: 8.097px;
+    content: "123";
+    display: block;
+    font-family: Arial;
+    font-size: 6px;
+    font-weight: bold;
+    height: 8.097px;
+    letter-spacing: 0.375px;
+    line-height: 8.9966666667px;
+    margin-bottom: -1px;
+    position: absolute;
+    right: 7.1333333333px;
+    text-align: center;
+    width: 12.84px;
+  }
+/*!*************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/credit_card/cvc.module.css ***!
+  \*************************************************************************************************/
+.ild4DC6BGM_J7ijUL8os{
+    font-size:1em;
+    padding:5px;
+  }
+/*!***************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/credit_card/index.module.css ***!
+  \***************************************************************************************************/
+.N4z2aNiSmADxDmQbRmBo label{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    padding-top: 10px;
+}
+.jsd9q8AFbGs4MNw8zxz8 {
+    display: flex;
+    flex-direction: row;
+    margin-top:10px;
+}
+  .eYFAix6nVz1E1jb0AhPU {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    width:45%;
+    
+  }
+  
+
+.GwNc76AwMZwRkakyl7CA{
+  font-weight: none;
+  font-size:0.7em;
+}
+.GKbhiwPd2vv6YzRgAXFq{
+  font-size:1em;
+  padding:5px;
+}
+._r35E5FLJoRFDx1nObnf{
+  font-size:1em;
+  padding:5px;
+  width:260px;
+}
+
+/* card */
+
+
+.KY1tRpX4fP17mlbf1ymX {
+  height: 38px;
+  position: absolute;
+  right: 6px;
+  top: calc(50% - 17px);
+  width: 60px;
+}
+
+/* CREDIT CARD IMAGE STYLING */
+.s7QaOOMe849cl8UhGERJ{
+  width: 100%;
+  max-width: 400px;
+  max-height: 251px;
+  height: 54vw;
+  padding: 20px;
+}
+.aR84lhaffs1rNvYV4UDw * {
+  transition: none !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
+
+
+#YTWxgpm863h3YBZnVYis {
+  position: absolute;
+  right: 10px;
+  top: 15px;
+}
+
+#YTWxgpm863h3YBZnVYis svg {
+  width: 70px;
+  max-height: 30px;
+  
+}
+
+.LVHfpq1DgilyFF1AHkgD svg#Y08MV0gMTpCbHHWKkkwa,
+.LVHfpq1DgilyFF1AHkgD svg#ic30ybf3Lr22eHuZCZkx {
+  width: 100%;
+  -webkit-box-shadow: 1px 5px 6px 0px black;
+  box-shadow: 1px 5px 6px 0px black;
+  border-radius: 22px;
+}
+
+#enN5Jf7IEv0FWKfwvnS_{
+  cursor: pointer;
+  float: right;
+  font-size: 12px;
+  color: #fff;
+  padding: 2px 4px;
+  background-color: #909090;
+  border-radius: 4px;
+  cursor: pointer;
+  float:right;
+}
+
+/* CHANGEABLE CARD ELEMENTS */
+.LVHfpq1DgilyFF1AHkgD .Ig272FkgLJeBOfHCbKmh,
+.LVHfpq1DgilyFF1AHkgD .cScvcw8YcgTvxy12pHVP {
+  -webkit-transition: fill .5s;
+  transition: fill .5s;
+}
+
+.LVHfpq1DgilyFF1AHkgD .ps_oUDctU643lcNnmXSQ {
+  fill: #03A9F4;
+}
+
+.LVHfpq1DgilyFF1AHkgD .UhcODewPY0vQOjTKVugj {
+  fill: #0288D1;
+}
+
+.LVHfpq1DgilyFF1AHkgD .QB3qqrseBCQMTKEHQLNX {
+  fill: #ef5350;
+}
+
+.LVHfpq1DgilyFF1AHkgD .SAXQxkoJl5AjH6Gn68kf {
+  fill: #d32f2f;
+}
+
+.LVHfpq1DgilyFF1AHkgD .EMbT8KCsCy2_ZN4mqPfu {
+  fill: #ab47bc;
+}
+
+.LVHfpq1DgilyFF1AHkgD .YFmAC4jAafUMwtHq8LLm {
+  fill: #7b1fa2;
+}
+
+.LVHfpq1DgilyFF1AHkgD .eEtq3uAxJh8FZEbDrxxL {
+  fill: #26c6da;
+}
+
+.LVHfpq1DgilyFF1AHkgD .mx73xzTGb4u9YKR3kwZm {
+  fill: #0097a7;
+}
+
+.LVHfpq1DgilyFF1AHkgD .R5rKBUTYRNe_I77cjKqs {
+  fill: #66bb6a;
+}
+
+.LVHfpq1DgilyFF1AHkgD .B8yr0WU3ArdABTwWu7Nh {
+  fill: #388e3c;
+}
+
+.LVHfpq1DgilyFF1AHkgD .GTo2B996VCGQzU_wnGv2 {
+  fill: #d4e157;
+}
+
+.LVHfpq1DgilyFF1AHkgD .dQWrBA9ZDnPcZiBsHOaT {
+  fill: #afb42b;
+}
+
+.LVHfpq1DgilyFF1AHkgD .Yp3tsCHPWAyOD5tbm3Z0 {
+  fill: #ffeb3b;
+}
+
+.LVHfpq1DgilyFF1AHkgD .JcCrfQIRZEK_Z9uBR0YD {
+  fill: #f9a825;
+}
+
+.LVHfpq1DgilyFF1AHkgD .GSSALb6DprrS_R8ltXOl {
+  fill: #ff9800;
+}
+
+.LVHfpq1DgilyFF1AHkgD .ertLpWe7ThGSqoazZ1n_ {
+  fill: #ef6c00;
+}
+
+.LVHfpq1DgilyFF1AHkgD .L3U9M0cPx0xhEm0_qOZY {
+  fill: #bdbdbd;
+}
+
+.LVHfpq1DgilyFF1AHkgD .aLhtI6YtieK4MHPNLy09 {
+  fill: #616161;
+}
+
+/* FRONT OF CARD */
+#t1oD7Yiy2KeRRM0npGkv {
+  text-transform: uppercase;
+}
+
+#Y08MV0gMTpCbHHWKkkwa .YNr8xu24ysfEXs6Eaxoy {
+  fill: #FFFFFF;
+}
+
+#Y08MV0gMTpCbHHWKkkwa .bFRCUeNm9znqrT3zhArb {
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 600;
+}
+
+#Y08MV0gMTpCbHHWKkkwa ._SbPlFXJ3EAaPXoZIpjN {
+  font-size: 54.7817px;
+}
+
+#Y08MV0gMTpCbHHWKkkwa .pztJwmpSbGqsQc4xUQEw {
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 400;
+}
+
+#Y08MV0gMTpCbHHWKkkwa ._tD_y9pcwPf9nmblaksL {
+  font-size: 33.1112px;
+}
+
+#Y08MV0gMTpCbHHWKkkwa .JVMtDRK1Mv0LXO5XqFqg {
+  opacity: 0.6;
+  fill: #FFFFFF;
+}
+
+#Y08MV0gMTpCbHHWKkkwa .uEHxiZkjVHXEpk7UdIgk {
+  font-size: 24px;
+}
+
+#Y08MV0gMTpCbHHWKkkwa .P7olO152VAntzXQsxTzl {
+  font-size: 36.5498px;
+}
+
+#Y08MV0gMTpCbHHWKkkwa .mSSyT9R_ZZJ7pLlmAQ9Q {
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 300;
+}
+
+#Y08MV0gMTpCbHHWKkkwa .Kk83yzfK2RiVl2myEMV1 {
+  font-size: 16.1716px;
+}
+
+#Y08MV0gMTpCbHHWKkkwa .NUhoNhI5Sc8Fewr3qi8G {
+  fill: #4C4C4C;
+}
+
+/* BACK OF CARD */
+#ic30ybf3Lr22eHuZCZkx .ugIC2DHc7qGvhZiaIEwr {
+  fill: none;
+  stroke: #0F0F0F;
+  stroke-miterlimit: 10;
+}
+
+#ic30ybf3Lr22eHuZCZkx .YNr8xu24ysfEXs6Eaxoy {
+  fill: #111111;
+}
+
+#ic30ybf3Lr22eHuZCZkx .bFRCUeNm9znqrT3zhArb {
+  fill: #F2F2F2;
+}
+
+#ic30ybf3Lr22eHuZCZkx ._SbPlFXJ3EAaPXoZIpjN {
+  fill: #D8D2DB;
+}
+
+#ic30ybf3Lr22eHuZCZkx .pztJwmpSbGqsQc4xUQEw {
+  fill: #C4C4C4;
+}
+
+#ic30ybf3Lr22eHuZCZkx ._tD_y9pcwPf9nmblaksL {
+  font-family: 'Source Code Pro', monospace;
+  font-weight: 400;
+}
+
+#ic30ybf3Lr22eHuZCZkx .JVMtDRK1Mv0LXO5XqFqg {
+  font-size: 27px;
+}
+
+#ic30ybf3Lr22eHuZCZkx .uEHxiZkjVHXEpk7UdIgk {
+  opacity: 0.6;
+}
+
+#ic30ybf3Lr22eHuZCZkx .P7olO152VAntzXQsxTzl {
+  fill: #FFFFFF;
+}
+
+#ic30ybf3Lr22eHuZCZkx .mSSyT9R_ZZJ7pLlmAQ9Q {
+  font-size: 24px;
+}
+
+#ic30ybf3Lr22eHuZCZkx .Kk83yzfK2RiVl2myEMV1 {
+  fill: #EAEAEA;
+}
+
+#ic30ybf3Lr22eHuZCZkx .NUhoNhI5Sc8Fewr3qi8G {
+  font-family: 'Rock Salt', cursive;
+}
+
+#ic30ybf3Lr22eHuZCZkx .UStQ7DVmrB0roxu2tV8V {
+  font-size: 37.769px;
+}
+
+/* FLIP ANIMATION */
+.WXTXtpmccSKe2t5lufuB {
+  perspective: 1000px;
+}
+
+.LVHfpq1DgilyFF1AHkgD {
+  width: 100%;
+  max-width: 400px;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: -webkit-transform 0.6s;
+  -webkit-transition: -webkit-transform 0.6s;
+  transition: transform 0.6s;
+  transition: transform 0.6s, -webkit-transform 0.6s;
+  cursor: pointer;
+}
+.LVHfpq1DgilyFF1AHkgD .sr3lzZ5wFHqbXBocQz58,
+.LVHfpq1DgilyFF1AHkgD .VxycQG0Twve_gLEkSIn5 {
+    position: absolute;
+    width: 100%;
+    max-width: 400px;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    color: #47525d;
+}
+
+.LVHfpq1DgilyFF1AHkgD .VxycQG0Twve_gLEkSIn5 {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+.LVHfpq1DgilyFF1AHkgD.ldGPUDA7CL0Iq08J5SaV {
+    -webkit-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+.v2yWhsTaiPl3_po61dOp{
+  enable-background: new 0 0 750 471;
+}
+
+
 /*!************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/views/bag/bag.module.css ***!
   \************************************************************************************/

@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  .creditcard {
+    background: #cec5bc;
+    border-radius: 3.50px;
+    display: inline-block;
+    height: 40.485px;
+    position: relative;
+    width: 64.2px;
+  }
+  .creditcard.creditcard_back .strip {
+    background: #000;
+    height: 8.097px;
+    position: absolute;
+    top: 8.097px;
+    width: 100%;
+  }
+  .creditcard.creditcard_back:before {
+    background: #fff;
+    bottom: 8.097px;
+    content: "";
+    display: block;
+    height: 8.097px;
+    left: 8.025px;
+    position: absolute;
+    width: 47.5555555556px;
+  }
+  .creditcard.creditcard_back:after {
+    background: #fff;
+    border: 1px solid #f00;
+    bottom: 8.097px;
+    content: "123";
+    display: block;
+    font-family: Arial;
+    font-size: 6px;
+    font-weight: bold;
+    height: 8.097px;
+    letter-spacing: 0.375px;
+    line-height: 8.9966666667px;
+    margin-bottom: -1px;
+    position: absolute;
+    right: 7.1333333333px;
+    text-align: center;
+    width: 12.84px;
+  }
