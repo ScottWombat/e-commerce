@@ -441,7 +441,7 @@
   }
   .xNGR9SZkbfhnwp59R13U{
     padding-top:5px;
-    padding-left:5px;
+    padding-left:15px;
    
   }
   .vaWstpSVG031on1rmL5w{
@@ -466,6 +466,19 @@
     padding-top:10px;
     padding-right:12px;
     border:1px solid #fff;
+  }
+  .b74dJi_xLunB1HFKkDg6{
+    margin-top:5px;
+    color: #fff;
+    width: 100%;
+    font-size: 16px;
+    background-color: #000; 
+    display:inline-block;
+    text-align:left;
+    height:43px;
+    padding-top:10px;
+    padding-right:13px;
+    border:1px solid #000;
   }
   .KXIe_SX9jp9nymR4thJF{
     display:flex;
@@ -562,11 +575,23 @@
 .bbM0DjF_v0GEGnfKmK72{
   display:relative;
   padding:5px;
-  border:1px solid red;
+  border-bottom:1px solid #ccc;
+  width:100%;
+}
+.sSTcIDFdgwzePrArLWXL{
+  display:relative;
+  padding:5px;
+  border-bottom:1px solid #ccc;
   width:100%;
   height:100%;
 }
-
+.ghbDrBc3Z7CHg7sBgKAF{
+  display:relative;
+  padding:5px;
+  border-bottom:1px solid #ccc;
+  width:100%;
+  height:100%;
+}
 .caZiFV2Z8zSfquyux1XP{
   position: relative;
   transform: translate(-50%, -50%);
@@ -577,66 +602,43 @@
   color:#000;
   border:1px solid red;
 }
+.XOzwmIrQwAFKLLDAByFE{
+  position: relative;
+  left:50%;
+}
+.aia0yy_dbRjHi_FCxjfC{
+  display:inline-block;
+  margin-top: 25px;
+  width:100%;
+  margin-bottom:25px;
+  font-weight: bold;
+  margin-left:5px;
+}
+.SDcpEix8Q7IjNAq7iQ6X{
+  display:inline-block;
+  width:100%;
+  font-weight: bold;
+  margin-left:5px;
+  margin-bottom:15x;
+}
+.wYB498cG47IyoFhHerWS{
+  float:left;
+}
+.YchZpazN2IjNZ7zLum9F{
+  float:right;
+}
+.j6AXYG0ymk5XmnkNpKdr{
+  margin-top: -5px;
+  font-size:0.7em;
+  margin-left:5px;
+}
+.Gr0AIXEXW7eXSCuszGuh{
+  margin-top:30px;
+  margin-left:5px
+}
   
 
   
-/*!*******************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/credit_card_cvc/index.module.css ***!
-  \*******************************************************************************************************/
-* {
-    box-sizing: border-box;
-  }
-  
-  .HqgcouREH9IHCttYAIwH {
-    background: #cec5bc;
-    border-radius: 3.50px;
-    display: inline-block;
-    height: 40.485px;
-    position: relative;
-    width: 64.2px;
-  }
-  .HqgcouREH9IHCttYAIwH.fBPd4WPKvldXAOhr7lMb .AyxhKJH1WEQryvlQwL0Z {
-    background: #000;
-    height: 8.097px;
-    position: absolute;
-    top: 8.097px;
-    width: 100%;
-  }
-  .HqgcouREH9IHCttYAIwH.fBPd4WPKvldXAOhr7lMb:before {
-    background: #fff;
-    bottom: 8.097px;
-    content: "";
-    display: block;
-    height: 8.097px;
-    left: 8.025px;
-    position: absolute;
-    width: 47.5555555556px;
-  }
-  .HqgcouREH9IHCttYAIwH.fBPd4WPKvldXAOhr7lMb:after {
-    background: #fff;
-    border: 1px solid #f00;
-    bottom: 8.097px;
-    content: "123";
-    display: block;
-    font-family: Arial;
-    font-size: 6px;
-    font-weight: bold;
-    height: 8.097px;
-    letter-spacing: 0.375px;
-    line-height: 8.9966666667px;
-    margin-bottom: -1px;
-    position: absolute;
-    right: 7.1333333333px;
-    text-align: center;
-    width: 12.84px;
-  }
-/*!*************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/credit_card/cvc.module.css ***!
-  \*************************************************************************************************/
-.ild4DC6BGM_J7ijUL8os{
-    font-size:1em;
-    padding:5px;
-  }
 /*!***************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/credit_card/index.module.css ***!
   \***************************************************************************************************/
@@ -749,7 +751,13 @@
 .LVHfpq1DgilyFF1AHkgD .UhcODewPY0vQOjTKVugj {
   fill: #0288D1;
 }
+.LVHfpq1DgilyFF1AHkgD .ITU3hfsRgQ7Xfc7GIWaM {
+  fill: #000;
+}
 
+.LVHfpq1DgilyFF1AHkgD .JZdrqV28dzPhq_n8IP1h {
+  fill: #000;
+}
 .LVHfpq1DgilyFF1AHkgD .QB3qqrseBCQMTKEHQLNX {
   fill: #ef5350;
 }

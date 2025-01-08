@@ -2,7 +2,7 @@
 import React,{ ChangeEvent, forwardRef, HTMLInputTypeAttribute } from  "react";
 import { IMaskInput } from 'react-imask';
 import IMask from "imask";
-import * as styles from './cvc.module.css';
+import * as styles from './index.module.css';
 interface  TextInputProps {
     handleChange?: (e: ChangeEvent<HTMLInputElement>) =>  void;
     onComplete?: (v) => void;
@@ -149,6 +149,39 @@ export const CVCMask = forwardRef<HTMLInputElement, TextInputProps>(
       />
     );
     
+});
+
+
+const customMask = function (value) {
+  var pattern = new RegExp(/^[A-Za-z ]+$/i);
+  console.log(value, pattern.test(value));
+  return pattern.test(value);
+};
+export const CardNameMask = forwardRef<HTMLInputElement, TextInputProps>(
+  ({ handleChange,doFlip, name, type,id }, ref) => {
+   //return <input  onChange={handleChange}  name={name}  type={type}  ref={ref}  />;
+   return (<IMaskInput
+      id={id}
+      onChange={handleChange}
+      name={name}
+      type={type}
+      inputRef={ref}
+      unmask={true}
+      className={styles.txt}
+      onAccept={(value) => {
+        doFlip(true);
+      }}
+      onComplete={(...ar)=> {
+        setTimeout(() => {
+          doFlip(false);
+        }, 3000);
+       }}
+      //mask=String
+      mask= {customMask}
+      // pattern: "/^[0-9 ]+$/"
+    />
+  );
+  
 });
 
     

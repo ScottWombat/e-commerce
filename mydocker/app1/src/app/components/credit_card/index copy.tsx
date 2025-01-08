@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
 import Cards from 'react-credit-cards-2';
-import {CardNameMask,CardNumberMask,ExpiryDateMask,CVCMask} from './input_mask';
+import {CardNumberMask,ExpiryDateMask,CVCMask} from './input_mask';
 import * as styles from './index.module.css';
 import {SelectIcon} from './icons'
-interface WrapperProps {
-    height?: string;
-}
-export const Wrapper = styled.div<WrapperProps>`
+export const Wrapper = styled.div`
     display:grid;
     grid-template-columns: 50% 50%;
-    transition: height 1s ease;
-    -webkit-transition: height 1s ease;
-    height: ${p => p.height};
-    overflow: hidden;
 `;
 export const LeftWrapper = styled.div`
 
@@ -198,7 +191,7 @@ const CreditCardContent = () => {
             <RightWrapper>
                 <div className={styles.field_container1}>
                     <label htmlFor="card_name" className={styles.lbl}>Name</label>
-                    <CardNameMask className={styles.txt} id="card_name" type="text" name="card_name" handleChange={handleChange} onComplete={onComplete}/>
+                    <input type="text" id="card_name" name="card_name" className={styles.txt1} onChange={handleChange}/>
                     <label htmlFor="card_number" className={styles.lbl}>Card Number</label>
                     <CardNumberMask className={styles.txt} id="card_number" type="text" name="card_number" handleChange={handleChange} onComplete={onComplete}/>
                 </div>

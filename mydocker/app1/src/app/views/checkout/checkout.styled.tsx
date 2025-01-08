@@ -4,6 +4,7 @@ interface DivProps {
     show?: string;
     height?: string;
     color?:string;
+    isOpen?:boolean;
 }
 
 export const Container = styled.div`
@@ -61,7 +62,7 @@ export const ContentLeft = styled.div`
 export const ContentRight = styled.div`
     float: :right;
     width:40%;
-    border:1px solid #000;
+    
 `;
 
 export const Contact = styled.div`
@@ -125,7 +126,7 @@ export const Payment = styled.div<DivProps>`
     height:${p => p.height};
     overflow: hidden;
     border-bottom:1px solid #ccc;
-    
+   
 `;
 export const PaymentIcons = styled.div<DivProps>`
     display:${p=>p.show};
@@ -135,10 +136,12 @@ export const PaymentIcons = styled.div<DivProps>`
     -webkit-transition: height 1s ease;
     height:${p => p.height};
     overflow: hidden;
+   
 
 `;
 export const PaymentSection = styled.div<DivProps>`
-
+    height:${p => p.height};
+    
 `;
 export const PaymentDetails = styled.div<DivProps>`
 
@@ -185,8 +188,62 @@ export const CreditCardSection = styled.div<DivProps>`
     -webkit-transition: height 1s ease;
     height: ${p => p.height};
     overflow: hidden;
-    border: 1px solid red;
+    border: 1px solid #ccc;
+    border-bottom: ${p =>p.isOpen?'2px solid #000':'1px solid #ccc'};
 `;
+export const PaypalSection = styled.div<DivProps>`
+    margin-top:20px;
+    font-weight:bold;
+    transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    height: ${p => p.height};
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-bottom: ${p =>p.isOpen?'2px solid #000':'1px solid #ccc'};
+`;
+export const AfterPaySection = styled.div<DivProps>`
+    margin-top:20px;
+    font-weight:bold;
+    transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    height: ${p => p.height};
+    overflow: hidden;
+    border: 1px solid #ccc;
+    border-bottom: ${p =>p.isOpen?'2px solid #000':'1px solid #ccc'};
+`;
+
+
+export const PaypalContent = styled.div<DivProps>`
+
+`;
+
+export const PromoCodeWrapper = styled.div<DivProps>`
+    transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    height: ${p => p.height};
+    overflow: hidden;
+
+`;
+export const ProductList = styled.div`
+   margin-top:15px;
+   margin-bottom:10px;
+   display:block;
+  width: 100%;
+   border-top: 1px solid #ccc; 
+`;
+
+export const ProductRow = styled.div`
+   margin-top:15px;
+   display:grid;
+   grid-template-columns: 100px 1fr;
+`;
+
+export const ProductDetails =  styled.div`
+    display:inline-block;
+    
+`;
+
+
 
 
 

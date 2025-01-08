@@ -107,7 +107,13 @@
 .creditcard .lightbluedark {
   fill: #0288D1;
 }
+.creditcard .black {
+  fill: #000;
+}
 
+.creditcard .blackdark {
+  fill: #000;
+}
 .creditcard .red {
   fill: #ef5350;
 }

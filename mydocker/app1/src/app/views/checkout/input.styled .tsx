@@ -5,6 +5,7 @@ export interface InputProps{
     img_position?:string;
     onFocus?: () => void;
     display?:string;
+    background?:string;
 }
 export const Wrapper1 = styled.div`
     position: relative;
@@ -22,9 +23,10 @@ display: block;
 width: ${p => p.width};
 margin-top:15px;
 border: 1px solid #757575;
-background: url(${p => p.img});
+background-image: url(${p => p.background});
+background-size:15px;
 background-repeat: no-repeat;
-background-position: ${p => p.img_position};
+background-position: 340px 10px;
 &:focus {
   outline: none;
   box-shadow: 0px 0px 2px red;

@@ -1,19 +1,28 @@
 import React,{useState,useEffect} from 'react';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as styles from './index.module.css';
 import { Container,Center,Header,Company,Bag,Title,Description,Content,ContentRight,ContentLeft,Contact,Delivery,Payment,DeliveryAddress, DeliverySection,DeliveryDetails,PaymentIcons,PaymentSection,PaymentDetails} from './checkout.styled';
-import { CreditCardSection,PaymentDetailsHeader,Credit,PayPal,AfterPay } from './checkout.styled';
-import {Button,Address} from './checkout.styled';
+import { CreditCardSection,PaymentDetailsHeader,PaypalSection,AfterPaySection,PaypalContent,PromoCodeWrapper,Credit,PayPal,AfterPay } from './checkout.styled';
+import {Button,Address,ProductList,ProductRow,ProductDetails} from './checkout.styled';
 import { Logo } from 'app/components/logo';
 import { ShoppingBagIcon } from 'app/layout/usermenu/bag';
 import { Wrapper1,Input,Label,ButtonWrapper} from './input.styled '
 import { fieldValidation,emailValidation } from 'app/utils/form_validation';
 import InputBox from 'app/components/input';
 import RightArrow from 'app/svg/right_arrow';
-import {NoCard,CreditExpiryDate,Color_Afterpay,Color_Paypal,Color_Master,Color_Visa,Color_Amex,MasterIcon,VisaIcon,AmexIcon,PaypalIcon,AfterpayIcon,SSL} from 'app/svg/payment_icons';
+import { selectAllItems} from '../../store/cart/cartReducer'
+import {NoCard,CreditExpiryDate,PromoCode,White_Paypal,Color_Afterpay,Color_Paypal,Color_Master,Color_Visa,Color_Amex,MasterIcon,VisaIcon,AmexIcon,PaypalIcon,AfterpayIcon,SSL} from 'app/svg/payment_icons';
 import CreditCardCvc from 'app/components/credit_card_cvc';
 import CreditCardContent from 'app/components/credit_card';
 const CheckoutPage = (props) => {
-    const [creditCardSectionHeight,setCreditCardSectionHeight] = useState("40px")
+    const items = useAppSelector(state => selectAllItems(state))
+    const [promocodeHeight,setPromocodeHeight] = useState('50px');
+    const [openCreditSection,setOpenCreditSection] = useState(true);
+    const [openPaypalSection,setOpenPaypalSection] = useState(false);
+    const [openAfterpaySection,setOpenAfterpaySection] = useState(false);
+    const [afterPaySectionHeight,setAfterPaySectionHeight] = useState("40px")
+    const [creditCardSectionHeight,setCreditCardSectionHeight] = useState("250px")
+    const [paypalSectionHeight,setPaypalSectionHeight] = useState("40px")
     const [zindex,setZindex] = useState('0');
     const [showPaymentIcons,setShowPaymentIcons] = useState('flex');
     const [borderColor,setBorderColor] = useState('#fff');
@@ -30,6 +39,7 @@ const CheckoutPage = (props) => {
     const [paymentDetaisHeight,setPaymentDetailsHeight] = useState('0px')
     const [buttonName,setButtonName] = useState('NEXT')
     const [inputIcon, setInputIcon] = useState('empty.png');
+    const [promoCodeImg,setPromoCodeImg] = useState('black_cross.png');
     const [next,setNext] = useState(false);
     const [showDelivery,setShowDelivery] = useState('none');
     const [showPayment,setShowPayment] = useState('none');
@@ -39,7 +49,7 @@ const CheckoutPage = (props) => {
     });
 
     const [firstNameState, setfirstNameState] = useState({
-        icon:'empty.png',value:'',error:null
+        icon:'crossmark.png',value:'',error:null
     });
     const [lastNameState, setLastNameState] = useState({
         icon:'empty.png',value:'',error:null
@@ -78,7 +88,7 @@ const CheckoutPage = (props) => {
            setDeliveryAddressHeight('850px')
            //alert("d")
         }else{
-            alert("e")
+           // alert("e")
             setAddressHeight('580px')
             setDeliveryAddressHeight('550px')
         }
@@ -88,7 +98,7 @@ const CheckoutPage = (props) => {
         e.target.blur(); 
      
         if(e.keyCode === 13){
-            alert("EE")
+            //alert("EE")
             setAddressHeight('580px')
             setDeliveryAddressHeight('550px')
           }
@@ -125,9 +135,9 @@ const CheckoutPage = (props) => {
         }
     }
     const onChange = (e)=>{
-        alert(e.target.value)
+        //alert(e.target.value)
     }
-    const onNextDeliveryClick = (e) =>{
+    const onNextClickToDelivery = (e) =>{
         setNextAddress("none");
         setNextDelivery('block');
         setAddressHeight('850px');
@@ -136,23 +146,99 @@ const CheckoutPage = (props) => {
         setBorderColor('#ccc');
     }
     const onCreditCardSectionClick = (e) =>{
-        if(creditCardSectionHeight =='40px'){
-          setCreditCardSectionHeight('440px');
-        }else{
-            setCreditCardSectionHeight('40px');
+        if(openPaypalSection){
+            setPaypalSectionHeight('40px');
+            setPaymentHeight('350px')
+            setOpenPaypalSection(false)
         }
-    }
-    const onNextPaymentClick = (e) =>{
+        if(openAfterpaySection){
+            setAfterPaySectionHeight('40px');
+            setPaymentHeight('350px')
+            setOpenAfterpaySection(false)
+        }
+        if(openCreditSection){
+            setCreditCardSectionHeight('40px');
+            setPaymentHeight('350px')
+            setOpenCreditSection(false);
+        }else{
+            setCreditCardSectionHeight('240px');
+            setPaymentHeight('600px')
+            setOpenCreditSection(true);
+        }
+          
         
+    }
+    const onPaypalSectionClick = (e) =>{
+        if(openCreditSection){
+            setCreditCardSectionHeight('40px');
+            setPaymentHeight('350px')
+            setOpenCreditSection(false)
+        }
+        if(openAfterpaySection){
+            setAfterPaySectionHeight('40px');
+            setPaymentHeight('350px')
+            setOpenAfterpaySection(false)
+        }
+        if(openPaypalSection){
+           setPaypalSectionHeight("40px")
+           setOpenPaypalSection(false)
+        }else{
+            setPaypalSectionHeight("100px")
+            setPaymentHeight('450px')
+            setOpenPaypalSection(true)
+
+        }
+        
+    }   
+    const onAfterPaySectionClick = (e)=>{
+        if(openCreditSection){
+            setCreditCardSectionHeight('40px');
+            setPaymentHeight('350px')
+            setOpenCreditSection(false)
+        }
+        if(openPaypalSection){
+            setPaypalSectionHeight('40px');
+            setPaymentHeight('350px')
+            setOpenPaypalSection(false)
+        }
+        if(openAfterpaySection){
+            setAfterPaySectionHeight("40px")
+            setOpenAfterpaySection(false)
+            setPaymentHeight('350px')
+    
+        }else{
+            setAfterPaySectionHeight("100px")
+            setPaymentHeight('450px')
+
+            setOpenAfterpaySection(true)
+        }
+        
+    }
+    const onNextClickToPayment = (e) =>{
         //setNextAddress("none");
         setNextDelivery('none');
         //setAddressHeight('850px');
         //setDeliveryHeight('150px');
         //setDeliverySectionHeight('150px');
-        setPaymentHeight("950px")
-        setPaymentSectionHeight('700px');
+        setPaymentHeight("800px")
+        setPaymentSectionHeight('440px');
         setShowPaymentIcons('none');
         setPaymentIconsHeight('0px');
+        //setCreditCardSectionHeight('40px');
+    }
+    const onPromocodeClick = () =>{
+        setPromocodeHeight('120px')
+    }
+    const promoCodeOnChange = (e) =>{
+        
+        setPromocodeHeight('250px')
+    }
+    //const  = (e) =>{
+        
+        //setPromocodeHeight('250px')
+    //}
+    const promoCodeOnChick = (e) =>{
+        setPromoCodeImg('')
     }
     return (
         <Container>
@@ -252,7 +338,7 @@ const CheckoutPage = (props) => {
                     </div>
                     <ButtonWrapper display={nextAddress} >
                         <Button height={'50px'}>
-                        <a className={styles.a_button} onClick={onNextDeliveryClick}>
+                        <a className={styles.a_button} onClick={onNextClickToDelivery}>
                         <span className={styles.button_name}>{buttonName}</span><span className={styles.arrows}><RightArrow/></span>
                         </a>
                         </Button>
@@ -274,7 +360,7 @@ const CheckoutPage = (props) => {
                     </DeliverySection>
                     <ButtonWrapper display={nextDelivery} >
                         <Button height={'50px'}>
-                        <a className={styles.a_button} onClick={onNextPaymentClick}>
+                        <a className={styles.a_button} onClick={onNextClickToPayment}>
                         <span className={styles.button_name}>{buttonName}</span><span className={styles.arrows}><RightArrow/></span>
                         </a>
                         </Button>
@@ -283,42 +369,132 @@ const CheckoutPage = (props) => {
                   <Payment height={paymentHeight}>
                     <div>PAYMENT</div>
                     <PaymentIcons height={paymentIconsHeight} show={showPaymentIcons}><AmexIcon/><MasterIcon/><VisaIcon/><PaypalIcon/><AfterpayIcon/></PaymentIcons>
+                    <PaymentDetailsHeader>
+                          <div className={styles.payment_header}>Payments are SSL encrypted so that your credit card and payment details stay safe.</div><div className={styles.ssl}><SSL/></div>
+                    </PaymentDetailsHeader>
                     <PaymentSection height={paymentSectionHeight}>
                         <PaymentDetails>
-                          <PaymentDetailsHeader>
-                          <div className={styles.payment_header}>Payments are SSL encrypted so that your credit card and payment details stay safe.</div><div className={styles.ssl}><SSL/></div>
-                         </PaymentDetailsHeader>
-                         <CreditCardSection height={creditCardSectionHeight}>
+                         <CreditCardSection height={creditCardSectionHeight} isOpen={openCreditSection}>
                             <a className={styles.b_button} onClick={onCreditCardSectionClick}>
                             <span className={styles.button_name}>Debit/Credit Card</span>
                             <span className={styles.s_credit_card}>
                                 <Color_Visa/>
                                 <Color_Amex/>
                                 <Color_Master/>
-                                <CreditCardCvc zindex={zindex}/>
-                                <NoCard/>
-                                <CreditExpiryDate/>
                             </span>
                             </a>
                             <div className={styles.credit_card_content}>
                                 <CreditCardContent/>
                             </div>
                         </CreditCardSection>
-                        
-                      
-                         <input type='button' value='PLACE ORDER'/>
-                         <input type='button' value='Paypal'/>
+                        <PaypalSection height={paypalSectionHeight} isOpen={openPaypalSection}>
+                                <a className={styles.b_button} onClick={onPaypalSectionClick}>
+                                <span className={styles.button_name}>PayPal</span>
+                                <span className={styles.s_credit_card}>
+                                <Color_Paypal/>
+                               </span>
+                               </a>
+                               <div className={styles.payment_content}>
+                                 <PaypalContent>You will be redirected to PayPal, where you can pay and complete your order.</PaypalContent>
+                                </div>
+                        </PaypalSection>
+
+                        <AfterPaySection height={afterPaySectionHeight} isOpen={openAfterpaySection}>
+                                <a className={styles.b_button} onClick={onAfterPaySectionClick}>
+                                <span className={styles.button_name}>AfterPay</span>
+                                <span className={styles.s_credit_card}>
+                                <Color_Afterpay/>
+                               </span>
+                               </a>
+                               <div className={styles.afterpay_content}>
+                               Pay in 4 easy instalments. You'll be redirected to the Afterpay website.
+                               </div>
+                        </AfterPaySection>
+                         <br/>
+                        {(openCreditSection || openAfterpaySection) &&
+                         <Button height={'50px'}>
+                        <a className={styles.a_button} onClick={onNextClickToPayment}>
+                        <span className={styles.button_name}>Place Order</span><span className={styles.arrows}><RightArrow/></span>
+                        </a>
+                        </Button>
+                        }
+                        {openPaypalSection &&
+                        <Button height={'50px'}>
+                        <a className={styles.a_button} onClick={onNextClickToPayment}>
+                        <span className={styles.white_paypal}><White_Paypal/></span>
+                        </a>
+                        </Button>}
                         </PaymentDetails>
                     </PaymentSection>
                   </Payment>
                   <Button height={'0px'}>
                   <a className={styles.a_button} onClick={onNext}>
-                    <span className={styles.button_name}>{buttonName}</span><span className={styles.arrows}><RightArrow/></span>
+                    <span className={styles.button_name}>{buttonName}</span>
+                    <span className={styles.arrows}><RightArrow/></span>
                   </a>
                   </Button>
                   </form>
                 </ContentLeft>
-                <ContentRight>Right</ContentRight>
+                <ContentRight>
+                    <div className={styles.right_header_content}>
+                    <div className={styles.content_left}>YOUR CARD</div>
+                    <div className={styles.content_right}>EDIT</div>
+                    </div>
+                    <div className={styles.right_content}>
+                    <div className={styles.content_left}>4 items</div>
+                    <div className={styles.content_right}>$575.00</div>
+                    </div>
+                    <div className={styles.right_content}>
+                    <div className={styles.content_left}>Original Price</div>
+                    <div className={styles.content_right}>$620.00</div>
+                    </div>
+                    <div className={styles.right_content}>
+                    <div className={styles.content_left}>Delivery</div>
+                    <div className={styles.content_right}>Free</div>
+                    </div>
+                    <div className={styles.right_content}>
+                    <div className={styles.content_left}>On Sale</div>
+                    <div className={styles.content_right}>-$45.00</div>
+                    </div>
+                    <div className={styles.right_content}>
+                    <div className={styles.content_left}>Total</div>
+                    <div className={styles.content_right}>$575.00</div>
+                    </div>
+                    <div className={styles.gst}>(Inclusive of GST $52.00)</div>
+                    <PromoCodeWrapper height={promocodeHeight}>
+                    <div className={styles.promo_code} onClick={onPromocodeClick}>
+                       
+                        <PromoCode/>&nbsp;USE A PROMO CODE
+                        <Wrapper1>
+                        <Input width={'375px'} autoComplete={'promocode'} onClick={promoCodeOnChick} onChange={promoCodeOnChange} id="promocode" defaultValue='' onBlur={promoCodeOnChange} placeholder="" background={ `./assets/images/${promoCodeImg}`}/>
+                        <Label>Promo Code</Label>
+                      
+
+                       </Wrapper1>
+                        <Button height={'50px'}>
+                           <a className={styles.c_button} onClick={onNext}>
+                           <span className={styles.button_name}>APPLY</span>
+                           <span className={styles.arrows}><RightArrow/></span>
+                          </a>
+                        </Button>
+                    </div>
+                    </PromoCodeWrapper>
+                    <ProductList>
+                    {items.map(p => (
+                        <ProductRow>
+                         <div>
+                        <img width="80px" height="80px" src="./assets/images/img1.jpg" />
+                        </div>
+                        
+                        <ProductDetails>
+                            <div>{p.title}</div>
+                            <div>${p.price}</div>
+                            <div>{p.description}</div>
+                        </ProductDetails>
+                        </ProductRow>
+                      ))}
+                    </ProductList>
+                </ContentRight>
             </Content>
             </Center>
         </Container>
