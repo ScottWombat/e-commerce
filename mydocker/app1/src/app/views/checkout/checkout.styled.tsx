@@ -57,6 +57,7 @@ export const ContentLeft = styled.div`
     float:left;
     width:60%;
     height:100vh;
+    padding-right:10px;
     
 `;
 export const ContentRight = styled.div`
@@ -70,8 +71,8 @@ export const Contact = styled.div`
     padding-top:0px;
     border-bottom:1px solid #ccc;
     width:100$;
-    height:150px;
-    margin-top:20px;
+    height:140px;
+    margin-top:30px;
 `;
 
 export const Address = styled.div<DivProps>`
@@ -82,6 +83,7 @@ export const Address = styled.div<DivProps>`
     height: ${p => p.height};
     overflow: hidden;
     border-bottom:1px solid #ccc;
+
 `;
 
 export const DeliveryAddress = styled.div<DivProps>`
@@ -91,6 +93,7 @@ export const DeliveryAddress = styled.div<DivProps>`
     -webkit-transition: height 1s ease;
     height: ${p => p.height};
     overflow: hidden;
+   
   
 `;
 
@@ -106,7 +109,7 @@ export const Delivery = styled.div<DivProps>`
 
 export const DeliverySection = styled.div<DivProps>`
     width:100%;
-    margin-top:20px;
+    margin-top:30px;
     font-weight:bold;
     transition: height 1s ease;
     -webkit-transition: height 1s ease;
@@ -126,7 +129,8 @@ export const Payment = styled.div<DivProps>`
     height:${p => p.height};
     overflow: hidden;
     border-bottom:1px solid #ccc;
-   
+  
+
 `;
 export const PaymentIcons = styled.div<DivProps>`
     display:${p=>p.show};
@@ -136,6 +140,7 @@ export const PaymentIcons = styled.div<DivProps>`
     -webkit-transition: height 1s ease;
     height:${p => p.height};
     overflow: hidden;
+  
    
 
 `;
@@ -147,7 +152,7 @@ export const PaymentDetails = styled.div<DivProps>`
 
 `;
 export const PaymentDetailsHeader = styled.div<DivProps>`
-    margin-top:20px;
+    margin-top:0px;
     border:1px solid #ccc;
     font-weight:none;
     padding:15px;
@@ -222,13 +227,26 @@ export const PromoCodeWrapper = styled.div<DivProps>`
     -webkit-transition: height 1s ease;
     height: ${p => p.height};
     overflow: hidden;
+    
+`;
 
+export const PromoCodeMessage = styled.div<DivProps>`
+    margin-top:20px;
+    transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    height: ${p => p.height};
+    overflow: hidden;
+    border-style: dotted;
+    border-color: #ccc;
+    padding:5px;
+    color:#ff2626;
+    display:  ${p => p.height=='0px'?'none':'block'}
 `;
 export const ProductList = styled.div`
    margin-top:15px;
    margin-bottom:10px;
    display:block;
-  width: 100%;
+   width: 100%;
    border-top: 1px solid #ccc; 
 `;
 

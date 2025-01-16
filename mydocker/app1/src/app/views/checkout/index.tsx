@@ -3,10 +3,10 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as styles from './index.module.css';
 import { Container,Center,Header,Company,Bag,Title,Description,Content,ContentRight,ContentLeft,Contact,Delivery,Payment,DeliveryAddress, DeliverySection,DeliveryDetails,PaymentIcons,PaymentSection,PaymentDetails} from './checkout.styled';
 import { CreditCardSection,PaymentDetailsHeader,PaypalSection,AfterPaySection,PaypalContent,PromoCodeWrapper,Credit,PayPal,AfterPay } from './checkout.styled';
-import {Button,Address,ProductList,ProductRow,ProductDetails} from './checkout.styled';
+import {Button,Address,ProductList,ProductRow,ProductDetails,PromoCodeMessage} from './checkout.styled';
 import { Logo } from 'app/components/logo';
 import { ShoppingBagIcon } from 'app/layout/usermenu/bag';
-import { Wrapper1,Input,Label,ButtonWrapper} from './input.styled '
+import { Wrapper1,Input,Label,ButtonWrapper,AddressButtonWrapper,DeliveryButtonWrapper} from './input.styled '
 import { fieldValidation,emailValidation } from 'app/utils/form_validation';
 import InputBox from 'app/components/input';
 import RightArrow from 'app/svg/right_arrow';
@@ -14,16 +14,17 @@ import { selectAllItems} from '../../store/cart/cartReducer'
 import {NoCard,CreditExpiryDate,PromoCode,White_Paypal,Color_Afterpay,Color_Paypal,Color_Master,Color_Visa,Color_Amex,MasterIcon,VisaIcon,AmexIcon,PaypalIcon,AfterpayIcon,SSL} from 'app/svg/payment_icons';
 import CreditCardCvc from 'app/components/credit_card_cvc';
 import CreditCardContent from 'app/components/credit_card';
+import {State,InitialiseInputState,InitialiseHeightState,HeightState,OpenState,InitializeOpenState} from './input_interface';
 const CheckoutPage = (props) => {
     const items = useAppSelector(state => selectAllItems(state))
-    const [promocodeHeight,setPromocodeHeight] = useState('50px');
-    const [openCreditSection,setOpenCreditSection] = useState(true);
+    //const [promocodeHeight,setPromocodeHeight] = useState('50px');
+    const [openCreditcardSection,setOpenCreditcardSection] = useState(false);
     const [openPaypalSection,setOpenPaypalSection] = useState(false);
     const [openAfterpaySection,setOpenAfterpaySection] = useState(false);
-    const [afterPaySectionHeight,setAfterPaySectionHeight] = useState("40px")
+    //const [afterPaySectionHeight,setAfterPaySectionHeight] = useState("40px")
     const [creditCardSectionHeight,setCreditCardSectionHeight] = useState("250px")
     const [paypalSectionHeight,setPaypalSectionHeight] = useState("40px")
-    const [zindex,setZindex] = useState('0');
+    //const [zindex,setZindex] = useState('0');
     const [showPaymentIcons,setShowPaymentIcons] = useState('flex');
     const [borderColor,setBorderColor] = useState('#fff');
     const [nextAddress, setNextAddress] = useState('block');
@@ -38,15 +39,21 @@ const CheckoutPage = (props) => {
     const [paymentSectionHeight,setPaymentSectionHeight] = useState('0px');
     const [paymentDetaisHeight,setPaymentDetailsHeight] = useState('0px')
     const [buttonName,setButtonName] = useState('NEXT')
-    const [inputIcon, setInputIcon] = useState('empty.png');
-    const [promoCodeImg,setPromoCodeImg] = useState('black_cross.png');
+    //const [inputIcon, setInputIcon] = useState('empty.png');
     const [next,setNext] = useState(false);
     const [showDelivery,setShowDelivery] = useState('none');
     const [showPayment,setShowPayment] = useState('none');
     const [placeOrder,setPlaceOrder] = useState(false)
+    const [inputState2 ,setInputState2] =useState<State>(InitialiseInputState);
+    const [heightState,setHeightState] = useState<HeightState>(InitialiseHeightState);
+    const [openState,setOpenState] = useState<OpenState>(InitializeOpenState);
     const [emailState, setEmailState] = useState({
         icon:'empty.png',value:'',error:null
     });
+    
+    const [inputState1,setInputState1] = useState({
+        promo_code:{value: ''}
+    })
 
     const [firstNameState, setfirstNameState] = useState({
         icon:'crossmark.png',value:'',error:null
@@ -85,7 +92,7 @@ const CheckoutPage = (props) => {
            
            setEmailState({...emailState,value: val,icon: image,error: ret})
            setAddressHeight('880px')
-           setDeliveryAddressHeight('850px')
+           setDeliveryAddressHeight('860px')
            //alert("d")
         }else{
            // alert("e")
@@ -108,8 +115,13 @@ const CheckoutPage = (props) => {
         const value = e.target.value
         let ret = emailValidation(e.target.value)
         if(ret ===null){
-            setAddressHeight('900px')
-            setDeliveryAddressHeight('850px')
+            //setAddressHeight('900px')
+            //setDeliveryAddressHeight('850px')
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                address: {height: '1150px'},
+                delivery_address: {height: '1000px'}
+            }));
         }
     }
     const handleOnFocus = () => {
@@ -138,107 +150,256 @@ const CheckoutPage = (props) => {
         //alert(e.target.value)
     }
     const onNextClickToDelivery = (e) =>{
-        setNextAddress("none");
+        //setNextAddress("none");
         setNextDelivery('block');
-        setAddressHeight('850px');
-        setDeliveryHeight('200px');
-        setDeliverySectionHeight('100px');
         setBorderColor('#ccc');
+        //setAddressHeight('850px');
+        //setDeliveryHeight('200px');
+        //setDeliverySectionHeight('100px');
+        setHeightState((prev_state) =>({
+            ...prev_state,
+            address: {height: '1060px'},
+            delivery_address: {height: '1060px'},
+            delivery: {height:'250px'},
+            delivery_section: {height: '90px'},
+            address_button_wrapper: {height:'0px'}
+        }));
+        
     }
     const onCreditCardSectionClick = (e) =>{
-        if(openPaypalSection){
-            setPaypalSectionHeight('40px');
-            setPaymentHeight('350px')
-            setOpenPaypalSection(false)
+        
+        if(openState.paypal.isOpen){
+            //setPaypalSectionHeight('40px');
+            //setPaymentHeight('350px')
+            setOpenState((prev_state)=>({
+                ...prev_state,
+                paypal:{isOpen:false}
+            }));
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                paypal_section: {height: '40px'},
+                payment: {height:'350px'},
+                
+            }));
+
         }
-        if(openAfterpaySection){
-            setAfterPaySectionHeight('40px');
-            setPaymentHeight('350px')
-            setOpenAfterpaySection(false)
+        if(openState.after_pay.isOpen){
+            //setPaymentHeight('350px')
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                payment: {height:'350px'},
+                afterpay_section: {height: '40px'},
+                
+            }));
+            setOpenState((prev1_state)=>({
+                ...prev1_state,
+                after_pay:{isOpen:false}
+            }));
         }
-        if(openCreditSection){
-            setCreditCardSectionHeight('40px');
-            setPaymentHeight('350px')
-            setOpenCreditSection(false);
+        if(openState.credit_card.isOpen){
+            //setOpenCreditcardSection(false);
+            setOpenState((prev1_state)=>({
+                ...prev1_state,
+                credit_card:{isOpen:false}
+            }));
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                payment: {height:'350px'},
+                creditcard_section: {height: '40px'},
+                
+            }));
         }else{
-            setCreditCardSectionHeight('240px');
-            setPaymentHeight('600px')
-            setOpenCreditSection(true);
+            //setOpenCreditcardSection(true); 
+            setOpenState((prev_state)=>({
+                ...prev_state,
+                credit_card:{isOpen:true}
+            }));
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                creditcard_section: {height: '290px'},
+                payment:{height:'650px'}
+                
+            }));
+
         }
           
         
     }
     const onPaypalSectionClick = (e) =>{
-        if(openCreditSection){
-            setCreditCardSectionHeight('40px');
-            setPaymentHeight('350px')
-            setOpenCreditSection(false)
+        //setOpenPaypalSection(true)
+        //console.log("ooooo")
+        if(openState.credit_card.isOpen){
+            //setCreditCardSectionHeight('40px');
+            //setPaymentHeight('350px')
+            setOpenState((prev_state)=>({
+                ...prev_state,
+                credit_card:{isOpen:false}
+            }));
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                creditcard_section: {height: '40px'},
+             //   payment: {height:'350px'},
+                
+            }));
         }
-        if(openAfterpaySection){
-            setAfterPaySectionHeight('40px');
-            setPaymentHeight('350px')
-            setOpenAfterpaySection(false)
+        if (openState.after_pay.isOpen){
+           // setPaymentHeight('350px')
+           setOpenState((prev_state)=>({
+            ...prev_state,
+            after_pay:{isOpen:false}
+        }));
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                afterpay_section: {height: '40px'},
+             //   payment: {height:'350px'},
+                
+            }));
         }
-        if(openPaypalSection){
-           setPaypalSectionHeight("40px")
-           setOpenPaypalSection(false)
+        
+        if(openState.paypal.isOpen){
+           //setPaypalSectionHeight("100px")
+           // setPaymentHeight('450px')
+            
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                payment: {height:'350px'},
+                paypal_section:  {height: '40px'}
+                
+            }));
+            setOpenState((prev_state)=>({
+                ...prev_state,
+                paypal:{isOpen:false}
+            }));
         }else{
-            setPaypalSectionHeight("100px")
-            setPaymentHeight('450px')
-            setOpenPaypalSection(true)
+            setOpenState((prev_state)=>({
+                ...prev_state,
+                paypal:{isOpen:true}
+            }));
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                payment: {height:'600px'},
+                paypal_section:  {height: '100px'}
 
+                
+            }));
         }
         
     }   
     const onAfterPaySectionClick = (e)=>{
-        if(openCreditSection){
-            setCreditCardSectionHeight('40px');
-            setPaymentHeight('350px')
-            setOpenCreditSection(false)
+        if(openState.credit_card.isOpen){
+            setOpenState((prev_state)=>({
+                ...prev_state,
+                credit_card:{isOpen:false}
+            }));
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                creditcard_section: {height: '40px'},
+             //   payment: {height:'350px'},
+                
+            }));
         }
-        if(openPaypalSection){
-            setPaypalSectionHeight('40px');
-            setPaymentHeight('350px')
-            setOpenPaypalSection(false)
+        if(openState.paypal.isOpen){
+            //setPaypalSectionHeight('40px');
+            //setPaymentHeight('350px')
+            //setOpenPaypalSection(false)
+            setOpenState((prev_state)=>({
+                ...prev_state,
+                paypal:{isOpen:false}
+            }));
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                paypal_section: {height: '40px'},
+             //   payment: {height:'350px'},
+                
+            }));
+            
         }
-        if(openAfterpaySection){
-            setAfterPaySectionHeight("40px")
-            setOpenAfterpaySection(false)
-            setPaymentHeight('350px')
+        if(openState.after_pay.isOpen){
+            //setAfterPaySectionHeight("40px")
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                payment: {height:'350px'},
+                afterpay_section:  {height: '40px'}
+                
+            }));
+            setOpenState((prev_state)=>({
+                ...prev_state,
+                after_pay:{isOpen:false}
+            }));
     
         }else{
-            setAfterPaySectionHeight("100px")
-            setPaymentHeight('450px')
-
-            setOpenAfterpaySection(true)
+            //setAfterPaySectionHeight("100px")
+            //setPaymentHeight('450px')
+            //setOpenAfterpaySection(true)
+            setOpenState((prev_state)=>({
+                ...prev_state,
+                after_pay:{isOpen:true}
+            }));
+            setHeightState((prev_state) =>({
+                ...prev_state,
+                payment: {height:'450px'},
+                afterpay_section:  {height: '100px'}
+                
+            }));
         }
         
     }
     const onNextClickToPayment = (e) =>{
-        //setNextAddress("none");
-        setNextDelivery('none');
-        //setAddressHeight('850px');
-        //setDeliveryHeight('150px');
-        //setDeliverySectionHeight('150px');
-        setPaymentHeight("800px")
-        setPaymentSectionHeight('440px');
-        setShowPaymentIcons('none');
-        setPaymentIconsHeight('0px');
-        //setCreditCardSectionHeight('40px');
+
+        //setNextDelivery('none');
+
+        //setPaymentIconsHeight('0px');
+        
+        //setPaymentHeight("800px")
+        //setPaymentSectionHeight('440px');
+       
+        setHeightState((prev_state) =>({
+            ...prev_state,
+            payment: {height: '350px'},
+            payment_section: {height:'280px'},
+            payment_icons:{height:'0px'},
+            delivery_button_wrapper:{height:'0px'},
+            delivery:{height:'165px'}
+
+        }));
+ 
     }
-    const onPromocodeClick = () =>{
-        setPromocodeHeight('120px')
+    const promoCodeDivOnClick = () =>{
+        //setPromocodeHeight('120px')
+        setHeightState((prev_state) =>({
+            ...prev_state,
+            promo_code: {height: '120px'}
+        }));
+    }
+    
+    /*** Promo Code Event ***/
+    const promoCodeOnBlur = (e) =>{
+       let img = e.target.value==''?'./assets/images/black_cross.png':'';
+        setInputState2((prev_state) =>({
+                    ...prev_state,
+                    promo_code: {...prev_state.promo_code,bg_image: img}
+        }));
+    }
+    const promoCodeOnClick = () =>{
+        //alert("D")
+        //setHeight({...height,promoCodeMessage:'0px',promoCodeHeight:'120px'});
+
+        setInputState2((prev_state) =>({
+                    ...prev_state,
+                    promo_code: {...prev_state.promo_code,bg_image: ''}
+        }));
+    }
+    const promoCodeInputOnClick = (e) =>{
+
     }
     const promoCodeOnChange = (e) =>{
-        
-        setPromocodeHeight('250px')
-    }
-    //const  = (e) =>{
-        
-        //setPromocodeHeight('250px')
-    //}
-    const promoCodeOnChick = (e) =>{
-        setPromoCodeImg('')
+        //setHeight({...height,promoCodeMessage:'0px',promoCodeHeight:'185px'});
+        //setPromocodeHeight('185px')
+        //setInputState1({promo_code:e.target.value})
+        setInputState2((prev_state) =>({
+            ...prev_state,
+            promo_code: {...prev_state.promo_code,value: e.target.value}
+        }));
     }
     return (
         <Container>
@@ -262,23 +423,23 @@ const CheckoutPage = (props) => {
                        {emailState.error !== null?emailState.error:''}
                     </div>
                   </Contact>
-                  <Address height={addressHeight}>
+                  <Address height={heightState.address.height}>
                     <div>ADDRESS</div>
-                    <DeliveryAddress height={deliveryAddressHeight}>
+                    <DeliveryAddress height={heightState.delivery_address.height}>
                     <div>Delivery Address</div>
                     <div className={styles.input_wrapper}>
                     <Wrapper1>
-                    <Input img_position={'220px 10px'} width={'260px'} autoComplete={'new_email1'} onChange={handleChange} onKeyDown={handleKeyDown} id="email1" defaultValue={firstNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
+                    <Input img_position={'220px 10px'} width={'260px'} autoComplete={'first_name'} onChange={handleChange} onKeyDown={handleKeyDown} id="email1" defaultValue={firstNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
                     <Label>First Name</Label>
                     </Wrapper1>
                     <Wrapper1>
-                    <Input img_position={'220px 10px'} width={'260px'} autoComplete={'new_email2'} onChange={handleChange} onKeyDown={handleKeyDown} id="email2" defaultValue={lastNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
+                    <Input img_position={'220px 10px'} width={'260px'} autoComplete={'last_name'} onChange={handleChange} onKeyDown={handleKeyDown} id="email2" defaultValue={lastNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
                     <Label>Last Name</Label>
                     </Wrapper1>
                     </div>
                     <div className={styles.input_wrapper}>
                     <Wrapper1>
-                    <Input img_position={'505px 10px'} width={'545px'} autoComplete={'new_email2'} onChange={handleChange} onKeyDown={handleKeyDown} id="email2" defaultValue={lastNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
+                    <Input img_position={'505px 10px'} width={'545px'} autoComplete={'company_name'} onChange={handleChange} onKeyDown={handleKeyDown} id="email2" defaultValue={lastNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
                     <Label>Company Name</Label>
                     </Wrapper1>
                     </div>
@@ -336,20 +497,20 @@ const CheckoutPage = (props) => {
                     <div className={styles.checkbox_wrapper}>
                     <label className={styles.checkbox_label}><input className={styles.checkbox_input} type="checkbox" />I understand and agree that in certain circumstances, my personal information may be transferred to other entities in the adidas Group and service providers that are located in countries that do not have comparable privacy safeguards to Australia. </label>
                     </div>
-                    <ButtonWrapper display={nextAddress} >
-                        <Button height={'50px'}>
+                  
+                    </DeliveryAddress>
+                    <AddressButtonWrapper height={heightState.address_button_wrapper.height} >
+                        <Button height={heightState.next_button.height}>
                         <a className={styles.a_button} onClick={onNextClickToDelivery}>
                         <span className={styles.button_name}>{buttonName}</span><span className={styles.arrows}><RightArrow/></span>
                         </a>
                         </Button>
-                        </ButtonWrapper>
-                    </DeliveryAddress>
-                   
+                    </AddressButtonWrapper>
                   </Address>
                  
-                  <Delivery height={deliveryHeight}>
+                  <Delivery height={heightState.delivery.height}>
                     <div>DELIVERY OPTIONS</div>
-                    <DeliverySection height={deliverySectionHeight} color={borderColor}>
+                    <DeliverySection height={heightState.delivery_section.height} color={borderColor}>
                         <DeliveryDetails>
                         <div className={styles.delivery_details}>
                         <div>Shipping</div>
@@ -358,23 +519,24 @@ const CheckoutPage = (props) => {
                         </div>
                         </DeliveryDetails>
                     </DeliverySection>
-                    <ButtonWrapper display={nextDelivery} >
-                        <Button height={'50px'}>
+                    <DeliveryButtonWrapper height={heightState.delivery_button_wrapper.height} >
+                        <Button height={heightState.next_button.height}>
                         <a className={styles.a_button} onClick={onNextClickToPayment}>
                         <span className={styles.button_name}>{buttonName}</span><span className={styles.arrows}><RightArrow/></span>
                         </a>
                         </Button>
-                        </ButtonWrapper>
+                    </DeliveryButtonWrapper>
                   </Delivery>
-                  <Payment height={paymentHeight}>
+                  <Payment height={heightState.payment.height}>
                     <div>PAYMENT</div>
-                    <PaymentIcons height={paymentIconsHeight} show={showPaymentIcons}><AmexIcon/><MasterIcon/><VisaIcon/><PaypalIcon/><AfterpayIcon/></PaymentIcons>
+                    <PaymentIcons height={heightState.payment_icons.height} show={showPaymentIcons}><AmexIcon/><MasterIcon/><VisaIcon/><PaypalIcon/><AfterpayIcon/></PaymentIcons>
                     <PaymentDetailsHeader>
                           <div className={styles.payment_header}>Payments are SSL encrypted so that your credit card and payment details stay safe.</div><div className={styles.ssl}><SSL/></div>
                     </PaymentDetailsHeader>
-                    <PaymentSection height={paymentSectionHeight}>
+                    <PaymentSection height={heightState.payment_section.height}>
                         <PaymentDetails>
-                         <CreditCardSection height={creditCardSectionHeight} isOpen={openCreditSection}>
+                        
+                         <CreditCardSection height={heightState.creditcard_section.height} isOpen={openState.credit_card.isOpen}>
                             <a className={styles.b_button} onClick={onCreditCardSectionClick}>
                             <span className={styles.button_name}>Debit/Credit Card</span>
                             <span className={styles.s_credit_card}>
@@ -387,7 +549,8 @@ const CheckoutPage = (props) => {
                                 <CreditCardContent/>
                             </div>
                         </CreditCardSection>
-                        <PaypalSection height={paypalSectionHeight} isOpen={openPaypalSection}>
+                        
+                        <PaypalSection height={heightState.paypal_section.height} isOpen={openState.paypal.isOpen}>
                                 <a className={styles.b_button} onClick={onPaypalSectionClick}>
                                 <span className={styles.button_name}>PayPal</span>
                                 <span className={styles.s_credit_card}>
@@ -399,7 +562,7 @@ const CheckoutPage = (props) => {
                                 </div>
                         </PaypalSection>
 
-                        <AfterPaySection height={afterPaySectionHeight} isOpen={openAfterpaySection}>
+                        <AfterPaySection height={heightState.afterpay_section.height} isOpen={openState.after_pay.isOpen}>
                                 <a className={styles.b_button} onClick={onAfterPaySectionClick}>
                                 <span className={styles.button_name}>AfterPay</span>
                                 <span className={styles.s_credit_card}>
@@ -411,14 +574,14 @@ const CheckoutPage = (props) => {
                                </div>
                         </AfterPaySection>
                          <br/>
-                        {(openCreditSection || openAfterpaySection) &&
+                        {(openState.credit_card.isOpen || openState.after_pay.isOpen ) &&
                          <Button height={'50px'}>
                         <a className={styles.a_button} onClick={onNextClickToPayment}>
                         <span className={styles.button_name}>Place Order</span><span className={styles.arrows}><RightArrow/></span>
                         </a>
                         </Button>
                         }
-                        {openPaypalSection &&
+                        {openState.paypal.isOpen &&
                         <Button height={'50px'}>
                         <a className={styles.a_button} onClick={onNextClickToPayment}>
                         <span className={styles.white_paypal}><White_Paypal/></span>
@@ -427,12 +590,9 @@ const CheckoutPage = (props) => {
                         </PaymentDetails>
                     </PaymentSection>
                   </Payment>
-                  <Button height={'0px'}>
-                  <a className={styles.a_button} onClick={onNext}>
-                    <span className={styles.button_name}>{buttonName}</span>
-                    <span className={styles.arrows}><RightArrow/></span>
-                  </a>
-                  </Button>
+                  
+                 
+                  
                   </form>
                 </ContentLeft>
                 <ContentRight>
@@ -461,23 +621,21 @@ const CheckoutPage = (props) => {
                     <div className={styles.content_right}>$575.00</div>
                     </div>
                     <div className={styles.gst}>(Inclusive of GST $52.00)</div>
-                    <PromoCodeWrapper height={promocodeHeight}>
-                    <div className={styles.promo_code} onClick={onPromocodeClick}>
-                       
-                        <PromoCode/>&nbsp;USE A PROMO CODE
-                        <Wrapper1>
-                        <Input width={'375px'} autoComplete={'promocode'} onClick={promoCodeOnChick} onChange={promoCodeOnChange} id="promocode" defaultValue='' onBlur={promoCodeOnChange} placeholder="" background={ `./assets/images/${promoCodeImg}`}/>
-                        <Label>Promo Code</Label>
-                      
-
-                       </Wrapper1>
-                        <Button height={'50px'}>
-                           <a className={styles.c_button} onClick={onNext}>
-                           <span className={styles.button_name}>APPLY</span>
-                           <span className={styles.arrows}><RightArrow/></span>
-                          </a>
-                        </Button>
-                    </div>
+                    <PromoCodeMessage height={heightState.promo_code_message.height}>Promo code not recognised. Please check and try again</PromoCodeMessage>
+                    <PromoCodeWrapper height={heightState.promo_code.height}>
+                        <div className={styles.promo_code} onClick={promoCodeDivOnClick}>
+                            <PromoCode/>&nbsp;USE A PROMO CODE
+                            <Wrapper1>   
+                                <Input img_position={inputState2.promo_code.bg_img_pos} width={inputState2.promo_code.width} autoComplete={'promocode'} onClick={(e) =>promoCodeInputOnClick(e)} onChange={promoCodeOnChange} id="promo_code" value={inputState2.promo_code.value} onBlur={(e)=>promoCodeOnBlur(e)} placeholder="" background={inputState2.promo_code.bg_image}/>
+                                <Label>Promo Code</Label>
+                            </Wrapper1>
+                            <Button height={'50px'}>
+                                <a className={styles.c_button} onClick={onNext}>
+                                <span className={styles.button_name}>APPLY</span>
+                                <span className={styles.arrows}><RightArrow/></span>
+                                </a>
+                            </Button>
+                        </div>
                     </PromoCodeWrapper>
                     <ProductList>
                     {items.map(p => (

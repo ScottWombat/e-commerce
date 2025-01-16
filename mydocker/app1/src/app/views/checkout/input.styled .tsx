@@ -2,16 +2,18 @@ import styled from "styled-components";
 export interface InputProps{
     img?: string;
     width?: string;
+    height?:string;
     img_position?:string;
     onFocus?: () => void;
     display?:string;
     background?:string;
+    value?:string;
 }
 export const Wrapper1 = styled.div`
     position: relative;
     width: 20rem;
-    height: 1.5rem;
-    margin-top:10px;
+    height: 44px;
+    margin-top:20px;
     display:inline-block;
     onFocus:boolean;
 `;
@@ -22,14 +24,14 @@ padding: 10px 10px 10px 15px;
 display: block;
 width: ${p => p.width};
 margin-top:15px;
-border: 1px solid #757575;
-background-image: url(${p => p.background});
+border: 1px solid #ccc;
+background: url(${p => p.background});
 background-size:15px;
 background-repeat: no-repeat;
-background-position: 340px 10px;
+background-position: ${p => p.img_position};
 &:focus {
   outline: none;
-  box-shadow: 0px 0px 2px red;
+  box-shadow: 0px 0px 2px #ccc;
 }
 `;
 
@@ -54,7 +56,28 @@ export const Label = styled.label`
 
 export const ButtonWrapper = styled.div<InputProps>`
   width:100%;
-  display:${p => p.display}
+  transition: height 1s ease;
+  -webkit-transition: height 1s ease;
+  height: ${p => p.height};
+  overflow: hidden;
+`;
+
+export const AddressButtonWrapper = styled.div<InputProps>`
+
+  width:100%;
+  transition: height 1s ease;
+  -webkit-transition: height 1s ease;
+  height: ${p => p.height};
+  overflow: hidden;
+`;
+
+export const DeliveryButtonWrapper = styled.div<InputProps>`
+  margin-top:5px;
+  width:100%;
+  transition: height 1s ease;
+  -webkit-transition: height 1s ease;
+  height: ${p => p.height};
+  overflow: hidden;
 `;
 
 
