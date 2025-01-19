@@ -1,0 +1,25 @@
+/* tslint:disable 
+ tslint-disable no-restricted-globals */
+{
+    "compilerOptions": {
+      "baseUrl": "./app",
+      "target": "esnext",   
+      "module":"esnext",                               
+      "lib": [
+      "DOM",
+      "ESNext"
+      ],                                        
+      "jsx": "react-jsx",                                       
+      "allowJs": true,
+      "moduleResolution": "node",
+      "types": ["react", "react-dom", "@types/react", "@types/react-dom"],     
+      "outDir": "./dist",
+      "strict": true,
+      "esModuleInterop": true,
+      "resolveJsonModule": true,
+      "noImplicitAny": false,
+      "skipLibCheck": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"],
+  }

@@ -1,14 +1,42 @@
-version: '3.7'
 services:
-  mongo:
+  redis-cache:
+    build: 
+      context: ./redis
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      REDIS_PWD: '${REDIS_PWD}'
+    ports:
+      - '6379:6379'
+    volumes:
+      - redis-cache:/data/redis-cache
+    networks:
+      custom_net:
+        ipv4_address: 172.18.1.4
+  redis-insight:
+    image: redis/redisinsight:latest
+    restart: always
+    ports:
+      - "5540:5540"
+    volumes:
+      - redis-insight:/data/redis-insight
+    networks:
+      custom_net:
+        ipv4_address: 172.18.1.5
+    depends_on:
+      - redis-cache
+  mongo-db:
     image: mongo
-    container_name: mongodb
+    container_name: mongo-db
     restart: unless-stopped
     env_file:
       - .env
     volumes:
-      - mongodb:/data/db
-      - ./init.d/init.js:/docker-entrypoint-initdb.d/init.js:ro
+      - mongo-db:/data/mongo-db
+      - ./mongo/init.d/init.js:/docker-entrypoint-initdb.d/init.js:ro
+    networks:
+      custom_net:
+        ipv4_address: 172.18.1.2
   mongo-seed:
     env_file:
       - .env
@@ -20,17 +48,41 @@ services:
         - USERNAME=$MONGO_INITDB_ROOT_USERNAME
         - PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
     depends_on:
-      - mongo-express
+      - mongo-db
+    volumes:
+      - mongo-seed:/data/mongo-seed
+    networks:
+      custom_net:
+        ipv4_address: 172.18.1.6
   mongo-express:
     image: mongo-express
     restart: unless-stopped
     ports:
       - 8081:8081
     depends_on:
-      - mongo
+      - mongo-db
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: example
-      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongo123
+      ME_CONFIG_MONGODB_URL: mongodb://admin:mongo123@mongo-db:27017/
+      ME_CONFIG_BASICAUTH: true
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: express123
+    networks:
+      custom_net:
+        ipv4_address: 172.18.1.3
+    volumes:
+      - mongo-express:/data/mongo-express
 volumes:
-  mongodb:
+  mongo-db:
+  mongo-express:
+  mongo-seed:
+  redis-insight:
+  redis-cache:
+networks:
+  custom_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.1.0/24
+          gateway: 172.18.1.1

@@ -2,8 +2,8 @@ import React, { useEffect, useState} from 'react';
 import { Outlet } from 'react-router-dom'
 import styled from "styled-components";
 import { Section , SearchSection, NavSection ,MainSection, FooterSection,LogoSection,MenuSection} from 'src/layout'
-import { MainMenu } from "src/component/mainmenu";
-import { UserMenu } from 'src/component/usermenu';
+import { MainMenu } from "../../component/mainmenu";
+import { UserMenu } from '../../component/usermenu';
 import { SearchBox } from 'src/component/search';
 
 export const Desktop = (props:any) =>{
@@ -20,7 +20,7 @@ export const Desktop = (props:any) =>{
                 <SearchBox onClose={searchOnClick}/>
             </SearchSection>
             <NavSection>
-              <LogoSection>JACK&JILL</LogoSection>
+              <LogoSection>JACK&JILL6</LogoSection>
               <MenuSection>
                 <MainMenu/>
                 <UserMenu onClick={searchOnClick}/>

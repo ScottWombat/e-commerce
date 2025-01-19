@@ -2,8 +2,8 @@ from fastapi import APIRouter, Body, Depends, HTTPException
 from typing import Annotated
 from datetime import datetime
 from bson import ObjectId
-from app.db.db import get_db
-from app.db.mongodb import AsyncIOMotorClient, get_database
+
+from app.db.db import AsyncIOMotorClient, get_db
 from app.repository.category_repository import bulk_update_object_id
 from app.model.category import Category,CategoryResponse
 

@@ -23,7 +23,7 @@ from app.model.user import User, UserInDB, Token, TokenData
 from app.auth.auth_handler import signJWT
 from app.exceptions.custom_exception import CustomException
 from app.utils.random_code import getRandomCode
-from app.db.mongodb import AsyncIOMotorClient, get_database
+from app.db.db import AsyncIOMotorClient, get_db
 from app.db.db import get_db
 from app.model.user import User
 from app.model.response import Response

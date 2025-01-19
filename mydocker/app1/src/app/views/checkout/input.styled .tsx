@@ -8,6 +8,7 @@ export interface InputProps{
     display?:string;
     background?:string;
     value?:string;
+    border_bottom?:string;
 }
 export const Wrapper1 = styled.div`
     position: relative;
@@ -25,6 +26,7 @@ display: block;
 width: ${p => p.width};
 margin-top:15px;
 border: 1px solid #ccc;
+border-bottom: ${p => p.border_bottom};
 background: url(${p => p.background});
 background-size:15px;
 background-repeat: no-repeat;

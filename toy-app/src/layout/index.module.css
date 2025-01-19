@@ -1,5 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 .rightMenuWrapper {
     position: relative;
     top:0;
     display:inline-flex;
+}
+
+.amp{
+    font-family: 'Playfair Display';font-size: 28px;
+    color:rgb(240, 38, 38)
 }

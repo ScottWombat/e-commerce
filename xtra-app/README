@@ -1,0 +1,10 @@
+Run app in development mode
+
+>npm run start -> localhost:8080
+
+Build image
+> docker build . -t revit/xtra-app
+
+Run app from docker image
+
+>docker run --name react-nginx-app -p 9080:9080 -d xtra-app-nginx-react

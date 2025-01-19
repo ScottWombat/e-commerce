@@ -1,5 +1,5 @@
 from app.model.product import Product,ProductList,ProductResponse,ProductDTO
-from app.db.mongodb import AsyncIOMotorClient
+from app.db.db import AsyncIOMotorClient
 #from bson import ObjectId,json_util
 from bson.json_util import dumps
 from typing import List,Dict

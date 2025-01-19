@@ -3,7 +3,7 @@ from typing import Annotated
 from datetime import datetime
 from bson import ObjectId
 from app.db.db import get_db
-from app.db.mongodb import AsyncIOMotorClient, get_database
+from app.db.db import AsyncIOMotorClient, get_db
 from app.repository.product_repository import count_products, query_products
 from app.model.address import Address
 

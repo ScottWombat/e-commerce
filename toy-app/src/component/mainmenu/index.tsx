@@ -2,9 +2,8 @@ import styled from "styled-components";
 import styles from './menu.module.css';
 export const Wrapper = styled.div`
     width:100%;
-    height:20px;
+    height:25px;
     float:right;
-    
 `;
 
 

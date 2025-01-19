@@ -1,0 +1,26 @@
+
+.cart_toggle {
+    background-color: #0000;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    color: #000;
+    line-height: 1;
+    height:110px;
+    width:110px;
+    position: relative;
+   
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.count_items {
+    color: #000;
+    font-family: arial;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top:-30px;
+    margin-left:10px;
+}

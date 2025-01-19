@@ -4,11 +4,11 @@ from motor.motor_asyncio import AsyncIOMotorClient
 import logging
 import asyncio
 from app.conf.config import Config
-
+db_name = Config.db_settings.get('db_name')
 db_client: AsyncIOMotorClient = None # type: ignore
 
 async def get_db() -> AsyncIOMotorClient: # type: ignore
-    db_name = Config.db_settings.get('db_name')
+    #db_name = Config.db_settings.get('db_name')
     return db_client[db_name]
 
 
@@ -24,7 +24,12 @@ async def connect_and_init_db():
             uuidRepresentation="standard",
         )
         db_client.get_io_loop = asyncio.get_event_loop
-        logging.info('Connected to mongo.')
+        ping_response = await db_client[db_name].command("ping")
+        if ping_response["ok"] != 1.0:
+            raise Exception("Problem connecting to database cluster.")
+        else:
+            print("Connected to database cluster.")
+        logging.info("Connected to Mongodb: " +db_name)
     except Exception as e:
         logging.exception(f'Could not connect to mongo: {e}')
         raise

@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from datetime import datetime
 from app.model.product import Product,ProductResponse
 from app.db.db import get_db
-from app.db.mongodb import AsyncIOMotorClient, get_database
+from app.db.db import AsyncIOMotorClient, get_db
 from app.repository.product_repository import query_category_size,count_products, query_products,query_by_category_name
 from typing import Optional, Dict, Any,List
 d = [

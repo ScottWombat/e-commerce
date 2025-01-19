@@ -61,6 +61,15 @@ var sex_dolls=[
     "California Exotic The Girl Next Door Sex Doll",
     "California Exotic Naughty Neighbor Love Doll"
 ]
+var anal_toys =[
+    "Tantus Ripple Large",
+    "CalExotics Colours Pleasures Trainer Kit",
+    "Lovense Hush 2",
+    "XL Lubricant Applicator",
+    "Cute Little Fuckers",
+    "Snug Plug",
+    "Bootie Butt Plug"
+]
 
  
 for (var i = 0; i < 1000; i++) { 
@@ -82,13 +91,16 @@ for (var i = 0; i < 1000; i++) {
     }
     jsonArray.push({ 
         "id": Math.floor(1000000 + Math.random() * 9999999), 
-        "name": name,
+        "title": name,
+        "description": "blah blah blash",
         "catalog": catalog,
         "category": category,
         "price": parseFloat( parseFloat( price ).toFixed( 2 ) ),
         "discount": Math.floor((Math.random() * 30)) ,
         "rating": Math.floor((Math.random() * 4)) +1,
-        "viewers": Math.floor((Math.random() * 100)) +1
+        "viewers": Math.floor((Math.random() * 100)) +1,
+        "image_id": "",
+        "number_image": 5
     }); 
 } 
 
@@ -117,7 +129,7 @@ function getWomenProductName(category){
     }else if(category ==  'Dildos'){
         return dildos[Math.floor(Math.random() * 4)]
     }else{
-        return "N/A"
+        return anal_toys[Math.floor(Math.random() * 6)]
     }
 
 }
@@ -127,7 +139,7 @@ function getWomenProductName(category){
 const data = JSON.stringify(jsonArray);
 
 // writing the JSON string content to a file
-fs.writeFile("products.json", data, (error) => {
+fs.writeFile("../mongo-seed/products.json", data, (error) => {
   // throwing the error
   // in case of a writing problem
   if (error) {

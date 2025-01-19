@@ -20,9 +20,9 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname,'dist','index.html'));
 });
 
-//app.get('/nodejs', (req, res) => {
-  //res.send('Hello World: ' + 'Host name: ' + os.networkInterfaces().eth0[0].address);
-//});
+app.get('/nodejs', (req, res) => {
+res.send('Hello World: ' + 'Host name: ' + os.networkInterfaces().eth0[0].address);
+});
 
 app.listen(PORT, () => {
   console.log(`Running on http://${HOST}:${PORT}`);

@@ -1,9 +1,9 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as styles from './index.module.css';
 import { Container,Center,Header,Company,Bag,Title,Description,Content,ContentRight,ContentLeft,Contact,Delivery,Payment,DeliveryAddress, DeliverySection,DeliveryDetails,PaymentIcons,PaymentSection,PaymentDetails} from './checkout.styled';
 import { CreditCardSection,PaymentDetailsHeader,PaypalSection,AfterPaySection,PaypalContent,PromoCodeWrapper,Credit,PayPal,AfterPay } from './checkout.styled';
-import {Button,Address,ProductList,ProductRow,ProductDetails,PromoCodeMessage} from './checkout.styled';
+import {Button,Address,ProductList,ProductRow,ProductDetails,PromoCodeMessage,ErrorMessage} from './checkout.styled';
 import { Logo } from 'app/components/logo';
 import { ShoppingBagIcon } from 'app/layout/usermenu/bag';
 import { Wrapper1,Input,Label,ButtonWrapper,AddressButtonWrapper,DeliveryButtonWrapper} from './input.styled '
@@ -14,39 +14,41 @@ import { selectAllItems} from '../../store/cart/cartReducer'
 import {NoCard,CreditExpiryDate,PromoCode,White_Paypal,Color_Afterpay,Color_Paypal,Color_Master,Color_Visa,Color_Amex,MasterIcon,VisaIcon,AmexIcon,PaypalIcon,AfterpayIcon,SSL} from 'app/svg/payment_icons';
 import CreditCardCvc from 'app/components/credit_card_cvc';
 import CreditCardContent from 'app/components/credit_card';
-import {State,InitialiseInputState,InitialiseHeightState,HeightState,OpenState,InitializeOpenState} from './input_interface';
+import {State,InitialiseInputState,InitialiseHeightState,HeightState,OpenState,InitializeOpenState,BGImage, BorderBottom} from './input_interface';
 const CheckoutPage = (props) => {
+    const emailInputRef = useRef(null);
     const items = useAppSelector(state => selectAllItems(state))
     //const [promocodeHeight,setPromocodeHeight] = useState('50px');
-    const [openCreditcardSection,setOpenCreditcardSection] = useState(false);
-    const [openPaypalSection,setOpenPaypalSection] = useState(false);
-    const [openAfterpaySection,setOpenAfterpaySection] = useState(false);
+    //const [openCreditcardSection,setOpenCreditcardSection] = useState(false);
+    //const [openPaypalSection,setOpenPaypalSection] = useState(false);
+   // const [openAfterpaySection,setOpenAfterpaySection] = useState(false);
     //const [afterPaySectionHeight,setAfterPaySectionHeight] = useState("40px")
-    const [creditCardSectionHeight,setCreditCardSectionHeight] = useState("250px")
-    const [paypalSectionHeight,setPaypalSectionHeight] = useState("40px")
+    //const [creditCardSectionHeight,setCreditCardSectionHeight] = useState("250px")
+    //const [paypalSectionHeight,setPaypalSectionHeight] = useState("40px")
     //const [zindex,setZindex] = useState('0');
     const [showPaymentIcons,setShowPaymentIcons] = useState('flex');
-    const [borderColor,setBorderColor] = useState('#fff');
-    const [nextAddress, setNextAddress] = useState('block');
-    const [nextDelivery,setNextDelivery] = useState('none');
-    const [isFocused, setIsFocused] = useState(true);
-    const [addressHeight,setAddressHeight] = useState('60px')
-    const [deliveryHeight,setDeliveryHeight] = useState('60px')
-    const [deliveryAddressHeight,setDeliveryAddressHeight] = useState('0px');
-    const [deliverySectionHeight,setDeliverySectionHeight] = useState('0px')
-    const [paymentHeight,setPaymentHeight] = useState('80px')
-    const [paymentIconsHeight,setPaymentIconsHeight]= useState('30px');
-    const [paymentSectionHeight,setPaymentSectionHeight] = useState('0px');
-    const [paymentDetaisHeight,setPaymentDetailsHeight] = useState('0px')
+    //const [borderColor,setBorderColor] = useState('#fff');
+    //const [nextAddress, setNextAddress] = useState('block');
+    //const [nextDelivery,setNextDelivery] = useState('none');
+    //const [isFocused, setIsFocused] = useState(true);
+    //const [addressHeight,setAddressHeight] = useState('60px')
+    //const [deliveryHeight,setDeliveryHeight] = useState('60px')
+    //const [deliveryAddressHeight,setDeliveryAddressHeight] = useState('0px');
+    //const [deliverySectionHeight,setDeliverySectionHeight] = useState('0px')
+    //const [paymentHeight,setPaymentHeight] = useState('80px')
+    //const [paymentIconsHeight,setPaymentIconsHeight]= useState('30px');
+    //const [paymentSectionHeight,setPaymentSectionHeight] = useState('0px');
+    //const [paymentDetaisHeight,setPaymentDetailsHeight] = useState('0px')
     const [buttonName,setButtonName] = useState('NEXT')
     //const [inputIcon, setInputIcon] = useState('empty.png');
     const [next,setNext] = useState(false);
-    const [showDelivery,setShowDelivery] = useState('none');
-    const [showPayment,setShowPayment] = useState('none');
+    //const [showDelivery,setShowDelivery] = useState('none');
+    //const [showPayment,setShowPayment] = useState('none');
     const [placeOrder,setPlaceOrder] = useState(false)
     const [inputState2 ,setInputState2] =useState<State>(InitialiseInputState);
     const [heightState,setHeightState] = useState<HeightState>(InitialiseHeightState);
     const [openState,setOpenState] = useState<OpenState>(InitializeOpenState);
+
     const [emailState, setEmailState] = useState({
         icon:'empty.png',value:'',error:null
     });
@@ -73,7 +75,8 @@ const CheckoutPage = (props) => {
     useEffect(() => {
         console.log("INSSSSSSS")
        console.log(emailState)
-    },[emailState]);
+       console.log(inputState2)
+    },[emailState,inputState2]);
 
     const updateState = (newState) =>{
         setTimeout(() => {
@@ -91,13 +94,13 @@ const CheckoutPage = (props) => {
            let val = ret ===null?e.target.value:'';
            
            setEmailState({...emailState,value: val,icon: image,error: ret})
-           setAddressHeight('880px')
-           setDeliveryAddressHeight('860px')
+           //setAddressHeight('880px')
+           //setDeliveryAddressHeight('860px')
            //alert("d")
         }else{
            // alert("e")
-            setAddressHeight('580px')
-            setDeliveryAddressHeight('550px')
+            //setAddressHeight('580px')
+           // setDeliveryAddressHeight('550px')
         }
         
     };
@@ -106,8 +109,8 @@ const CheckoutPage = (props) => {
      
         if(e.keyCode === 13){
             //alert("EE")
-            setAddressHeight('580px')
-            setDeliveryAddressHeight('550px')
+            //setAddressHeight('580px')
+            //setDeliveryAddressHeight('550px')
           }
     }
     const handleChange = (e) =>{
@@ -124,20 +127,20 @@ const CheckoutPage = (props) => {
             }));
         }
     }
-    const handleOnFocus = () => {
-        setIsFocused(true);
-    };
-    const onNext = ()=>{
+    //const handleOnFocus = () => {
+    //    setIsFocused(true);
+   // };
+    const onNext1 = ()=>{
         if(!placeOrder){
             if(next){
-                setShowPayment('block');
+                //setShowPayment('block');
                
-                setPaymentHeight('50px');
+                //setPaymentHeight('50px');
                 setPlaceOrder(!placeOrder);
                 setButtonName("PLACE ORDER");
             }else{
-                setShowDelivery('block');
-                setDeliveryHeight('50px');
+                //setShowDelivery('block');
+                //setDeliveryHeight('50px');
                 
                 setNext(!next);
                 return ;
@@ -151,8 +154,8 @@ const CheckoutPage = (props) => {
     }
     const onNextClickToDelivery = (e) =>{
         //setNextAddress("none");
-        setNextDelivery('block');
-        setBorderColor('#ccc');
+        //setNextDelivery('block');
+        //setBorderColor('#ccc');
         //setAddressHeight('850px');
         //setDeliveryHeight('200px');
         //setDeliverySectionHeight('100px');
@@ -299,9 +302,6 @@ const CheckoutPage = (props) => {
             }));
         }
         if(openState.paypal.isOpen){
-            //setPaypalSectionHeight('40px');
-            //setPaymentHeight('350px')
-            //setOpenPaypalSection(false)
             setOpenState((prev_state)=>({
                 ...prev_state,
                 paypal:{isOpen:false}
@@ -309,13 +309,11 @@ const CheckoutPage = (props) => {
             setHeightState((prev_state) =>({
                 ...prev_state,
                 paypal_section: {height: '40px'},
-             //   payment: {height:'350px'},
                 
             }));
             
         }
         if(openState.after_pay.isOpen){
-            //setAfterPaySectionHeight("40px")
             setHeightState((prev_state) =>({
                 ...prev_state,
                 payment: {height:'350px'},
@@ -328,9 +326,6 @@ const CheckoutPage = (props) => {
             }));
     
         }else{
-            //setAfterPaySectionHeight("100px")
-            //setPaymentHeight('450px')
-            //setOpenAfterpaySection(true)
             setOpenState((prev_state)=>({
                 ...prev_state,
                 after_pay:{isOpen:true}
@@ -345,14 +340,6 @@ const CheckoutPage = (props) => {
         
     }
     const onNextClickToPayment = (e) =>{
-
-        //setNextDelivery('none');
-
-        //setPaymentIconsHeight('0px');
-        
-        //setPaymentHeight("800px")
-        //setPaymentSectionHeight('440px');
-       
         setHeightState((prev_state) =>({
             ...prev_state,
             payment: {height: '350px'},
@@ -371,8 +358,59 @@ const CheckoutPage = (props) => {
             promo_code: {height: '120px'}
         }));
     }
+
+    /*** Email Input Event */
+
+    const emailOnChange = (e) =>{
+        let ret = emailValidation(e.target.value)
+        console.log("EEE")
+        console.log(ret)
+        if(ret ===null){
+           // setHeightState((prev_state) =>({
+            //    ...prev_state,
+           //     address: {height: '1150px'},
+            //    delivery_address: {height: '1000px'}
+            //}));
+           // setInputState2((prev_state)=>({
+           //     ...prev_state,
+            //    email:{value:e.targ.value}
+           // }));
+          
+        }else{
+            setInputState2((prev_state)=>({
+                ...prev_state,
+                email:{...prev_state,has_error:true,touched:true}
+            }));
+        }
+    }
+    const emailOnBlur = (e) =>{
+        //const value = e.target.value
+        if(inputState2.email.has_error){
+            setInputState2((prev_state)=>({
+                ...prev_state,
+                email:{bg_img:BGImage.RED}
+            }));
+        }else{}
+          setHeightState((prev_state) =>({
+            ...prev_state,
+            address: {height: '1150px'},
+            delivery_address: {height: '1000px'}
+       }));
+    }
+    const emailOnClick =(e)=>{
+        const value = e.target.value
+        emailInputRef.current.focus();
+       
+        /*
+        setInputState2((prev_state) =>({
+            ...prev_state,
+            email: {...prev_state.email,bg_img: BGImage.RED,border_bottom: BorderBottom.RED}
+        }));
+        console.log(inputState2)
+        */
+    }
     
-    /*** Promo Code Event ***/
+    /*** Promo Code Input Event ***/
     const promoCodeOnBlur = (e) =>{
        let img = e.target.value==''?'./assets/images/black_cross.png':'';
         setInputState2((prev_state) =>({
@@ -393,14 +431,22 @@ const CheckoutPage = (props) => {
 
     }
     const promoCodeOnChange = (e) =>{
-        //setHeight({...height,promoCodeMessage:'0px',promoCodeHeight:'185px'});
-        //setPromocodeHeight('185px')
-        //setInputState1({promo_code:e.target.value})
         setInputState2((prev_state) =>({
             ...prev_state,
             promo_code: {...prev_state.promo_code,value: e.target.value}
         }));
     }
+    /** Place Order */
+    const onClickPlaceOrder = ()=>{
+
+    }
+    const onClickRedirecToPaypal = ()=>{
+
+    }
+    const onClickApplyPromoCode = () =>{
+
+    }
+    
     return (
         <Container>
             <Center>
@@ -416,12 +462,15 @@ const CheckoutPage = (props) => {
                   <Contact>
                   <div>CONTACT</div>
                   <Wrapper1>
-                    <Input width={'260px'}  onChange={handleChange} id="email" defaultValue={emailState.value} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon} onFocus={handleOnFocus}/>
+                   
+                    <Input ref={emailInputRef} border_bottom={inputState2.email.border_bottom} img_position={inputState2.email.bg_img_pos} width={inputState2.email.width} autoComplete={'email'} onClick={(e) =>emailOnClick(e)} onChange={emailOnChange} id="email1" defaultValue={inputState2.promo_code.value} onBlur={(e)=>emailOnBlur(e)} placeholder="" background={inputState2.email.bg_img}/>
                     <Label>Email</Label>
                     </Wrapper1>
-                    <div className={styles.err_msg}>
-                       {emailState.error !== null?emailState.error:''}
-                    </div>
+                    {inputState2.email.touched && inputState2.email.has_error && 
+                        <ErrorMessage height={heightState.error_message.height}>
+                        *Invalid email address
+                        </ErrorMessage>
+                    }
                   </Contact>
                   <Address height={heightState.address.height}>
                     <div>ADDRESS</div>
@@ -510,7 +559,7 @@ const CheckoutPage = (props) => {
                  
                   <Delivery height={heightState.delivery.height}>
                     <div>DELIVERY OPTIONS</div>
-                    <DeliverySection height={heightState.delivery_section.height} color={borderColor}>
+                    <DeliverySection height={heightState.delivery_section.height}>
                         <DeliveryDetails>
                         <div className={styles.delivery_details}>
                         <div>Shipping</div>
@@ -576,14 +625,14 @@ const CheckoutPage = (props) => {
                          <br/>
                         {(openState.credit_card.isOpen || openState.after_pay.isOpen ) &&
                          <Button height={'50px'}>
-                        <a className={styles.a_button} onClick={onNextClickToPayment}>
+                        <a className={styles.a_button} onClick={onClickPlaceOrder}>
                         <span className={styles.button_name}>Place Order</span><span className={styles.arrows}><RightArrow/></span>
                         </a>
                         </Button>
                         }
                         {openState.paypal.isOpen &&
                         <Button height={'50px'}>
-                        <a className={styles.a_button} onClick={onNextClickToPayment}>
+                        <a className={styles.a_button} onClick={onClickRedirecToPaypal}>
                         <span className={styles.white_paypal}><White_Paypal/></span>
                         </a>
                         </Button>}
@@ -630,7 +679,7 @@ const CheckoutPage = (props) => {
                                 <Label>Promo Code</Label>
                             </Wrapper1>
                             <Button height={'50px'}>
-                                <a className={styles.c_button} onClick={onNext}>
+                                <a className={styles.c_button} onClick={onClickApplyPromoCode}>
                                 <span className={styles.button_name}>APPLY</span>
                                 <span className={styles.arrows}><RightArrow/></span>
                                 </a>

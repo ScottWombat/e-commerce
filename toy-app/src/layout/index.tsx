@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,Suspense} from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from "styled-components";
 import { SearchBox } from 'src/component/search';
@@ -47,17 +47,19 @@ export const SearchSection = styled.div<SearchSectionProps>`
 export const NavSection = styled.div<NavProps>`
   width:100%;
   display: grid;
-  padding:0px;
-  grid-template-columns: 30% 58% auto;
+  padding:0;
+  grid-template-columns: 10% 70% auto;
   top:0;
   z-index:0;
-  background-color:red;
   position::absolute;
+  height:100px;
+  justify-content: center;
+  align-items: center;  
+    
 `;
 export const MainSection = styled.div`
   width:100%;
   height:100%;
-  background-color:#d3d3d3;
 `;
 
 export const FooterSection = styled.div`
@@ -66,11 +68,8 @@ export const FooterSection = styled.div`
 `;
 
 export const LogoSection = styled.div`
-    
     font-size:20px;
-    display: flex;
-    margin:40px;
-    
+    height:25px;
 `;
 export const MenuSection = styled.div`
     width:100%;
@@ -104,8 +103,11 @@ export const AppLayout = () => {
         { isTablet && <Mobile onClose={searchOnClick} margin='15px' svgWidth='2em' svgHeight='2em'/>}
         { isMobile && <Mobile onClose={searchOnClick} margin='15px' svgWidth='2em' svgHeight='2em'/>}
         { isDesktop && <Desktop onClose={searchOnClick} margin='50px' svgWidth='2.5em' svgHeight='2.5em'/>}
+        { isLarge && <Desktop onClose={searchOnClick} margin='50px' svgWidth='2.5em' svgHeight='2.5em' />}
         <MainSection>
+          <Suspense fallback={<>loading...</>}>
           <Outlet/>
+          </Suspense>
         </MainSection>
         <FooterSection>Footer</FooterSection>
     </Section>

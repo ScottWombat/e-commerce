@@ -1,0 +1,179 @@
+.container{
+    font-size: 20px;
+}
+
+.table {
+    display: table;
+    margin: 1em auto;
+    width:100%;
+  }
+  .header1 {
+    border-bottom: 1px solid;
+    width:5%;
+    text-align: center;
+  }
+  
+  .header2 {
+    border-bottom: 1px solid;
+    width:50%;
+  }
+  .header3 {
+    border-bottom: 1px solid;
+    width:10%;
+    text-align: center;
+  }
+
+  .header3 {
+    border-bottom: 1px solid;
+    width:10%;
+    text-align: center;
+  }
+  .header4 {
+    border-bottom: 1px solid;
+    width:10%;
+    text-align: center;
+  }
+  .header5 {
+    border-bottom: 1px solid;
+    width:10%;
+    text-align: center;
+  }
+  .header6 {
+    border-bottom: 1px solid;
+    width:10%;
+    text-align: center;
+  }
+
+  .cell1 {
+    text-align: center;
+  }
+
+  .cell2 {
+    vertical-align: middle;
+  }
+
+  .cell3 {
+    text-align: center;
+    vertical-align: middle;
+  }
+  .cell4 {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  .bottom1 {
+    border-top: 1px solid;
+    text-align: center;
+  }
+  
+
+
+  .table_row_header {
+    display: table-row;
+    line-height:25px; 
+    font-weight: 600;
+    font-size:1.2em;
+  }
+
+  .table_row_bottom {
+    display: table-row;
+    line-height:1px; 
+  }
+  
+  .table_row {
+    display: table-row;
+    line-height:50px; 
+  }
+  
+  .table_cell {
+    display: table-cell;
+    padding: 7px;
+  }
+
+  .input_number{
+    width:50px;
+    height:30px;
+    padding:5px;
+    text-align: center;
+    font-size:20px;
+  }
+
+  /*   Cart Totals */
+  .cart_totals_table {
+    display: table;
+    margin: 1em auto;
+    width:50%;
+    float: left;
+    
+  }
+  .cart_totols_table_row {
+    display: table-row;
+    line-height:25px; 
+  }
+  .name{
+    float:left;
+    width:50%;
+    font-weight: bold;
+    font-size:20px;
+  }
+  .value{
+    float:left;
+    display:flex;
+  }
+
+.shipping_section{
+    padding:0;
+}
+.shipping_rate{
+    padding-top:0px;
+    top:50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.shipping{
+    top:50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.address_label{
+    display:relative;
+    margin:0;
+    padding:0;
+}
+.address_button{
+    display:fixed;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    width: 500px;
+    padding:0;
+  }
+.address_button:hover {
+    opacity: 0.7;
+    margin:0px;
+    padding:0px;
+}
+.content {
+  display:absolute;
+  margin:0;
+  background: #ffffcc;
+  width: 500px;
+  overflow: hidden;
+  max-height: 0;
+  transition: all 0.3s ease-in-out;
+  font-size: 18pt;
+  overflow: hidden;
+  box-sizing: border-box;
+  float:left;
+}
+
+.state:checked ~ .content {  
+    max-height: 150px;
+  }
+  .inner {
+    margin: 16px;
+  }
+
+
+  
+ 

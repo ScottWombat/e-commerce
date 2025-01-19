@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import styles from './search.module.css'
+import { ShoppingBagIcon } from "../svg/bag";
+import { Search1Icon } from "../svg/search1";
 const Container = styled.div`
     width:100%;
     display:grid;
@@ -43,7 +45,8 @@ export const SearchBox = ({ onClose }: any) => {
                         value={inputValue}
                         onChange={(e) => setInputValue(e.target.value)}/>
                     <button type="submit" className={styles.searchButton} onClick={submit}>
-                        <i className="fa fa-search"></i>
+                        
+                        <Search1Icon width={'40px'} height={'40px'}/>
                     </button>
                     
                 </div>

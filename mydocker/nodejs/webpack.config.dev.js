@@ -10,7 +10,8 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js'],
+    modules: ['src', 'node_modules']
   },
   devtool: 'eval',
   module: {
@@ -24,18 +25,32 @@ module.exports = {
         test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: "static/images/[name].[hash:8].[ext]",
+            },
+          },
+        ],
+      },
     ]
   },
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: path.resolve(__dirname,'../src/app/assets/images'), to: 'assets/images' },
-        { from: path.resolve(__dirname,'../src/app/assets/css'), to: 'assets/css' }
+        { from: path.resolve(__dirname,'./public/images'), to: 'assets/images' },
+        { from: path.resolve(__dirname,'./public/fonts'), to: 'assets/fonts' },
+        { from: path.resolve(__dirname,'./public/css'), to: 'assets/css' }
       ]
     }),
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: './public/index.html'
+      template: './public/index.html',
+      title: 'App:Development',
+      favicon: './public/favicon.ico',
     })
   ],
   devServer: {
@@ -47,6 +62,9 @@ module.exports = {
     devMiddleware: {
       index: 'index.html',
       writeToDisk: true
+    },
+    client: {
+      overlay: false, // <- add this
     }
   },
 };

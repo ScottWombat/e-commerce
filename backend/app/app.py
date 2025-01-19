@@ -1,5 +1,6 @@
 import os, sys
 import logging
+from contextlib import asynccontextmanager
 #from logging.config import dictConfig
 from typing import Optional, List
 from fastapi import Depends,FastAPI, Body, status, Request
@@ -33,11 +34,14 @@ from app.routers.addresses import router as addresses_router
 from app.routers.mongo import router as healthcheck_router
 from app.routers.file_upload import router as file_router
 from app.routers.category import router as category_router
-
+from app.routers.countries import router as countries_router
+from app.routers.mycollection import router as mycollection_router
+from app.routers.json import router as json_router
 from app.common.http_errors import BadRequest, UnprocessableError
 
-from app.db.db import connect_and_init_db, close_db_connect
-from app.db.mongodb_utils import connect_to_mongo, close_mongo_connection
+from app.repository.country_repository import count_countries
+from app.db.db import get_db,connect_and_init_db, close_db_connect
+#from app.db.db import connect_to_mongo, close_mongo_connection
 from app.dependencies.header_token import get_query_token, get_token_header
 #from app.db.mongodb import AsyncIOMotorClient, get_database
 
@@ -55,6 +59,8 @@ from app.model.price import Price
 from app.model.extra import Extra
 
 from fastapi.encoders import jsonable_encoder
+
+
 #MONGO_URL = "mongodb://root:example@172.18.0.2:27017?uuidRepresentation=standard"
 #MONGO_DB_NAME = "mydatabase"
 #MONGO_CLIENT: AsyncIOMotorClient = None
@@ -62,7 +68,15 @@ from fastapi.encoders import jsonable_encoder
 #dictConfig(log_config)
 setup_logging()
 
-app = FastAPI()
+@asynccontextmanager
+async def app_lifespan(app: FastAPI):
+    print("init lifespan")
+    await connect_and_init_db()
+    yield
+    await close_db_connect()
+    print("clean up lifespan")
+
+app = FastAPI(lifespan=app_lifespan)
 
 # openapi schema
 def custom_openapi():
@@ -89,7 +103,7 @@ app.add_middleware(
 )
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:3000","http://localhost:8082"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -106,11 +120,8 @@ app.add_middleware(GZipMiddleware, minimum_size=1000)
 app.add_middleware(SignatureMiddleware)
 app.add_middleware(TimingMiddleware)
 
-#app.add_event_handler("startup", connect_to_mongo)
-#app.add_event_handler("shutdown", close_mongo_connection)
-
-app.add_event_handler("startup", connect_and_init_db)
-app.add_event_handler("shutdown", close_db_connect)
+#app.add_event_handler("startup", connect_and_init_db)
+#app.add_event_handler("shutdown", close_db_connect)
 
 #app.include_router(items_router)
 app.include_router(users_router)
@@ -119,6 +130,9 @@ app.include_router(addresses_router)
 app.include_router(healthcheck_router)
 app.include_router(file_router)
 app.include_router(category_router)
+app.include_router(countries_router)
+app.include_router(json_router)
+app.include_router(mycollection_router)
 #for router in map(routers.__dict__.get, routers.__all__):
 #   app.include_router(router)
 #app.include_router(router)

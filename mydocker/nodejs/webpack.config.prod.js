@@ -23,7 +23,8 @@ module.exports = {
     },
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js'],
+    modules: ['src', 'node_modules']
   },
   module: {
     rules: [
@@ -52,8 +53,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: path.resolve(__dirname,'./src/app/assets/images'), to: 'assets/images' },
-        { from: path.resolve(__dirname,'./src/app/assets/css'), to: 'assets/css' },
+        { from: path.resolve(__dirname,'./public/images'), to: 'assets/images' },
         { from: path.resolve(__dirname,'./public/fonts'), to: 'assets/fonts' },
         { from: path.resolve(__dirname,'./public/css'), to: 'assets/css' }
       ]
@@ -64,7 +64,8 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
-       minify: false,
+      minify: false,
+      favicon: './public/favicon.ico', 
     })
   ],
   

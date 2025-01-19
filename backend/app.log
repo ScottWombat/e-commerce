@@ -323,3 +323,49 @@ Traceback (most recent call last):
   File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/motor/core.py", line 855, in __call__
     raise TypeError(
 TypeError: MotorDatabase object is not callable. If you meant to call the 'command' method on a AsyncIOMotorClient object it is failing because no such method exists.
+[2024-10-12 20:56:42,945] [ERROR] db - Could not connect to mongo: 172.19.0.3:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 670a47bc5dae6114c7df9eec, topology_type: Unknown, servers: [<ServerDescription ('172.19.0.3', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('172.19.0.3:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+Traceback (most recent call last):
+  File "/home/revit/python-projects/ecommerce-app/backend/app/db/db.py", line 27, in connect_and_init_db
+    ping_response = await db_client[db_name].command("ping")
+  File "/usr/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/database.py", line 890, in command
+    with self.__client._conn_for_reads(read_preference, session) as (
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1346, in _conn_for_reads
+    server = self._select_server(read_preference, session)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1303, in _select_server
+    server = topology.select_server(server_selector)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/topology.py", line 302, in select_server
+    server = self._select_server(selector, server_selection_timeout, address)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/topology.py", line 286, in _select_server
+    servers = self.select_servers(selector, server_selection_timeout, address)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/topology.py", line 237, in select_servers
+    server_descriptions = self._select_servers_loop(selector, server_timeout, address)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/topology.py", line 259, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+pymongo.errors.ServerSelectionTimeoutError: 172.19.0.3:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 670a47bc5dae6114c7df9eec, topology_type: Unknown, servers: [<ServerDescription ('172.19.0.3', 27017) server_type: Unknown, rtt: None, error=AutoReconnect('172.19.0.3:27017: [Errno 111] Connection refused (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+[2024-11-11 19:47:02,088] [ERROR] db - Could not connect to mongo: 172.19.0.2:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 6731c468dd2691fb5a117baf, topology_type: Unknown, servers: [<ServerDescription ('172.19.0.2', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('172.19.0.2:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>
+Traceback (most recent call last):
+  File "/home/revit/python-projects/ecommerce-app/backend/app/db/db.py", line 27, in connect_and_init_db
+    ping_response = await db_client[db_name].command("ping")
+  File "/usr/lib/python3.9/concurrent/futures/thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/_csot.py", line 107, in csot_wrapper
+    return func(self, *args, **kwargs)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/database.py", line 890, in command
+    with self.__client._conn_for_reads(read_preference, session) as (
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1346, in _conn_for_reads
+    server = self._select_server(read_preference, session)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/mongo_client.py", line 1303, in _select_server
+    server = topology.select_server(server_selector)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/topology.py", line 302, in select_server
+    server = self._select_server(selector, server_selection_timeout, address)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/topology.py", line 286, in _select_server
+    servers = self.select_servers(selector, server_selection_timeout, address)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/topology.py", line 237, in select_servers
+    server_descriptions = self._select_servers_loop(selector, server_timeout, address)
+  File "/home/revit/python-projects/ecommerce-app/backend/venv/lib/python3.9/site-packages/pymongo/topology.py", line 259, in _select_servers_loop
+    raise ServerSelectionTimeoutError(
+pymongo.errors.ServerSelectionTimeoutError: 172.19.0.2:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms), Timeout: 30s, Topology Description: <TopologyDescription id: 6731c468dd2691fb5a117baf, topology_type: Unknown, servers: [<ServerDescription ('172.19.0.2', 27017) server_type: Unknown, rtt: None, error=NetworkTimeout('172.19.0.2:27017: timed out (configured timeouts: socketTimeoutMS: 20000.0ms, connectTimeoutMS: 20000.0ms)')>]>

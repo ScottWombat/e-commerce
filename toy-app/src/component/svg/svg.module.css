@@ -12,3 +12,16 @@
 	stroke: #111516;
 	stroke-width: 2px;
   }
+
+
+.svg_transform{
+	transform: scale(1);
+}
+
+.svg_test{
+	stroke: none; stroke-width: 0; stroke-dasharray: none; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;
+}
+
+.cls_1{
+	fill:none;stroke:#020202;stroke-linecap:round;stroke-miterlimit:10;stroke-width:22px;
+}

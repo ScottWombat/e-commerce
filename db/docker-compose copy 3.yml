@@ -1,0 +1,56 @@
+version: '3.7'
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - mongodb:/data/db
+      - ./init.d/init.js:/docker-entrypoint-initdb.d/init.js:ro
+    networks:
+      custom_net:
+        ipv4_address: 172.18.1.2
+  mongo-seed:
+    env_file:
+      - .env
+    build:
+      context: ./seed
+      dockerfile: Dockerfile
+      args:
+        - DATABASE_URI=$DATABASE_URI
+        - USERNAME=$MONGO_INITDB_ROOT_USERNAME
+        - PASSWORD=$MONGO_INITDB_ROOT_PASSWORD
+  mongo-express:
+    image: mongo-express
+    restart: unless-stopped
+    ports:
+      - 8081:8081
+    depends_on:
+      - mongo
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongo123
+      ME_CONFIG_MONGODB_URL: mongodb://admin:mongo123@mongo:27017/
+      ME_CONFIG_BASICAUTH: true
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: express123
+    networks:
+      custom_net:
+        ipv4_address: 172.18.1.3
+    volumes:
+      - mongodb_express:/docker_volumes/mongo_db_express
+volumes:
+  mongodb:
+    driver: local
+  mongodb_express:
+    driver: local
+
+networks:
+  custom_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.18.1.0/24
+          gateway: 172.18.1.1

@@ -1,8 +1,8 @@
 services:
   nodejs_app1:
     image: mynodejs
-    ports:
-      - 3001:3000
+    expose:
+      - 3000
     networks:
       custom_net:
         ipv4_address: 172.18.1.3
@@ -27,6 +27,13 @@ services:
     networks:
       custom_net:
         ipv4_address: 172.18.1.6
+  nodejs_api:
+    image: mynodeapi
+    expose:
+      - 3009
+    networks:
+      custom_net:
+        ipv4_address: 172.18.1.8
   ng_reverse_proxy: 
     image: mynginx
     restart: unless-stopped

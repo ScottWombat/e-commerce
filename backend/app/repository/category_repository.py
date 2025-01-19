@@ -1,4 +1,4 @@
-from app.db.mongodb import AsyncIOMotorClient
+from app.db.db import AsyncIOMotorClient
 
 async def bulk_update_object_id(catalogue_name:str,client: AsyncIOMotorClient) -> dict: # type: ignore
     catalogue_list = ["men","women","couple"]

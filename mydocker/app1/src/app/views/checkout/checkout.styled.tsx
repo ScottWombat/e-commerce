@@ -260,6 +260,18 @@ export const ProductDetails =  styled.div`
     display:inline-block;
     
 `;
+export const ErrorMessage = styled.div<DivProps>`
+    margin-top:20px;
+    transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    height: ${p => p.height};
+    overflow: hidden;
+    padding:5px;
+    color:#ff2626;
+    font-size:0.8em;
+    font-weight:none;
+    display:  ${p => p.height=='0px'?'none':'block'}
+`;
 
 
 

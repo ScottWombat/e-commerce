@@ -1,5 +1,5 @@
 from app.model.item import Item,ItemResponse
-from app.db.mongodb import AsyncIOMotorClient
+from app.db.db import AsyncIOMotorClient
 from bson.objectid import ObjectId
 
 async def pagination(client: AsyncIOMotorClient,page: int = 1, limit: int = 10) -> ItemResponse: # type: ignore

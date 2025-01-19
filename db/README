@@ -1,6 +1,18 @@
+
+Create volumes
+>docker volume create mongo-db
+>docker volume create mongodb-express
+
+docker stop
+>docker-compose down
+
+docker rebuild
+>docker-compose up --build
+
+
 Mongo-express ui default account
 username: admin
-password: pass
+password: mongo123
 
 Access mongodb shell
 
@@ -21,3 +33,10 @@ Import json to Mongo
 
 > mongoimport --username=myuser --password=mypassword --db=mydb --collection=catalogue --uri=mongodb://localhost:27017/ --jsonArray --file=/catalogues.json --type=json
 
+Connect to Redis
+
+> docker exec -it <id> redis-cli
+# 
+# AUTH default rev123
+# keys *
+# get '/@2dd26a89bd9cc48c9ed6059599039df1cdff4fd2'
