@@ -3,10 +3,10 @@ export const fieldValidation = (fieldName, fieldValue) => {
       return `${fieldName} is required`;
     }
     if (/[^a-zA-Z -]/.test(fieldValue)) {
-      return "Invalid characters";
+      return "*Invalid characters";
     }
     if (fieldValue.trim().length < 3) {
-      return `${fieldName} needs to be at least three characters`;
+      return `*${fieldName} needs to be at least three characters`;
     }
     return null;
   };
@@ -16,8 +16,30 @@ export const fieldValidation = (fieldName, fieldValue) => {
       return null;
     }
     if (email.trim() === "") {
-      return "Email is required";
+      return "*Email is required";
     }
-    return "Please enter a valid email";
+    return "*Please enter a valid email";
+  };
+
+  export const numberValidation = (fieldName, fieldValue) => {
+    if (fieldValue.trim() === "") {
+      return `${fieldName} is required`;
+    }
+    if (/^\d+$/.test(fieldValue)) {
+      return null;
+    }
+    
+    return "*Please enter numberic value";;
+  };
+
+  export const mobileValidation = (fieldName, fieldValue) => {
+    if (fieldValue.trim() === "") {
+      return `${fieldName} is required`;
+    }
+    if (/^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/.test(fieldValue)) {
+      return null;
+    }
+    
+    return "*Please enter Mobile value";;
   };
   

@@ -20,21 +20,23 @@ export const Wrapper1 = styled.div`
 `;
 
 export const Input = styled.input<InputProps>`
-font-size: 16px;
-padding: 10px 10px 10px 15px;
-display: block;
-width: ${p => p.width};
-margin-top:15px;
-border: 1px solid #ccc;
-border-bottom: ${p => p.border_bottom};
-background: url(${p => p.background});
-background-size:15px;
-background-repeat: no-repeat;
-background-position: ${p => p.img_position};
-&:focus {
-  outline: none;
-  box-shadow: 0px 0px 2px #ccc;
-}
+  id:${p => p.id};
+  name:${p => p.name};
+  font-size: 16px;
+  padding: 10px 10px 10px 15px;
+  display: block;
+  width: ${p => p.width};
+  margin-top:15px;
+  border: 1px solid #ccc;
+  border-bottom: ${p => p.border_bottom};
+  background: url(${p => p.background});
+  background-size:15px;
+  background-repeat: no-repeat;
+  background-position: ${p => p.img_position};
+  &:focus {
+    outline: none;
+    box-shadow: 0px 0px 2px #ccc;
+  }
 `;
 
 export const Label = styled.label`

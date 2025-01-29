@@ -336,7 +336,9 @@
 /*!*******************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/views/checkout/index.module.css ***!
   \*******************************************************************************************/
-
+input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
 .b5gDFO4deu10ZN81iqDg{
     background-color: red;
     width:80%;
@@ -511,10 +513,38 @@
   display: flex;
   align-items: baseline; 
 }
-.hph6U1G_m4CJZJljp27A {
-  flex: none;
-  margin-right: 10px;
+input[type=checkbox]:checked:before {
+
+	color: black !important;
 }
+.hph6U1G_m4CJZJljp27A{
+  -moz-appearance:none;
+	-webkit-appearance:none;
+	-o-appearance:none;
+	outline: none;
+	content: none;	
+  
+  
+}
+.hph6U1G_m4CJZJljp27A::before {
+	  
+    content: "\2714";
+    font-size: 24px;
+    color: transparent !important;
+    background: #ffffff;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    margin-right: 5px;
+    margin-top:10px;
+    line-height: 28px;
+    text-align: center;
+  align-items: center;
+  align-content: top;
+}
+
+
 .oPPAt77eWN_6J4Qp_AT2{
   height:20px;
   vertical-align: middle;
@@ -636,8 +666,30 @@
   margin-top:25px;
   margin-left:5px
 }
-  
 
+
+/* check box */
+label > input[type="checkbox"] {
+  display: none;
+}
+
+label > input[type="checkbox"] + span::before {
+    content: " ";
+    width: 20pt;
+    height: 20pt;
+    border-radius: 10%;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: gray;
+    line-height: 28px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+} 
+
+label > input[type="checkbox"]:checked + span::before {
+ content: '\2714';
+}
   
 /*!***************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/credit_card/index.module.css ***!

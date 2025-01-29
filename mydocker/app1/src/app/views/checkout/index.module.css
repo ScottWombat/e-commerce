@@ -1,4 +1,6 @@
-
+input::-webkit-calendar-picker-indicator {
+  opacity: 0;
+}
 .wrapper{
     background-color: red;
     width:80%;
@@ -173,10 +175,38 @@
   display: flex;
   align-items: baseline; 
 }
-.checkbox_input {
-  flex: none;
-  margin-right: 10px;
+input[type=checkbox]:checked:before {
+
+	color: black !important;
 }
+.checkbox_input{
+  -moz-appearance:none;
+	-webkit-appearance:none;
+	-o-appearance:none;
+	outline: none;
+	content: none;	
+  
+  
+}
+.checkbox_input::before {
+	  
+    content: "\2714";
+    font-size: 24px;
+    color: transparent !important;
+    background: #ffffff;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+    margin-right: 5px;
+    margin-top:10px;
+    line-height: 28px;
+    text-align: center;
+  align-items: center;
+  align-content: top;
+}
+
+
 .payment_header{
   height:20px;
   vertical-align: middle;
@@ -298,6 +328,28 @@
   margin-top:25px;
   margin-left:5px
 }
-  
 
+
+/* check box */
+label > input[type="checkbox"] {
+  display: none;
+}
+
+label > input[type="checkbox"] + span::before {
+    content: " ";
+    width: 20pt;
+    height: 20pt;
+    border-radius: 10%;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: gray;
+    line-height: 28px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+} 
+
+label > input[type="checkbox"]:checked + span::before {
+ content: '\2714';
+}
   

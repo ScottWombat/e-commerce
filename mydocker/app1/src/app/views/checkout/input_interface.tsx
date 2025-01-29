@@ -1,3 +1,22 @@
+import random_string from 'app/utils/random_string';
+
+const RD_STR = random_string()
+const EMAIL_ID= "email"+ RD_STR;
+const FNAME_ID = "firstname" + RD_STR;
+const LNAME_ID = "lastname" + RD_STR;
+const COMPANY_ID = "company" + RD_STR;
+const UNIT_ID = "unit"+RD_STR;
+const STREETNO_ID = "streetno"+RD_STR;
+const STREETNAME_ID = "streetname"+RD_STR;
+const SUBURB_ID = "suburb"+RD_STR;
+const STATE_ID = "state"+RD_STR;
+const POSTCODE_ID = 'postal'+ RD_STR;
+const COUNTRY_ID = 'country'+RD_STR;
+const MOBILE_ID ='mobile'+RD_STR;
+const BILLING_ID = 'billing'+ RD_STR;
+const CONSENT_ID ='consent'+RD_STR;
+const NOTIFY_ID ='notify'+RD_STR;
+const AGREE_ID ='agree'+RD_STR;
 /** Input state */
 export enum BGImage {
     EMPTY="./assets/images/empty.png",
@@ -9,8 +28,10 @@ export enum BorderBottom{
     GREEN="1px solid #7CFC00",
     RED="1px solid #FF0000"
 }
+
 interface Values{
     id?:string,
+    name?:string,
     value?:string,
     height?:string,
     width?:string,
@@ -19,23 +40,210 @@ interface Values{
     bg_img?:BGImage,
     border_bottom?:BorderBottom,
     has_error?:boolean,
-    touched?:boolean
+    show_err_message?:boolean,
+    err_message?:string,
+    show_message?:boolean,
+    input_message?:string,
+    checked?:boolean
+}
+interface CreditCardValues{
+    name:string,
+    number:string,
+    valid:string,
+    security_code:number;
+
+}
+export interface CreditCardState{
+    creditcard: CreditCardValues
 }
 
 export interface State {
     email: Values,
+    firstname: Values,
+    lastname: Values,
+    company: Values,
+    unitno: Values,
+    streetno: Values,
+    streetname: Values,
+    suburb: Values,
+    state: Values,
+    postcode: Values,
+    country: Values,
+    mobile: Values,
+    billing: Values,
+    consent: Values,
+    notify: Values,
+    agree: Values,
     promo_code: Values
 }
 
 const EMAIL_VALUE:Values ={
-    id:'email',
+    id:EMAIL_ID,
+    name:"email",
     value:'',
     bg_img_pos:'230px 10px',
     width:'260px',
     bg_img: BGImage.EMPTY,
     border_bottom: BorderBottom.GREY,
     has_error:false,
-    touched:false
+    show_err_message:false,
+    err_message:''
+}
+const FIRSTNAME_VALUE:Values ={
+    id:FNAME_ID,
+    name:'firstname',
+    value:'',
+    bg_img_pos:'220px 10px',
+    width:'260px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:''
+}
+const LASTNAME_VALUE:Values ={
+    id:LNAME_ID,
+    name:'lastname',
+    value:'',
+    bg_img_pos:'220px 10px',
+    width:'260px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:''
+}
+const COMPANY_VALUE:Values ={
+    id:COMPANY_ID,
+    name:'company',
+    value:'',
+    bg_img_pos:'505px 10px',
+    width:'545px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:''
+}
+const UNITNO_VALUE:Values ={
+    id:UNIT_ID,
+    name:'unitno',
+    value:'',
+    bg_img_pos:'220px 10px',
+    width:'260px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:''
+}
+const STREETNO_VALUE:Values ={
+    id:STREETNO_ID,
+    name:'streetno',
+    value:'',
+    bg_img_pos:'220px 10px',
+    width:'260px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:''
+}
+const STREETNAME_VALUE:Values={
+    id:STREETNAME_ID,
+    name:'streetname',
+    value:'',
+    bg_img_pos:'505px 10px',
+    width:'545px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:'',
+    show_message:false,
+    input_message:'E.g George St'
+}
+const SUBURB_VALUE:Values ={
+    id: SUBURB_ID,
+    name:'suburb',
+    value:'',
+    bg_img_pos:'505px 10px',
+    width:'545px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:''
+}
+const STATE_VALUE:Values ={
+    id: STATE_ID,
+    name:'state',
+    value:'',
+    bg_img_pos:'220px 10px',
+    width:'260px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:''
+}
+const POSTCODE_VALUE:Values ={
+    id:POSTCODE_ID,
+    name:'postcode',
+    value:'',
+    bg_img_pos:'220px 10px',
+    width:'260px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:''
+}
+const COUNTRY_VALUE:Values ={
+    id:COUNTRY_ID,
+    name:'country',
+    value:'',
+    bg_img_pos:'220px 10px',
+    width:'260px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:''
+}
+const MOBILE_VALUE:Values ={
+    id:MOBILE_ID,
+    name:'mobile',
+    value:'',
+    bg_img_pos:'220px 10px',
+    width:'260px',
+    bg_img: BGImage.EMPTY,
+    border_bottom: BorderBottom.GREY,
+    has_error:false,
+    show_err_message:false,
+    err_message:'',
+    show_message:false,
+    input_message:'E.g 0403872130 or 040-387-2130'
+}
+const BILLING_VALUE:Values ={
+    id:BILLING_ID,
+    name:'billing',
+    checked:false
+}
+const CONSENT_VALUE:Values ={
+    id:CONSENT_ID,
+    name:'consent',
+    checked:false
+}
+const NOTIFY_VALUE:Values ={
+    id:NOTIFY_ID,
+    name:'notify',
+    checked:false
+}
+const AGREE_VALUE:Values ={
+    id:AGREE_ID,
+    name:'agree',
+    checked:false
 }
 
 const PROMO_CODE_VALUE:Values ={
@@ -45,13 +253,40 @@ const PROMO_CODE_VALUE:Values ={
     width:'415px',
     bg_image:'./assets/images/black_cross.png',
     has_error:false,
-    touched:false
+    show_err_message:false
+}
+
+const CREDITCARD_VALUE:CreditCardValues ={
+    name:'',
+    number:'',
+    valid:'',
+    security_code:0
 }
 
 export const InitialiseInputState: State ={
     email:EMAIL_VALUE,
+    firstname: FIRSTNAME_VALUE,
+    lastname: LASTNAME_VALUE,
+    company: COMPANY_VALUE,
+    unitno: UNITNO_VALUE,
+    streetno: STREETNO_VALUE,
+    streetname: STREETNAME_VALUE,
+    suburb: SUBURB_VALUE,
+    state: STATE_VALUE,
+    postcode: POSTCODE_VALUE,
+    country: COUNTRY_VALUE,
+    mobile: MOBILE_VALUE,
+    billing: BILLING_VALUE,
+    consent: CONSENT_VALUE,
+    notify: NOTIFY_VALUE,
+    agree:AGREE_VALUE,
     promo_code:PROMO_CODE_VALUE
 }
+
+export const InitialiseCreditcardState:CreditCardState={
+    creditcard:CREDITCARD_VALUE
+}
+
 
 
 
@@ -96,6 +331,7 @@ export interface HeightState{
     delivery_button_wrapper: HeightValue;
     next_button: HeightValue;
     error_message: HeightValue;
+    input_message: HeightValue;
 }
 
 export const InitialiseHeightState: HeightState ={
@@ -115,7 +351,8 @@ export const InitialiseHeightState: HeightState ={
     address_button_wrapper: {height:'50px'},
     delivery_button_wrapper:{height:'50px'},
     next_button:{height:'50px'},
-    error_message: {height:'30px'}
+    error_message: {height:'30px'},
+    input_message: {height:'30px'}
 
 }
 

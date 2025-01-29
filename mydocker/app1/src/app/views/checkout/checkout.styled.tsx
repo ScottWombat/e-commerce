@@ -5,6 +5,7 @@ interface DivProps {
     height?: string;
     color?:string;
     isOpen?:boolean;
+    margin_top?:string;
 }
 
 export const Container = styled.div`
@@ -129,9 +130,8 @@ export const Payment = styled.div<DivProps>`
     height:${p => p.height};
     overflow: hidden;
     border-bottom:1px solid #ccc;
-  
-
 `;
+
 export const PaymentIcons = styled.div<DivProps>`
     display:${p=>p.show};
     margin-top:40px;
@@ -140,10 +140,8 @@ export const PaymentIcons = styled.div<DivProps>`
     -webkit-transition: height 1s ease;
     height:${p => p.height};
     overflow: hidden;
-  
-   
-
 `;
+
 export const PaymentSection = styled.div<DivProps>`
     height:${p => p.height};
     
@@ -261,7 +259,7 @@ export const ProductDetails =  styled.div`
     
 `;
 export const ErrorMessage = styled.div<DivProps>`
-    margin-top:20px;
+    margin-top:${p => p.margin_top};
     transition: height 1s ease;
     -webkit-transition: height 1s ease;
     height: ${p => p.height};
@@ -272,6 +270,21 @@ export const ErrorMessage = styled.div<DivProps>`
     font-weight:none;
     display:  ${p => p.height=='0px'?'none':'block'}
 `;
+
+export const InputMessage = styled.div<DivProps>`
+    margin-top:${p => p.margin_top};
+    transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    height: ${p => p.height};
+    overflow: hidden;
+    padding:5px;
+    color:#ccc;
+    font-size:0.8em;
+    font-weight:none;
+    display:  ${p => p.height=='0px'?'none':'block'}
+`;
+
+
 
 
 

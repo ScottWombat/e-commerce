@@ -3,21 +3,19 @@ import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import * as styles from './index.module.css';
 import { Container,Center,Header,Company,Bag,Title,Description,Content,ContentRight,ContentLeft,Contact,Delivery,Payment,DeliveryAddress, DeliverySection,DeliveryDetails,PaymentIcons,PaymentSection,PaymentDetails} from './checkout.styled';
 import { CreditCardSection,PaymentDetailsHeader,PaypalSection,AfterPaySection,PaypalContent,PromoCodeWrapper,Credit,PayPal,AfterPay } from './checkout.styled';
-import {Button,Address,ProductList,ProductRow,ProductDetails,PromoCodeMessage,ErrorMessage,InputMessage} from './checkout.styled';
+import {Button,Address,ProductList,ProductRow,ProductDetails,PromoCodeMessage,ErrorMessage} from './checkout.styled';
 import { Logo } from 'app/components/logo';
 import { ShoppingBagIcon } from 'app/layout/usermenu/bag';
 import { Wrapper1,Input,Label,ButtonWrapper,AddressButtonWrapper,DeliveryButtonWrapper} from './input.styled '
-import { fieldValidation,emailValidation,numberValidation,mobileValidation} from 'app/utils/form_validation';
+import { fieldValidation,emailValidation } from 'app/utils/form_validation';
 import InputBox from 'app/components/input';
 import RightArrow from 'app/svg/right_arrow';
 import { selectAllItems} from '../../store/cart/cartReducer'
 import {NoCard,CreditExpiryDate,PromoCode,White_Paypal,Color_Afterpay,Color_Paypal,Color_Master,Color_Visa,Color_Amex,MasterIcon,VisaIcon,AmexIcon,PaypalIcon,AfterpayIcon,SSL} from 'app/svg/payment_icons';
 import CreditCardCvc from 'app/components/credit_card_cvc';
 import CreditCardContent from 'app/components/credit_card';
-import {State,InitialiseInputState,CreditCardState,InitialiseHeightState,InitialiseCreditcardState,HeightState,OpenState,InitializeOpenState,BGImage, BorderBottom} from './input_interface';
-import { allCountries} from 'app/store/countries/countriesReducer';
+import {State,InitialiseInputState,InitialiseHeightState,HeightState,OpenState,InitializeOpenState,BGImage, BorderBottom} from './input_interface';
 const CheckoutPage = (props) => {
-    const countrylist = useAppSelector(allCountries)
     const emailInputRef = useRef(null);
     const firstnameInputRef = useRef(null);
     const lastnameInputRef = useRef(null);
@@ -30,8 +28,7 @@ const CheckoutPage = (props) => {
 
     const [next,setNext] = useState(false);
     
-    const [placeOrder,setPlaceOrder] = useState(false);
-    const [creditCard,setCreditCard] = useState<CreditCardState>(InitialiseCreditcardState);
+    const [placeOrder,setPlaceOrder] = useState(false)
     const [inputState2 ,setInputState2] =useState<State>(InitialiseInputState);
     const [heightState,setHeightState] = useState<HeightState>(InitialiseHeightState);
     const [openState,setOpenState] = useState<OpenState>(InitializeOpenState);
@@ -96,8 +93,8 @@ const CheckoutPage = (props) => {
             //setDeliveryAddressHeight('850px')
             setHeightState((prev_state) =>({
                 ...prev_state,
-                address: {height: '1350px'},
-                delivery_address: {height: '1200px'}
+                address: {height: '1150px'},
+                delivery_address: {height: '1000px'}
             }));
         }
     }
@@ -336,72 +333,52 @@ const CheckoutPage = (props) => {
         }
         
     }
-    const checkboxOnChange = (e) =>{
-        
-        setInputState2((prev_state)=>({
-            ...prev_state,
-            [e.target.name]:{...prev_state[e.target.name],checked:!inputState2[e.target.name].checked}
-        }));
-        console.log(inputState2)
-    }
 
     const inputOnChange = (e) =>{
         setInputState2((prev_state)=>({
             ...prev_state,
             [e.target.name]:{...prev_state[e.target.name],value:e.target.value}
         }));
-        console.log(inputState2)
     }
 
     const inputOnBlur = (e) =>{
         let ret = null;
         if(e.target.name==='email'){
             ret = emailValidation(inputState2[e.target.name].value);
-        }else if(e.target.name==='mobile'){
-            ret = mobileValidation(e.targetname,inputState2[e.target.name].value)
-        }else if (e.target.name==='country'){
-            //alert(e.target.value)
-            let exist = dataListValidation(e.target.value);
-
-            if(exist){
-                ret=null;
-            }else{
-                ret="Country is requied *"
-            }
         }else if (e.target.name==='company'){
             if(e.target.value===''){
                 ret=null;
-            //}else{
-            //    ret = fieldValidation(e.target.name,inputState2[e.target.name].value);
+            }else{
+                ret = fieldValidation(e.target.name,inputState2[e.target.name].value);
+                
             }
-        }else if (e.target.name==='streetno' || e.target.name==='postcode'){
-            ret = numberValidation(e.target.name,inputState2[e.target.name].value);
-        }else{
+        } else{
             ret = fieldValidation(e.target.name,inputState2[e.target.name].value);
+            
         }
         if(ret===null){
             let bgImage=null;
             let borderBottom=null;
-            if(e.target.name==='company' && e.target.value===''){
-                bgImage =BGImage.EMPTY;
-                borderBottom=BorderBottom.GREY;
-            }else{
+            //if(e.target.name==='company' && e.target.name===''){
+            //    bgImage =BGImage.EMPTY;
+            //    borderBottom=BorderBottom.GREY;
+            //}else{
                 bgImage =BGImage.GREEN;
                 borderBottom=BorderBottom.GREEN;
-            }
+           // }
             setInputState2((prev_state) =>({
                 ...prev_state,
-                [e.target.name]:{...prev_state[e.target.name],bg_img:bgImage,show_message:true,show_err_message:false,border_bottom:borderBottom}
+                [e.target.name]:{...prev_state[e.target.name],bg_img:BGImage.GREEN,show_err_message:false,border_bottom:BorderBottom.GREEN}
             }));
             setHeightState((prev_state) =>({
                     ...prev_state,
-                    address: {height: '1250px'},
-                    delivery_address: {height: '1120px'}
+                    address: {height: '1150px'},
+                    delivery_address: {height: '1000px'}
             }));
         }else{
             setInputState2((prev_state) =>({
                 ...prev_state,
-                [e.target.name]:{...prev_state[e.target.name],bg_img:BGImage.RED,show_message:false,show_err_message:true,border_bottom:BorderBottom.RED,err_message:ret}
+                [e.target.name]:{...prev_state[e.target.name],bg_img:BGImage.RED,show_err_message:true,border_bottom:BorderBottom.RED,err_message:ret}
             }));
         }
     }
@@ -446,7 +423,6 @@ const CheckoutPage = (props) => {
         const value = e.target.value
         emailInputRef.current.focus();
     }
- 
     const inputOnKeyDown = (e) => {
         let ret = null;
         if(e.target.name==='email'){
@@ -469,11 +445,11 @@ const CheckoutPage = (props) => {
                 let borderBottom=null;
                 if(e.target.name==='company'){
                     bgImage =BGImage.EMPTY;
-                    borderBottom=BorderBottom.GREY;
-                }else{
+                //    borderBottom=BorderBottom.GREY;
+                //}else{
                     bgImage =BGImage.GREEN;
                     borderBottom=BorderBottom.GREEN;
-                }
+                //}
                     setInputState2((prev_state) =>({
                     ...prev_state,
                     [e.target.name]:{...prev_state[e.target.name],bg_img:bgImage,show_err_message:false,border_bottom:borderBottom}
@@ -533,17 +509,13 @@ const CheckoutPage = (props) => {
     }
     /** Place Order */
     const onClickPlaceOrder = ()=>{
-        console.log(creditCard)
+
     }
     const onClickRedirecToPaypal = ()=>{
 
     }
     const onClickApplyPromoCode = () =>{
 
-    }
-    /* Datalist validation */
-    const dataListValidation = (value)=>{
-        return countrylist.includes(value)
     }
     
     return (
@@ -625,7 +597,7 @@ const CheckoutPage = (props) => {
                         onBlur={(e) =>inputOnBlur(e)} 
                         placeholder="" 
                         background={inputState2.lastname.bg_img}/>
-                       <Label>Last Name *</Label>
+                       <Label>First Name *</Label>
                        {inputState2.firstname.show_err_message && 
                         <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
                             {inputState2.lastname.err_message}
@@ -654,7 +626,7 @@ const CheckoutPage = (props) => {
                         <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
                             {inputState2.company.err_message}
                         </ErrorMessage>
-                    }
+                       }
                     </Wrapper1>
                     </div>
                     <div className={styles.input_wrapper}>
@@ -671,207 +643,55 @@ const CheckoutPage = (props) => {
                     <Label>Lvt, Apt or Unit No.</Label>
                     </Wrapper1>
                     <Wrapper1>
-                    <Input 
-                         id={inputState2.streetno.id}
-                         name={inputState2.streetno.name}
-                         border_bottom={inputState2.streetno.border_bottom} 
-                         img_position={inputState2.streetno.bg_img_pos}  
-                         width={inputState2.streetno.width} 
-                         autoComplete={inputState2.streetno.id} 
-                         onChange={(e) =>inputOnChange(e)} 
-                         onKeyDown={(e)=>inputOnKeyDown(e) } 
-                         defaultValue={inputState2.streetno.value} 
-                         onBlur={(e) =>inputOnBlur(e)} 
-                         placeholder="" 
-                         background={inputState2.streetno.bg_img}/>
-                        <Label>Street no *</Label>
-                        {inputState2.streetno.show_err_message && 
-                        <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
-                            {inputState2.streetno.err_message}
-                        </ErrorMessage>
-                         }
+                    <Input img_position={'220px 10px'} width={'260px'} autoComplete={'new_email2'} onChange={handleChange} onKeyDown={handleKeyDown1} id="email2" defaultValue={lastNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
+                    <Label>Street no *</Label>
                     </Wrapper1>
                     </div>
                     <div className={styles.input_wrapper}>
                     <Wrapper1>
-                    <Input 
-                        id={inputState2.streetname.id}
-                        name={inputState2.streetname.name}
-                        border_bottom={inputState2.streetname.border_bottom} 
-                        img_position={inputState2.streetname.bg_img_pos}  
-                        width={inputState2.streetname.width} 
-                        autoComplete={inputState2.streetname.id} 
-                        onChange={(e) =>inputOnChange(e)} 
-                        onKeyDown={(e)=>inputOnKeyDown(e) } 
-                        defaultValue={inputState2.streetname.value} 
-                        onBlur={(e) =>inputOnBlur(e)} 
-                        placeholder="" 
-                        background={inputState2.streetname.bg_img}/>
-                    <Label>Street Name *</Label>
-                    {inputState2.streetname.show_message && 
-                        <ErrorMessage height={heightState.input_message.height} margin_top={'10px'}>
-                            {inputState2.streetname.input_message}
-                        </ErrorMessage>
-                    }
-                    {inputState2.streetname.show_err_message && 
-                        <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
-                            {inputState2.streetname.err_message}
-                        </ErrorMessage>
-                    }
+                    <Input img_position={'505px 10px'} width={'545px'} autoComplete={'new_email2'} onChange={handleChange} onKeyDown={handleKeyDown1} id="email2" defaultValue={lastNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
+                    <Label>Address *</Label>
                     </Wrapper1>
                     </div>
                     <div className={styles.input_wrapper}>
                     <Wrapper1>
-                    <Input 
-                        id={inputState2.suburb.id}
-                        name={inputState2.suburb.name}
-                        border_bottom={inputState2.suburb.border_bottom}
-                        img_position={inputState2.suburb.bg_img_pos}  
-                        width={inputState2.suburb.width}  
-                        autoComplete={inputState2.suburb.id} 
-                        onChange={(e) =>inputOnChange(e)} 
-                        onKeyDown={(e)=>inputOnKeyDown(e)} 
-                        defaultValue={inputState2.suburb.value} 
-                        onBlur={(e) =>inputOnBlur(e)} 
-                        placeholder="" 
-                        background={inputState2.suburb.bg_img}/>
-                    <Label>Suburb *</Label>
-                    {inputState2.suburb.show_err_message && 
-                        <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
-                            {inputState2.suburb.err_message}
-                        </ErrorMessage>
-                    }
+                    <Input img_position={'505px 10px'} width={'545px'} autoComplete={'new_email2'} onChange={handleChange} onKeyDown={handleKeyDown1} id="email2" defaultValue={lastNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
+                    <Label>Company Name</Label>
                     </Wrapper1>
                     </div>
                     <div className={styles.input_wrapper}>
                     <Wrapper1>
-                    <Input 
-                         id={inputState2.state.id}
-                         name={inputState2.state.name}
-                         border_bottom={inputState2.state.border_bottom} 
-                         img_position={inputState2.state.bg_img_pos}  
-                         width={inputState2.state.width} 
-                         autoComplete={inputState2.state.id} 
-                         onChange={(e) =>inputOnChange(e)} 
-                         onKeyDown={(e)=>inputOnKeyDown(e) } 
-                         defaultValue={inputState2.state.value} 
-                         onBlur={(e) =>inputOnBlur(e)} 
-                         placeholder="" 
-                         background={inputState2.state.bg_img}/>
-                        <Label>State *</Label>
-                        {inputState2.state.show_err_message && 
-                        <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
-                            {inputState2.state.err_message}
-                        </ErrorMessage>
-                         }
+                    <Input img_position={'220px 10px'} width={'260px'} autoComplete={'new_email1'} onChange={handleChange} onKeyDown={handleKeyDown1} id="email1" defaultValue={firstNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
+                    <Label>First Name</Label>
                     </Wrapper1>
                     <Wrapper1>
-                    <Input 
-                         id={inputState2.postcode.id}
-                         name={inputState2.postcode.name}
-                         border_bottom={inputState2.postcode.border_bottom} 
-                         img_position={inputState2.postcode.bg_img_pos}  
-                         width={inputState2.postcode.width} 
-                         autoComplete={inputState2.postcode.id} 
-                         onChange={(e) =>inputOnChange(e)} 
-                         onKeyDown={(e)=>inputOnKeyDown(e) } 
-                         defaultValue={inputState2.postcode.value} 
-                         onBlur={(e) =>inputOnBlur(e)} 
-                         placeholder="" 
-                         background={inputState2.postcode.bg_img}/>
-                        <Label>Postal Code *</Label>
-                        {inputState2.postcode.show_err_message && 
-                        <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
-                            {inputState2.postcode.err_message}
-                        </ErrorMessage>
-                         }
+                    <Input img_position={'220px 10px'} width={'260px'} autoComplete={'new_email2'} onChange={handleChange} onKeyDown={handleKeyDown1} id="email2" defaultValue={lastNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
+                    <Label>Last Name</Label>
                     </Wrapper1>
                     </div>
                     <div className={styles.input_wrapper}>
                     <Wrapper1>
-                    <Input list="countrydata"
-                         id={inputState2.country.id}
-                         name={inputState2.country.name}
-                         border_bottom={inputState2.country.border_bottom} 
-                         img_position={inputState2.country.bg_img_pos}  
-                         width={inputState2.country.width} 
-                         autoComplete={inputState2.country.id} 
-                         onChange={(e) =>inputOnChange(e)} 
-                         onKeyDown={(e)=>inputOnKeyDown(e) } 
-                         onInput={(e) => inputOnBlur(e)}
-                         defaultValue={inputState2.country.value} 
-                         onBlur={(e) =>inputOnBlur(e)} 
-                         placeholder="" 
-                         background={inputState2.country.bg_img}/>
-                        <Label>Country *</Label>
-                        <datalist id="countrydata">
-                        {countrylist.map(item =>
-                            <option>{item}</option>
-                        )}
-                        </datalist>
-                        {inputState2.country.show_err_message && 
-                        <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
-                            {inputState2.country.err_message}
-                        </ErrorMessage>
-                         }
-                    </Wrapper1>
-                    </div>
-                    <div className={styles.input_wrapper}>
-                    <Wrapper1>
-                    <Input 
-                         id={inputState2.mobile.id}
-                         name={inputState2.mobile.name}
-                         border_bottom={inputState2.mobile.border_bottom} 
-                         img_position={inputState2.mobile.bg_img_pos}  
-                         width={inputState2.mobile.width} 
-                         autoComplete={inputState2.mobile.id} 
-                         onChange={(e) =>inputOnChange(e)} 
-                         onKeyDown={(e)=>inputOnKeyDown(e) } 
-                         defaultValue={inputState2.mobile.value} 
-                         onBlur={(e) =>inputOnBlur(e)} 
-                         placeholder="" 
-                         background={inputState2.mobile.bg_img}/>
-                        <Label>Mobile Phone *</Label>
-                        {inputState2.mobile.show_message && 
-                        <ErrorMessage height={heightState.input_message.height} margin_top={'10px'}>
-                            {inputState2.mobile.input_message}
-                        </ErrorMessage>
-                        }
-                        {inputState2.mobile.show_err_message && 
-                        <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
-                            {inputState2.mobile.err_message}
-                        </ErrorMessage>
-                         }
+                    <Input img_position={'220px 10px'} width={'260px'} autoComplete={'new_email1'} onChange={handleChange} onKeyDown={handleKeyDown1} id="email1" defaultValue={firstNameState.value} onBlur={handleOnBlur} placeholder="" img={process.env.PUBLIC_IMAGE_URL + emailState.icon}/>
+                    <Label>First Name</Label>
                     </Wrapper1>
                     </div>
                     <div>&nbsp;</div>
                     <div className={styles.checkbox_wrapper}>
-                    <label >
-                    <input onChange={(e) => checkboxOnChange(e)}id={inputState2.billing.id} name={inputState2.billing.name} className={styles.checkbox_input} type="checkbox" defaultChecked={inputState2.billing.checked}/>
-                    <span>&nbsp;&nbsp;My billing and delivery information are the same.</span>
-                    </label>
+                    <label className={styles.checkbox_label}><input className={styles.checkbox_input} type="checkbox" />My billing and delivery information are the same. </label>
                     </div>
                     <div className={styles.checkbox_wrapper}>
-                    <label>
-                        <input onChange={(e) => checkboxOnChange(e)}id={inputState2.consent.id} name={inputState2.consent.name} className={styles.checkbox_input} type="checkbox" defaultChecked={inputState2.consent.checked}/>
-                        <span>&nbsp;&nbsp;I'm 18+ years old. *</span>
-                    </label>
+                    <label className={styles.checkbox_label}><input className={styles.checkbox_input} type="checkbox" />I'm 18+ years old. *</label>
                     </div>
                     <div className={styles.checkbox_wrapper}>
                     Also want product updates with our newsletter?
                     </div>
                     <div className={styles.checkbox_wrapper}>
-                    <label>
-                        <input onChange={(e) => checkboxOnChange(e)}id={inputState2.notify.id} name={inputState2.notify.name} className={styles.checkbox_input} type="checkbox" defaultChecked={inputState2.notify.checked}/>
-                        <span>&nbsp;&nbsp;I agree to receive news, promotions, information regarding adidas’ brand, products, activities and events, and any other marketing communications and materials by e-mail, sms, in-app notification and/or telephone from Adidas Australia Pty Ltd. and runtastic GmbH pursuant to the adidas Privacy Policy.HOW?</span>
-                    </label>
+                    <label className={styles.checkbox_label}><input className={styles.checkbox_input} type="checkbox" />I agree to receive news, promotions, information regarding adidas’ brand, products, activities and events, and any other marketing communications and materials by e-mail, sms, in-app notification and/or telephone from Adidas Australia Pty Ltd. and runtastic GmbH pursuant to the adidas Privacy Policy.HOW?</label>
                     </div>
                     <div className={styles.checkbox_wrapper}>
-                    <label>
-                        <input onChange={(e) => checkboxOnChange(e)}id={inputState2.agree.id} name={inputState2.agree.name} className={styles.checkbox_input} type="checkbox" defaultChecked={inputState2.agree.checked}/>
-                        <span>&nbsp;&nbsp;I understand and agree that in certain circumstances, my personal information may be transferred to other entities in the adidas Group and service providers that are located in countries that do not have comparable privacy safeguards to Australia. </span>
-                    </label>
+                    <label className={styles.checkbox_label}><input className={styles.checkbox_input} type="checkbox" />I understand and agree that in certain circumstances, my personal information may be transferred to other entities in the adidas Group and service providers that are located in countries that do not have comparable privacy safeguards to Australia. </label>
                     </div>
+                  
                     </DeliveryAddress>
                     <AddressButtonWrapper height={heightState.address_button_wrapper.height} >
                         <Button height={heightState.next_button.height}>
@@ -920,7 +740,7 @@ const CheckoutPage = (props) => {
                             </span>
                             </a>
                             <div className={styles.credit_card_content}>
-                                <CreditCardContent setCreditCard={setCreditCard}/>
+                                <CreditCardContent/>
                             </div>
                         </CreditCardSection>
                         

@@ -23,7 +23,7 @@ export const RightWrapper = styled.div`
   width:100%;
 `;
 
-const CreditCardContent = () => {
+const CreditCardContent = (props) => {
     const [lightcolor,setLightcolor] = useState('grey');
     const [darkcolor,setDarkcolor] = useState("greydark");
     const [creditcode,setCreditcode] = useState('0');
@@ -32,14 +32,8 @@ const CreditCardContent = () => {
     const [expirydate,setExpirydate] = useState('00/00')
     const [cvc,setCvc] = useState('');
     const [flip,setFlip] = useState(false);
-    const [state, setState] = useState({
-        number: '',
-        expiry: '',
-        cvc: '',
-        name: '',
-    });
+   
     const doFlip = (value)=>{
-        console.log("flip")
         setFlip(value)
     }
     const handleChange =(e)=>{
@@ -47,14 +41,30 @@ const CreditCardContent = () => {
         switch (name){
             case 'card_name':
                 setCardname(e.target.value);
+                props.setCreditCard((prev_state)=>({
+                    ...prev_state,
+                    creditcard:{...prev_state.creditcard,name:e.target.value}
+                }));
                 break;
             case 'card_number':
                 setCardnumber(e.target.value);
+                props.setCreditCard((prev_state)=>({
+                    ...prev_state,
+                    creditcard:{...prev_state.creditcard,number:e.target.value}
+                }));
                 break;
             case 'expiry_date':
                 setExpirydate(e.target.value);
+                props.setCreditCard((prev_state)=>({
+                    ...prev_state,
+                    creditcard:{...prev_state.creditcard,valid:e.target.value}
+                }));
                 break;
             default:
+                props.setCreditCard((prev_state)=>({
+                    ...prev_state,
+                    creditcard:{...prev_state.creditcard,security_code:e.target.value}
+                }));
                 setCvc(e.target.value)
         }
         

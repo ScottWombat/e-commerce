@@ -2,10 +2,12 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import counterReducer from './counter';
 import cartReducer from './cart/cartReducer';
 import checkoutReducer from './checkout/checkoutReducer';
+import countriesReducer from './countries/countriesReducer';
 const rootReducer = combineReducers({
     counter: counterReducer,
     cart:cartReducer,
-    checkout:checkoutReducer
+    checkout:checkoutReducer,
+    country: countriesReducer
 })
 export const store = configureStore({
     reducer: rootReducer

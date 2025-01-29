@@ -107,9 +107,9 @@ export const CardNumberMask = forwardRef<HTMLInputElement, TextInputProps>(
        unmask={true}
        className={styles.txt}
        onAccept={(value,mask, ...args) => {
-        console.log('onAccept start');
-        console.log(mask, args);
-        console.log('onAccept end');
+        //console.log('onAccept start');
+        //console.log(mask, args);
+        //console.log('onAccept end');
         //o//nComplete(value)
        }}
        onComplete={(...ar)=> {
@@ -154,11 +154,11 @@ export const CVCMask = forwardRef<HTMLInputElement, TextInputProps>(
 
 const customMask = function (value) {
   var pattern = new RegExp(/^[A-Za-z ]+$/i);
-  console.log(value, pattern.test(value));
+  //console.log(value, pattern.test(value));
   return pattern.test(value);
 };
 export const CardNameMask = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ handleChange,doFlip, name, type,id }, ref) => {
+  ({ handleChange, name, type,id }, ref) => {
    //return <input  onChange={handleChange}  name={name}  type={type}  ref={ref}  />;
    return (<IMaskInput
       id={id}
@@ -169,12 +169,12 @@ export const CardNameMask = forwardRef<HTMLInputElement, TextInputProps>(
       unmask={true}
       className={styles.txt}
       onAccept={(value) => {
-        doFlip(true);
+        //doFlip(true);
       }}
       onComplete={(...ar)=> {
-        setTimeout(() => {
-          doFlip(false);
-        }, 3000);
+        //setTimeout(() => {
+        //  doFlip(false);
+        //}, 3000);
        }}
       //mask=String
       mask= {customMask}
