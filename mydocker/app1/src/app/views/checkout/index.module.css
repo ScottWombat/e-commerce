@@ -186,8 +186,8 @@ input[type=checkbox]:checked:before {
 	outline: none;
 	content: none;	
   
-  
 }
+
 .checkbox_input::before {
 	  
     content: "\2714";
@@ -202,8 +202,8 @@ input[type=checkbox]:checked:before {
     margin-top:10px;
     line-height: 28px;
     text-align: center;
-  align-items: center;
-  align-content: top;
+    align-items: center;
+    align-content: top;
 }
 
 
@@ -269,7 +269,15 @@ input[type=checkbox]:checked:before {
   padding:5px;
   border-bottom:1px solid #ccc;
   width:100%;
+  background-color: red;
+  overflow:auto;
+  height:auto;
+  height:auto;
+min-height:250px;
+height:auto !important;        /* for IE as it does not support min-height */
+height:250px;    
 }
+
 .payment_content{
   display:relative;
   padding:5px;
@@ -351,5 +359,16 @@ label > input[type="checkbox"] + span::before {
 
 label > input[type="checkbox"]:checked + span::before {
  content: '\2714';
+}
+ul.ulMessage{
+  margin-top:0px;
+  font-size:10px;
+}
+
+ul.ulMessage > li{
+  list-style:square !important;
+  margin-left: 2em;
+  color:red;
+  padding-bottom:0.5em;
 }
   

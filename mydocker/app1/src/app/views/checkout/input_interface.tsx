@@ -44,7 +44,8 @@ interface Values{
     err_message?:string,
     show_message?:boolean,
     input_message?:string,
-    checked?:boolean
+    checked?:boolean,
+    required?:boolean
 }
 interface CreditCardValues{
     name:string,
@@ -53,8 +54,20 @@ interface CreditCardValues{
     security_code:number;
 
 }
+interface CreditValues{
+    value:any,
+    message:string,
+    showMessage:boolean
+}
 export interface CreditCardState{
     creditcard: CreditCardValues
+}
+
+export interface CreditState{
+   name: CreditValues,
+   number: CreditValues,
+   expiry: CreditValues,
+   cvc: CreditValues
 }
 
 export interface State {
@@ -70,9 +83,7 @@ export interface State {
     postcode: Values,
     country: Values,
     mobile: Values,
-    billing: Values,
-    consent: Values,
-    notify: Values,
+    legalage: Values,
     agree: Values,
     promo_code: Values
 }
@@ -225,26 +236,7 @@ const MOBILE_VALUE:Values ={
     show_message:false,
     input_message:'E.g 0403872130 or 040-387-2130'
 }
-const BILLING_VALUE:Values ={
-    id:BILLING_ID,
-    name:'billing',
-    checked:false
-}
-const CONSENT_VALUE:Values ={
-    id:CONSENT_ID,
-    name:'consent',
-    checked:false
-}
-const NOTIFY_VALUE:Values ={
-    id:NOTIFY_ID,
-    name:'notify',
-    checked:false
-}
-const AGREE_VALUE:Values ={
-    id:AGREE_ID,
-    name:'agree',
-    checked:false
-}
+
 
 const PROMO_CODE_VALUE:Values ={
     id:'promo_code',
@@ -254,6 +246,17 @@ const PROMO_CODE_VALUE:Values ={
     bg_image:'./assets/images/black_cross.png',
     has_error:false,
     show_err_message:false
+}
+
+const LEGAL_AGE_VALUE:Values={
+    id:'legalage',
+    checked: false,
+    show_message: false
+}
+const AGREE_VALUE:Values={
+    id:'agree',
+    checked: false,
+    show_message: false
 }
 
 const CREDITCARD_VALUE:CreditCardValues ={
@@ -276,16 +279,16 @@ export const InitialiseInputState: State ={
     postcode: POSTCODE_VALUE,
     country: COUNTRY_VALUE,
     mobile: MOBILE_VALUE,
-    billing: BILLING_VALUE,
-    consent: CONSENT_VALUE,
-    notify: NOTIFY_VALUE,
-    agree:AGREE_VALUE,
+    legalage: LEGAL_AGE_VALUE,
+    agree: AGREE_VALUE,
     promo_code:PROMO_CODE_VALUE
 }
 
 export const InitialiseCreditcardState:CreditCardState={
     creditcard:CREDITCARD_VALUE
 }
+
+
 
 
 
@@ -313,6 +316,20 @@ interface HeightValue {
     height:string
 }
 
+interface High{
+    height:number;
+}
+
+export interface HighState{
+    address: High,
+    delivery_address: High
+}
+
+export const InitialiseHighState: HighState={
+    address:{height:60},
+    delivery_address:{height:0}
+}
+
 export interface HeightState{
     payment: HeightValue,
     payment_icons: HeightValue,
@@ -332,6 +349,8 @@ export interface HeightState{
     next_button: HeightValue;
     error_message: HeightValue;
     input_message: HeightValue;
+    creditcard_wrapper: HeightValue;
+    creditcard_content: HeightValue;
 }
 
 export const InitialiseHeightState: HeightState ={
@@ -352,8 +371,9 @@ export const InitialiseHeightState: HeightState ={
     delivery_button_wrapper:{height:'50px'},
     next_button:{height:'50px'},
     error_message: {height:'30px'},
-    input_message: {height:'30px'}
-
+    input_message: {height:'30px'},
+    creditcard_wrapper: {height:'210px'},
+    creditcard_content: {height:'200px'}
 }
 
 

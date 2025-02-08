@@ -43,27 +43,27 @@ const CreditCardContent = (props) => {
                 setCardname(e.target.value);
                 props.setCreditCard((prev_state)=>({
                     ...prev_state,
-                    creditcard:{...prev_state.creditcard,name:e.target.value}
+                    name:{...prev_state.name,value:e.target.value}
                 }));
                 break;
             case 'card_number':
                 setCardnumber(e.target.value);
                 props.setCreditCard((prev_state)=>({
                     ...prev_state,
-                    creditcard:{...prev_state.creditcard,number:e.target.value}
+                    number:{...prev_state.number,value:e.target.value}
                 }));
                 break;
             case 'expiry_date':
                 setExpirydate(e.target.value);
                 props.setCreditCard((prev_state)=>({
                     ...prev_state,
-                    creditcard:{...prev_state.creditcard,valid:e.target.value}
+                    expiry:{...prev_state.expiry,value:e.target.value}
                 }));
                 break;
             default:
                 props.setCreditCard((prev_state)=>({
                     ...prev_state,
-                    creditcard:{...prev_state.creditcard,security_code:e.target.value}
+                    cvc:{...prev_state.cvc,value:e.target.value}
                 }));
                 setCvc(e.target.value)
         }
@@ -104,7 +104,7 @@ const CreditCardContent = (props) => {
        }
     }
     return (
-        <Wrapper>
+        <Wrapper height={props.height}>
             <LeftWrapper>
                 <div className={styles.container3 + ' ' +styles.preload}>
                   <div className={styles.creditcard + ' ' + (flip?styles.flipped:'back-flip')}>

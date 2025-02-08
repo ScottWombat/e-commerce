@@ -1,41 +1,55 @@
 import React,{useState,useEffect,useRef} from 'react';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import {updateTermsConditions} from '../../store/checkout/checkoutReducer'
 import * as styles from './index.module.css';
+import * as styles1 from './terms_conditions.module.css';
 import { Container,Center,Header,Company,Bag,Title,Description,Content,ContentRight,ContentLeft,Contact,Delivery,Payment,DeliveryAddress, DeliverySection,DeliveryDetails,PaymentIcons,PaymentSection,PaymentDetails} from './checkout.styled';
 import { CreditCardSection,PaymentDetailsHeader,PaypalSection,AfterPaySection,PaypalContent,PromoCodeWrapper,Credit,PayPal,AfterPay } from './checkout.styled';
-import {Button,Address,ProductList,ProductRow,ProductDetails,PromoCodeMessage,ErrorMessage,InputMessage} from './checkout.styled';
+import {Button,Address,ProductList,ProductRow,ProductDetails,PromoCodeMessage,ErrorMessage,InputMessage,CreditCardContentWrapper} from './checkout.styled';
 import { Logo } from 'app/components/logo';
 import { ShoppingBagIcon } from 'app/layout/usermenu/bag';
 import { Wrapper1,Input,Label,ButtonWrapper,AddressButtonWrapper,DeliveryButtonWrapper} from './input.styled '
 import { fieldValidation,emailValidation,numberValidation,mobileValidation} from 'app/utils/form_validation';
-import InputBox from 'app/components/input';
+//import InputBox from 'app/components/input';
 import RightArrow from 'app/svg/right_arrow';
-import { selectAllItems} from '../../store/cart/cartReducer'
+import { selectAllItems} from '../../store/cart/cartReducer';
+import {selectTermsConditionsByName} from 'app/store/checkout/checkoutReducer';
 import {NoCard,CreditExpiryDate,PromoCode,White_Paypal,Color_Afterpay,Color_Paypal,Color_Master,Color_Visa,Color_Amex,MasterIcon,VisaIcon,AmexIcon,PaypalIcon,AfterpayIcon,SSL} from 'app/svg/payment_icons';
 import CreditCardCvc from 'app/components/credit_card_cvc';
 import CreditCardContent from 'app/components/credit_card';
-import {State,InitialiseInputState,CreditCardState,InitialiseHeightState,InitialiseCreditcardState,HeightState,OpenState,InitializeOpenState,BGImage, BorderBottom} from './input_interface';
+import {State,InitialiseInputState,InitialiseHeightState,HeightState,OpenState,InitializeOpenState,BGImage, BorderBottom,HighState,InitialiseHighState} from './input_interface';
+import {CreditCardState,InitialiseCreditCardState} from './interface_creditcard'
 import { allCountries} from 'app/store/countries/countriesReducer';
+//import {Styled} from './checkbox'
+import TermConditions from 'app/components/term_and_conditions';
+//import {Styled,OptionWrapper} from 'app/components/term_and_conditions';
+import { MessageBox } from 'app/components/message';
 const CheckoutPage = (props) => {
+    const dispatch = useAppDispatch();
     const countrylist = useAppSelector(allCountries)
+    let legalage =  useAppSelector(state => selectTermsConditionsByName(state,'legalage'))
+    const [legalAgeSelected,setLegalAgeSected] = useState(legalage[0].selected)
     const emailInputRef = useRef(null);
     const firstnameInputRef = useRef(null);
     const lastnameInputRef = useRef(null);
-
-    const items = useAppSelector(state => selectAllItems(state))
     
+    const items = useAppSelector(state => selectAllItems(state))
     const [showPaymentIcons,setShowPaymentIcons] = useState('flex');
     
-    const [buttonName,setButtonName] = useState('NEXT')
-
+    const [buttonName,setButtonName] = useState('NEXT')   
     const [next,setNext] = useState(false);
     
     const [placeOrder,setPlaceOrder] = useState(false);
-    const [creditCard,setCreditCard] = useState<CreditCardState>(InitialiseCreditcardState);
+    const [creditValid,setCreditValid] = useState(true);
+    const [creditCardMessage,setCreditCardMessage] = useState([])
+    const [checkboxBorder,setCheckboxBorder] =useState("1px solid #000")
+    const [creditCard,setCreditCard] = useState<CreditCardState>(InitialiseCreditCardState);
     const [inputState2 ,setInputState2] =useState<State>(InitialiseInputState);
     const [heightState,setHeightState] = useState<HeightState>(InitialiseHeightState);
+    const [highState,setHighState] = useState<HighState>(InitialiseHighState)
     const [openState,setOpenState] = useState<OpenState>(InitializeOpenState);
-
+    const [showLegalMessage,setShowLegalMessage] = useState(false);
+    const [showAgreeMessage,setShowAgreeMessage] = useState(false)
     const [emailState, setEmailState] = useState({
         icon:'empty.png',value:'',error:null
     });
@@ -56,77 +70,30 @@ const CheckoutPage = (props) => {
     ])
 
     useEffect(() => {
-        console.log('inputstate2')
-        console.log(inputState2)
+      
     },[inputState2]);
 
-    
-
+    useEffect(() => {
+        console.log('creditCarf')
+        console.log(creditCard)
+    },[creditCard]);
+  
     const updateState = (newState) =>{
         setTimeout(() => {
             setEmailState({...emailState,icon: 'crossmark.png',error:null})
           }, 2000);
     }
-    const handleOnBlur = (e) => {
-        
-        //e.preventDefault();
-        if (e.currentTarget.id === 'email'){
-           let ret = emailValidation(e.target.value)
-           let image = ret ===null?"checkmark.png":"crossmark.png";
-          
-           let err = ret ===null?null:ret;
-           let val = ret ===null?e.target.value:'';
-           
-           setEmailState({...emailState,value: val,icon: image,error: ret})
-           
-        }else{
-        
-        }
-        
-    };
-    const handleKeyDown1 = (e) => {
-       
-    }
-    const handleChange = (e) =>{
-        //alert("dhhh")
-        const value = e.target.value
-        let ret = emailValidation(e.target.value)
-        if(ret ===null){
-            //setAddressHeight('900px')
-            //setDeliveryAddressHeight('850px')
-            setHeightState((prev_state) =>({
-                ...prev_state,
-                address: {height: '1350px'},
-                delivery_address: {height: '1200px'}
-            }));
-        }
-    }
-    //const handleOnFocus = () => {
-    //    setIsFocused(true);
-   // };
-    const onNext1 = ()=>{
-        if(!placeOrder){
-            if(next){
-                setPlaceOrder(!placeOrder);
-                setButtonName("PLACE ORDER");
-            }else{
-                
-                setNext(!next);
-                return ;
-            }
-        }else{
-            alert("Place order now")
-        }
-    }
-    //const onChange = (e)=>{
-        //alert(e.target.value)
-    //}
+
+    
     const onNextClickToDelivery = (e) =>{
+        setHighState((prev_state) =>({
+            ...prev_state,
+            address: {height: 1130},
+            delivery_address: {height: 1060}
+        }));
         
         setHeightState((prev_state) =>({
             ...prev_state,
-            address: {height: '1060px'},
-            delivery_address: {height: '1060px'},
             delivery: {height:'250px'},
             delivery_section: {height: '90px'},
             address_button_wrapper: {height:'0px'}
@@ -179,7 +146,7 @@ const CheckoutPage = (props) => {
             }));
             setHeightState((prev_state) =>({
                 ...prev_state,
-                creditcard_section: {height: '290px'},
+                creditcard_section: {height: '250px'},
                 payment:{height:'650px'}
                 
             }));
@@ -336,14 +303,6 @@ const CheckoutPage = (props) => {
         }
         
     }
-    const checkboxOnChange = (e) =>{
-        
-        setInputState2((prev_state)=>({
-            ...prev_state,
-            [e.target.name]:{...prev_state[e.target.name],checked:!inputState2[e.target.name].checked}
-        }));
-        console.log(inputState2)
-    }
 
     const inputOnChange = (e) =>{
         setInputState2((prev_state)=>({
@@ -380,6 +339,7 @@ const CheckoutPage = (props) => {
             ret = fieldValidation(e.target.name,inputState2[e.target.name].value);
         }
         if(ret===null){
+        
             let bgImage=null;
             let borderBottom=null;
             if(e.target.name==='company' && e.target.value===''){
@@ -393,10 +353,10 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 [e.target.name]:{...prev_state[e.target.name],bg_img:bgImage,show_message:true,show_err_message:false,border_bottom:borderBottom}
             }));
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                     ...prev_state,
-                    address: {height: '1250px'},
-                    delivery_address: {height: '1120px'}
+                    address: {height: 1180},
+                    delivery_address: {height: 1120}
             }));
         }else{
             setInputState2((prev_state) =>({
@@ -404,49 +364,9 @@ const CheckoutPage = (props) => {
                 [e.target.name]:{...prev_state[e.target.name],bg_img:BGImage.RED,show_message:false,show_err_message:true,border_bottom:BorderBottom.RED,err_message:ret}
             }));
         }
+        
     }
 
-    const emailOnBlur = (e) =>{
-        let ret = emailValidation(inputState2.email.value);
-        if(ret===null){
-            let bgImage=null;
-            let borderBottom=null;
-            if(e.target.name==='company'){
-                bgImage =BGImage.EMPTY;
-                borderBottom=BorderBottom.GREY;
-            }else{
-                bgImage =BGImage.GREEN;
-                borderBottom=BorderBottom.GREEN;
-            }
-            setInputState2((prev_state) =>({
-                ...prev_state,
-                [e.target.name]:{...prev_state[e.target.name],bg_img:{bgImage},show_err_message:false,border_bottom:{borderBottom}}
-            }));
-            /*
-            if(e.target.name==='company'){
-                setInputState2((prev_state) =>({
-                    ...prev_state,
-                    [e.target.name]:{...prev_state[e.target.name],bg_img:BGImage.EMPTY,show_err_message:false,border_bottom:BorderBottom.GREY}
-                }));
-            }else{
-               setInputState2((prev_state) =>({
-                ...prev_state,
-                [e.target.name]:{...prev_state[e.target.name],bg_img:BGImage.GREEN,show_err_message:false,border_bottom:BorderBottom.GREEN}
-               }));
-            }
-            */
-        }else{
-            setInputState2((prev_state) =>({
-                ...prev_state,
-                [e.target.name]:{...prev_state[e.target.name],bg_img:BGImage.RED,show_err_message:true,border_bottom:BorderBottom.RED,err_message:ret}
-            }));
-        }
-    }
-    const emailOnClick =(e)=>{
-        const value = e.target.value
-        emailInputRef.current.focus();
-    }
- 
     const inputOnKeyDown = (e) => {
         let ret = null;
         if(e.target.name==='email'){
@@ -478,24 +398,7 @@ const CheckoutPage = (props) => {
                     ...prev_state,
                     [e.target.name]:{...prev_state[e.target.name],bg_img:bgImage,show_err_message:false,border_bottom:borderBottom}
                 }));
-                /*
-                if(e.target.name==='company'){
-                    setInputState2((prev_state) =>({
-                        ...prev_state,
-                        [e.target.name]:{...prev_state[e.target.name],bg_img:BGImage.EMPTY,show_err_message:false,border_bottom:BorderBottom.GREY}
-                    }));
-                }else{
-                   setInputState2((prev_state) =>({
-                    ...prev_state,
-                    [e.target.name]:{...prev_state[e.target.name],bg_img:BGImage.GREEN,show_err_message:false,border_bottom:BorderBottom.GREEN}
-                   }));
-                }
-                setHeightState((prev_state) =>({
-                    ...prev_state,
-                    address: {height: '1150px'},
-                    delivery_address: {height: '1000px'}
-                }));
-                */
+                
             }else{
                 setInputState2((prev_state) =>({
                     ...prev_state,
@@ -533,7 +436,84 @@ const CheckoutPage = (props) => {
     }
     /** Place Order */
     const onClickPlaceOrder = ()=>{
-        console.log(creditCard)
+        let valid =validateCreditCard();
+        if(valid){
+            //foward
+        }else{
+            setCreditValid(valid);
+        }
+
+       // const terms =  useAppSelector(state => selectTermsConditionsByName(state,'billing'))
+        console.log("DD");
+        console.log(legalAgeSelected)
+        //setCheckboxBorder("2px solid #ff0000")   
+        console.log("place order")
+        console.log(inputState2)
+
+    }
+
+    const validateCreditCard=()=>{
+        let validCreditCard=false;
+        let creditCardMessage=[];
+        let height=260;
+        let paymentHeight:650;
+        if(creditCard.name.value===''){
+            setCreditCard((prev_state)=>({
+                ...prev_state,
+                name:{...prev_state.name,showMessage:true,height:'20px'}
+            }));
+            validCreditCard=true;
+            //setCreditInvalid(creditInvalid+1);
+            height += 20;
+            creditCardMessage.push(creditCard.name.message)
+        }
+        if(creditCard.number.value===''){
+            setCreditCard((prev_state)=>({
+                ...prev_state,
+                number:{...prev_state.number,showMessage:true,height:'20px'}
+            }));
+            validCreditCard=true;
+            //setCreditInvalid(creditInvalid+1);
+            height += 20;
+            creditCardMessage.push(creditCard.number.message)
+        }
+        
+        if(creditCard.expiry.value===''){
+            setCreditCard((prev_state)=>({
+                ...prev_state,
+                expiry:{...prev_state.expiry,showMessage:true,height:'20px'}
+            }));
+            validCreditCard=true;
+            //setCreditInvalid(creditInvalid+1);
+            height += 20;
+            creditCardMessage.push(creditCard.expiry.message)
+        }
+
+        if(creditCard.cvc.value===''){
+            setCreditCard((prev_state)=>({
+                ...prev_state,
+                cvc:{...prev_state.cvc,showMessage:true,height:'20px'}
+            }));
+            validCreditCard=true;
+            //setCreditInvalid(creditInvalid+1);
+            height += 20;
+            creditCardMessage.push(creditCard.cvc.message)
+        }
+        setCreditCardMessage(creditCardMessage);
+        let heightString = height+"px"
+        let temp = height + paymentHeight;
+        let paymentHeightString  = temp+"px";
+        setHeightState((prev_state) =>({
+            ...prev_state,
+            creditcard_section: {height: heightString},
+            payment:{height: '890px'}
+            
+        }));
+       // if(!inputState2.agree.checked || !inputState2.consent.checked){
+        //    validCreditCard= false;
+        //}
+        return validCreditCard;
+        
     }
     const onClickRedirecToPaypal = ()=>{
 
@@ -544,6 +524,58 @@ const CheckoutPage = (props) => {
     /* Datalist validation */
     const dataListValidation = (value)=>{
         return countrylist.includes(value)
+    }
+
+    const checkBoxOnClick =(e)=>{
+       console.log("Checjed")
+       console.log(e.target.checked)
+       let showMessage= e.target.checked===true?false:true
+       console.log(showMessage)
+       dispatch(updateTermsConditions({name:e.target.name,selected:e.target.checked}))
+       if(e.target.name==='legalage'){
+            setInputState2((prev_state) =>({
+            ...prev_state,
+               legalage:{...prev_state.legalage,
+               show_message: showMessage
+               }
+            }));
+            //let haddr = highState.address.height;
+            //let daddr = highState.delivery_address + 20;
+            console.log("hig")
+           
+            console.log(inputState2.legalage.show_message)
+            console.log(highState)
+            console.log(inputState2)
+            if(showMessage){
+                setHighState((prev_state) =>({
+                ...prev_state,
+                address: {...prev_state.address,height: 1180 + 80},
+                delivery_address: {...prev_state.delivery_address,height:1060 + 80}
+               }));
+               console.log("hig1")
+               console.log(highState)
+            }else{
+                setHighState((prev_state) =>({
+                    ...prev_state,
+                    address: {...prev_state.address,height: 1180 },
+                    delivery_address: {...prev_state.delivery_address,height:1060}
+                }));
+                console.log("hig2")
+                console.log(highState)
+            }
+            
+        }
+    
+       if(e.target.name==='agree'){
+            setInputState2((prev_state) =>({
+            ...prev_state,
+               agree:{...prev_state.agree,
+               show_message:e.target.checked?false:true
+               }
+            }));
+       }
+      
+       
     }
     
     return (
@@ -572,7 +604,8 @@ const CheckoutPage = (props) => {
                         onChange={(e) =>inputOnChange(e)} 
                         onKeyDown={(e)=>inputOnKeyDown(e)}
                         onBlur={(e)=>inputOnBlur(e)} 
-                        defaultValue={inputState2.email.value} 
+                        //defaultValue={inputState2.email.value} 
+                        value={'revit@gmail.com'}
                         placeholder="" 
                         background={inputState2.email.bg_img}/>
                         <Label>Email *</Label>
@@ -583,9 +616,9 @@ const CheckoutPage = (props) => {
                         </ErrorMessage>
                     }
                   </Contact>
-                  <Address height={heightState.address.height}>
+                  <Address height={highState.address.height+"px"}>
                     <div>ADDRESS</div>
-                    <DeliveryAddress height={heightState.delivery_address.height}>
+                    <DeliveryAddress height={highState.delivery_address.height+"px"}>
                     <div>Delivery Address</div>
                     <div className={styles.input_wrapper}>
                     <Wrapper1>
@@ -844,35 +877,33 @@ const CheckoutPage = (props) => {
                          }
                     </Wrapper1>
                     </div>
-                    <div>&nbsp;</div>
+                   
                     <div className={styles.checkbox_wrapper}>
-                    <label >
-                    <input onChange={(e) => checkboxOnChange(e)}id={inputState2.billing.id} name={inputState2.billing.name} className={styles.checkbox_input} type="checkbox" defaultChecked={inputState2.billing.checked}/>
-                    <span>&nbsp;&nbsp;My billing and delivery information are the same.</span>
-                    </label>
-                    </div>
-                    <div className={styles.checkbox_wrapper}>
-                    <label>
-                        <input onChange={(e) => checkboxOnChange(e)}id={inputState2.consent.id} name={inputState2.consent.name} className={styles.checkbox_input} type="checkbox" defaultChecked={inputState2.consent.checked}/>
-                        <span>&nbsp;&nbsp;I'm 18+ years old. *</span>
-                    </label>
-                    </div>
-                    <div className={styles.checkbox_wrapper}>
-                    Also want product updates with our newsletter?
-                    </div>
-                    <div className={styles.checkbox_wrapper}>
-                    <label>
-                        <input onChange={(e) => checkboxOnChange(e)}id={inputState2.notify.id} name={inputState2.notify.name} className={styles.checkbox_input} type="checkbox" defaultChecked={inputState2.notify.checked}/>
-                        <span>&nbsp;&nbsp;I agree to receive news, promotions, information regarding adidas’ brand, products, activities and events, and any other marketing communications and materials by e-mail, sms, in-app notification and/or telephone from Adidas Australia Pty Ltd. and runtastic GmbH pursuant to the adidas Privacy Policy.HOW?</span>
-                    </label>
-                    </div>
-                    <div className={styles.checkbox_wrapper}>
-                    <label>
-                        <input onChange={(e) => checkboxOnChange(e)}id={inputState2.agree.id} name={inputState2.agree.name} className={styles.checkbox_input} type="checkbox" defaultChecked={inputState2.agree.checked}/>
-                        <span>&nbsp;&nbsp;I understand and agree that in certain circumstances, my personal information may be transferred to other entities in the adidas Group and service providers that are located in countries that do not have comparable privacy safeguards to Australia. </span>
-                    </label>
+                        <div className={styles1.wrapper}>
+                            <div>
+                            <input className={styles1.checkbox1} type="checkbox" id='billing' name='billing'/>
+                            </div>
+                            <div>My billing and delivery information are the same.</div>
+                            <div>&nbsp;</div><div>&nbsp;</div>
+                            <div>
+                            <input className={styles1.checkbox1} type="checkbox" id='legalage' name='legalage' onClick={checkBoxOnClick}/>
+                            </div>
+                            <div>I'm 18+ years old.</div>
+                            <MessageBox show={inputState2.legalage.show_message}/>
+                            <div>
+                            <input className={styles1.checkbox1} type="checkbox" id='notify' name='notify'/>
+                            </div>
+                            <div>I agree to receive news, promotions, information regarding adidas’ brand, products, activities and events, and any other marketing communications and materials by e-mail, sms, in-app notification and/or telephone from Adidas Australia Pty Ltd. and runtastic GmbH pursuant to the adidas Privacy Policy.HOW?</div>
+                            <div>&nbsp;</div><div>&nbsp;</div>
+                            <div>
+                            <input className={styles1.checkbox1} type="checkbox" id='agree' name='agree' onClick={checkBoxOnClick}/>
+                            </div>
+                            <div>I understand and agree that in certain circumstances, my personal information may be transferred to other entities in the adidas Group and service providers that are located in countries that do not have comparable privacy safeguards to Australia.</div>
+                            <MessageBox show={inputState2.agree.show_message} />
+                        </div>
                     </div>
                     </DeliveryAddress>
+                   
                     <AddressButtonWrapper height={heightState.address_button_wrapper.height} >
                         <Button height={heightState.next_button.height}>
                         <a className={styles.a_button} onClick={onNextClickToDelivery}>
@@ -908,7 +939,7 @@ const CheckoutPage = (props) => {
                           <div className={styles.payment_header}>Payments are SSL encrypted so that your credit card and payment details stay safe.</div><div className={styles.ssl}><SSL/></div>
                     </PaymentDetailsHeader>
                     <PaymentSection height={heightState.payment_section.height}>
-                        <PaymentDetails>
+                          <PaymentDetails>
                         
                          <CreditCardSection height={heightState.creditcard_section.height} isOpen={openState.credit_card.isOpen}>
                             <a className={styles.b_button} onClick={onCreditCardSectionClick}>
@@ -919,11 +950,18 @@ const CheckoutPage = (props) => {
                                 <Color_Master/>
                             </span>
                             </a>
-                            <div className={styles.credit_card_content}>
-                                <CreditCardContent setCreditCard={setCreditCard}/>
-                            </div>
+                          
+                            <CreditCardContentWrapper height={heightState.creditcard_wrapper.height}>
+                                <CreditCardContent setCreditCard={setCreditCard} height={heightState.creditcard_content.height}/>
+                                <ul className={styles.ulMessage}>
+                                {creditCardMessage.map(item=>(
+                                    <li>{item}</li>
+                                ))}
+                                </ul>
+                            </CreditCardContentWrapper>
+                          
                         </CreditCardSection>
-                        
+                      
                         <PaypalSection height={heightState.paypal_section.height} isOpen={openState.paypal.isOpen}>
                                 <a className={styles.b_button} onClick={onPaypalSectionClick}>
                                 <span className={styles.button_name}>PayPal</span>
@@ -964,9 +1002,6 @@ const CheckoutPage = (props) => {
                         </PaymentDetails>
                     </PaymentSection>
                   </Payment>
-                  
-                 
-                  
                   </form>
                 </ContentLeft>
                 <ContentRight>

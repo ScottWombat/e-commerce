@@ -95,7 +95,6 @@ export const DeliveryAddress = styled.div<DivProps>`
     height: ${p => p.height};
     overflow: hidden;
    
-  
 `;
 
 export const Delivery = styled.div<DivProps>`
@@ -282,6 +281,18 @@ export const InputMessage = styled.div<DivProps>`
     font-size:0.8em;
     font-weight:none;
     display:  ${p => p.height=='0px'?'none':'block'}
+`;
+
+
+export const CreditCardContentWrapper= styled.div<DivProps>`
+    display:relative;
+    padding:5px;
+    border-bottom:0px solid red;
+    width:100%;
+    transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    height: ${p => p.height};
+
 `;
 
 

@@ -524,8 +524,8 @@ input[type=checkbox]:checked:before {
 	outline: none;
 	content: none;	
   
-  
 }
+
 .hph6U1G_m4CJZJljp27A::before {
 	  
     content: "\2714";
@@ -540,8 +540,8 @@ input[type=checkbox]:checked:before {
     margin-top:10px;
     line-height: 28px;
     text-align: center;
-  align-items: center;
-  align-content: top;
+    align-items: center;
+    align-content: top;
 }
 
 
@@ -607,7 +607,15 @@ input[type=checkbox]:checked:before {
   padding:5px;
   border-bottom:1px solid #ccc;
   width:100%;
+  background-color: red;
+  overflow:auto;
+  height:auto;
+  height:auto;
+min-height:250px;
+height:auto !important;        /* for IE as it does not support min-height */
+height:250px;    
 }
+
 .sSTcIDFdgwzePrArLWXL{
   display:relative;
   padding:5px;
@@ -690,6 +698,42 @@ label > input[type="checkbox"] + span::before {
 label > input[type="checkbox"]:checked + span::before {
  content: '\2714';
 }
+ul._15IEExKWkUmxW0U10b5{
+  margin-top:0px;
+  font-size:10px;
+}
+
+ul._15IEExKWkUmxW0U10b5 > li{
+  list-style:square !important;
+  margin-left: 2em;
+  color:red;
+  padding-bottom:0.5em;
+}
+  
+/*!******************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/views/checkout/terms_conditions.module.css ***!
+  \******************************************************************************************************/
+.MuYFM3Zx2PHN9uFu6FtX{
+    display:grid;
+    grid-template-columns: 8% 92%;
+    margin-top:15px;
+}
+
+
+.LLbwUwHIJ0XRuAs459W8 {
+    outline: none;
+    cursor: pointer;
+    content: url(e8d50a5fcda6a1315e28.png);
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    appearance: none;
+    -webkit-appearance: none;
+    
+  }
+  .LLbwUwHIJ0XRuAs459W8:checked{
+    content: url(92f81a9af540ee69b633.jpg)
+  }
   
 /*!***************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/credit_card/index.module.css ***!
