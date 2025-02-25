@@ -1,8 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-
-
   a {
     text-decoration:none;
   }
@@ -14,6 +12,13 @@ const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
   }
+
+  @media only screen and (max-width: 400px) {
+    body {
+      font-size: 28px !important;
+    }
+}
+
 `;
 
 export default GlobalStyle;

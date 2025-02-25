@@ -1,3 +1,75 @@
+/*!*****************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/searchbox/searchbox.module.css ***!
+  \*****************************************************************************************************/
+.faV3I8RRz8EsstvQSnkE {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.cR6qt9fYHmlvWZL0NS1O {
+  width: 100%;
+  outline: none;
+  border:none;
+  border-bottom: 1px solid #2d2c2c ;
+  padding: 5px;
+  height: 40px;
+  outline: none;
+  color: #2d2c2c;
+  font-size:28px;
+  font-family: 'Montserrat';
+  letter-spacing: 1px;
+}
+
+.cR6qt9fYHmlvWZL0NS1O:focus{
+  color: #000;
+}
+
+.Uu4pv5ajIVBaxEhrBWpS {
+  width: 47px;
+  height: 43px;
+  border:0px;
+  text-align: center;
+  color: #2d2c2c;
+  background-color: white;
+  cursor: pointer;
+  font-size: 28px;
+  margin-top:10px;
+}
+
+/*Resize the wrap to see the search bar change!*/
+.L7uxTeZCQLurZnLzPxHW{
+  width: 60%;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* close button */
+.dGM41nXpOLvHGh5TEo15 {
+  background: #fff;
+  width: 25px;
+  height: 25px;
+  position: relative;
+}
+.dGM41nXpOLvHGh5TEo15:after {
+  content: '';
+  height: 25px;
+  border-left: 2px solid #000;
+  position: absolute;
+  transform: rotate(45deg);
+  left: 12px;
+}
+
+.dGM41nXpOLvHGh5TEo15:before {
+  content: '';
+  height: 25px;
+  border-left: 2px solid #000;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 12px;
+}
 /*!***********************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/layout/mainmenu/mainmenu.module.css ***!
   \***********************************************************************************************/
@@ -249,78 +321,6 @@
 ._zxu_LMtWJP70o3cASNC{
     text-decoration: none;
 }
-/*!*****************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/components/searchbox/searchbox.module.css ***!
-  \*****************************************************************************************************/
-.faV3I8RRz8EsstvQSnkE {
-  width: 100%;
-  position: relative;
-  display: flex;
-}
-
-.cR6qt9fYHmlvWZL0NS1O {
-  width: 100%;
-  outline: none;
-  border:none;
-  border-bottom: 1px solid #2d2c2c ;
-  padding: 5px;
-  height: 40px;
-  outline: none;
-  color: #2d2c2c;
-  font-size:28px;
-  font-family: 'Montserrat';
-  letter-spacing: 1px;
-}
-
-.cR6qt9fYHmlvWZL0NS1O:focus{
-  color: #000;
-}
-
-.Uu4pv5ajIVBaxEhrBWpS {
-  width: 47px;
-  height: 43px;
-  border:0px;
-  text-align: center;
-  color: #2d2c2c;
-  background-color: white;
-  cursor: pointer;
-  font-size: 28px;
-  margin-top:10px;
-}
-
-/*Resize the wrap to see the search bar change!*/
-.L7uxTeZCQLurZnLzPxHW{
-  width: 60%;
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-/* close button */
-.dGM41nXpOLvHGh5TEo15 {
-  background: #fff;
-  width: 25px;
-  height: 25px;
-  position: relative;
-}
-.dGM41nXpOLvHGh5TEo15:after {
-  content: '';
-  height: 25px;
-  border-left: 2px solid #000;
-  position: absolute;
-  transform: rotate(45deg);
-  left: 12px;
-}
-
-.dGM41nXpOLvHGh5TEo15:before {
-  content: '';
-  height: 25px;
-  border-left: 2px solid #000;
-  position: absolute;
-  transform: rotate(-45deg);
-  left: 12px;
-}
 /*!**************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./src/app/views/home/home.module.css ***!
   \**************************************************************************************/
@@ -494,7 +494,7 @@ input::-webkit-calendar-picker-indicator {
     position:relative;
     width:100%;
     margin-top:10px;
-    margin-bottom:0px;
+    margin-bottom:10px;
   }
   .hYEEYtPCQaSrqB3tEhCZ{
     float:left;

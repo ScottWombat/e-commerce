@@ -49,34 +49,43 @@ export const Description = styled.div`
 `;
 export const Content = styled.div`
     display: flex;
-    justify-content: space-between;
-    paddint-top:10px;
-    width:100%;
-    height:100vh;
+    width: 900px; /* Can be in percentage also. */
+    height: auto;
+    margin: 0 auto;
+    position: relative;
 `;
+export const Content1 = styled.div`
+    display: flex;
+    justify-content: center;
+    text-align:center;
+    paddint-top:10px;
+    width:800px;
+
+    
+`;
+
+
 export const ContentLeft = styled.div`
     float:left;
-    width:60%;
+    width:55%;
     height:100vh;
-    padding-right:10px;
-    
+   
 `;
 export const ContentRight = styled.div`
-    float: :right;
-    width:40%;
-    
+    float: :left;
+    width:45%;
+    margin-left:30px;
 `;
 
 export const Contact = styled.div`
     font-weight:bold;
     padding-top:0px;
     border-bottom:1px solid #ccc;
-    width:100$;
+    width:100%;
     height:140px;
     margin-top:30px;
 `;
-
-export const Address = styled.div<DivProps>`
+export const Address1 = styled.div<DivProps>`
     margin-top:40px;
     font-weight:bold;
     transition: height 1s ease;
@@ -86,6 +95,16 @@ export const Address = styled.div<DivProps>`
     border-bottom:1px solid #ccc;
 
 `;
+export const Address = styled.div<DivProps>`
+    margin-top:40px;
+    font-weight:bold;
+    transition: height 1s ease;
+    -webkit-transition: height 1s ease;
+    height: ${p => p.height};
+    overflow: hidden;
+    border-bottom:1px solid #ccc;
+    
+`;
 
 export const DeliveryAddress = styled.div<DivProps>`
     margin-top:20px;
@@ -94,7 +113,6 @@ export const DeliveryAddress = styled.div<DivProps>`
     -webkit-transition: height 1s ease;
     height: ${p => p.height};
     overflow: hidden;
-   
 `;
 
 export const Delivery = styled.div<DivProps>`
@@ -267,6 +285,7 @@ export const ErrorMessage = styled.div<DivProps>`
     color:#ff2626;
     font-size:0.8em;
     font-weight:none;
+    width:100%;
     display:  ${p => p.height=='0px'?'none':'block'}
 `;
 

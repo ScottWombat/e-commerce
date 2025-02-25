@@ -12,8 +12,8 @@ export interface InputProps{
 }
 export const Wrapper1 = styled.div`
     position: relative;
-    width: 20rem;
-    height: 44px;
+    width: 295px;
+    height: 40px;
     margin-top:20px;
     display:inline-block;
     onFocus:boolean;
@@ -71,7 +71,7 @@ export const AddressButtonWrapper = styled.div<InputProps>`
   width:100%;
   transition: height 1s ease;
   -webkit-transition: height 1s ease;
-  height: ${p => p.height};
+  height: ${p => p.height};;
   overflow: hidden;
 `;
 
@@ -91,7 +91,7 @@ padding: 10px 10px 10px 15px;
 display: block;
 width: 550px;
 
-border: 1px solid #757575;
+border: 1px solid red;
 background: url(${p => p.img});
 background-repeat: no-repeat;
 background-position: 250px 10px;

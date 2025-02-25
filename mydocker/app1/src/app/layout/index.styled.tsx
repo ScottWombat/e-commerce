@@ -5,6 +5,26 @@ interface SearchSectionProps {
   onClick?: () => void;
 }
 
+export const Layout = styled.div`
+  display: grid;
+  grid-gap: 0px;
+  @media all and (min-width: 320px) and and (max-width: 479px){
+    grid-template-columns: 1fr;
+    grid-template-rows:  1fr;
+    grid-template-areas: "mobile_section";
+  }
+  @media all and (max-width: 768px){
+    grid-template-columns: 1fr;
+    grid-template-rows:  1fr;
+    grid-template-areas: "tablet_section";
+  }
+  @media all and(max-width: 1024px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "laptop_section";
+                                             
+`;
+
 export const Container = styled.div`
   display: grid;
   grid-template-rows: 100%;
@@ -61,6 +81,9 @@ export const MainSection = styled.div`
   background-color:yellow;
 `;
 
+
+
+
 export const FooterSection = styled.div`
   width:100%;
   
@@ -84,3 +107,49 @@ export const ThreeDotSection = styled.div`
   margin-top:25px;
   font-size:30px;
 `;
+//new 
+interface Size {
+  xs: string
+  sm: string
+  md: string
+  lg: string
+  xl: string
+  xxl: string
+}
+
+const size: Size = {
+  xs: '400px', // for small screen mobile
+  sm: '600px', // for mobile screen
+  md: '900px', // for tablets
+  lg: '1280px', // for laptops
+  xl: '1440px', // for desktop / monitors
+  xxl: '1920px', // for big screens
+}
+
+export const device = {
+  xs: `(max-width: ${size.xs})`,
+  sm: `min-width: ${size.sm})`,
+  md: `(max-width: ${size.md})`,
+  lg: `(max-width: ${size.lg})`,
+  xl: `(max-width: ${size.xl})`,
+  xxl: `(max-width: ${size.xxl})`,
+}
+
+
+export const SmallMobile = styled.div`
+  display: flex;
+  justify-content: space-between;
+  
+  @media only screen and ${device.xs} {
+    flex-direction: column;
+  }
+  `;
+ export const Mobile = styled.div`
+  display: flex;
+  justify-content: space-between;
+  
+  @media only screen and ${device.sm} {
+    flex-direction: column;
+    backgroun-color:blue;
+  }
+  `;

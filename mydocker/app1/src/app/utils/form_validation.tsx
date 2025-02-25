@@ -35,11 +35,15 @@ export const fieldValidation = (fieldName, fieldValue) => {
   export const mobileValidation = (fieldName, fieldValue) => {
     if (fieldValue.trim() === "") {
       return `${fieldName} is required`;
-    }
+    } 
     if (/^(()?\d{3}())?(-|\s)?\d{3}(-|\s)?\d{4}$/.test(fieldValue)) {
       return null;
     }
-    
-    return "*Please enter Mobile value";;
+    let msg = `
+    * Please enter Mobile value<br/>
+    eg. 0403872130 or 040-387-1223
+    `
+    //return "*Please enter Mobile value \\neg. 04023872987 or 040-387-4321";;
+    return msg;
   };
   

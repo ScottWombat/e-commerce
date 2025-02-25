@@ -1,0 +1,46 @@
+{
+  "$ref": "#/definitions/Order",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "CustomerInfo": {
+      "additionalProperties": false,
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "middleName": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "middleName",
+        "lastName",
+        "email",
+        "mobile"
+      ],
+      "type": "object"
+    },
+    "Order": {
+      "additionalProperties": false,
+      "properties": {
+        "customerInfo": {
+          "$ref": "#/definitions/CustomerInfo"
+        }
+      },
+      "required": [
+        "customerInfo"
+      ],
+      "type": "object"
+    }
+  }
+}

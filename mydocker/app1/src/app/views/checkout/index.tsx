@@ -1,8 +1,13 @@
 import React,{useState,useEffect,useRef} from 'react';
-import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import {updateTermsConditions} from '../../store/checkout/checkoutReducer'
 import * as styles from './index.module.css';
 import * as styles1 from './terms_conditions.module.css';
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import {updateCart,updatePayment,updateCustomerInfo,updateTermsConditions} from '../../store/checkout/checkoutReducer'
+import { selectAllItems} from '../../store/cart/cartReducer';
+import {selectTermsConditionsByName} from 'app/store/checkout/checkoutReducer';
+import { allCountries} from 'app/store/countries/countriesReducer';
+import {increase,decrease} from 'app/store/counter';
+
 import { Container,Center,Header,Company,Bag,Title,Description,Content,ContentRight,ContentLeft,Contact,Delivery,Payment,DeliveryAddress, DeliverySection,DeliveryDetails,PaymentIcons,PaymentSection,PaymentDetails} from './checkout.styled';
 import { CreditCardSection,PaymentDetailsHeader,PaypalSection,AfterPaySection,PaypalContent,PromoCodeWrapper,Credit,PayPal,AfterPay } from './checkout.styled';
 import {Button,Address,ProductList,ProductRow,ProductDetails,PromoCodeMessage,ErrorMessage,InputMessage,CreditCardContentWrapper} from './checkout.styled';
@@ -12,26 +17,33 @@ import { Wrapper1,Input,Label,ButtonWrapper,AddressButtonWrapper,DeliveryButtonW
 import { fieldValidation,emailValidation,numberValidation,mobileValidation} from 'app/utils/form_validation';
 //import InputBox from 'app/components/input';
 import RightArrow from 'app/svg/right_arrow';
-import { selectAllItems} from '../../store/cart/cartReducer';
-import {selectTermsConditionsByName} from 'app/store/checkout/checkoutReducer';
+
+
 import {NoCard,CreditExpiryDate,PromoCode,White_Paypal,Color_Afterpay,Color_Paypal,Color_Master,Color_Visa,Color_Amex,MasterIcon,VisaIcon,AmexIcon,PaypalIcon,AfterpayIcon,SSL} from 'app/svg/payment_icons';
 import CreditCardCvc from 'app/components/credit_card_cvc';
 import CreditCardContent from 'app/components/credit_card';
 import {State,InitialiseInputState,InitialiseHeightState,HeightState,OpenState,InitializeOpenState,BGImage, BorderBottom,HighState,InitialiseHighState} from './input_interface';
 import {CreditCardState,InitialiseCreditCardState} from './interface_creditcard'
-import { allCountries} from 'app/store/countries/countriesReducer';
+
 //import {Styled} from './checkbox'
 import TermConditions from 'app/components/term_and_conditions';
 //import {Styled,OptionWrapper} from 'app/components/term_and_conditions';
 import { MessageBox } from 'app/components/message';
+import {selectCount} from 'app/store/counter';
+
+import { validate_order } from 'app/model/validate';
+
 const CheckoutPage = (props) => {
     const dispatch = useAppDispatch();
+    const counter = useAppSelector(selectCount);
     const countrylist = useAppSelector(allCountries)
     let legalage =  useAppSelector(state => selectTermsConditionsByName(state,'legalage'))
     const [legalAgeSelected,setLegalAgeSected] = useState(legalage[0].selected)
     const emailInputRef = useRef(null);
     const firstnameInputRef = useRef(null);
     const lastnameInputRef = useRef(null);
+    const legalageCheckboxRef = useRef(null)
+    const agreeCheckboxRef = useRef(null)
     
     const items = useAppSelector(state => selectAllItems(state))
     const [showPaymentIcons,setShowPaymentIcons] = useState('flex');
@@ -50,6 +62,9 @@ const CheckoutPage = (props) => {
     const [openState,setOpenState] = useState<OpenState>(InitializeOpenState);
     const [showLegalMessage,setShowLegalMessage] = useState(false);
     const [showAgreeMessage,setShowAgreeMessage] = useState(false)
+    const [unchecked,setUnchecked] = useState(0);
+    const [onUnChecked,setOnUnChecked] = useState(false);
+    const [firstTime,setFirstTime] = useState(true)
     const [emailState, setEmailState] = useState({
         icon:'empty.png',value:'',error:null
     });
@@ -70,12 +85,24 @@ const CheckoutPage = (props) => {
     ])
 
     useEffect(() => {
-      
-    },[inputState2]);
+        setUnchecked(unchecked+1);
+    },[onUnChecked,setOnUnChecked])
 
     useEffect(() => {
-        console.log('creditCarf')
-        console.log(creditCard)
+      
+    
+    },[inputState2,highState,showAgreeMessage,showLegalMessage]);
+    //useEffect(() => {
+
+   // },[heightState])
+   useEffect (()=>{
+   
+    dispatch(updateCart({items:items}))
+   },[items]);
+
+    useEffect(() => {
+        //console.log('creditCarf')
+       //console.log(creditCard)
     },[creditCard]);
   
     const updateState = (newState) =>{
@@ -86,19 +113,41 @@ const CheckoutPage = (props) => {
 
     
     const onNextClickToDelivery = (e) =>{
+        let addr = highState.address.height.slice(0,-2) 
+
+        let address = parseInt(addr)-80;
+        let str_addr= address+'px';
+        
         setHighState((prev_state) =>({
             ...prev_state,
-            address: {height: 1130},
-            delivery_address: {height: 1060}
+            address: {height: str_addr},
+            //delivery_address: {height: '1060px'},
+            delivery: {height:'220px'},
+            delivery_section: {height: '80px'},
+            address_button_wrapper: {height:'0px'},
+            delivery_button_wrapper: {height:'50px'}
         }));
-        
+        /*
         setHeightState((prev_state) =>({
             ...prev_state,
             delivery: {height:'250px'},
             delivery_section: {height: '90px'},
             address_button_wrapper: {height:'0px'}
-        }));
+        }));\
+        */
         
+    }
+    const onNextClickToPayment = (e) =>{
+        setHighState((prev_state) =>({
+            ...prev_state,
+            payment: {height: '350px'},
+            payment_section: {height:'280px'},
+            payment_icons:{height:'0px'},
+            delivery_button_wrapper:{height:'0px'},
+            delivery:{height:'165px'}
+
+        }));
+ 
     }
     const onCreditCardSectionClick = (e) =>{
         if(openState.paypal.isOpen){
@@ -106,7 +155,7 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 paypal:{isOpen:false}
             }));
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 paypal_section: {height: '40px'},
                 payment: {height:'350px'},
@@ -115,7 +164,7 @@ const CheckoutPage = (props) => {
         }
         if(openState.after_pay.isOpen){
             //setPaymentHeight('350px')
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 payment: {height:'350px'},
                 afterpay_section: {height: '40px'},
@@ -132,7 +181,7 @@ const CheckoutPage = (props) => {
                 ...prev1_state,
                 credit_card:{isOpen:false}
             }));
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 payment: {height:'350px'},
                 creditcard_section: {height: '40px'},
@@ -144,7 +193,7 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 credit_card:{isOpen:true}
             }));
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 creditcard_section: {height: '250px'},
                 payment:{height:'650px'}
@@ -165,7 +214,7 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 credit_card:{isOpen:false}
             }));
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 creditcard_section: {height: '40px'},
              //   payment: {height:'350px'},
@@ -178,7 +227,7 @@ const CheckoutPage = (props) => {
             ...prev_state,
             after_pay:{isOpen:false}
         }));
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 afterpay_section: {height: '40px'},
              //   payment: {height:'350px'},
@@ -188,7 +237,7 @@ const CheckoutPage = (props) => {
         
         if(openState.paypal.isOpen){
            
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 payment: {height:'350px'},
                 paypal_section:  {height: '40px'}
@@ -203,7 +252,7 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 paypal:{isOpen:true}
             }));
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 payment: {height:'600px'},
                 paypal_section:  {height: '100px'}
@@ -214,12 +263,13 @@ const CheckoutPage = (props) => {
         
     }   
     const onAfterPaySectionClick = (e)=>{
+        dispatch(updatePayment({type:'after_pay'}));
         if(openState.credit_card.isOpen){
             setOpenState((prev_state)=>({
                 ...prev_state,
                 credit_card:{isOpen:false}
             }));
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 creditcard_section: {height: '40px'},
              //   payment: {height:'350px'},
@@ -231,7 +281,7 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 paypal:{isOpen:false}
             }));
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 paypal_section: {height: '40px'},
                 
@@ -239,7 +289,7 @@ const CheckoutPage = (props) => {
             
         }
         if(openState.after_pay.isOpen){
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 payment: {height:'350px'},
                 afterpay_section:  {height: '40px'}
@@ -255,7 +305,7 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 after_pay:{isOpen:true}
             }));
-            setHeightState((prev_state) =>({
+            setHighState((prev_state) =>({
                 ...prev_state,
                 payment: {height:'450px'},
                 afterpay_section:  {height: '100px'}
@@ -264,18 +314,7 @@ const CheckoutPage = (props) => {
         }
         
     }
-    const onNextClickToPayment = (e) =>{
-        setHeightState((prev_state) =>({
-            ...prev_state,
-            payment: {height: '350px'},
-            payment_section: {height:'280px'},
-            payment_icons:{height:'0px'},
-            delivery_button_wrapper:{height:'0px'},
-            delivery:{height:'165px'}
-
-        }));
- 
-    }
+    
     const promoCodeDivOnClick = () =>{
         //setPromocodeHeight('120px')
         setHeightState((prev_state) =>({
@@ -339,7 +378,7 @@ const CheckoutPage = (props) => {
             ret = fieldValidation(e.target.name,inputState2[e.target.name].value);
         }
         if(ret===null){
-        
+            dispatch(updateCustomerInfo({name:e.target.name,value:e.target.value}))
             let bgImage=null;
             let borderBottom=null;
             if(e.target.name==='company' && e.target.value===''){
@@ -355,8 +394,9 @@ const CheckoutPage = (props) => {
             }));
             setHighState((prev_state) =>({
                     ...prev_state,
-                    address: {height: 1180},
-                    delivery_address: {height: 1120}
+                    address: {height: '1210px'},
+                    delivery_address: {height: '1090px'},
+                    address_button_wrapper:{height:'50px'}
             }));
         }else{
             setInputState2((prev_state) =>({
@@ -436,24 +476,39 @@ const CheckoutPage = (props) => {
     }
     /** Place Order */
     const onClickPlaceOrder = ()=>{
+        //console.log("openState");
+        //console.log(openState)
         let valid =validateCreditCard();
+        //console.log(valid)
         if(valid){
-            //foward
-        }else{
+            //console.log("Credit cart");
+            //console.log(creditCard)
+            //if(openState.credit_card.isOpen){
+            dispatch(updatePayment({type:'creditcard',name:creditCard.name.value,number:creditCard.number.value,expiry:creditCard.expiry.value,cvc:creditCard.cvc.value}))
+            //}else if (openState.paypal.isOpen){
+            //    dispatch(updatePayment({type:'paypal'}));
+           // }else{
+            //    dispatch(updatePayment({type:'after_pay'}));
+            //}
             setCreditValid(valid);
         }
 
-       // const terms =  useAppSelector(state => selectTermsConditionsByName(state,'billing'))
-        console.log("DD");
-        console.log(legalAgeSelected)
+        // const terms =  useAppSelector(state => selectTermsConditionsByName(state,'billing'))
+        //console.log("DD");
+        //console.log(legalAgeSelected)
         //setCheckboxBorder("2px solid #ff0000")   
-        console.log("place order")
-        console.log(inputState2)
+        //console.log("place order")
+        //console.log(inputState2)
+        const data={
+            customerInfo:{firstName:'revit'}
+        }
+        let errors = validate_order(data);
+        console.log(errors)
 
     }
 
     const validateCreditCard=()=>{
-        let validCreditCard=false;
+        let validCreditCard=true;
         let creditCardMessage=[];
         let height=260;
         let paymentHeight:650;
@@ -462,7 +517,7 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 name:{...prev_state.name,showMessage:true,height:'20px'}
             }));
-            validCreditCard=true;
+            validCreditCard=false;
             //setCreditInvalid(creditInvalid+1);
             height += 20;
             creditCardMessage.push(creditCard.name.message)
@@ -472,7 +527,7 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 number:{...prev_state.number,showMessage:true,height:'20px'}
             }));
-            validCreditCard=true;
+            validCreditCard=false;
             //setCreditInvalid(creditInvalid+1);
             height += 20;
             creditCardMessage.push(creditCard.number.message)
@@ -483,7 +538,7 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 expiry:{...prev_state.expiry,showMessage:true,height:'20px'}
             }));
-            validCreditCard=true;
+            validCreditCard=false;
             //setCreditInvalid(creditInvalid+1);
             height += 20;
             creditCardMessage.push(creditCard.expiry.message)
@@ -494,7 +549,7 @@ const CheckoutPage = (props) => {
                 ...prev_state,
                 cvc:{...prev_state.cvc,showMessage:true,height:'20px'}
             }));
-            validCreditCard=true;
+            validCreditCard=false;
             //setCreditInvalid(creditInvalid+1);
             height += 20;
             creditCardMessage.push(creditCard.cvc.message)
@@ -516,7 +571,7 @@ const CheckoutPage = (props) => {
         
     }
     const onClickRedirecToPaypal = ()=>{
-
+        dispatch(updatePayment({type:'paypal'}));
     }
     const onClickApplyPromoCode = () =>{
 
@@ -527,55 +582,101 @@ const CheckoutPage = (props) => {
     }
 
     const checkBoxOnClick =(e)=>{
-       console.log("Checjed")
-       console.log(e.target.checked)
-       let showMessage= e.target.checked===true?false:true
-       console.log(showMessage)
-       dispatch(updateTermsConditions({name:e.target.name,selected:e.target.checked}))
-       if(e.target.name==='legalage'){
-            setInputState2((prev_state) =>({
-            ...prev_state,
-               legalage:{...prev_state.legalage,
-               show_message: showMessage
-               }
-            }));
-            //let haddr = highState.address.height;
-            //let daddr = highState.delivery_address + 20;
-            console.log("hig")
-           
-            console.log(inputState2.legalage.show_message)
-            console.log(highState)
-            console.log(inputState2)
-            if(showMessage){
-                setHighState((prev_state) =>({
-                ...prev_state,
-                address: {...prev_state.address,height: 1180 + 80},
-                delivery_address: {...prev_state.delivery_address,height:1060 + 80}
-               }));
-               console.log("hig1")
-               console.log(highState)
-            }else{
-                setHighState((prev_state) =>({
-                    ...prev_state,
-                    address: {...prev_state.address,height: 1180 },
-                    delivery_address: {...prev_state.delivery_address,height:1060}
-                }));
-                console.log("hig2")
-                console.log(highState)
-            }
-            
-        }
-    
-       if(e.target.name==='agree'){
-            setInputState2((prev_state) =>({
-            ...prev_state,
-               agree:{...prev_state.agree,
-               show_message:e.target.checked?false:true
-               }
-            }));
-       }
-      
+        
+        dispatch(updateTermsConditions({name:e.target.name,selected:e.target.checked}))
        
+        setInputState2((prev_state) =>({
+            ...prev_state,
+               [name]:{...prev_state[name],
+               //show_message: showMessage,
+               value:e.target.checked
+               }
+        }));
+       let name = e.target.name;
+       let HEIGHT= "1210px";
+       let DELIVERY_HEIGHT="1090px"
+       let legalMessage = showLegalMessage;
+       let agreeMessage = showAgreeMessage;
+       if(name==='legalage'){
+            legalMessage = (e.target.checked===true)?false:true;
+       }
+       if(name==='agree'){
+            agreeMessage =(e.target.checked===true)?false:true;
+       }
+       if(legalMessage){
+            if(agreeMessage){
+                HEIGHT= "1270px";
+                DELIVERY_HEIGHT="1170px"
+            }else{
+                HEIGHT= "1240px";
+                DELIVERY_HEIGHT="1120px"
+            }
+           
+       }
+       
+       if(agreeMessage){
+            if(agreeMessage){
+                HEIGHT= "1270px";
+                DELIVERY_HEIGHT="1150px"
+            }else{
+                HEIGHT= "1240px";
+                DELIVERY_HEIGHT="1120px"
+            }
+             
+       }
+       /*
+       if(legalMessage && agreeMessage){
+            HEIGHT= "1300px";
+            DELIVERY_HEIGHT="1180px"
+       }
+       */
+
+       setShowLegalMessage(legalMessage)
+       setShowAgreeMessage(agreeMessage)
+       /*
+        if (showLegalMessage && !showAgreeMessage){
+            alert("JJ")
+            setHighState((prev_state) =>({
+                ...prev_state,
+                address: {height: "1250px"},
+                delivery_address: {height: "1150px"}
+                
+            }));
+        }
+        if ( showAgreeMessage && !showLegalMessage ){
+            alert("TT")
+            setHighState((prev_state) =>({
+                ...prev_state,
+                address: {height: "1250px"},
+                delivery_address: {height: "1150px"}
+                
+            }));
+        }
+        */
+        /*
+        if(legalageCheckboxRef.current.checked && !agreeCheckboxRef.current.checked){
+            
+            //addrHigh="1190px";
+            //delAddrHigh="1060px";
+            setHighState((prev_state) =>({
+                ...prev_state,
+                address: {height: "1210px"},
+                delivery_address: {height: "1090px"},
+                show_message:false
+            }));
+        }
+
+        */
+        
+        
+       
+        setHighState((prev_state) =>({
+            ...prev_state,
+            address: {height: HEIGHT},
+            delivery_address: {height: DELIVERY_HEIGHT},
+        }));
+    
+
     }
     
     return (
@@ -616,9 +717,9 @@ const CheckoutPage = (props) => {
                         </ErrorMessage>
                     }
                   </Contact>
-                  <Address height={highState.address.height+"px"}>
+                  <Address height={highState.address.height}>
                     <div>ADDRESS</div>
-                    <DeliveryAddress height={highState.delivery_address.height+"px"}>
+                    <DeliveryAddress height={highState.delivery_address.height}>
                     <div>Delivery Address</div>
                     <div className={styles.input_wrapper}>
                     <Wrapper1>
@@ -647,7 +748,7 @@ const CheckoutPage = (props) => {
                         <Input ref={lastnameInputRef}
                         id={inputState2.lastname.id} 
                         name={inputState2.lastname.name}
-                        border_bottom={inputState2.firstname.border_bottom}
+                        border_bottom={inputState2.lastname.border_bottom}
                         img_position={inputState2.lastname.bg_img_pos} 
                         width={inputState2.lastname.width} 
                         autoComplete={inputState2.lastname.id} 
@@ -683,6 +784,7 @@ const CheckoutPage = (props) => {
                         placeholder="" 
                         background={inputState2.company.bg_img}/>
                     <Label>Company Name</Label>
+               
                     {inputState2.company.show_err_message && 
                         <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
                             {inputState2.company.err_message}
@@ -699,7 +801,9 @@ const CheckoutPage = (props) => {
                         width={inputState2.unitno.width} 
                         autoComplete={inputState2.unitno.id} 
                         onChange={(e) =>inputOnChange(e)} 
+                        onKeyDown={(e)=>inputOnKeyDown(e) } 
                         defaultValue={inputState2.unitno.value} 
+                        onBlur={(e) =>inputOnBlur(e)} 
                         placeholder="" />
                     <Label>Lvt, Apt or Unit No.</Label>
                     </Wrapper1>
@@ -741,11 +845,6 @@ const CheckoutPage = (props) => {
                         placeholder="" 
                         background={inputState2.streetname.bg_img}/>
                     <Label>Street Name *</Label>
-                    {inputState2.streetname.show_message && 
-                        <ErrorMessage height={heightState.input_message.height} margin_top={'10px'}>
-                            {inputState2.streetname.input_message}
-                        </ErrorMessage>
-                    }
                     {inputState2.streetname.show_err_message && 
                         <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
                             {inputState2.streetname.err_message}
@@ -851,7 +950,7 @@ const CheckoutPage = (props) => {
                     </div>
                     <div className={styles.input_wrapper}>
                     <Wrapper1>
-                    <Input 
+                        <Input 
                          id={inputState2.mobile.id}
                          name={inputState2.mobile.name}
                          border_bottom={inputState2.mobile.border_bottom} 
@@ -865,57 +964,56 @@ const CheckoutPage = (props) => {
                          placeholder="" 
                          background={inputState2.mobile.bg_img}/>
                         <Label>Mobile Phone *</Label>
-                        {inputState2.mobile.show_message && 
-                        <ErrorMessage height={heightState.input_message.height} margin_top={'10px'}>
-                            {inputState2.mobile.input_message}
-                        </ErrorMessage>
-                        }
+                     
                         {inputState2.mobile.show_err_message && 
-                        <ErrorMessage height={heightState.error_message.height} margin_top={'10px'}>
-                            {inputState2.mobile.err_message}
+                        <ErrorMessage height={'35px'} margin_top={'10px'}>
+                             * Please enter Mobile value<br/>
+                             eg. 0403872130 or 040-387-1223
                         </ErrorMessage>
                          }
                     </Wrapper1>
+                  
                     </div>
-                   
+                   <br/>
                     <div className={styles.checkbox_wrapper}>
                         <div className={styles1.wrapper}>
                             <div>
-                            <input className={styles1.checkbox1} type="checkbox" id='billing' name='billing'/>
+                            <input className={styles1.checkbox1} type="checkbox" id='billing' name='billing' onClick={checkBoxOnClick}/>
                             </div>
                             <div>My billing and delivery information are the same.</div>
                             <div>&nbsp;</div><div>&nbsp;</div>
                             <div>
-                            <input className={styles1.checkbox1} type="checkbox" id='legalage' name='legalage' onClick={checkBoxOnClick}/>
+                            <input value={inputState2.legalage.value} ref={legalageCheckboxRef} className={styles1.checkbox1} type="checkbox" id='legalage' name='legalage' onClick={checkBoxOnClick}/>
                             </div>
                             <div>I'm 18+ years old.</div>
-                            <MessageBox show={inputState2.legalage.show_message}/>
+                            <MessageBox show={showLegalMessage}/>
                             <div>
                             <input className={styles1.checkbox1} type="checkbox" id='notify' name='notify'/>
                             </div>
                             <div>I agree to receive news, promotions, information regarding adidas’ brand, products, activities and events, and any other marketing communications and materials by e-mail, sms, in-app notification and/or telephone from Adidas Australia Pty Ltd. and runtastic GmbH pursuant to the adidas Privacy Policy.HOW?</div>
                             <div>&nbsp;</div><div>&nbsp;</div>
                             <div>
-                            <input className={styles1.checkbox1} type="checkbox" id='agree' name='agree' onClick={checkBoxOnClick}/>
+                            <input value={inputState2.agree.value} ref={agreeCheckboxRef} className={styles1.checkbox1} type="checkbox" id='agree' name='agree' onClick={checkBoxOnClick}/>
                             </div>
                             <div>I understand and agree that in certain circumstances, my personal information may be transferred to other entities in the adidas Group and service providers that are located in countries that do not have comparable privacy safeguards to Australia.</div>
-                            <MessageBox show={inputState2.agree.show_message} />
+                            <MessageBox show={showAgreeMessage} />
                         </div>
                     </div>
                     </DeliveryAddress>
                    
-                    <AddressButtonWrapper height={heightState.address_button_wrapper.height} >
+                    <AddressButtonWrapper height={highState.address_button_wrapper.height}>
                         <Button height={heightState.next_button.height}>
                         <a className={styles.a_button} onClick={onNextClickToDelivery}>
                         <span className={styles.button_name}>{buttonName}</span><span className={styles.arrows}><RightArrow/></span>
                         </a>
                         </Button>
                     </AddressButtonWrapper>
+                  
                   </Address>
                  
-                  <Delivery height={heightState.delivery.height}>
+                  <Delivery height={highState.delivery.height}>
                     <div>DELIVERY OPTIONS</div>
-                    <DeliverySection height={heightState.delivery_section.height}>
+                    <DeliverySection height={highState.delivery_section.height}>
                         <DeliveryDetails>
                         <div className={styles.delivery_details}>
                         <div>Shipping</div>
@@ -924,7 +1022,7 @@ const CheckoutPage = (props) => {
                         </div>
                         </DeliveryDetails>
                     </DeliverySection>
-                    <DeliveryButtonWrapper height={heightState.delivery_button_wrapper.height} >
+                    <DeliveryButtonWrapper height={highState.delivery_button_wrapper.height} >
                         <Button height={heightState.next_button.height}>
                         <a className={styles.a_button} onClick={onNextClickToPayment}>
                         <span className={styles.button_name}>{buttonName}</span><span className={styles.arrows}><RightArrow/></span>
@@ -932,16 +1030,16 @@ const CheckoutPage = (props) => {
                         </Button>
                     </DeliveryButtonWrapper>
                   </Delivery>
-                  <Payment height={heightState.payment.height}>
+                  <Payment height={highState.payment.height}>
                     <div>PAYMENT</div>
-                    <PaymentIcons height={heightState.payment_icons.height} show={showPaymentIcons}><AmexIcon/><MasterIcon/><VisaIcon/><PaypalIcon/><AfterpayIcon/></PaymentIcons>
+                    <PaymentIcons height={highState.payment_icons.height} show={showPaymentIcons}><AmexIcon/><MasterIcon/><VisaIcon/><PaypalIcon/><AfterpayIcon/></PaymentIcons>
                     <PaymentDetailsHeader>
                           <div className={styles.payment_header}>Payments are SSL encrypted so that your credit card and payment details stay safe.</div><div className={styles.ssl}><SSL/></div>
                     </PaymentDetailsHeader>
-                    <PaymentSection height={heightState.payment_section.height}>
+                    <PaymentSection height={highState.payment_section.height}>
                           <PaymentDetails>
                         
-                         <CreditCardSection height={heightState.creditcard_section.height} isOpen={openState.credit_card.isOpen}>
+                         <CreditCardSection height={highState.creditcard_section.height} isOpen={openState.credit_card.isOpen}>
                             <a className={styles.b_button} onClick={onCreditCardSectionClick}>
                             <span className={styles.button_name}>Debit/Credit Card</span>
                             <span className={styles.s_credit_card}>
@@ -951,8 +1049,8 @@ const CheckoutPage = (props) => {
                             </span>
                             </a>
                           
-                            <CreditCardContentWrapper height={heightState.creditcard_wrapper.height}>
-                                <CreditCardContent setCreditCard={setCreditCard} height={heightState.creditcard_content.height}/>
+                            <CreditCardContentWrapper height={highState.creditcard_wrapper.height}>
+                                <CreditCardContent setCreditCard={setCreditCard} height={highState.creditcard_content.height}/>
                                 <ul className={styles.ulMessage}>
                                 {creditCardMessage.map(item=>(
                                     <li>{item}</li>
@@ -962,7 +1060,7 @@ const CheckoutPage = (props) => {
                           
                         </CreditCardSection>
                       
-                        <PaypalSection height={heightState.paypal_section.height} isOpen={openState.paypal.isOpen}>
+                        <PaypalSection height={highState.paypal_section.height} isOpen={openState.paypal.isOpen}>
                                 <a className={styles.b_button} onClick={onPaypalSectionClick}>
                                 <span className={styles.button_name}>PayPal</span>
                                 <span className={styles.s_credit_card}>
@@ -974,7 +1072,7 @@ const CheckoutPage = (props) => {
                                 </div>
                         </PaypalSection>
 
-                        <AfterPaySection height={heightState.afterpay_section.height} isOpen={openState.after_pay.isOpen}>
+                        <AfterPaySection height={highState.afterpay_section.height} isOpen={openState.after_pay.isOpen}>
                                 <a className={styles.b_button} onClick={onAfterPaySectionClick}>
                                 <span className={styles.button_name}>AfterPay</span>
                                 <span className={styles.s_credit_card}>

@@ -9,13 +9,13 @@ export const counterSlice = createSlice({
   name: 'counter',
   initialState,
   reducers: {
-    increase: (state, action) => {
+    increase: (state) => {
        state.count += 1;
     },
-    decrease: (state, action) => {
+    decrease: (state) => {
        state.count -= 1;
     },
-    reset: (state,action) => {
+    reset: (state) => {
       state.count = 0;
     },
     
