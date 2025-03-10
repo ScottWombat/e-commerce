@@ -1,9 +1,10 @@
-import styles from './bag.module.css';
+import React from 'react';
 
 interface ShoppingBagProps {
     fill?: string;
     width?: string;
     height?: string;
+    size?:string;
     className?: string;
 }
 

@@ -1,0 +1,120 @@
+.navbar {
+    width: 8vw;
+    height: 8vh;
+    position: fixed;
+    display: flex;
+    justify-content: left;
+    background-color: white;
+    margin-top:0;
+  }
+  
+  .btn {
+    position: relative;
+    top: 0em;
+    left: 1em;
+  
+  }
+  
+  .hamburger {
+    width: 3em;
+    height: 0.25em;
+    background-color: black;
+    margin: 0.5em 0;
+  }
+  
+  .btn:hover .hamburger {
+    background-color: #00565b;
+    transition: background-color 0.3s;
+  }
+  
+  nav {
+    text-align: left;
+    margin-left:100px;
+  }
+  
+  nav ul {
+    list-style: none;
+  }
+  
+  nav li {
+    margin-bottom: 2em;
+    margin-left: 1em;
+  }
+  
+  nav a {
+    font-size: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+  
+  nav a:hover {
+    color: #003d42;
+    transition: color 0.3s;
+  }
+  
+  .menu {
+    position: fixed;
+    width: 100vw;
+    height:100vw;
+    top: 0;
+    left:0px;
+    background-color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    /* "delay" the visibility transition */
+    -webkit-transition: opacity 0.5s, visibility 0s linear 0.5s;
+    transition: opacity 0.5s, visibility 0s linear 0.5s;
+    z-index: 1;
+  }
+  .menu:target {
+    visibility: visible;
+    opacity: 1;
+    /* cancel visibility transition delay */
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+  }
+  
+  .menu .close {
+    position: absolute;
+    right: 0.25em;
+    top: 0.25em;
+    color: #000;
+    transition: color 0.3s;
+    font-size: 6em;
+    line-height: 0.6em;
+    font-weight: bold;
+  }
+  .menu .close:hover {
+    color: #6f0e0e;
+  }
+  
+  .close_menu {
+    
+    cursor: default;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    visibility: hidden;
+    /* "delay" the visibility transition */
+    -webkit-transition: opacity 0.5s, visibility 0s linear 0.5s;
+    transition: opacity 0.5s, visibility 0s linear 0.5s;
+  }
+  .menu:target + .close_menu {
+    opacity: 1;
+    visibility: visible;
+    /* cancel visibility transition delay */
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+  }
+
+  .menu_header{
+    margin-top:50px;
+    font-size:20px;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 0.5em;
+  }
+  

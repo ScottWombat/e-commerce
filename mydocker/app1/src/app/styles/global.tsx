@@ -13,11 +13,11 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  @media only screen and (max-width: 400px) {
+  @media only screen and (min-width: 400px) {
     body {
-      font-size: 28px !important;
+      font-size: 10px !important;
     }
-}
+  }
 
 `;
 

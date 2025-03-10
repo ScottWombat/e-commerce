@@ -1,0 +1,190 @@
+.collapse_accordion{
+    margin-top:50px;
+    font-size:20px;
+}
+.collapse_accordion ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    background-color:  #dbe2e9;
+}
+
+.collapse_accordion label {
+    display: block;
+    cursor: pointer;
+    padding: 10px 25px;
+    border: 0px solid #fff;
+    border-bottom: none;
+    background-color: #dbe2e9;
+    position: relative;
+    color:#000;
+    
+}
+
+.collapse_accordion label:hover {
+    background: #dbe2e9;
+}
+
+.collapse_accordion label:after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    text-indent: -9999px;
+    border-top: 1px solid #000;
+    border-left: 1px solid #000;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+    text-decoration: none;
+    color: transparent;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transform: rotate(135deg);
+    left: 10px;
+    top: 50%;
+    margin-top: -5px;
+}
+
+.collapse_accordion input[type="checkbox"]:checked+label:after {
+    transform: rotate(45deg);
+    top: 20px;
+}
+
+.collapse_accordion input[type="radio"]:checked+label:after {
+    transform: rotate(45deg);
+    top: 20px;
+}
+
+.collapse_accordion label.last {
+    border-bottom: 0px solid #fff;
+}
+
+.collapse-accordion ul ul li {
+    padding: 0px;
+    background: #dbe2e9 ;
+}
+
+
+.collapse_accordion input[type="checkBox"] {
+    position: absolute;
+    left: -9999px;
+}
+.collapse_accordion input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+}
+
+.collapse_accordion input[type="checkBox"]~ul {
+    height: 0;
+    transform: scaleY(0);
+  transition: transform .2s ease-out;
+}
+.collapse-accordion input[type="radio"]~ul {
+    height: 0;
+    transform: scaleY(0);
+transition: transform .5s ease-out;
+}
+
+.collapse_accordion input[type="checkBox"]:checked~ul {
+    height: 100%;
+    transform-origin: top;
+    transition: transform .5s ease-out;
+    transform: scaleY(1);
+}
+
+.collapse_accordion input[type="radio"]:checked~ul {
+    height: 100%;
+    transform-origin: top;
+    transition: transform .2s ease-out;
+    transform: scaleY(1);
+}
+
+.collapse_accordion input[type="checkBox"]:checked+label {
+    background:  #dbe2e9;
+    border-bottom: 0px solid #fff;
+}
+.collapse_accordion input[type="radio"]:checked+label {
+    background: #dbe2e9;
+    border-bottom: 0px solid #fff;
+}
+
+.collapse_accordion input[type="checkbox"]:checked+label .collpaseText {
+    display: block;
+    
+}
+
+.collapse_accordion input[type="radio"]:checked+label .collpaseText {
+    display: block;
+   
+
+}
+
+.collapse_accordion input[type="checkbox"]:checked+label .expandText {
+    display: none;
+  
+
+}
+
+.collapse_accordion input[type="radio"]:checked+label .expandText {
+    display: none;
+ 
+
+}
+
+.collpaseText {
+    display: none;
+    text-decoration: none;
+}   
+.indent{
+    margin-left:50px;
+    background-color: red;
+}
+ul.ulchild{
+    padding: 0;
+    margin: 0;
+}
+
+ul.ulchild > li{
+    padding: 0;
+    margin: 0 0 40px 50px;
+    background-color:  #dbe2e9;
+}
+
+ul.ulchild > li > a{
+    display:block;
+    padding: 0;
+    color: #000;
+    text-decoration: none;
+    font-size:18px;
+   
+}
+
+
+ul.ulparent{
+    padding: 0;
+    margin: 0;
+}
+ul.ulparent > li{
+    padding: 0;
+    margin: 0;
+   
+}
+
+ul.ulchild > li > a.a_underline {
+   
+    text-decoration: none;
+  }
+  
+
+  
+ul.ulchild > li > a.a_underline:hover{ 
+   text-decoration: underline;
+   text-decoration-color: red;
+   text-underline-offset: 8px;
+   text-decoration-thickness: 3px;
+   cursor:pointer;
+  }
+
+
