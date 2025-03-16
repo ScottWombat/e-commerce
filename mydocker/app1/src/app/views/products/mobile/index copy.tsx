@@ -119,24 +119,28 @@ const SlideRightPanel = styled.div<SlideRightPanel>`
   visibility: ${props => props.isVisible ? 'visible' : 'hidden'};
   transition: visibility ${props => props.isVisible ? '0s 0s' : '0s 0.6s'};
   z-index:20;
-  
+  background-color:#ffffff;
 `;
-
+const FilterHeader =styled.h1`
+   color: red;
+`;
 const FilterWrapper = styled.div`
     height:100vh;
     width:100%;
     display: block;
     position: absolute;
-    margin:auto;
+    margin: auto;
     bottom: 0;
     left: 0;
     right: 0;
     top: 0px;
     padding: 3px;
+    height: 40px;
     width: 100%;
-    background-color:#ffffff;
+    border-bottom: 2px solid #3b98e1;
     margin-left: auto;
     margin-right: auto;
+    
     ul {
         list-style: none;
         height: 100%;
@@ -146,12 +150,12 @@ const FilterWrapper = styled.div`
       }
       
       ul li {
-        color: #000000;
+        color: #69b7f4;
         display: block;
         position: relative;
         float: left;
         width: 100%;
-        height: 80px;
+        height: 100px;
       }
       ul li input[type="radio"] {
         position: absolute;
@@ -172,13 +176,13 @@ const FilterWrapper = styled.div`
       }
       
       ul li:hover label {
-        color: #000000;
+        color: #ffffff;
       }
       
       ul li .radiobutton {
         display: block;
         position: absolute;
-        border: 4px solid #CCCCCC;
+        border: 4px solid #69b7f4;
         border-radius: 100%;
         height: 30px;
         width: 30px;
@@ -217,55 +221,18 @@ const FilterWrapper = styled.div`
       
       input[type="radio"]:checked ~ label {
         color: #000000;
-        font-weight: 700;
       }
+      
+    
 `;
 const FilterClose = styled.div`
     float:right;
     padding:50px;
 `;
-const FilterHeader = styled.div`
-   color: #000000;
-   margin-top:50px;
-   margin-left:20px;
-   font-size:2.5em;
-   font-weight: 400;
-   
-`;
 const FilterBy = styled.div`
-    margin-top:20px;
+    margin-top:50px;
     font-size:2.5em;
-`;
-const FilterButtonWrapper = styled.div`
-    font-size:2.5em;
-    margin-top:550px;
-    width:100%;
-    text-align:center;
-    z-index:21;
-`;
-
-const FilterButton = styled.button`
-    top:0;
-	font-size: 0.7em;
-	background: none;
-	cursor: pointer;
-	padding: 10px 40px;
-	display: inline-block;
-	margin: 15px 30px;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	font-weight: 500;
-	outline: none;
-	position: relative;
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
-    border: 3px solid #cccccc;
-	color: #000;
-    &:hover{
-        border: 3px solid #000;
-        font-weight: 700;
-    }
+    
     
 `;
 
@@ -344,43 +311,31 @@ const ProductList = (props) => {
                             <X fille="#00000" widht="20px" height="20px" />
                         </a>
                     </FilterClose>
-                    <FilterHeader>FILTER SORTY BY</FilterHeader>
+                    
                     <FilterBy>
-                        <ul>
-                            <li>
-                                <input type="radio" id="title1" name="selector" />
-                                <label htmlFor="title1">Title</label>
-                                <div className={"radiobutton"}></div>
-                            </li>
-                            <li>
-                                <input type="radio" id="keywords" name="selector" />
-                                <label htmlFor="keywords">Key words</label>
-                                <div className={"radiobutton"}></div>
-                            </li>
-                            <li>
-                                <input type="radio" id="highlow" name="selector" />
-                                <label htmlFor="highlow">Price: High-Low</label>
-                                <div className="radiobutton"></div>
-                            </li>
-                            <li>
-                                <input type="radio" id="lowhigh" name="selector" />
-                                <label htmlFor="lowhigh">Price: Low-Hight</label>
-                                <div className="radiobutton"></div>
-                            </li>
-                            <li>
-                                <input type="radio" id="arrivals" name="selector" />
-                                <label htmlFor="arrivals">New Arrivals</label>
-                                <div className="radiobutton"></div>
-                            </li>
-                            <li>
-                                <input type="radio" id="sales" name="selector" />
-                                <label htmlFor="sales">Sales</label>
-                                <div className="radiobutton"></div>
-                            </li>
-                        </ul>
-                     
+                            
+                            <ul>
+                                <li>
+                                    <input type="radio" id="fast" name="selector" />
+                                    <label htmlFor="fast">Send as soon as possible.</label>
+                                    <div className={"radiobutton"}></div>
+                                </li>
+                                <li>
+                                    <input type="radio" id="medium" name="selector" />
+                                    <label htmlFor="medium">I'm in no rush... as long as it gets there.</label>
+                                    <div className="radiobutton"></div>
+                                </li>
+                                <li>
+                                    <input type="radio" id="slow" name="selector" />
+                                    <label htmlFor="slow">Send it via donkey.</label>
+                                    <div className="radiobutton"></div>
+                                </li>
+                            </ul>
+                        
+
+
+
                     </FilterBy>
-                    <FilterButtonWrapper><FilterButton>Apply</FilterButton></FilterButtonWrapper>
                 </FilterWrapper>
             </SlideRightPanel>
 

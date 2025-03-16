@@ -3,6 +3,7 @@ import React,{useState,Suspense, useEffect,} from 'react';
 import { Outlet } from 'react-router-dom';
 import styled from "styled-components";
 import { SearchBox } from 'app/components/searchbox';
+import { FilterBox } from 'app/components/filter-box';
 import { MainMenu } from "./mainmenu";
 import { UserMenu } from './usermenu';
 import { Logo } from 'app/components/logo';
@@ -19,6 +20,10 @@ import CartSlider from 'app/components/cart-slider';
 interface SearchSectionProps {
     isVisible?: boolean;
     onClick?: () => void;
+}
+interface FilterSectionProps {
+  isVisible?: boolean;
+  onClick?: () => void;
 }
 
 interface NavProps {
@@ -52,6 +57,20 @@ const SearchSection = styled.div<SearchSectionProps>`
   right: 0px;
   transform: ${ props => props.isVisible ? 'translateY(0px)' : "translateY(-130px)"}; 
 
+  transition: ease-in .7s ;
+  background-color:#fff;
+  border-bottom:1px solid #d3d3d3;
+  z-index:1;
+`;
+
+const FilterSection = styled.div<FilterSectionProps>`
+
+  position:absolute;
+  width:100%;
+  height:${ props => props.isVisible ? '130px':'-130px'};
+  left: 0px;
+  right: 0px;
+  transform: ${ props => props.isVisible ? 'translateY(0px)' : "translateY(-130px)"}; 
   transition: ease-in .7s ;
   background-color:#fff;
   border-bottom:1px solid #d3d3d3;
@@ -144,7 +163,7 @@ const MobileMenu1 = (props) =>{
 
 export const MobileLayout = (props) => {
     const [searchVisible, setSearchVisible] = useState(false);
-    
+    const [filterVisible, setFilterVisible] = useState(false);
     const [sidebar,setSideBar]=useState(false);
     const [open,setOpen] = useState(props.close);
     const searchOnClick = () =>{
@@ -161,6 +180,9 @@ export const MobileLayout = (props) => {
     return(
         <Container>
             <Section>
+                <FilterSection isVisible={filterVisible}>
+                   <FilterBox/>
+                </FilterSection>
                 <SearchSection isVisible={searchVisible}>
                     <SearchBox onClose={searchOnClick}/>
                 </SearchSection>
